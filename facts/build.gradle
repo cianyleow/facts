@@ -28,7 +28,9 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework:spring-jdbc:4.2.5.RELEASE')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('mysql:mysql-connector-java:5.1.38')
+	
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
