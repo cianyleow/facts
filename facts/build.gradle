@@ -28,7 +28,7 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework:spring-jdbc:2.0.6')
+	compile('org.springframework:spring-jdbc:4.2.5.RELEASE')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
