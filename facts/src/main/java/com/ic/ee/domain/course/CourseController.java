@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ic.ee.domain.course.dao.api.CourseDAO;
+import com.ic.ee.core.jdbc.api.CourseDAO;
 
 @RestController(value = "/courses")
 public class CourseController {
