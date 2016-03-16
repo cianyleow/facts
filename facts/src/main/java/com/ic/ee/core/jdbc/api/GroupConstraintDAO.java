@@ -1,4 +1,4 @@
-package com.ic.ee.domain.user.group.dao.api;
+package com.ic.ee.core.jdbc.api;
 
 public interface GroupConstraintDAO {
 

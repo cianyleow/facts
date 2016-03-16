@@ -1,29 +1,27 @@
-package com.ic.ee.core.jdbc.impl;
+package com.ic.ee.core.jdbc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import com.ic.ee.core.jdbc.api.JdbcBaseDAO;
+public abstract class AbstractJdbcBaseDAO {
 
-public abstract class AbstractJdbcBaseDAO implements JdbcBaseDAO {
+	private final List<String> sqlStatements;
 
-	private final Set<String> sqlStatements;
-
-	private final JdbcTemplate jdbcTemplate;
+	private final NamedParameterJdbcTemplate jdbcTemplate;
 
 
-	public AbstractJdbcBaseDAO(DataSource dataSource, Set<String> fileNames) throws IOException {
-		sqlStatements = new HashSet<String>();
-		jdbcTemplate = new JdbcTemplate(dataSource);
+	public AbstractJdbcBaseDAO(DataSource dataSource, String...fileNames) throws IOException {
+		sqlStatements = new ArrayList<String>();
+		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 		for(String fileName : fileNames) {
 			sqlStatements.add(readSQLString(fileName));
 		}
@@ -42,11 +40,11 @@ public abstract class AbstractJdbcBaseDAO implements JdbcBaseDAO {
         return stringBuilder.toString();
 	}
 
-	public JdbcTemplate getJdbcTemplate() {
+	public NamedParameterJdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 
-	public Set<String> getSqlStatements() {
+	public List<String> getSqlStatements() {
 		return sqlStatements;
 	}
 }

@@ -1,4 +1,4 @@
-package com.ic.ee.domain.common.dao.api;
+package com.ic.ee.core.jdbc.api;
 
 public interface AcademicPeriodDAO {
 

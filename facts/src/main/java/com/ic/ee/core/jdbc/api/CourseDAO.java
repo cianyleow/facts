@@ -1,4 +1,4 @@
-package com.ic.ee.domain.course.dao.api;
+package com.ic.ee.core.jdbc.api;
 
 import java.util.Set;
 
