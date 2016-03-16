@@ -16,9 +16,6 @@ public class CourseDetailsRowMapper implements RowMapper<CourseDetails> {
 		details.setName(rs.getString("name"));
 		details.setShortName(rs.getString("shortName"));
 		details.setDescription(rs.getString("description"));
-		return null;
+		return details;
 	}
-
-
-
 }
