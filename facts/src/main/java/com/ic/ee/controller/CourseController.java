@@ -1,4 +1,4 @@
-package com.ic.ee.domain.course;
+package com.ic.ee.controller;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.core.service.api.CourseService;
+import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.CourseDetails;
 
 @RestController
 public class CourseController {
