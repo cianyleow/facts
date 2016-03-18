@@ -55,7 +55,7 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
-		return courseDAO.updateCourse(course);
+	public Boolean updateCourse(Course course) {
+		return (courseDAO.updateCourse(course) == 1);
 	}
 }

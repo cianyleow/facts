@@ -11,7 +11,7 @@ public interface CourseService {
 	public Integer saveCourse(Course course);
 
 	// Updating
-	public Course updateCourse(Course course);
+	public Boolean updateCourse(Course course);
 
 	// Deleting
 

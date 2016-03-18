@@ -37,14 +37,14 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	}
 
 	@Override
-	public Boolean updateCourse(Course course) {
+	public Integer updateCourse(Course course) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("courseId", course.getCourseId());
 		paramSource.addValue("name", course.getName());
 		paramSource.addValue("shortName", course.getShortName());
 		paramSource.addValue("academicPeriod", course.getAcademicPeriodId());
 		paramSource.addValue("description", course.getDescription());
-		return (getJdbcTemplate().update(getSqlStatements().get(1), paramSource) == 1);
+		return getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
 
 	@Override

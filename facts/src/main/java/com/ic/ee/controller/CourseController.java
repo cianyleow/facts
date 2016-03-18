@@ -29,7 +29,7 @@ public class CourseController {
 	@RequestMapping(path = "/courses", method = RequestMethod.POST)
 	@ResponseBody
 	public Integer addCourse(@RequestBody Course course) {
-		return courseService.createNewCourse(course);
+		return courseService.saveCourse(course);
 	}
 
 	// PUT (updating an element)

@@ -9,7 +9,7 @@ public interface CourseDAO {
 
 	public Integer saveCourse(Course newCourse);
 
-	public Boolean updateCourse(Course course);
+	public Integer updateCourse(Course course);
 
 	public List<Course> getCourses(List<Integer> courseIds);
 
