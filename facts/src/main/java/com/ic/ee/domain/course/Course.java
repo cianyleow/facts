@@ -60,6 +60,13 @@ public class Course {
 		return academicPeriod;
 	}
 
+	public Integer getAcademicPeriodId() {
+		if(getAcademicPeriod() != null) {
+			return getAcademicPeriod().getAcademicPeriodId();
+		}
+		return null;
+	}
+
 	public void setAcademicPeriod(AcademicPeriod academicPeriod) {
 		this.academicPeriod = academicPeriod;
 	}
