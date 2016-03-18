@@ -14,4 +14,6 @@ public interface CourseDAO {
 	public List<Course> getCourses(List<Integer> courseIds);
 
 	public List<CourseDetails> getCourseDetails(List<Integer> courseIds);
+
+	public List<CourseDetails> getCourseDetailsForAcademicPeriod(Integer academicPeriodId);
 }

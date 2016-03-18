@@ -61,7 +61,6 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public List<CourseDetails> getCourseDetailsByAcademicPeriod(Integer academicPeriodId) {
-		// TODO Auto-generated method stub
-		return null;
+		return courseDAO.getCourseDetailsForAcademicPeriod(academicPeriodId);
 	}
 }
