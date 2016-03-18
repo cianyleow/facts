@@ -22,4 +22,5 @@ public interface CourseService {
 
 	public Course getCourse(Integer courseId);
 
+	public List<CourseDetails> getCourseDetailsByAcademicPeriod(Integer academicPeriodId);
 }

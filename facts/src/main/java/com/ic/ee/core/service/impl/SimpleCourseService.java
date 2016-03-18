@@ -58,4 +58,10 @@ public class SimpleCourseService implements CourseService {
 	public Boolean updateCourse(Course course) {
 		return (courseDAO.updateCourse(course) == 1);
 	}
+
+	@Override
+	public List<CourseDetails> getCourseDetailsByAcademicPeriod(Integer academicPeriodId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

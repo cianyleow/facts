@@ -33,14 +33,25 @@ public class CourseController {
 	}
 
 	// PUT (updating an element)
+	@RequestMapping(path = "/courses", method = RequestMethod.PUT)
+	@ResponseBody
+	public Boolean updateCourse(@RequestBody Course course) {
+		return courseService.updateCourse(course);
+	}
 
 	// DELETE (deleting an element)
 
 	// GET
 	@RequestMapping(path = "/courses", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CourseDetails> getCourses() {
+	public List<CourseDetails> getAllCourses() {
 		return courseService.getAllCourseDetails();
+	}
+
+	@RequestMapping(path = "/courses/byPeriod/{academicPeriodId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CourseDetails> getCourseDetailsByPeriod(@PathVariable("academicPeriodId") Integer academicPeriodId) {
+		return courseService.getCourseDetailsByAcademicPeriod(academicPeriodId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
