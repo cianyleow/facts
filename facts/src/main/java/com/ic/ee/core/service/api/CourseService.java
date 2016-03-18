@@ -8,8 +8,7 @@ import com.ic.ee.domain.course.CourseDetails;
 public interface CourseService {
 
 	// Creating
-
-	public Integer createCourse(Course course);
+	public Integer saveCourse(Course course);
 
 	// Updating
 	public Course updateCourse(Course course);

@@ -9,9 +9,9 @@ public interface CourseDAO {
 
 	public Integer saveCourse(Course newCourse);
 
-	public Course updateCourse(Course course);
+	public Boolean updateCourse(Course course);
 
-	public Course getCourse(Course course);
+	public List<Course> getCourses(List<Integer> courseIds);
 
 	public List<CourseDetails> getCourseDetails(List<Integer> courseIds);
 }
