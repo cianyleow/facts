@@ -29,7 +29,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", course.getName());
 		paramSource.addValue("shortName", course.getShortName());
-		paramSource.addValue("academicPeriod", course.getAcademicPeriodId());
+		paramSource.addValue("academicPeriodId", course.getAcademicPeriodId());
 		paramSource.addValue("description", course.getDescription());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
@@ -42,7 +42,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 		paramSource.addValue("courseId", course.getCourseId());
 		paramSource.addValue("name", course.getName());
 		paramSource.addValue("shortName", course.getShortName());
-		paramSource.addValue("academicPeriod", course.getAcademicPeriodId());
+		paramSource.addValue("academicPeriodId", course.getAcademicPeriodId());
 		paramSource.addValue("description", course.getDescription());
 		return getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
