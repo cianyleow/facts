@@ -38,12 +38,19 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public Course getCourse(Integer courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Course> courses = courseDAO.getCourses(new ArrayList<Integer>(courseId));
+		if(courses == null) {
+			// throw NoResultsReturnedError();
+		} else if(courses.isEmpty()) {
+			// throw NoResultsReturnedError();
+		} else if(courses.size() > 1) {
+			// throw TooManyResultsReturnedError();
+		}
+		return courses.get(0);
 	}
 
 	@Override
-	public Integer createCourse(Course course) {
+	public Integer saveCourse(Course course) {
 		return courseDAO.saveCourse(course);
 	}
 

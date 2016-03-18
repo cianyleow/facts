@@ -7,10 +7,13 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.jdbc.api.CourseDAO;
 import com.ic.ee.core.jdbc.rowmapper.CourseDetailsRowMapper;
+import com.ic.ee.core.jdbc.rowmapper.CourseRowMapper;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.CourseDetails;
 
@@ -18,7 +21,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "saveCourse.sql", "getOneCourseDetails.sql");
+		super(dataSource, "saveCourse.sql", "updateCourse.sql", "getCourses.sql", "getCourseDetails.sql");
 	}
 
 	@Override
@@ -30,24 +33,26 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 		if(course.getDescription() != null) {
 			paramSource.addValue("description", course.getDescription());
 		}
-		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, Integer.class);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
+	public Boolean updateCourse(Course course) {
 		return null;
 	}
 
 	@Override
-	public Course getCourse(Course course) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Course> getCourses(List<Integer> courseIds) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds.toArray());
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new CourseRowMapper());
 	}
 
 	@Override
 	public List<CourseDetails> getCourseDetails(List<Integer> courseIds) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds.toArray());
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new CourseDetailsRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, new CourseDetailsRowMapper());
 	}
 
 
