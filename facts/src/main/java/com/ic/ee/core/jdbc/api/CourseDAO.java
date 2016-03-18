@@ -1,20 +1,17 @@
 package com.ic.ee.core.jdbc.api;
 
-import java.util.Set;
+import java.util.List;
 
-import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.CourseDetails;
 
 public interface CourseDAO {
 
-	public Course saveCourse(Course newCourse);
+	public Integer saveCourse(Course newCourse);
 
-	public Course getCourse(Integer courseId);
+	public Course updateCourse(Course course);
 
-	public CourseDetails getCourseDetails(Integer courseId);
+	public Course getCourse(Course course);
 
-	public Course getCurrentYearCourses(AcademicPeriod academicPeriod);
-
-	public Set<CourseDetails> getAllCourses();
+	public List<CourseDetails> getCourseDetails(List<Integer> courseIds);
 }

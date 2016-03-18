@@ -1,5 +1,7 @@
+
 package com.ic.ee.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ic.ee.core.jdbc.api.CourseDAO;
@@ -23,7 +25,15 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public CourseDetails getCourseDetails(Integer courseId) {
-		return courseDAO.getCourseDetails(courseId);
+		List<CourseDetails> courseDetails = courseDAO.getCourseDetails(new ArrayList<Integer>(courseId));
+		if(courseDetails == null) {
+			// throw NoResultsReturnedError();
+		} else if(courseDetails.isEmpty()) {
+			// throw NoResultsReturnedError();
+		} else if(courseDetails.size() > 1) {
+			// throw TooManyResultsReturnedError();
+		}
+		return courseDetails.get(0);
 	}
 
 	@Override
@@ -33,8 +43,12 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Integer createNewCourse(Course course) {
-		System.out.println(course);
-		return 0;
+	public Integer createCourse(Course course) {
+		return courseDAO.saveCourse(course);
+	}
+
+	@Override
+	public Course updateCourse(Course course) {
+		return courseDAO.updateCourse(course);
 	}
 }

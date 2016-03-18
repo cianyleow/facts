@@ -9,9 +9,10 @@ public interface CourseService {
 
 	// Creating
 
-	public Integer createNewCourse(Course course);
+	public Integer createCourse(Course course);
 
 	// Updating
+	public Course updateCourse(Course course);
 
 	// Deleting
 
