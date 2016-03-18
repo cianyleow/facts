@@ -31,4 +31,10 @@ public class SimpleCourseService implements CourseService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Integer createNewCourse(Course course) {
+		System.out.println(course);
+		return 0;
+	}
 }
