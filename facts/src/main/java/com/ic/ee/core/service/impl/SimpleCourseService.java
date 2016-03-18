@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ic.ee.core.jdbc.api.CourseDAO;
+import com.ic.ee.core.service.api.AcademicPeriodService;
 import com.ic.ee.core.service.api.CourseService;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.CourseDetails;
@@ -13,8 +14,11 @@ public class SimpleCourseService implements CourseService {
 
 	private final CourseDAO courseDAO;
 
-	public SimpleCourseService(CourseDAO courseDAO) {
+	private final AcademicPeriodService academicPeriodService;
+
+	public SimpleCourseService(CourseDAO courseDAO, AcademicPeriodService academicPeriodService) {
 		this.courseDAO = courseDAO;
+		this.academicPeriodService = academicPeriodService;
 	}
 
 	@Override
@@ -61,7 +65,7 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public List<CourseDetails> getCourseDetailsByAcademicPeriod(Integer academicPeriodId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Integer> courseIds = academicPeriodService.getCourseIdsFromAcademicPeriod(academicPeriodId);
+		return courseDAO.getCourseDetails(courseIds);
 	}
 }
