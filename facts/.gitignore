@@ -1,3 +1,2 @@
 .gradle
 bin/
-src/main/resources/application.properties
