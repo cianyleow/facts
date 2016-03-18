@@ -7,7 +7,7 @@ import com.ic.ee.domain.course.CourseDetails;
 
 public interface CourseDAO {
 
-	public Integer saveCourse(Course newCourse);
+	public Integer saveCourse(Course course);
 
 	public Integer updateCourse(Course course);
 
