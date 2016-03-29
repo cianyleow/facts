@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ic.ee.core.service.api.AssignmentService;
-import com.ic.ee.core.service.api.CourseService;
+import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.CourseDetails;
 import com.ic.ee.domain.course.assignment.AssignmentDetails;
+import com.ic.ee.service.api.AssignmentService;
+import com.ic.ee.service.api.CourseService;
 
 @RestController
 public class CourseController {
@@ -56,13 +58,13 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Course getCourse(@PathVariable("courseId") Integer courseId) {
+	public Course getCourse(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return courseService.getCourse(courseId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/details", method = RequestMethod.GET)
 	@ResponseBody
-	public CourseDetails getCourseDetails(@PathVariable("courseId") Integer courseId) {
+	public CourseDetails getCourseDetails(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return courseService.getCourseDetails(courseId);
 	}
 

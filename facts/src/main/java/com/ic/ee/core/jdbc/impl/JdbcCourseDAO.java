@@ -49,13 +49,13 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 
 	@Override
 	public List<Course> getCourses(List<Integer> courseIds) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds.toArray());
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
 		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new CourseRowMapper());
 	}
 
 	@Override
 	public List<CourseDetails> getCourseDetails(List<Integer> courseIds) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds.toArray());
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
 		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, new CourseDetailsRowMapper());
 	}
 

@@ -1,0 +1,1 @@
+SELECT authority FROM user_authority WHERE username = :username

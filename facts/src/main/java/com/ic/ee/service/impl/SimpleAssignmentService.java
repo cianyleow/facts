@@ -1,11 +1,11 @@
-package com.ic.ee.core.service.impl;
+package com.ic.ee.service.impl;
 
 import java.util.List;
 
 import com.ic.ee.core.jdbc.api.AssignmentDAO;
-import com.ic.ee.core.service.api.AssignmentService;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.AssignmentDetails;
+import com.ic.ee.service.api.AssignmentService;
 
 public class SimpleAssignmentService implements AssignmentService {
 

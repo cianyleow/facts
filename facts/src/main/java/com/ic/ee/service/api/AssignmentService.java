@@ -1,4 +1,4 @@
-package com.ic.ee.core.service.api;
+package com.ic.ee.service.api;
 
 import java.util.List;
 
