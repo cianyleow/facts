@@ -15,10 +15,12 @@ import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.jdbc.api.AuthUserDAO;
 import com.ic.ee.core.jdbc.api.CourseDAO;
 import com.ic.ee.core.jdbc.api.UserAuthorityDAO;
+import com.ic.ee.core.jdbc.api.UserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcCourseDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserAuthorityDAO;
+import com.ic.ee.core.jdbc.impl.JdbcUserDAO;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
 import com.ic.ee.core.web.authentication.service.api.TokenUserDetailsService;
 import com.ic.ee.core.web.authentication.service.impl.SimpleTokenAuthenticationService;
@@ -26,9 +28,11 @@ import com.ic.ee.core.web.authentication.service.impl.SimpleTokenUserDetailsServ
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.AuthUserService;
 import com.ic.ee.service.api.CourseService;
+import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
 import com.ic.ee.service.impl.SimpleAuthUserService;
 import com.ic.ee.service.impl.SimpleCourseService;
+import com.ic.ee.service.impl.SimpleUserService;
 
 @Configuration
 public class AppConfig {
@@ -85,6 +89,17 @@ public class AppConfig {
 	}
 
 	@Bean
+	public UserDAO userDAO() {
+		try {
+			return new JdbcUserDAO(dataSource);
+		} catch(IOException ioe) {
+			logger.error("UserDAO threw IO Exception: " + ioe.toString());
+			System.exit(-1);
+		}
+		return null;
+	}
+
+	@Bean
 	public AccountStatusUserDetailsChecker accountStatusUserDetailsChecker() {
 		return new AccountStatusUserDetailsChecker();
 	}
@@ -105,6 +120,11 @@ public class AppConfig {
 	@Bean
 	TokenAuthenticationService tokenAuthenticationService() {
 		return new SimpleTokenAuthenticationService(tokenSecret);
+	}
+
+	@Bean
+	UserService userService() {
+		return new SimpleUserService(userDAO());
 	}
 
 	@Bean

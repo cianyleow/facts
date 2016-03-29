@@ -11,6 +11,7 @@ import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.user.auth.AuthUser;
 import com.ic.ee.domain.user.auth.UserAuthority;
 import com.ic.ee.service.api.AuthUserService;
+import com.ic.ee.util.ElementExtractor;
 
 public class SimpleAuthUserService implements AuthUserService {
 
@@ -25,14 +26,7 @@ public class SimpleAuthUserService implements AuthUserService {
 	@Override
 	public AuthUser getAuthUser(String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		List<AuthUser> authUsers = authUserDAO.getAuthUsers(Collections.singletonList(username));
-		if(authUsers == null) {
-			throw new NoResultsReturnedException();
-		} else if(authUsers.isEmpty()) {
-			throw new NoResultsReturnedException();
-		} else if(authUsers.size() > 1) {
-			throw new TooManyResultsReturnedException();
-		}
-		AuthUser authUser = authUsers.get(0);
+		AuthUser authUser = ElementExtractor.extractOne(authUsers);
 
 		// Decorate authUser with user authorities.
 		decorateAuthUserWithAuthorities(authUser);
