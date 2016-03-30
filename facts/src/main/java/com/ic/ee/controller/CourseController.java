@@ -58,11 +58,11 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
 	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
-		return null;
+		return assignmentService.getAssignments(courseId);
 	}
 	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("courseId") Integer courseId, @PathVariable("assignmentId") Integer assignmentId) {
-		return null;
+		return assignmentService.getAssignment(assignmentId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
