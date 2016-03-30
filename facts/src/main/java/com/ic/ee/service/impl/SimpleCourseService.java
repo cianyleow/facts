@@ -24,14 +24,4 @@ public class SimpleCourseService implements CourseService {
 		List<Course> courses = courseDAO.getCourses(Collections.singletonList(courseId));
 		return ElementExtractor.extractOne(courses);
 	}
-
-	@Override
-	public Integer saveCourse(Course course) {
-		return courseDAO.saveCourse(course);
-	}
-
-	@Override
-	public Boolean updateCourse(Course course) {
-		return (courseDAO.updateCourse(course) == 1);
-	}
 }

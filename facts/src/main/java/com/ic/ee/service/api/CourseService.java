@@ -6,9 +6,5 @@ import com.ic.ee.domain.course.Course;
 
 public interface CourseService {
 
-	public Integer saveCourse(Course course);
-
-	public Boolean updateCourse(Course course);
-
 	public Course getCourse(Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException;
 }
