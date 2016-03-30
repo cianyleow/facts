@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.service.api.EnrollmentService;
 
@@ -30,7 +32,7 @@ public class EnrollmentController {
 	}
 
 	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.GET)
-	public Enrollment getEnrollment(@PathVariable("enrollmentId") Integer enrollmentId) {
+	public Enrollment getEnrollment(@PathVariable("enrollmentId") Integer enrollmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return enrollmentService.getEnrollment(enrollmentId);
 	}
 
