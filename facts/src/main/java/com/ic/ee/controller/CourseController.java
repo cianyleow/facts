@@ -19,6 +19,7 @@ import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
+import com.ic.ee.service.api.SubmissionService;
 
 @RestController
 public class CourseController {
@@ -28,6 +29,9 @@ public class CourseController {
 
 	@Autowired
 	private AssignmentService assignmentService;
+
+	@Autowired
+	private SubmissionService submissionService;
 
 	@RequestMapping(path = "/courses", method = RequestMethod.GET)
 	@ResponseBody
@@ -67,11 +71,11 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
 	public List<Submission> getSubmissions(@PathVariable("courseId") Integer courseId, @PathVariable("assignmentId") Integer assignmentId) {
-		return null;
+		return submissionService.getSubmissions(assignmentId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}/submissions/{submissionId}", method = RequestMethod.GET)
 	public Submission getSubmission(@PathVariable("courseId") Integer courseId, @PathVariable("assignmentId") Integer assignmentId, @PathVariable("submissionId") Integer submissionId) {
-		return null;
+		return submissionService.getSubmission(submissionId);
 	}
 }
