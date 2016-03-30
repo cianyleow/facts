@@ -1,6 +1,5 @@
 package com.ic.ee.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,6 @@ public class EnrollmentController {
 
 	@Autowired
 	private EnrollmentService enrollmentService;
-
-	@RequestMapping("/enrollments/me")
-	public List<Enrollment> getEnrollments(Principal user) {
-		return enrollmentService.getEnrollments(user.getName());
-	}
 
 	@RequestMapping("/enrollments/{username}")
 	public List<Enrollment> getEnrollments(@PathVariable("username") String username) {
