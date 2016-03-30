@@ -12,16 +12,14 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.jdbc.api.CourseDAO;
-import com.ic.ee.core.jdbc.rowmapper.CourseDetailsRowMapper;
 import com.ic.ee.core.jdbc.rowmapper.CourseRowMapper;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.course.CourseDetails;
 
 public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "saveCourse.sql", "updateCourse.sql", "getCoursesByCourseIds.sql", "getCourseDetailsByCourseIds.sql", "getCourseDetailsByAcademicPeriod.sql", "getCourseDetails.sql");
+		super(dataSource, "saveCourse.sql", "updateCourse.sql", "getCoursesByCourseIds.sql");
 	}
 
 	@Override
@@ -29,7 +27,6 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", course.getName());
 		paramSource.addValue("shortName", course.getShortName());
-		paramSource.addValue("academicPeriodId", course.getAcademicPeriodId());
 		paramSource.addValue("description", course.getDescription());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
@@ -42,7 +39,6 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 		paramSource.addValue("courseId", course.getCourseId());
 		paramSource.addValue("name", course.getName());
 		paramSource.addValue("shortName", course.getShortName());
-		paramSource.addValue("academicPeriodId", course.getAcademicPeriodId());
 		paramSource.addValue("description", course.getDescription());
 		return getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
@@ -51,22 +47,5 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	public List<Course> getCourses(List<Integer> courseIds) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
 		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new CourseRowMapper());
-	}
-
-	@Override
-	public List<CourseDetails> getCourseDetails(List<Integer> courseIds) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
-		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, new CourseDetailsRowMapper());
-	}
-
-	@Override
-	public List<CourseDetails> getCourseDetailsForAcademicPeriod(Integer academicPeriodId) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("academicPeriodId", academicPeriodId);
-		return getJdbcTemplate().query(getSqlStatements().get(4), paramSource, new CourseDetailsRowMapper());
-	}
-
-	@Override
-	public List<CourseDetails> getCoursesDetails() {
-		return getJdbcTemplate().query(getSqlStatements().get(5), new CourseDetailsRowMapper());
 	}
 }

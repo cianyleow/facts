@@ -8,7 +8,6 @@ import com.ic.ee.core.jdbc.api.CourseDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.course.CourseDetails;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.util.ElementExtractor;
 
@@ -18,17 +17,6 @@ public class SimpleCourseService implements CourseService {
 
 	public SimpleCourseService(CourseDAO courseDAO) {
 		this.courseDAO = courseDAO;
-	}
-
-	@Override
-	public List<CourseDetails> getAllCourseDetails() {
-		return courseDAO.getCoursesDetails();
-	}
-
-	@Override
-	public CourseDetails getCourseDetails(Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<CourseDetails> courseDetails = courseDAO.getCourseDetails(Collections.singletonList(courseId));
-		return ElementExtractor.extractOne(courseDetails);
 	}
 
 	@Override
@@ -45,10 +33,5 @@ public class SimpleCourseService implements CourseService {
 	@Override
 	public Boolean updateCourse(Course course) {
 		return (courseDAO.updateCourse(course) == 1);
-	}
-
-	@Override
-	public List<CourseDetails> getCourseDetailsByAcademicPeriod(Integer academicPeriodId) {
-		return courseDAO.getCourseDetailsForAcademicPeriod(academicPeriodId);
 	}
 }

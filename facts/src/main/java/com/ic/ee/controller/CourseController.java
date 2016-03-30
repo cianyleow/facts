@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.course.CourseDetails;
 import com.ic.ee.domain.course.assignment.AssignmentDetails;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
@@ -41,31 +40,10 @@ public class CourseController {
 		return courseService.updateCourse(course);
 	}
 
-	// DELETE (deleting an element)
-
-	// GET
-	@RequestMapping(path = "/courses", method = RequestMethod.GET)
-	@ResponseBody
-	public List<CourseDetails> getAllCourses() {
-		return courseService.getAllCourseDetails();
-	}
-
-	@RequestMapping(path = "/courses/byPeriod/{academicPeriodId}", method = RequestMethod.GET)
-	@ResponseBody
-	public List<CourseDetails> getCourseDetailsByPeriod(@PathVariable("academicPeriodId") Integer academicPeriodId) {
-		return courseService.getCourseDetailsByAcademicPeriod(academicPeriodId);
-	}
-
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Course getCourse(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return courseService.getCourse(courseId);
-	}
-
-	@RequestMapping(path = "/courses/{courseId}/details", method = RequestMethod.GET)
-	@ResponseBody
-	public CourseDetails getCourseDetails(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		return courseService.getCourseDetails(courseId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
