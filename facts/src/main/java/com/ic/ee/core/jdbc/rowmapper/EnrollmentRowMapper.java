@@ -17,8 +17,10 @@ public class EnrollmentRowMapper implements RowMapper<Enrollment> {
 		enrollment.setEnrollmentId(rs.getInt("enrollmentId"));
 		Course course = new Course();
 		course.setCourseId(rs.getInt("courseId"));
+		enrollment.setCourse(course);
 		Student student = new Student();
 		student.setUserName(rs.getString("username"));
+		enrollment.setStudent(student);
 		enrollment.setUpdateTime(rs.getDate("updateTime"));
 		return enrollment;
 	}
