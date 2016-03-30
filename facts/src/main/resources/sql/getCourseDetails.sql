@@ -1,1 +1,1 @@
-SELECT courseId, name, shortName, description FROM course WHERE courseId IN (:courseIds)
+SELECT courseId, name, shortName, description FROM course

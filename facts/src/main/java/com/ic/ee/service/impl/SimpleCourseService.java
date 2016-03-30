@@ -22,8 +22,7 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public List<CourseDetails> getAllCourseDetails() {
-		// TODO Auto-generated method stub
-		return null;
+		return courseDAO.getCoursesDetails();
 	}
 
 	@Override

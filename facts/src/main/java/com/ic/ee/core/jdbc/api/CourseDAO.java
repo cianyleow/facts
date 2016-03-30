@@ -11,6 +11,8 @@ public interface CourseDAO {
 
 	public Integer updateCourse(Course course);
 
+	public List<CourseDetails> getCoursesDetails();
+
 	public List<Course> getCourses(List<Integer> courseIds);
 
 	public List<CourseDetails> getCourseDetails(List<Integer> courseIds);
