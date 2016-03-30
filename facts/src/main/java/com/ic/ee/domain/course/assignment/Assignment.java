@@ -2,13 +2,9 @@ package com.ic.ee.domain.course.assignment;
 
 import java.util.Date;
 
-import com.ic.ee.domain.course.Course;
-
 public class Assignment {
 
 	private Integer assignmentId;
-
-	private Course course;
 
 	private String name;
 	private String description;
@@ -24,14 +20,6 @@ public class Assignment {
 
 	public void setAssignmentId(Integer assignmentId) {
 		this.assignmentId = assignmentId;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
 	}
 
 	public String getName() {
