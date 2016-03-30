@@ -1,5 +1,7 @@
 package com.ic.ee.domain.course;
 
+import com.ic.ee.domain.common.AcademicPeriod;
+
 public class Course {
 
 	private Integer courseId;
@@ -7,6 +9,16 @@ public class Course {
 	private String name;
 	private String shortName;
 	private String description;
+
+	private AcademicPeriod academicPeriod;
+
+	public AcademicPeriod getAcademicPeriod() {
+		return academicPeriod;
+	}
+
+	public void setAcademicPeriod(AcademicPeriod academicPeriod) {
+		this.academicPeriod = academicPeriod;
+	}
 
 	public Integer getCourseId() {
 		return courseId;
