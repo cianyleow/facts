@@ -14,11 +14,13 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.jdbc.api.AuthUserDAO;
 import com.ic.ee.core.jdbc.api.CourseDAO;
+import com.ic.ee.core.jdbc.api.EnrollmentDAO;
 import com.ic.ee.core.jdbc.api.UserAuthorityDAO;
 import com.ic.ee.core.jdbc.api.UserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcCourseDAO;
+import com.ic.ee.core.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserAuthorityDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserDAO;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
@@ -28,10 +30,12 @@ import com.ic.ee.core.web.authentication.service.impl.SimpleTokenUserDetailsServ
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.AuthUserService;
 import com.ic.ee.service.api.CourseService;
+import com.ic.ee.service.api.EnrollmentService;
 import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
 import com.ic.ee.service.impl.SimpleAuthUserService;
 import com.ic.ee.service.impl.SimpleCourseService;
+import com.ic.ee.service.impl.SimpleEnrollmentService;
 import com.ic.ee.service.impl.SimpleUserService;
 
 @Configuration
@@ -100,6 +104,17 @@ public class AppConfig {
 	}
 
 	@Bean
+	public EnrollmentDAO enrollmentDAO() {
+		try {
+			return new JdbcEnrollmentDAO(dataSource);
+		} catch(IOException ioe) {
+			logger.error("EnrollmentDAO threw IO Exception: " + ioe.toString());
+			System.exit(-1);
+		}
+		return null;
+	}
+
+	@Bean
 	public AccountStatusUserDetailsChecker accountStatusUserDetailsChecker() {
 		return new AccountStatusUserDetailsChecker();
 	}
@@ -130,5 +145,10 @@ public class AppConfig {
 	@Bean
 	TokenUserDetailsService tokenUserDetailsService() {
 		return new SimpleTokenUserDetailsService(authUserService(), accountStatusUserDetailsChecker());
+	}
+
+	@Bean
+	EnrollmentService enrollmentService() {
+		return new SimpleEnrollmentService(enrollmentDAO());
 	}
 }
