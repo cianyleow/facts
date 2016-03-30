@@ -17,7 +17,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getCoursesByCourseIds.sql");
+		super(dataSource, "getCoursesByCourseIds.sql", "getCourses.sql");
 	}
 //
 //	@Override
@@ -45,5 +45,10 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	public List<Course> getCourses(List<Integer> courseIds) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new CourseRowMapper());
+	}
+
+	@Override
+	public List<Course> getCourses() {
+		return getJdbcTemplate().query(getSqlStatements().get(1), new CourseRowMapper());
 	}
 }
