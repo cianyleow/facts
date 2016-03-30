@@ -8,7 +8,5 @@ public interface AssignmentService {
 
 	public Assignment getAssignment(Integer assignmentId);
 
-	public List<Assignment> getAssignments();
-
 	public List<Assignment> getAssignments(Integer courseId);
 }

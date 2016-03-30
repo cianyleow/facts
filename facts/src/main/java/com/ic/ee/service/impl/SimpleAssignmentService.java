@@ -20,12 +20,6 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
-	public List<Assignment> getAssignments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Assignment> getAssignments(Integer courseId) {
 		// TODO Auto-generated method stub
 		return null;
