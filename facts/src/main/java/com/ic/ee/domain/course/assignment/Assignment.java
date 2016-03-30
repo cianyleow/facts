@@ -1,13 +1,8 @@
 package com.ic.ee.domain.course.assignment;
 
 import java.util.Date;
-import java.util.Set;
 
-import com.ic.ee.domain.common.feedback.mark.MarkComponent;
-import com.ic.ee.domain.common.file.File;
-import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.user.group.constraint.GroupConstraint;
 
 public class Assignment {
 
@@ -18,17 +13,17 @@ public class Assignment {
 	private String name;
 	private String description;
 	private Date creationTime;
-	private Set<File> suppliedFiles;
+//	private Set<File> suppliedFiles;
 
 	private Date dueTime;
 
 	private Date openTime;
-
-	private GroupConstraint groupConstraint;
-
-	private Set<FileRequirement> requiredFiles;
-
-	private Set<MarkComponent> markComponents;
+//
+//	private GroupConstraint groupConstraint;
+//
+//	private Set<FileRequirement> requiredFiles;
+//
+//	private Set<MarkComponent> markComponents;
 
 	public Integer getAssignmentId() {
 		return assignmentId;
@@ -70,14 +65,6 @@ public class Assignment {
 		this.creationTime = creationTime;
 	}
 
-	public Set<File> getSuppliedFiles() {
-		return suppliedFiles;
-	}
-
-	public void setSuppliedFiles(Set<File> suppliedFiles) {
-		this.suppliedFiles = suppliedFiles;
-	}
-
 	public Date getDueTime() {
 		return dueTime;
 	}
@@ -92,29 +79,5 @@ public class Assignment {
 
 	public void setOpenTime(Date openTime) {
 		this.openTime = openTime;
-	}
-
-	public GroupConstraint getGroupConstraint() {
-		return groupConstraint;
-	}
-
-	public void setGroupConstraint(GroupConstraint groupConstraint) {
-		this.groupConstraint = groupConstraint;
-	}
-
-	public Set<FileRequirement> getRequiredFiles() {
-		return requiredFiles;
-	}
-
-	public void setRequiredFiles(Set<FileRequirement> requiredFiles) {
-		this.requiredFiles = requiredFiles;
-	}
-
-	public Set<MarkComponent> getMarkComponents() {
-		return markComponents;
-	}
-
-	public void setMarkComponents(Set<MarkComponent> markComponents) {
-		this.markComponents = markComponents;
 	}
 }
