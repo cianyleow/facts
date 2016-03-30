@@ -24,4 +24,10 @@ public class SimpleCourseService implements CourseService {
 		List<Course> courses = courseDAO.getCourses(Collections.singletonList(courseId));
 		return ElementExtractor.extractOne(courses);
 	}
+
+	@Override
+	public List<Course> getCourses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

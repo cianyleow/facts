@@ -32,7 +32,7 @@ public class CourseController {
 	@RequestMapping(path = "/courses", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Course> getCourses() {
-		return null;
+		return courseService.getCourses();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
