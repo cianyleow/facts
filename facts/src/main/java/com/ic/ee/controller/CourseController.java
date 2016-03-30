@@ -63,7 +63,7 @@ public class CourseController {
 		return assignmentService.getAssignments(courseId);
 	}
 	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}", method = RequestMethod.GET)
-	public Assignment getAssignment(@PathVariable("courseId") Integer courseId, @PathVariable("assignmentId") Integer assignmentId) {
+	public Assignment getAssignment(@PathVariable("courseId") Integer courseId, @PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return assignmentService.getAssignment(assignmentId);
 	}
 
