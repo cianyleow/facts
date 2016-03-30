@@ -1,0 +1,1 @@
+SELECT enrollmentId, username, courseId, enrollmentLevel, updateTime FROM enrollment WHERE enrollmentId IN (:enrollmentIds)

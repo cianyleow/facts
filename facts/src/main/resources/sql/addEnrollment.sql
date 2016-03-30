@@ -1,0 +1,1 @@
+INSERT INTO enrollment (username, courseId, enrollmentLevel) VALUES (:username, :courseId, :enrollmentLevel)
