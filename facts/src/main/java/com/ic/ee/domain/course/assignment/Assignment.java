@@ -13,17 +13,10 @@ public class Assignment {
 	private String name;
 	private String description;
 	private Date creationTime;
-//	private Set<File> suppliedFiles;
 
 	private Date dueTime;
 
 	private Date openTime;
-//
-//	private GroupConstraint groupConstraint;
-//
-//	private Set<FileRequirement> requiredFiles;
-//
-//	private Set<MarkComponent> markComponents;
 
 	public Integer getAssignmentId() {
 		return assignmentId;
