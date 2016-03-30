@@ -17,7 +17,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getCoursesByCourseIds.sql", "getCourses.sql");
+		super(dataSource, "getCoursesByIds.sql", "getCourses.sql");
 	}
 //
 //	@Override
