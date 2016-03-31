@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
-import com.ic.ee.domain.common.relationship.Enrollment;
+import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.User;
-import com.ic.ee.service.api.EnrollmentService;
+import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.UserService;
 
 @RestController
@@ -22,15 +22,15 @@ public class SelfController {
 	private UserService userService;
 
 	@Autowired
-	private EnrollmentService enrollmentService;
+	private CourseService courseService;
 
 	@RequestMapping(path = "/self", method = RequestMethod.GET)
 	public User getSelf(Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		return userService.getUser(user.getName());
 	}
 
-	@RequestMapping(path = "/self/enrollments", method = RequestMethod.GET)
-	public List<Enrollment> getSelfEnrollments(Principal user) {
-		return enrollmentService.getEnrollments(user.getName());
+	@RequestMapping(path = "/self/courses", method = RequestMethod.GET)
+	public List<Course> getEnrolledCourses(Principal user) {
+		return courseService.getCourses(user.getName());
 	}
 }

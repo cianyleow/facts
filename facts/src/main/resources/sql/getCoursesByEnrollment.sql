@@ -1,0 +1,1 @@
+SELECT course.courseId, course.name, course.shortName, course.description FROM course JOIN enrollment WHERE course.courseId = enrollment.courseId AND enrollment.username = :username

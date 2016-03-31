@@ -11,4 +11,6 @@ public interface CourseService {
 	public List<Course> getCourses();
 
 	public Course getCourse(Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException;
+
+	public List<Course> getCourses(String username);
 }

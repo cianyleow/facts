@@ -29,4 +29,9 @@ public class SimpleCourseService implements CourseService {
 	public List<Course> getCourses() {
 		return courseDAO.getCourses();
 	}
+
+	@Override
+	public List<Course> getCourses(String username) {
+		return courseDAO.getCourses(username);
+	}
 }
