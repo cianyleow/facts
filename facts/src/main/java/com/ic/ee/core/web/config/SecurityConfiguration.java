@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		//allow anonymous POSTs to login
 		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+		.antMatchers(HttpMethod.GET, "/files/{link}/download").permitAll()
 
 		//all other request need to be authenticated
 		.anyRequest().authenticated().and()

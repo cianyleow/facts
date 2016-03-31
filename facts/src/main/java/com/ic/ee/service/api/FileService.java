@@ -2,6 +2,8 @@ package com.ic.ee.service.api;
 
 import java.util.List;
 
+import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
+import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
@@ -13,4 +15,6 @@ public interface FileService {
 	public File getFile(Integer fileId) throws NoResultsReturnedException, TooManyResultsReturnedException;
 
 	public String getDownloadLink(Integer fileId, String username) throws NoResultsReturnedException, TooManyResultsReturnedException;
+
+	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException;
 }

@@ -18,7 +18,7 @@ import com.ic.ee.domain.common.file.File;
 public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getFiles.sql", "addDownloadLink.sql");
+		super(dataSource, "getFiles.sql", "addDownloadLink.sql", "getFileFromLink.sql", "voidDownloadLink.sql");
 	}
 
 	@Override
@@ -37,4 +37,18 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
+
+	@Override
+	public List<File> getFiles(String link) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("link", link);
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new FileRowMapper());
+	}
+
+	@Override
+	public Integer voidDownloadLink(String link) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("link", link);
+		return getJdbcTemplate().update(getSqlStatements().get(3), paramSource);
+	}
+
+
 }

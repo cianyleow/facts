@@ -10,4 +10,8 @@ public interface FileDAO {
 
 	public Integer addDownloadLink(File file, String hash, String username);
 
+	public List<File> getFiles(String link);
+
+	public Integer voidDownloadLink(String link);
+
 }

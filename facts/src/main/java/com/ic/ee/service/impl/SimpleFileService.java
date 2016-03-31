@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.ic.ee.core.jdbc.api.FileDAO;
+import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
+import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
@@ -51,5 +53,22 @@ public class SimpleFileService implements FileService {
 			throw new NoResultsReturnedException();
 		}
 		return hash;
+	}
+
+	@Override
+	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException {
+		List<File> files = fileDAO.getFiles(link);
+		File file;
+		try {
+			file = ElementExtractor.extractOne(files);
+		} catch (NoResultsReturnedException | TooManyResultsReturnedException e) {
+			throw new DownloadLinkDoesNotExistException();
+		}
+
+		if(fileDAO.voidDownloadLink(link) != 1) {
+			throw new DownloadLinkVoidFailedException();
+		}
+
+		return file;
 	}
 }
