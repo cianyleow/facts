@@ -12,13 +12,15 @@ import com.ic.ee.core.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.jdbc.rowmapper.AssignmentRowMapper;
 import com.ic.ee.core.jdbc.rowmapper.FileRequirementRowMapper;
+import com.ic.ee.core.jdbc.rowmapper.MarkComponentRowMapper;
+import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 
 public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql", "getFileRequirementsByAssignment.sql");
+		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql", "getFileRequirementsByAssignment.sql", "getMarkComponentsByAssignment.sql");
 	}
 
 	@Override
@@ -39,5 +41,9 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new FileRequirementRowMapper());
 	}
 
-
+	@Override
+	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
+		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, new MarkComponentRowMapper());
+	}
 }
