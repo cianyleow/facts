@@ -11,12 +11,14 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import com.ic.ee.core.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.jdbc.rowmapper.AssignmentRowMapper;
+import com.ic.ee.core.jdbc.rowmapper.FileRequirementRowMapper;
+import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 
 public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql");
+		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql", "getFileRequirementsByAssignment.sql");
 	}
 
 	@Override
@@ -30,4 +32,12 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", courseId);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new AssignmentRowMapper());
 	}
+
+	@Override
+	public List<FileRequirement> getRequiredFiles(Integer assignmentId) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new FileRequirementRowMapper());
+	}
+
+
 }

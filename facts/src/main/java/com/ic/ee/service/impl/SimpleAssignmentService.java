@@ -6,6 +6,7 @@ import java.util.List;
 import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
+import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.util.ElementExtractor;
@@ -29,4 +30,8 @@ public class SimpleAssignmentService implements AssignmentService {
 		return assignmentDAO.getAssignments(courseId);
 	}
 
+	@Override
+	public List<FileRequirement> getRequiredFiles(Integer assignmentId) {
+		return assignmentDAO.getRequiredFiles(assignmentId);
+	}
 }
