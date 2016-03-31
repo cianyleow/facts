@@ -20,7 +20,9 @@ import com.ic.ee.domain.course.assignment.Assignment;
 public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql", "getFileRequirementsByAssignment.sql", "getMarkComponentsByAssignment.sql");
+		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql",
+				"getFileRequirementsByAssignment.sql", "getMarkComponentsByAssignment.sql",
+				"getSuppliedFileIdsByAssignment.sql");
 	}
 
 	@Override
@@ -45,5 +47,11 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
 		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, new MarkComponentRowMapper());
+	}
+
+	@Override
+	public List<Integer> getSuppliedFileIds(Integer assignmentId) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
+		return getJdbcTemplate().queryForList(getSqlStatements().get(4), paramSource, Integer.class);
 	}
 }

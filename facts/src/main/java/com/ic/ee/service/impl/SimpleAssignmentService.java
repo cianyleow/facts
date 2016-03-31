@@ -7,17 +7,22 @@ import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
+import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.AssignmentService;
+import com.ic.ee.service.api.FileService;
 import com.ic.ee.util.ElementExtractor;
 
 public class SimpleAssignmentService implements AssignmentService {
 
 	private final AssignmentDAO assignmentDAO;
 
-	public SimpleAssignmentService(AssignmentDAO assignmentDAO) {
+	private final FileService fileService;
+
+	public SimpleAssignmentService(AssignmentDAO assignmentDAO, FileService fileService) {
 		this.assignmentDAO = assignmentDAO;
+		this.fileService = fileService;
 	}
 
 	@Override
@@ -40,4 +45,12 @@ public class SimpleAssignmentService implements AssignmentService {
 	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
 		return assignmentDAO.getMarkComponents(assignmentId);
 	}
+
+	@Override
+	public List<File> getSuppliedFiles(Integer assignmentId) {
+		List<Integer> fileIds = assignmentDAO.getSuppliedFileIds(assignmentId);
+		return fileService.getFiles(fileIds);
+	}
+
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
+import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 
@@ -17,4 +18,6 @@ public interface AssignmentService {
 	public List<FileRequirement> getRequiredFiles(Integer assignmentId);
 
 	public List<MarkComponent> getMarkComponents(Integer assignmentId);
+
+	public List<File> getSuppliedFiles(Integer assignmentId);
 }

@@ -16,4 +16,5 @@ public interface AssignmentDAO {
 
 	public List<MarkComponent> getMarkComponents(Integer assignmentId);
 
+	public List<Integer> getSuppliedFileIds(Integer assignmentId);
 }

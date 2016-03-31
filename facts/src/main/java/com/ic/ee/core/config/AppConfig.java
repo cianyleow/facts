@@ -15,12 +15,14 @@ import com.ic.ee.core.jdbc.api.AssignmentDAO;
 import com.ic.ee.core.jdbc.api.AuthUserDAO;
 import com.ic.ee.core.jdbc.api.CourseDAO;
 import com.ic.ee.core.jdbc.api.EnrollmentDAO;
+import com.ic.ee.core.jdbc.api.FileDAO;
 import com.ic.ee.core.jdbc.api.UserAuthorityDAO;
 import com.ic.ee.core.jdbc.api.UserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcCourseDAO;
 import com.ic.ee.core.jdbc.impl.JdbcEnrollmentDAO;
+import com.ic.ee.core.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserAuthorityDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserDAO;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
@@ -31,11 +33,13 @@ import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.AuthUserService;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.EnrollmentService;
+import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
 import com.ic.ee.service.impl.SimpleAuthUserService;
 import com.ic.ee.service.impl.SimpleCourseService;
 import com.ic.ee.service.impl.SimpleEnrollmentService;
+import com.ic.ee.service.impl.SimpleFileService;
 import com.ic.ee.service.impl.SimpleUserService;
 
 @Configuration
@@ -115,6 +119,17 @@ public class AppConfig {
 	}
 
 	@Bean
+	public FileDAO fileDAO() {
+		try {
+			return new JdbcFileDAO(dataSource);
+		} catch(IOException ioe) {
+			logger.error("FileDAO threw IO Exception: " + ioe.toString());
+			System.exit(-1);
+		}
+		return null;
+	}
+
+	@Bean
 	public AccountStatusUserDetailsChecker accountStatusUserDetailsChecker() {
 		return new AccountStatusUserDetailsChecker();
 	}
@@ -125,7 +140,7 @@ public class AppConfig {
 	}
 
 	@Bean AssignmentService assignmentService() {
-		return new SimpleAssignmentService(assignmentDAO());
+		return new SimpleAssignmentService(assignmentDAO(), fileService());
 	}
 
 	@Bean AuthUserService authUserService() {
@@ -145,6 +160,11 @@ public class AppConfig {
 	@Bean
 	TokenUserDetailsService tokenUserDetailsService() {
 		return new SimpleTokenUserDetailsService(authUserService(), accountStatusUserDetailsChecker());
+	}
+
+	@Bean
+	FileService fileService() {
+		return new SimpleFileService(fileDAO());
 	}
 
 	@Bean
