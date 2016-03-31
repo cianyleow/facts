@@ -1,0 +1,1 @@
+INSERT INTO download_link (fileId, link, username) VALUES (:fileId, :link, :username)

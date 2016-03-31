@@ -1,6 +1,7 @@
 package com.ic.ee.core.config;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.sql.DataSource;
 
@@ -41,6 +42,8 @@ import com.ic.ee.service.impl.SimpleCourseService;
 import com.ic.ee.service.impl.SimpleEnrollmentService;
 import com.ic.ee.service.impl.SimpleFileService;
 import com.ic.ee.service.impl.SimpleUserService;
+import com.ic.ee.util.HashUtil;
+import com.ic.ee.util.Sha256HashUtil;
 
 @Configuration
 public class AppConfig {
@@ -164,11 +167,22 @@ public class AppConfig {
 
 	@Bean
 	FileService fileService() {
-		return new SimpleFileService(fileDAO());
+		return new SimpleFileService(fileDAO(), hashUtil());
 	}
 
 	@Bean
 	EnrollmentService enrollmentService() {
 		return new SimpleEnrollmentService(enrollmentDAO());
+	}
+
+	@Bean
+	HashUtil hashUtil() {
+		try {
+			return new Sha256HashUtil();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error("Hash Util algorithm does not exist.");
+			System.exit(-1);
+		}
+		return null;
 	}
 }

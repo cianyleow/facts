@@ -8,4 +8,6 @@ public interface FileDAO {
 
 	public List<File> getFiles(List<Integer> fileIds);
 
+	public Integer addDownloadLink(File file, String hash, String username);
+
 }
