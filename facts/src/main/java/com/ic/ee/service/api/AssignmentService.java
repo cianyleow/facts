@@ -2,6 +2,11 @@ package com.ic.ee.service.api;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.ic.ee.core.web.exception.FileUploadException;
+import com.ic.ee.core.web.exception.HashingException;
+import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
@@ -20,4 +25,8 @@ public interface AssignmentService {
 	public List<MarkComponent> getMarkComponents(Integer assignmentId);
 
 	public List<File> getSuppliedFiles(Integer assignmentId);
+
+	public Assignment createAssignment(Integer courseId, Assignment assignment);
+
+	public File createSuppliedFile(Integer assignmentId, MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException;
 }

@@ -5,14 +5,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ic.ee.core.jdbc.api.FileDAO;
 import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
 import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
+import com.ic.ee.core.web.exception.FileUploadException;
+import com.ic.ee.core.web.exception.HashingException;
+import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.util.ElementExtractor;
+import com.ic.ee.util.FileUtils;
 import com.ic.ee.util.HashUtil;
 
 public class SimpleFileService implements FileService {
@@ -21,9 +27,12 @@ public class SimpleFileService implements FileService {
 
 	private final HashUtil hashUtil;
 
-	public SimpleFileService(FileDAO fileDAO, HashUtil hashUtil) {
+	private final FileUtils fileUtils;
+
+	public SimpleFileService(FileDAO fileDAO, HashUtil hashUtil, FileUtils fileUtils) {
 		this.fileDAO = fileDAO;
 		this.hashUtil = hashUtil;
+		this.fileUtils = fileUtils;
 	}
 
 	@Override
@@ -70,5 +79,17 @@ public class SimpleFileService implements FileService {
 		}
 
 		return file;
+	}
+
+	@Override
+	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException {
+		// Create file from multipart file
+		File createdFile = fileUtils.createFile(file);
+
+		// Get fileId and decorate created file
+		Integer fileId = fileDAO.createFile(username, createdFile);
+		createdFile.setFileId(fileId);
+
+		return createdFile;
 	}
 }

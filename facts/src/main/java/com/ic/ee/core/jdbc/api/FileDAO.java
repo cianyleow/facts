@@ -14,4 +14,6 @@ public interface FileDAO {
 
 	public Integer voidDownloadLink(String link);
 
+	public Integer createFile(String username, File file);
+
 }

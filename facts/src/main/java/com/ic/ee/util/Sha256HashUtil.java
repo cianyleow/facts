@@ -1,7 +1,13 @@
 package com.ic.ee.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.ic.ee.core.web.exception.HashingException;
 
 public class Sha256HashUtil implements HashUtil {
 
@@ -24,6 +30,23 @@ public class Sha256HashUtil implements HashUtil {
 			sb.append(Integer.toString((byteData[i] & 0xFF) + 0x100, 16).substring(1));
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public String getHash(MultipartFile file) throws HashingException {
+		try {
+			InputStream is = file.getInputStream();
+			byte[] dataBytes = new byte[1024];
+			int nread = 0;
+			while((nread = is.read(dataBytes)) != -1) {
+				md.update(dataBytes, 0, nread);
+			}
+		} catch (IOException e) {
+			throw new HashingException(e);
+		}
+		byte[] mdBytes = md.digest();
+
+		return bytesToString(mdBytes);
 	}
 
 }

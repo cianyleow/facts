@@ -2,8 +2,10 @@ package com.ic.ee.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,8 @@ import com.ic.ee.service.api.CourseService;
 
 @RestController
 public class CourseController {
+
+	private final static Logger logger = Logger.getLogger(CourseController.class);
 
 	@Autowired
 	private CourseService courseService;
@@ -61,6 +65,12 @@ public class CourseController {
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
 	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
 		return assignmentService.getAssignments(courseId);
+	}
+
+
+	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.POST)
+	public Assignment createAssignment(@PathVariable("courseId") Integer courseId, @RequestBody Assignment assignment) {
+		return assignmentService.createAssignment(courseId, assignment);
 	}
 
 //	@RequestMapping(path = "/courses/{courseId}/assignments/{assignmentId}/submissions", method = RequestMethod.GET)

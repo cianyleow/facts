@@ -1,6 +1,11 @@
 package com.ic.ee.domain.course.assignment;
 
 import java.util.Date;
+import java.util.List;
+
+import com.ic.ee.domain.common.feedback.mark.MarkComponent;
+import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.common.file.FileRequirement;
 
 public class Assignment {
 
@@ -13,6 +18,36 @@ public class Assignment {
 	private Date dueTime;
 
 	private Date openTime;
+
+	private List<FileRequirement> requiredFiles;
+
+	private List<MarkComponent> markComponents;
+
+	private List<File> suppliedFiles;
+
+	public List<FileRequirement> getRequiredFiles() {
+		return requiredFiles;
+	}
+
+	public void setRequiredFiles(List<FileRequirement> requiredFiles) {
+		this.requiredFiles = requiredFiles;
+	}
+
+	public List<MarkComponent> getMarkComponents() {
+		return markComponents;
+	}
+
+	public void setMarkComponents(List<MarkComponent> markComponents) {
+		this.markComponents = markComponents;
+	}
+
+	public List<File> getSuppliedFiles() {
+		return suppliedFiles;
+	}
+
+	public void setSuppliedFiles(List<File> suppliedFiles) {
+		this.suppliedFiles = suppliedFiles;
+	}
 
 	public Integer getAssignmentId() {
 		return assignmentId;

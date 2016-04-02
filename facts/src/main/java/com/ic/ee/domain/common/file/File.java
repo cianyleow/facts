@@ -12,7 +12,7 @@ public class File {
 	private String extension;
 
 	private String contentType;
-	private Integer size;
+	private Long size;
 	private String hash;
 
 	private String location;
@@ -51,11 +51,11 @@ public class File {
 		this.contentType = contentType;
 	}
 
-	public Integer getSize() {
+	public Long getSize() {
 		return size;
 	}
 
-	public void setSize(Integer size) {
+	public void setSize(Long size) {
 		this.size = size;
 	}
 

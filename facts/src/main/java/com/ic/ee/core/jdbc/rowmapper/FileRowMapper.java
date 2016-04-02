@@ -18,7 +18,7 @@ public class FileRowMapper implements RowMapper<File> {
 		file.setContentType(rs.getString("contentType"));
 		file.setHash(rs.getString("hash"));
 		file.setLocation(rs.getString("location"));
-		file.setSize(rs.getInt("size"));
+		file.setSize(rs.getLong("size"));
 		file.setCreationTime(rs.getDate("creationTime"));
 		return file;
 	}

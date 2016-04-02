@@ -39,6 +39,6 @@ public class FileController {
 		File file = fileService.getFile(link);
 //		response.setContentType(file.getContentType());
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName() + "." + file.getExtension());
-		return new FileSystemResource("C:/Temp/finalcopywithbleed_Part10.pdf");
+		return new FileSystemResource(file.getLocation());
 	}
 }
