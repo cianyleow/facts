@@ -6,17 +6,12 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
-import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.User;
 import com.ic.ee.domain.user.group.Group;
 
 public class Submission {
 
 	private Integer submissionId;
 
-	private Assignment parentAssignment;
-
-	private User submitter;
 	private Group group;
 
 	private SubmissionStatus submissionStatus;
@@ -34,23 +29,6 @@ public class Submission {
 
 	public void setSubmissionId(Integer submissionId) {
 		this.submissionId = submissionId;
-	}
-
-	@JsonIgnore
-	public Assignment getParentAssignment() {
-		return parentAssignment;
-	}
-
-	public void setParentAssignment(Assignment parentAssignment) {
-		this.parentAssignment = parentAssignment;
-	}
-
-	public User getSubmitter() {
-		return submitter;
-	}
-
-	public void setSubmitter(User submitter) {
-		this.submitter = submitter;
 	}
 
 	public Group getGroup() {

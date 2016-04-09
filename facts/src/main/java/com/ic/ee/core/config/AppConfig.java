@@ -22,6 +22,7 @@ import com.ic.ee.core.jdbc.api.EnrollmentDAO;
 import com.ic.ee.core.jdbc.api.FileDAO;
 import com.ic.ee.core.jdbc.api.FileRequirementDAO;
 import com.ic.ee.core.jdbc.api.MarkComponentDAO;
+import com.ic.ee.core.jdbc.api.SubmissionDAO;
 import com.ic.ee.core.jdbc.api.UserAuthorityDAO;
 import com.ic.ee.core.jdbc.api.UserDAO;
 import com.ic.ee.core.jdbc.impl.JdbcAssignmentDAO;
@@ -31,6 +32,7 @@ import com.ic.ee.core.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.jdbc.impl.JdbcFileRequirementDAO;
 import com.ic.ee.core.jdbc.impl.JdbcMarkComponentDAO;
+import com.ic.ee.core.jdbc.impl.JdbcSubmissionDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserAuthorityDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserDAO;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
@@ -44,6 +46,7 @@ import com.ic.ee.service.api.EnrollmentService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.MarkComponentService;
+import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
 import com.ic.ee.service.impl.SimpleAuthUserService;
@@ -52,6 +55,7 @@ import com.ic.ee.service.impl.SimpleEnrollmentService;
 import com.ic.ee.service.impl.SimpleFileRequirementService;
 import com.ic.ee.service.impl.SimpleFileService;
 import com.ic.ee.service.impl.SimpleMarkComponentService;
+import com.ic.ee.service.impl.SimpleSubmissionService;
 import com.ic.ee.service.impl.SimpleUserService;
 import com.ic.ee.util.FileUtils;
 import com.ic.ee.util.HashUtil;
@@ -174,6 +178,11 @@ public class AppConfig {
 	}
 
 	@Bean
+	SubmissionDAO submissionDAO() throws IOException {
+		return new JdbcSubmissionDAO(dataSource);
+	}
+
+	@Bean
 	AccountStatusUserDetailsChecker accountStatusUserDetailsChecker() {
 		return new AccountStatusUserDetailsChecker();
 	}
@@ -224,6 +233,11 @@ public class AppConfig {
 	@Bean
 	MarkComponentService markComponentService() throws IOException {
 		return new SimpleMarkComponentService(markComponentDAO());
+	}
+
+	@Bean
+	SubmissionService submissionService() throws IOException {
+		return new SimpleSubmissionService(submissionDAO());
 	}
 
 	@Bean

@@ -1,0 +1,1 @@
+SELECT submissionId, comment, submissionStatus, creationTime FROM submission WHERE submissionId IN (:submissionIds)

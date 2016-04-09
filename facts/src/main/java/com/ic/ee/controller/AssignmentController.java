@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,9 @@ import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
+import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
+import com.ic.ee.service.api.SubmissionService;
 
 @RestController
 public class AssignmentController {
@@ -29,6 +32,9 @@ public class AssignmentController {
 
 	@Autowired
 	private AssignmentService assignmentService;
+
+	@Autowired
+	private SubmissionService submissionService;
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
@@ -53,5 +59,10 @@ public class AssignmentController {
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.POST)
 	public File addRequiredFiles(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("file") MultipartFile file, Principal user) throws IncorrectFileNameFormatException, FileUploadException, HashingException {
 		return assignmentService.createSuppliedFile(assignmentId, file, user.getName());
+	}
+
+	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
+	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestBody Submission submission, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return submissionService.createSubmission(assignmentId, submission, user.getName());
 	}
 }

@@ -1,14 +1,14 @@
 package com.ic.ee.service.api;
 
-import java.util.List;
-
+import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public interface SubmissionService {
 
-	Submission getSubmission(Integer submissionId);
+	public Submission createSubmission(Integer assignmentId, Submission submission, String username) throws NoResultsReturnedException, TooManyResultsReturnedException;
 
-	List<Submission> getSubmissions(Integer assignmentId);
+	public Submission getSubmission(Integer submissionId) throws NoResultsReturnedException, TooManyResultsReturnedException;
 
 
 }
