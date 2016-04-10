@@ -6,13 +6,10 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
-import com.ic.ee.domain.user.group.Group;
 
 public class Submission {
 
 	private Integer submissionId;
-
-	private Group group;
 
 	private SubmissionStatus submissionStatus;
 
@@ -29,14 +26,6 @@ public class Submission {
 
 	public void setSubmissionId(Integer submissionId) {
 		this.submissionId = submissionId;
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
 	}
 
 	public SubmissionStatus getSubmissionStatus() {
