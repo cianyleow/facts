@@ -18,7 +18,7 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements SubmissionDAO {
 
 	public JdbcSubmissionDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createSubmission.sql", "getSubmissionsByIds.sql");
+		super(dataSource, "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,7 +27,7 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements Submission
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("assignmentId", assignmentId);
 		paramSource.addValue("username", username);
-		paramSource.addValue("submissionStatus", submission.getSubmissionStatus().toString());
+		paramSource.addValue("submissionStatus", "CREATED" /*submission.getSubmissionStatus().toString()*/);
 		paramSource.addValue("comment", submission.getComment());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
@@ -38,6 +38,14 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements Submission
 	public List<Submission> getSubmission(List<Integer> submissionIds) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionIds", submissionIds);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new SubmissionRowMapper());
+	}
+
+	@Override
+	public void createSubmissionFile(Integer submissionId, Integer fileId) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("submissionId", submissionId);
+		paramSource.addValue("fileId", fileId);
+		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
 	}
 
 }

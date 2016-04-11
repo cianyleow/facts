@@ -20,7 +20,10 @@ import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.SubmissionFileMatchException;
+import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
+import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
@@ -65,8 +68,8 @@ public class AssignmentController {
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
-	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException, JsonParseException, JsonMappingException, IOException {
+	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);
-		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
+		return submissionService.createSubmission(assignmentId, submission, files, "cyl312"/*user.getName()*/);
 	}
 }

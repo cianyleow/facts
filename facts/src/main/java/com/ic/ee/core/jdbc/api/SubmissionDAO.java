@@ -10,4 +10,6 @@ public interface SubmissionDAO {
 
 	public List<Submission> getSubmission(List<Integer> submissionIds);
 
+	public void createSubmissionFile(Integer submissionId, Integer fileId);
+
 }

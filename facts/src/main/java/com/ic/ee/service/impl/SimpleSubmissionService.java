@@ -1,5 +1,6 @@
 package com.ic.ee.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,14 +16,15 @@ import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
+import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.common.file.SubmissionFile;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
-import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.util.ElementExtractor;
@@ -31,26 +33,22 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final SubmissionDAO submissionDAO;
 
-	private final FileRequirementService fileRequirementService;
-
 	private final AssignmentService assignmentService;
 
 	private final FileService fileService;
 
 	private final SubmissionFileValidator submissionFileValidator;
 
-	public SimpleSubmissionService(SubmissionDAO submissionDAO, FileRequirementService fileRequirementService,
-			AssignmentService assignmentService, FileService fileService,
-			SubmissionFileValidator submissionFileValidator) {
+	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentService assignmentService,
+			FileService fileService, SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
-		this.fileRequirementService = fileRequirementService;
 		this.assignmentService = assignmentService;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
 	}
 
 	@Override
-	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		// Generate submission creation time - before file uploads, to avoid slow internet issues
 		submission.setCreationTime(new Date());
 
@@ -58,40 +56,64 @@ public class SimpleSubmissionService implements SubmissionService {
 		List<FileRequirement> fileRequirements = assignmentService.getRequiredFiles(assignmentId);
 
 		// Match all files up with the file requirements and validate - throw error if not complete/incorrect
-
+		List<SubmissionFile> submissionFiles = matchSubmissionFiles(files, fileRequirements);
+		Map<String, String> map = new HashMap<String, String>();
+		MapBindingResult errors = new MapBindingResult(map, SubmissionFile.class.getName());
+		for(SubmissionFile submissionFile : submissionFiles) {
+			submissionFileValidator.validate(submissionFile, errors);
+		}
+		if(errors.hasErrors()) {
+			throw new SubmissionFileValidationException(errors.getAllErrors());
+		}
 
 		// Create submission
 		Integer submissionId = submissionDAO.createSubmission(assignmentId, username, submission);
 
 		// Attach files to submission
-
+		createSubmissionFiles(submissionId, files, username);
 
 		// Return decorated submission from DB with submission ID
 		return getSubmission(submissionId);
+	}
+
+	private void createSubmissionFiles(Integer submissionId, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException {
+		List<Integer> fileIds = new ArrayList<Integer>();
+		for(MultipartFile file : files) {
+			File createdFile = fileService.createFile(file, username);
+			Integer fileId = createdFile.getFileId();
+			fileIds.add(fileId);
+			submissionDAO.createSubmissionFile(submissionId, fileId);
+		}
+	}
+
+	private List<SubmissionFile> matchSubmissionFiles(MultipartFile[] files, List<FileRequirement> fileRequirements) throws SubmissionFileMatchException, UnmatchableSetsException {
+		if((files == null && !fileRequirements.isEmpty()) || (files.length != fileRequirements.size())) {
+			throw new UnmatchableSetsException();
+		}
+
+		List<SubmissionFile> submissionFiles = new ArrayList<SubmissionFile>();
+
+		// Create an inverse map of fileRequirements to file names
+		Map<String, FileRequirement> fileRequirementsMap = new HashMap<String, FileRequirement>();
+		for(FileRequirement fileRequirement : fileRequirements) {
+			fileRequirementsMap.put(fileRequirement.getFullAllowedFileName(), fileRequirement);
+		}
+
+		// Remove each map element by file original name
+		for(MultipartFile file : files) {
+			FileRequirement fileRequirement = fileRequirementsMap.remove(file.getOriginalFilename());
+			if(fileRequirement == null) {
+				throw new SubmissionFileMatchException(file);
+			}
+			submissionFiles.add(new SubmissionFile(file, fileRequirement));
+		}
+
+		return submissionFiles;
 	}
 
 	@Override
 	public Submission getSubmission(Integer submissionId) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		List<Submission> submissions = submissionDAO.getSubmission(Collections.singletonList(submissionId));
 		return ElementExtractor.extractOne(submissions);
-	}
-
-	@Override
-	public File createSubmissionFile(Integer submissionId, Integer fileRequirementId, MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, SubmissionFileValidationException, NoResultsReturnedException, TooManyResultsReturnedException {
-		SubmissionFile submissionFile = new SubmissionFile(file, fileRequirementService.getFileRequirement(fileRequirementId));
-		Map<String, String> map = new HashMap<String, String>();
-		MapBindingResult errors = new MapBindingResult(map, SubmissionFile.class.getName());
-		submissionFileValidator.validate(submissionFile, errors);
-		if(errors.hasErrors()) {
-			throw new SubmissionFileValidationException(errors.getAllErrors());
-		}
-		File createdFile = fileService.createFile(file, username);
-		return createdFile;
-	}
-
-	@Override
-	public Submission validateSubmission(Integer submissionId, Submission submission) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
