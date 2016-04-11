@@ -1,18 +1,21 @@
 package com.ic.ee.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
@@ -62,7 +65,8 @@ public class AssignmentController {
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
-	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestBody Submission submission, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		return submissionService.createSubmission(assignmentId, submission, user.getName());
+	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException, JsonParseException, JsonMappingException, IOException {
+		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);
+		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
 	}
 }

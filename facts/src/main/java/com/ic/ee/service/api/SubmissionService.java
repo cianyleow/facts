@@ -13,7 +13,7 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public interface SubmissionService {
 
-	public Submission createSubmission(Integer assignmentId, Submission submission, String username) throws NoResultsReturnedException, TooManyResultsReturnedException;
+	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException;
 
 	public Submission validateSubmission(Integer submissionId, Submission submission);
 

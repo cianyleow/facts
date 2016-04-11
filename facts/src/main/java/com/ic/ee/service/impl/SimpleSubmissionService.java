@@ -1,6 +1,7 @@
 package com.ic.ee.service.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,10 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.common.file.SubmissionFile;
 import com.ic.ee.domain.course.assignment.submission.Submission;
-import com.ic.ee.domain.course.assignment.submission.SubmissionStatus;
+import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
@@ -31,26 +33,40 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final FileRequirementService fileRequirementService;
 
+	private final AssignmentService assignmentService;
+
 	private final FileService fileService;
 
 	private final SubmissionFileValidator submissionFileValidator;
 
-	public SimpleSubmissionService(SubmissionDAO submissionDAO, FileRequirementService fileRequirementService, FileService fileService, SubmissionFileValidator submissionFileValidator) {
+	public SimpleSubmissionService(SubmissionDAO submissionDAO, FileRequirementService fileRequirementService,
+			AssignmentService assignmentService, FileService fileService,
+			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
 		this.fileRequirementService = fileRequirementService;
+		this.assignmentService = assignmentService;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
 	}
 
 	@Override
-	public Submission createSubmission(Integer assignmentId, Submission submission, String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		// Set status to created - i.e. not valid yet
-		submission.setSubmissionStatus(SubmissionStatus.CREATED);
+	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		// Generate submission creation time - before file uploads, to avoid slow internet issues
+		submission.setCreationTime(new Date());
 
-		// Get submission ID
+		// Get file requirements
+		List<FileRequirement> fileRequirements = assignmentService.getRequiredFiles(assignmentId);
+
+		// Match all files up with the file requirements and validate - throw error if not complete/incorrect
+
+
+		// Create submission
 		Integer submissionId = submissionDAO.createSubmission(assignmentId, username, submission);
 
-		// Request whole new object from DB (including creationTime)
+		// Attach files to submission
+
+
+		// Return decorated submission from DB with submission ID
 		return getSubmission(submissionId);
 	}
 

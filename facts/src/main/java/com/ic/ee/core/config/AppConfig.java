@@ -238,7 +238,7 @@ public class AppConfig {
 
 	@Bean
 	SubmissionService submissionService() throws IOException {
-		return new SimpleSubmissionService(submissionDAO(), fileRequirementService(), fileService(), submissionFileValidator());
+		return new SimpleSubmissionService(submissionDAO(), fileRequirementService(), assignmentService(), fileService(), submissionFileValidator());
 	}
 
 	@Bean
