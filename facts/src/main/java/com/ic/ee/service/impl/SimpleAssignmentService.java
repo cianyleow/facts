@@ -84,7 +84,7 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
-	public File createSuppliedFile(Integer assignmentId, MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException {
+	public File createSuppliedFile(Integer assignmentId, MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException {
 		// Create file from multipart file
 		File createdFile = fileService.createFile(file, username);
 

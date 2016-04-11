@@ -1,6 +1,7 @@
 package com.ic.ee.core.jdbc.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -10,12 +11,13 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.jdbc.api.FileRequirementDAO;
+import com.ic.ee.core.jdbc.rowmapper.FileRequirementRowMapper;
 import com.ic.ee.domain.common.file.FileRequirement;
 
 public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO implements FileRequirementDAO {
 
 	public JdbcFileRequirementDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createFileRequirement.sql");
+		super(dataSource, "createFileRequirement.sql", "getFileRequirementsByIds.sql");
 	}
 
 	@Override
@@ -28,6 +30,12 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO implements FileR
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public List<FileRequirement> getFileRequirements(List<Integer> fileRequirementIds) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("fileRequirementIds", fileRequirementIds);
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new FileRequirementRowMapper());
 	}
 
 }

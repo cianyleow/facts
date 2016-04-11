@@ -23,5 +23,5 @@ public interface FileService {
 
 	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException;
 
-	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException;
+	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException;
 }

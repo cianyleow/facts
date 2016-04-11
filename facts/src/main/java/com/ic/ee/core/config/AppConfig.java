@@ -35,6 +35,7 @@ import com.ic.ee.core.jdbc.impl.JdbcMarkComponentDAO;
 import com.ic.ee.core.jdbc.impl.JdbcSubmissionDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserAuthorityDAO;
 import com.ic.ee.core.jdbc.impl.JdbcUserDAO;
+import com.ic.ee.core.validator.SubmissionFileValidator;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
 import com.ic.ee.core.web.authentication.service.api.TokenUserDetailsService;
 import com.ic.ee.core.web.authentication.service.impl.SimpleTokenAuthenticationService;
@@ -237,7 +238,7 @@ public class AppConfig {
 
 	@Bean
 	SubmissionService submissionService() throws IOException {
-		return new SimpleSubmissionService(submissionDAO());
+		return new SimpleSubmissionService(submissionDAO(), fileRequirementService(), fileService(), submissionFileValidator());
 	}
 
 	@Bean
@@ -249,6 +250,11 @@ public class AppConfig {
 			System.exit(-1);
 		}
 		return null;
+	}
+
+	@Bean
+	SubmissionFileValidator submissionFileValidator() {
+		return new SubmissionFileValidator();
 	}
 
 	@Bean

@@ -1,11 +1,15 @@
 package com.ic.ee.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.ic.ee.core.jdbc.api.FileRequirementDAO;
+import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.service.api.FileRequirementService;
+import com.ic.ee.util.ElementExtractor;
 
 public class SimpleFileRequirementService implements FileRequirementService {
 
@@ -28,6 +32,12 @@ public class SimpleFileRequirementService implements FileRequirementService {
 		Integer fileRequirementId = fileRequirementDAO.createFileRequirement(assignmentId, fileRequirement);
 		fileRequirement.setFileRequirementId(fileRequirementId);
 		return fileRequirement;
+	}
+
+	@Override
+	public FileRequirement getFileRequirement(Integer fileRequirementId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		List<FileRequirement> fileRequirements = fileRequirementDAO.getFileRequirements(Collections.singletonList(fileRequirementId));
+		return ElementExtractor.extractOne(fileRequirements);
 	}
 
 }

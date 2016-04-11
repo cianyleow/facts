@@ -1,5 +1,7 @@
 package com.ic.ee.domain.common.file;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class FileRequirement {
 
 	private Integer fileRequirementId;
@@ -37,5 +39,10 @@ public class FileRequirement {
 
 	public void setAllowedExtension(String allowedExtension) {
 		this.allowedExtension = allowedExtension;
+	}
+
+	@JsonIgnore
+	public String getFullAllowedFileName() {
+		return getFileName() + "." + getAllowedExtension();
 	}
 }

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,10 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ic.ee.core.web.authentication.filter.StatelessAuthenticationFilter;
-import com.ic.ee.core.web.authentication.filter.StatelessLoginFilter;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
 import com.ic.ee.core.web.authentication.service.api.TokenUserDetailsService;
 
@@ -36,24 +32,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-		.exceptionHandling().and()
-		.anonymous().and()
-		.servletApi().and()
-		.authorizeRequests()
-
-		//allow anonymous POSTs to login
-		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
-		.antMatchers(HttpMethod.GET, "/files/{link}/download").permitAll()
-
-		//all other request need to be authenticated
-		.anyRequest().authenticated().and()
-
-		// custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
-		.addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-
-		// custom Token based authentication based on the header previously given to the client
-		.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+//		http
+//		.exceptionHandling().and()
+//		.anonymous().and()
+//		.servletApi().and()
+//		.authorizeRequests()
+//
+//		//allow anonymous POSTs to login
+//		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+//		.antMatchers(HttpMethod.GET, "/files/{link}/download").permitAll()
+//
+//		//all other request need to be authenticated
+//		.anyRequest().authenticated().and()
+//
+//		// custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
+//		.addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+//
+//		// custom Token based authentication based on the header previously given to the client
+//		.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Bean

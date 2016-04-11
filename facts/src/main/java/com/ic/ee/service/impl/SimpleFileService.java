@@ -82,14 +82,13 @@ public class SimpleFileService implements FileService {
 	}
 
 	@Override
-	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException {
+	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException {
 		// Create file from multipart file
 		File createdFile = fileUtils.createFile(file);
 
 		// Get fileId and decorate created file
 		Integer fileId = fileDAO.createFile(username, createdFile);
-		createdFile.setFileId(fileId);
 
-		return createdFile;
+		return getFile(fileId);
 	}
 }
