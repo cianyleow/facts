@@ -25,6 +25,10 @@ repositories {
 	mavenCentral()
 }
 
+configurations {
+	providedRuntime
+}
+
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
