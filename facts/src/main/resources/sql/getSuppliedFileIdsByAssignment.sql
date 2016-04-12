@@ -1,1 +1,0 @@
-SELECT fileId FROM assignment_file WHERE assignmentId = :assignmentId

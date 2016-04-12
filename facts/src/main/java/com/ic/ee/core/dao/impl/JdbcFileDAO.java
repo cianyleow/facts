@@ -20,7 +20,8 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
 		super(dataSource, "getFiles.sql", "addDownloadLink.sql",
 				"getFileFromLink.sql", "voidDownloadLink.sql",
-				"createFile.sql", "getFilesFromSubmissionId.sql");
+				"createFile.sql", "getFilesFromSubmissionId.sql",
+				"getFilesFromAssignment.sql");
 	}
 
 	@Override
@@ -71,5 +72,11 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 	public List<File> getSubmissionFiles(Integer submissionId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submissionId);
 		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, new FileRowMapper());
+	}
+
+	@Override
+	public List<File> getAssignmentFiles(Integer assignmentId) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
+		return getJdbcTemplate().query(getSqlStatements().get(6), paramSource, new FileRowMapper());
 	}
 }

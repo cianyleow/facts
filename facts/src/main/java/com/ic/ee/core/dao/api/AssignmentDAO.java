@@ -11,8 +11,6 @@ public interface AssignmentDAO {
 
 	public List<Assignment> getAssignments(Integer courseId);
 
-	public List<Integer> getSuppliedFileIds(Integer assignmentId);
-
 	public Integer createAssignment(Integer courseId, Assignment assignment);
 
 	public void createAssignmentFile(Integer assignmentId, File file);

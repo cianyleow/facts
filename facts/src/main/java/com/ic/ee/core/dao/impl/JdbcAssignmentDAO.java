@@ -20,8 +20,7 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
 		super(dataSource, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql",
-				"getSuppliedFileIdsByAssignment.sql", "createAssignment.sql",
-				"createAssignmentFile.sql");
+				"createAssignment.sql", "createAssignmentFile.sql");
 	}
 
 	@Override
@@ -37,12 +36,6 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 	}
 
 	@Override
-	public List<Integer> getSuppliedFileIds(Integer assignmentId) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		return getJdbcTemplate().queryForList(getSqlStatements().get(2), paramSource, Integer.class);
-	}
-
-	@Override
 	public Integer createAssignment(Integer courseId, Assignment assignment) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("courseId", courseId);
@@ -51,7 +44,7 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 		paramSource.addValue("dueTime", assignment.getDueTime());
 		paramSource.addValue("openTime", assignment.getOpenTime());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(3), paramSource, keyHolder);
+		getJdbcTemplate().update(getSqlStatements().get(2), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
 
@@ -60,6 +53,6 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO implements Assignment
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("assignmentId", assignmentId);
 		paramSource.addValue("fileId", file.getFileId());
-		getJdbcTemplate().update(getSqlStatements().get(4), paramSource);
+		getJdbcTemplate().update(getSqlStatements().get(3), paramSource);
 	}
 }

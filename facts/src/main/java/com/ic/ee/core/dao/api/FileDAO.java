@@ -10,6 +10,8 @@ public interface FileDAO {
 
 	public List<File> getSubmissionFiles(Integer submissionId);
 
+	public List<File> getAssignmentFiles(Integer assignmentId);
+
 	public Integer addDownloadLink(File file, String hash, String username);
 
 	public List<File> getFiles(String link);
