@@ -10,4 +10,6 @@ public interface FileRequirementDAO {
 
 	public List<FileRequirement> getFileRequirements(List<Integer> fileRequirementIds);
 
+	public List<FileRequirement> getFileRequirements(Integer assignmentId);
+
 }
