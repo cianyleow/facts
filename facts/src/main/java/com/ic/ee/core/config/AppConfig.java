@@ -19,6 +19,7 @@ import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.api.EnrollmentDAO;
+import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.api.MarkComponentDAO;
@@ -29,6 +30,7 @@ import com.ic.ee.core.dao.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.dao.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.dao.impl.JdbcCourseDAO;
 import com.ic.ee.core.dao.impl.JdbcEnrollmentDAO;
+import com.ic.ee.core.dao.impl.JdbcFeedbackDAO;
 import com.ic.ee.core.dao.impl.JdbcFileDAO;
 import com.ic.ee.core.dao.impl.JdbcFileRequirementDAO;
 import com.ic.ee.core.dao.impl.JdbcMarkComponentDAO;
@@ -170,6 +172,12 @@ public class AppConfig {
 		return null;
 	}
 
+
+	@Bean
+	FeedbackDAO feedbackDAO() throws IOException {
+		return new JdbcFeedbackDAO(dataSource);
+	}
+
 	@Bean
 	MarkComponentDAO markComponentDAO() throws IOException {
 		return new JdbcMarkComponentDAO(dataSource);
@@ -244,8 +252,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	FeedbackService feedbackService() {
-		return new SimpleFeedbackService();
+	FeedbackService feedbackService() throws IOException {
+		return new SimpleFeedbackService(feedbackDAO());
 	}
 
 	@Bean

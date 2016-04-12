@@ -1,5 +1,6 @@
 package com.ic.ee.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,8 @@ public class SubmissionController {
 		return feedbackService.getSubmissionFeedback(submissionId);
 	}
 
+	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.POST)
+	public Feedback createFeedback(@PathVariable("submissionId") Integer submissionId, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return feedbackService.createFeedback(submissionId, user.getName());
+	}
 }
