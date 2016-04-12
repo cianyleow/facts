@@ -200,7 +200,7 @@ public class AppConfig {
 
 	@Bean
 	CourseService courseService() {
-		return new SimpleCourseService(courseDAO());
+		return new SimpleCourseService(courseDAO(), assignmentDAO());
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException {

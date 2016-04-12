@@ -4,10 +4,12 @@ package com.ic.ee.service.impl;
 import java.util.Collections;
 import java.util.List;
 
+import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.util.ElementExtractor;
 
@@ -15,8 +17,11 @@ public class SimpleCourseService implements CourseService {
 
 	private final CourseDAO courseDAO;
 
-	public SimpleCourseService(CourseDAO courseDAO) {
+	private final AssignmentDAO assignmentDAO;
+
+	public SimpleCourseService(CourseDAO courseDAO, AssignmentDAO assignmentDAO) {
 		this.courseDAO = courseDAO;
+		this.assignmentDAO = assignmentDAO;
 	}
 
 	@Override
@@ -41,9 +46,11 @@ public class SimpleCourseService implements CourseService {
 
 	private void decorateCourse(Course course) {
 		// Decorate assignments
-
+		List<Assignment> assignments = assignmentDAO.getAssignments(course.getCourseId());
+		course.setAssignments(assignments);
 		// Decorate markers
 
 		// Decorate course owner
+
 	}
 }
