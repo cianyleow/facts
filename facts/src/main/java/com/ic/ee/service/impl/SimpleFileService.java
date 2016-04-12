@@ -7,7 +7,7 @@ import java.util.Random;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ic.ee.core.jdbc.api.FileDAO;
+import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
 import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
 import com.ic.ee.core.web.exception.FileUploadException;

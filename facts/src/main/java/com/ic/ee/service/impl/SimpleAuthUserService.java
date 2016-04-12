@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import com.ic.ee.core.jdbc.api.AuthUserDAO;
-import com.ic.ee.core.jdbc.api.UserAuthorityDAO;
+import com.ic.ee.core.dao.api.AuthUserDAO;
+import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.user.auth.AuthUser;

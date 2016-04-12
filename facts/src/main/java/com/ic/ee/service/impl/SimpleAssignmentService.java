@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ic.ee.core.jdbc.api.AssignmentDAO;
+import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;

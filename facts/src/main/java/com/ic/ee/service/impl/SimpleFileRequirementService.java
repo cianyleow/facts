@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.ic.ee.core.jdbc.api.FileRequirementDAO;
+import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.FileRequirement;

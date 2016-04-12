@@ -3,7 +3,7 @@ package com.ic.ee.service.impl;
 import java.util.Collections;
 import java.util.List;
 
-import com.ic.ee.core.jdbc.api.EnrollmentDAO;
+import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.relationship.Enrollment;

@@ -10,7 +10,7 @@ import java.util.Map;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ic.ee.core.jdbc.api.SubmissionDAO;
+import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.validator.SubmissionFileValidator;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;

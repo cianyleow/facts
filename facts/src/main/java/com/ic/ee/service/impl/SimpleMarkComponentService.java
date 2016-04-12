@@ -3,7 +3,7 @@ package com.ic.ee.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ic.ee.core.jdbc.api.MarkComponentDAO;
+import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.service.api.MarkComponentService;
 
