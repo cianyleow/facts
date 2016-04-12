@@ -6,7 +6,6 @@ import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.common.feedback.mark.Mark;
 import com.ic.ee.domain.common.feedback.mark.MarkStatus;
-import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 
@@ -16,15 +15,13 @@ public class Feedback {
 
 	private Submission submission;
 
-	private Assignment assignment;
-
 	private Set<Comment> comments;
 	private CommentStatus commentStatus;
 
 	private Set<Mark> marks;
 	private MarkStatus markStatus;
 
-	private Marker assignedMarker;
+	private Marker marker;
 
 	public Integer getFeedbackId() {
 		return feedbackId;
@@ -40,14 +37,6 @@ public class Feedback {
 
 	public void setSubmission(Submission submission) {
 		this.submission = submission;
-	}
-
-	public Assignment getAssignment() {
-		return assignment;
-	}
-
-	public void setAssignment(Assignment assignment) {
-		this.assignment = assignment;
 	}
 
 	public Set<Comment> getComments() {
@@ -82,11 +71,11 @@ public class Feedback {
 		this.markStatus = markStatus;
 	}
 
-	public Marker getAssignedMarker() {
-		return assignedMarker;
+	public Marker getMarker() {
+		return marker;
 	}
 
-	public void setAssignedMarker(Marker assignedMarker) {
-		this.assignedMarker = assignedMarker;
+	public void setMarker(Marker marker) {
+		this.marker = marker;
 	}
 }
