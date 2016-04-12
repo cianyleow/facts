@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
+import com.ic.ee.core.dao.api.FileDAO;
+import com.ic.ee.core.dao.api.FileRequirementDAO;
+import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
@@ -25,14 +28,25 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	private final AssignmentDAO assignmentDAO;
 
+	private final MarkComponentDAO markComponentDAO;
+
+	private final FileRequirementDAO fileRequirementDAO;
+
+	private final FileDAO fileDAO;
+
 	private final MarkComponentService markComponentService;
 
 	private final FileRequirementService fileRequirementService;
 
 	private final FileService fileService;
 
-	public SimpleAssignmentService(AssignmentDAO assignmentDAO, MarkComponentService markComponentService, FileRequirementService fileRequirementService, FileService fileService) {
+	public SimpleAssignmentService(AssignmentDAO assignmentDAO, MarkComponentDAO markComponentDAO,
+			FileRequirementDAO fileRequirementDAO, FileDAO fileDAO, MarkComponentService markComponentService,
+			FileRequirementService fileRequirementService, FileService fileService) {
 		this.assignmentDAO = assignmentDAO;
+		this.markComponentDAO = markComponentDAO;
+		this.fileRequirementDAO = fileRequirementDAO;
+		this.fileDAO = fileDAO;
 		this.markComponentService = markComponentService;
 		this.fileRequirementService = fileRequirementService;
 		this.fileService = fileService;
@@ -80,11 +94,11 @@ public class SimpleAssignmentService implements AssignmentService {
 		// Decorate course
 
 		// Decorate markComponents
-
+		assignment.setMarkComponents(markComponentDAO.getMarkComponents(assignment.getAssignmentId()));
 		// Decorate suppliedFiles
-
+		assignment.setSuppliedFiles(fileDAO.getAssignmentFiles(assignment.getAssignmentId()));
 		// Decorate requiredFiles
-
+		assignment.setRequiredFiles(fileRequirementDAO.getFileRequirements(assignment.getAssignmentId()));
 		// Decorate submissions
 
 	}

@@ -204,7 +204,7 @@ public class AppConfig {
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException {
-		return new SimpleAssignmentService(assignmentDAO(), markComponentService(), fileRequirementService(), fileService());
+		return new SimpleAssignmentService(assignmentDAO(), markComponentDAO(), fileRequirementDAO(), fileDAO(), markComponentService(), fileRequirementService(), fileService());
 	}
 
 	@Bean AuthUserService authUserService() {
