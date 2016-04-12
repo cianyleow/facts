@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.course.assignment.Assignment;
 
 public class Submission {
 
@@ -19,6 +20,17 @@ public class Submission {
 	private Set<File> submittedFiles;
 
 	private Feedback feedback;
+
+	private Assignment parentAssignment;
+
+	@JsonIgnore
+	public Assignment getParentAssignment() {
+		return parentAssignment;
+	}
+
+	public void setParentAssignment(Assignment parentAssignment) {
+		this.parentAssignment = parentAssignment;
+	}
 
 	public Integer getSubmissionId() {
 		return submissionId;
