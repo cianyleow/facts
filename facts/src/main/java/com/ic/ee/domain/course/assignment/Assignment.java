@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
+import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public class Assignment {
 
@@ -25,6 +27,28 @@ public class Assignment {
 	private List<MarkComponent> markComponents;
 
 	private List<File> suppliedFiles;
+
+	private List<Submission> submissions;
+
+	private Course parentCourse;
+
+	@JsonIgnore
+	public List<Submission> getSubmissions() {
+		return submissions;
+	}
+
+	public void setSubmissions(List<Submission> submissions) {
+		this.submissions = submissions;
+	}
+
+	@JsonIgnore
+	public Course getParentCourse() {
+		return parentCourse;
+	}
+
+	public void setParentCourse(Course parentCourse) {
+		this.parentCourse = parentCourse;
+	}
 
 	@JsonIgnore
 	public List<FileRequirement> getRequiredFiles() {
