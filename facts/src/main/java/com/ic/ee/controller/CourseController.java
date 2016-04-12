@@ -15,8 +15,7 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.courseowner.CourseOwner;
-import com.ic.ee.domain.user.marker.Marker;
+import com.ic.ee.domain.user.User;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
@@ -44,7 +43,7 @@ public class CourseController {
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Course getCourse(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		return courseService.getCourse(courseId);
+		return courseService.getCourse(courseId, true);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
@@ -53,18 +52,18 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
-	public List<Marker> getMarkers(@PathVariable("courseId") Integer courseId) {
-		return null;
+	public List<User> getMarkers(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return courseService.getCourse(courseId, true).getMarkers();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
-	public List<CourseOwner> getCourseOwners(@PathVariable("courseId") Integer courseId) {
-		return null;
+	public User getCourseOwner(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return courseService.getCourse(courseId, true).getCourseOwner();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
-	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
-		return assignmentService.getAssignments(courseId);
+	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return courseService.getCourse(courseId, false).getAssignments();
 	}
 
 

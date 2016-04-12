@@ -20,9 +20,13 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Course getCourse(Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Course getCourse(Integer courseId, boolean lite) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		List<Course> courses = courseDAO.getCourses(Collections.singletonList(courseId));
-		return ElementExtractor.extractOne(courses);
+		Course course = ElementExtractor.extractOne(courses);
+		if(!lite) {
+			decorateCourse(course);
+		}
+		return course;
 	}
 
 	@Override
@@ -33,5 +37,13 @@ public class SimpleCourseService implements CourseService {
 	@Override
 	public List<Course> getCourses(String username) {
 		return courseDAO.getCourses(username);
+	}
+
+	private void decorateCourse(Course course) {
+		// Decorate assignments
+
+		// Decorate markers
+
+		// Decorate course owner
 	}
 }

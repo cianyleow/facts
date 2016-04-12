@@ -44,22 +44,22 @@ public class AssignmentController {
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		return assignmentService.getAssignment(assignmentId);
+		return assignmentService.getAssignment(assignmentId, true);
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
-	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getRequiredFiles(assignmentId);
+	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return assignmentService.getAssignment(assignmentId, false).getRequiredFiles();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/markComponents", method = RequestMethod.GET)
-	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getMarkComponents(assignmentId);
+	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return assignmentService.getAssignment(assignmentId, false).getMarkComponents();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)
-	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getSuppliedFiles(assignmentId);
+	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+		return assignmentService.getAssignment(assignmentId, false).getSuppliedFiles();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.POST)

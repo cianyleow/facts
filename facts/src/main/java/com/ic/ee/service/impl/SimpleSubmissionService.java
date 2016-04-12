@@ -23,6 +23,7 @@ import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.common.file.SubmissionFile;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
@@ -53,7 +54,8 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setCreationTime(new Date());
 
 		// Get file requirements
-		List<FileRequirement> fileRequirements = assignmentService.getRequiredFiles(assignmentId);
+		Assignment assignment = assignmentService.getAssignment(assignmentId, false);
+		List<FileRequirement> fileRequirements = assignment.getRequiredFiles();
 
 		// Match all files up with the file requirements and validate - throw error if not complete/incorrect
 		List<SubmissionFile> submissionFiles = matchSubmissionFiles(files, fileRequirements);

@@ -39,30 +39,11 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
-	public Assignment getAssignment(Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Assignment getAssignment(Integer assignmentId, boolean lite) throws NoResultsReturnedException, TooManyResultsReturnedException {
 		List<Assignment> assignments = assignmentDAO.getAssignments(Collections.singletonList(assignmentId));
-		return ElementExtractor.extractOne(assignments);
-	}
-
-	@Override
-	public List<Assignment> getAssignments(Integer courseId) {
-		return assignmentDAO.getAssignments(courseId);
-	}
-
-	@Override
-	public List<FileRequirement> getRequiredFiles(Integer assignmentId) {
-		return assignmentDAO.getRequiredFiles(assignmentId);
-	}
-
-	@Override
-	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
-		return assignmentDAO.getMarkComponents(assignmentId);
-	}
-
-	@Override
-	public List<File> getSuppliedFiles(Integer assignmentId) {
-		List<Integer> fileIds = assignmentDAO.getSuppliedFileIds(assignmentId);
-		return fileService.getFiles(fileIds);
+		Assignment assignment = ElementExtractor.extractOne(assignments);
+		decorateAssignment(assignment);
+		return assignment;
 	}
 
 	@Override
@@ -93,5 +74,18 @@ public class SimpleAssignmentService implements AssignmentService {
 
 		// Return file after link is created.
 		return createdFile;
+	}
+
+	private void decorateAssignment(Assignment assignment) {
+		// Decorate course
+
+		// Decorate markComponents
+
+		// Decorate suppliedFiles
+
+		// Decorate requiredFiles
+
+		// Decorate submissions
+
 	}
 }
