@@ -44,6 +44,7 @@ import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.AuthUserService;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.EnrollmentService;
+import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.MarkComponentService;
@@ -53,6 +54,7 @@ import com.ic.ee.service.impl.SimpleAssignmentService;
 import com.ic.ee.service.impl.SimpleAuthUserService;
 import com.ic.ee.service.impl.SimpleCourseService;
 import com.ic.ee.service.impl.SimpleEnrollmentService;
+import com.ic.ee.service.impl.SimpleFeedbackService;
 import com.ic.ee.service.impl.SimpleFileRequirementService;
 import com.ic.ee.service.impl.SimpleFileService;
 import com.ic.ee.service.impl.SimpleMarkComponentService;
@@ -239,6 +241,11 @@ public class AppConfig {
 	@Bean
 	SubmissionService submissionService() throws IOException {
 		return new SimpleSubmissionService(submissionDAO(), assignmentService(), fileService(), submissionFileValidator());
+	}
+
+	@Bean
+	FeedbackService feedbackService() {
+		return new SimpleFeedbackService();
 	}
 
 	@Bean

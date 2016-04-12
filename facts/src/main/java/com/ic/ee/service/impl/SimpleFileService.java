@@ -91,4 +91,9 @@ public class SimpleFileService implements FileService {
 
 		return getFile(fileId);
 	}
+
+	@Override
+	public List<File> getSubmissionFiles(Integer submissionId) {
+		return fileDAO.getSubmissionFiles(submissionId);
+	}
 }
