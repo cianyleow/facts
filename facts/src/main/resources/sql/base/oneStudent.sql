@@ -1,0 +1,1 @@
+SELECT user.username, email, firstName, lastName, studentId, yearOfStudy FROM user JOIN student_information ON username WHERE username = :id

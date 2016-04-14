@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
+import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
-import com.ic.ee.core.dao.api.UserDAO;
 import com.ic.ee.core.validator.SubmissionFileValidator;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
@@ -36,7 +36,7 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final AssignmentDAO assignmentDAO;
 
-	private final UserDAO userDAO;
+	private final StudentDAO studentDAO;
 
 	private final FeedbackDAO feedbackDAO;
 
@@ -44,12 +44,12 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final SubmissionFileValidator submissionFileValidator;
 
-	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, UserDAO userDAO,
+	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, StudentDAO studentDAO,
 			FeedbackDAO feedbackDAO, FileService fileService,
 			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
 		this.assignmentDAO = assignmentDAO;
-		this.userDAO = userDAO;
+		this.studentDAO = studentDAO;
 		this.feedbackDAO = feedbackDAO;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
@@ -152,6 +152,6 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setFeedback(feedbackDAO.getFeedback(submission));
 
 		// Decorate student
-//		submission.setSubmitter(userDAO.one(submission.getSubmitter().getUserName()));
+		submission.setSubmitter(studentDAO.one(submission.getSubmitter().getUserName()));
 	}
 }

@@ -25,6 +25,7 @@ import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.core.dao.api.MarkDAO;
+import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.api.UserDAO;
@@ -38,6 +39,7 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileRequirementDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcMarkComponentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcMarkDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcStudentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcSubmissionDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcUserAuthorityDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcUserDAO;
@@ -130,6 +132,11 @@ public class AppConfig {
 	}
 
 	@Bean
+	StudentDAO studentDAO() throws IOException {
+		return new JdbcStudentDAO(dataSource);
+	}
+
+	@Bean
 	FileDAO fileDAO() throws IOException {
 		return new JdbcFileDAO(dataSource);
 	}
@@ -219,7 +226,7 @@ public class AppConfig {
 
 	@Bean
 	SubmissionService submissionService() throws IOException, NoSuchAlgorithmException {
-		return new SimpleSubmissionService(submissionDAO(), assignmentDAO(), userDAO(), feedbackDAO(), fileService(), submissionFileValidator());
+		return new SimpleSubmissionService(submissionDAO(), assignmentDAO(), studentDAO(), feedbackDAO(), fileService(), submissionFileValidator());
 	}
 
 	@Bean
