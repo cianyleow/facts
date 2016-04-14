@@ -1,1 +1,1 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE fileRequirementId = :id
+DELETE FROM file_requirement WHERE fileRequirementId = :id

@@ -1,1 +1,1 @@
-SELECT feedbackId, submissionId, commentStatus, markStatus, marker FROM feedback WHERE feedbackId = :id
+DELETE FROM feedback WHERE feedbackId = :id

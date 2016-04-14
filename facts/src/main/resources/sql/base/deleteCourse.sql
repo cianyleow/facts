@@ -1,1 +1,1 @@
-SELECT course.courseId, course.name, course.shortName, course.description FROM course WHERE course.courseId = :id
+DELETE FROM course WHERE courseId = :id

@@ -1,1 +1,1 @@
-SELECT username, email, firstName, lastName FROM user WHERE username = :id
+DELETE FROM user WHERE username = :id

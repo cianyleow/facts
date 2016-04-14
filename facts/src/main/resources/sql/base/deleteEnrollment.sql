@@ -1,1 +1,1 @@
-SELECT enrollmentId, username, courseId, enrollmentLevel, updateTime FROM enrollment WHERE enrollmentId = :id
+DELETE FROM enrollment WHERE enrollmentId = :id

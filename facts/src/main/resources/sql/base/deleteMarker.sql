@@ -1,13 +1,1 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+DELETE FROM marker WHERE username = :id
