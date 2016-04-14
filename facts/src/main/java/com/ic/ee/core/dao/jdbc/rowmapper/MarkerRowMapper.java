@@ -11,8 +11,11 @@ public class MarkerRowMapper implements RowMapper<Marker> {
 
 	@Override
 	public Marker mapRow(ResultSet rs, int rowNum) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Marker marker = new Marker(rs.getString("username"));
+		marker.setEmail(rs.getString("email"));
+		marker.setFirstName(rs.getString("firstName"));
+		marker.setLastName(rs.getString("lastName"));
+		marker.setTitle(rs.getString("title"));
+		return marker;
 	}
-
 }
