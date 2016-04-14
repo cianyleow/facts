@@ -10,4 +10,6 @@ public interface FeedbackService {
 
 	public Feedback createFeedback(Integer submissionId, String username);
 
+	public Feedback getFeedback(Integer feedbackId);
+
 }

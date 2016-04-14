@@ -211,7 +211,7 @@ public class AppConfig {
 
 	@Bean
 	FeedbackService feedbackService() throws IOException {
-		return new SimpleFeedbackService(feedbackDAO());
+		return new SimpleFeedbackService(feedbackDAO(), submissionDAO());
 	}
 
 	@Bean
