@@ -11,24 +11,33 @@ import javax.sql.DataSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public abstract class AbstractJdbcBaseDAO<T> {
+public abstract class AbstractJdbcBaseDAO<T, T1> {
 
 	private final List<String> sqlStatements;
+
+	private final String oneSqlStatement;
+
+	private final String severalSqlStatement;
 
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 
 	private final RowMapper<T> rowMapper;
 
-
-	public AbstractJdbcBaseDAO(DataSource dataSource, RowMapper<T> rowMapper, String...fileNames) throws IOException {
+	public AbstractJdbcBaseDAO(DataSource dataSource, RowMapper<T> rowMapper, Class<T> genericType, String...fileNames) throws IOException {
 		this.rowMapper = rowMapper;
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 		this.sqlStatements = new ArrayList<String>();
 		for(String fileName : fileNames) {
 			this.sqlStatements.add(readSQLString(fileName));
 		}
+		String tableName = genericType.getSimpleName();
+		this.oneSqlStatement = readSQLString("base/one" + tableName + ".sql");
+		this.severalSqlStatement = readSQLString("base/several" + tableName + ".sql");
+
 	}
 
 	private String readSQLString(String fileName) throws IOException {
@@ -42,6 +51,16 @@ public abstract class AbstractJdbcBaseDAO<T> {
         }
         br.close();
         return stringBuilder.toString();
+	}
+
+	public T one(T1 id) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("id", id);
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, getRowMapper());
+	}
+
+	public List<T> several(List<T1> ids) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("ids", ids);
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {

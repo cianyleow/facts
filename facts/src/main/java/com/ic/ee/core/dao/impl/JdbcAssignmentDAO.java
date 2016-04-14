@@ -16,10 +16,10 @@ import com.ic.ee.core.dao.rowmapper.AssignmentRowMapper;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
 
-public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment> implements AssignmentDAO {
+public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new AssignmentRowMapper(), "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql",
+		super(dataSource, new AssignmentRowMapper(), Assignment.class, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql",
 				"createAssignment.sql", "createAssignmentFile.sql");
 	}
 

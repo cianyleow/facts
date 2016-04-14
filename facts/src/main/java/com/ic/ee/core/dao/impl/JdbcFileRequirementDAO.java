@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.rowmapper.FileRequirementRowMapper;
 import com.ic.ee.domain.common.file.FileRequirement;
 
-public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement> implements FileRequirementDAO {
+public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement, Integer> implements FileRequirementDAO {
 
 	public JdbcFileRequirementDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FileRequirementRowMapper(), "createFileRequirement.sql", "getFileRequirementsByIds.sql",
+		super(dataSource, new FileRequirementRowMapper(), FileRequirement.class, "createFileRequirement.sql", "getFileRequirementsByIds.sql",
 				"getFileRequirementsByAssignment.sql");
 	}
 

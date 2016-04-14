@@ -13,10 +13,10 @@ import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.rowmapper.UserAuthorityRowMapper;
 import com.ic.ee.domain.user.auth.UserAuthority;
 
-public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority> implements UserAuthorityDAO {
+public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, String> implements UserAuthorityDAO {
 
 	public JdbcUserAuthorityDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new UserAuthorityRowMapper(), "getUserAuthorities.sql");
+		super(dataSource, new UserAuthorityRowMapper(), UserAuthority.class, "getUserAuthorities.sql");
 	}
 
 	@Override

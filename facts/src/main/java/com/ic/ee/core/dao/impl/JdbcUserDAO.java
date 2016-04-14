@@ -13,10 +13,10 @@ import com.ic.ee.core.dao.api.UserDAO;
 import com.ic.ee.core.dao.rowmapper.UserRowMapper;
 import com.ic.ee.domain.user.User;
 
-public class JdbcUserDAO extends AbstractJdbcBaseDAO<User> implements UserDAO {
+public class JdbcUserDAO extends AbstractJdbcBaseDAO<User, String> implements UserDAO {
 
 	public JdbcUserDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new UserRowMapper(), "getUsers.sql");
+		super(dataSource, new UserRowMapper(), User.class, "getUsers.sql");
 	}
 
 	@Override

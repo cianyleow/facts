@@ -13,11 +13,11 @@ import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.rowmapper.CourseRowMapper;
 import com.ic.ee.domain.course.Course;
 
-public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course> implements CourseDAO {
+public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new CourseRowMapper(), "getCoursesByIds.sql", "getCourses.sql", "getCoursesByEnrollment.sql");
+		super(dataSource, new CourseRowMapper(), Course.class, "getCoursesByIds.sql", "getCourses.sql", "getCoursesByEnrollment.sql");
 	}
 //
 //	@Override

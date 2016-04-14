@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.dao.rowmapper.SubmissionRowMapper;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
-public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission> implements SubmissionDAO {
+public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> implements SubmissionDAO {
 
 	public JdbcSubmissionDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new SubmissionRowMapper(), "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
+		super(dataSource, new SubmissionRowMapper(), Submission.class, "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
 		// TODO Auto-generated constructor stub
 	}
 

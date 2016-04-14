@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.rowmapper.FileRowMapper;
 import com.ic.ee.domain.common.file.File;
 
-public class JdbcFileDAO extends AbstractJdbcBaseDAO<File> implements FileDAO {
+public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements FileDAO {
 
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FileRowMapper(), "getFiles.sql", "addDownloadLink.sql",
+		super(dataSource, new FileRowMapper(), File.class, "getFiles.sql", "addDownloadLink.sql",
 				"getFileFromLink.sql", "voidDownloadLink.sql",
 				"createFile.sql", "getFilesFromSubmissionId.sql",
 				"getFilesFromAssignment.sql");

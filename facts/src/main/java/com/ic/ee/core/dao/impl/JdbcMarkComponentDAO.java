@@ -14,10 +14,10 @@ import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.core.dao.rowmapper.MarkComponentRowMapper;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 
-public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent> implements MarkComponentDAO {
+public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Integer> implements MarkComponentDAO {
 
 	public JdbcMarkComponentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new MarkComponentRowMapper(), "createMarkComponent.sql", "getMarkComponent.sql", "getMarkComponentsByAssignment.sql");
+		super(dataSource, new MarkComponentRowMapper(), MarkComponent.class, "createMarkComponent.sql", "getMarkComponent.sql", "getMarkComponentsByAssignment.sql");
 	}
 
 	@Override
