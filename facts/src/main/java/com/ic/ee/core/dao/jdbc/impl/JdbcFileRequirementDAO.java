@@ -18,7 +18,7 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement,
 
 	public JdbcFileRequirementDAO(DataSource dataSource) throws IOException {
 		super(dataSource, new FileRequirementRowMapper(), FileRequirement.class,
-				"getFileRequirementsByAssignment.sql");
+				"severalFileRequirementForAssignment.sql");
 	}
 
 	@Override

@@ -1,1 +1,0 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE assignmentId = :assignmentId
