@@ -23,7 +23,6 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	@Override
 	public Feedback createFeedback(Integer submissionId, String username) {
-		// Create feedback and get ID back
 		Feedback feedback = new Feedback();
 		feedback.setSubmission(new Submission(submissionId));
 
@@ -33,5 +32,10 @@ public class SimpleFeedbackService implements FeedbackService {
 		feedback.setMarkStatus(MarkStatus.MARKS_PENDING);
 
 		return feedbackDAO.create(feedback);
+	}
+
+	@Override
+	public Feedback getLiteFeedback(Integer feedbackId) {
+		return feedbackDAO.one(feedbackId);
 	}
 }
