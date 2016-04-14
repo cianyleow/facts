@@ -10,7 +10,7 @@ public interface EnrollmentService {
 
 	public Enrollment getEnrollment(Integer enrollmentId);
 
-	public Integer addEnrollment(Enrollment enrollment);
+	public Enrollment createEnrollment(Enrollment enrollment);
 
 	public void updateEnrollment(Integer enrollmentId, Enrollment enrollment);
 

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.api.EnrollmentDAO;
@@ -24,17 +23,6 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 	public List<Enrollment> getEnrollments(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
-	}
-
-	@Override
-	public Integer addEnrollment(Enrollment enrollment) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("username", enrollment.getStudent().getUserName());
-		paramSource.addValue("courseId", enrollment.getCourse().getCourseId());
-		paramSource.addValue("enrollmentLevel", enrollment.getEnrollmentLevel().toString());
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
-		return keyHolder.getKey().intValue();
 	}
 
 	@Override

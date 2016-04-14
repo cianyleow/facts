@@ -25,8 +25,8 @@ public class SimpleEnrollmentService implements EnrollmentService {
 	}
 
 	@Override
-	public Integer addEnrollment(Enrollment enrollment) {
-		return enrollmentDAO.addEnrollment(enrollment);
+	public Enrollment createEnrollment(Enrollment enrollment) {
+		return enrollmentDAO.create(enrollment);
 	}
 
 	@Override

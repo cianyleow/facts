@@ -28,11 +28,6 @@ public class EnrollmentController {
 		return enrollmentService.getEnrollment(enrollmentId);
 	}
 
-	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.POST)
-	public Integer addEnrollment(@RequestBody Enrollment enrollment) {
-		return enrollmentService.addEnrollment(enrollment);
-	}
-
 	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.PUT)
 	public void updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment) {
 		enrollmentService.updateEnrollment(enrollmentId, enrollment);
