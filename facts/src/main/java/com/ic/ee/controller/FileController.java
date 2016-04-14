@@ -1,8 +1,6 @@
 package com.ic.ee.controller;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
 import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.domain.common.file.DownloadLink;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.service.api.FileService;
 
@@ -27,10 +25,8 @@ public class FileController {
 	private FileService fileService;
 
 	@RequestMapping(path = "/files/{fileId}/link", method = RequestMethod.GET)
-	public Map<String, String> getFileLink(@PathVariable("fileId") Integer fileId, Principal user) throws NoResultsReturnedException {
-		Map<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put("link", fileService.getDownloadLink(fileId, user.getName()));
-		return hashMap;
+	public DownloadLink getFileLink(@PathVariable("fileId") Integer fileId, Principal user) {
+		return fileService.getDownloadLink(fileId, user.getName());
 	}
 
 	@RequestMapping(path = "/files/{link}/download", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)

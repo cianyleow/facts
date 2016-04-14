@@ -19,6 +19,7 @@ import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.api.CommentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
+import com.ic.ee.core.dao.api.DownloadLinkDAO;
 import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
@@ -34,6 +35,7 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCommentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCourseDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcDownloadLinkDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileDAO;
@@ -129,6 +131,11 @@ public class AppConfig {
 	}
 
 	@Bean
+	DownloadLinkDAO downloadLinkDAO() throws IOException {
+		return new JdbcDownloadLinkDAO(dataSource);
+	}
+
+	@Bean
 	UserDAO userDAO() throws IOException {
 		return new JdbcUserDAO(dataSource);
 	}
@@ -213,7 +220,7 @@ public class AppConfig {
 
 	@Bean
 	FileService fileService() throws NoSuchAlgorithmException, IOException {
-		return new SimpleFileService(fileDAO(), hashUtil(), fileUtils());
+		return new SimpleFileService(fileDAO(), downloadLinkDAO(), hashUtil(), fileUtils());
 	}
 
 	@Bean

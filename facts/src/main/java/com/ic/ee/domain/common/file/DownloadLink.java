@@ -19,6 +19,10 @@ public class DownloadLink {
 
 	private boolean used;
 
+	public DownloadLink() {
+
+	}
+
 	public DownloadLink(Integer downloadLinkId) {
 		this.downloadLinkId = downloadLinkId;
 	}
