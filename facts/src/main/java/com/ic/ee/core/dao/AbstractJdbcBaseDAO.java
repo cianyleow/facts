@@ -55,12 +55,12 @@ public abstract class AbstractJdbcBaseDAO<T, T1> {
 
 	public T one(T1 id) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("id", id);
-		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, getRowMapper());
+		return getJdbcTemplate().queryForObject(oneSqlStatement, paramSource, getRowMapper());
 	}
 
 	public List<T> several(List<T1> ids) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("ids", ids);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+		return getJdbcTemplate().query(severalSqlStatement, paramSource, getRowMapper());
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {
