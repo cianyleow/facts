@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
+import com.ic.ee.domain.user.student.Student;
 
 public class Submission {
 
@@ -23,6 +24,8 @@ public class Submission {
 
 	private Assignment parentAssignment;
 
+	private Student submitter;
+
 	@JsonIgnore
 	public Assignment getParentAssignment() {
 		return parentAssignment;
@@ -30,6 +33,14 @@ public class Submission {
 
 	public void setParentAssignment(Assignment parentAssignment) {
 		this.parentAssignment = parentAssignment;
+	}
+
+	public Student getSubmitter() {
+		return submitter;
+	}
+
+	public void setSubmitter(Student submitter) {
+		this.submitter = submitter;
 	}
 
 	public Integer getSubmissionId() {
