@@ -17,6 +17,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.AuthUserDAO;
+import com.ic.ee.core.dao.api.CommentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
@@ -29,6 +30,7 @@ import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.api.UserDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAuthUserDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcCommentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCourseDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
@@ -137,6 +139,10 @@ public class AppConfig {
 		return new JdbcMarkDAO(dataSource);
 	}
 
+	@Bean
+	CommentDAO commentDAO() throws IOException {
+		return new JdbcCommentDAO(dataSource);
+	}
 
 	@Bean
 	FeedbackDAO feedbackDAO() throws IOException {
@@ -218,7 +224,7 @@ public class AppConfig {
 
 	@Bean
 	FeedbackService feedbackService() throws IOException {
-		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), markDAO());
+		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), markDAO(), commentDAO());
 	}
 
 	@Bean

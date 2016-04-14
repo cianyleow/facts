@@ -56,7 +56,14 @@ public class Feedback {
 	}
 
 	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+		if(comments == null) {
+			this.comments = new ArrayList<Comment>();
+		} else {
+			this.comments = comments;
+			for(Comment comment : this.comments) {
+				comment.setFeedback(this);
+			}
+		}
 	}
 
 	public CommentStatus getCommentStatus() {
