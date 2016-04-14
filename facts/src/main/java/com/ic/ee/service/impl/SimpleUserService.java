@@ -1,14 +1,8 @@
 package com.ic.ee.service.impl;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.ic.ee.core.dao.api.UserDAO;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.user.User;
 import com.ic.ee.service.api.UserService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleUserService implements UserService {
 
@@ -19,8 +13,7 @@ public class SimpleUserService implements UserService {
 	}
 
 	@Override
-	public User getUser(String username) throws NoResultsReturnedException, TooManyResultsReturnedException{
-		List<User> users = userDAO.getUsers(Collections.singletonList(username));
-		return ElementExtractor.extractOne(users);
+	public User getUser(String username) {
+		return userDAO.getUser(username);
 	}
 }

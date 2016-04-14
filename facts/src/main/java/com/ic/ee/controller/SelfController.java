@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.User;
 import com.ic.ee.service.api.CourseService;
@@ -25,7 +23,7 @@ public class SelfController {
 	private CourseService courseService;
 
 	@RequestMapping(path = "/self", method = RequestMethod.GET)
-	public User getSelf(Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public User getSelf(Principal user) {
 		return userService.getUser(user.getName());
 	}
 
