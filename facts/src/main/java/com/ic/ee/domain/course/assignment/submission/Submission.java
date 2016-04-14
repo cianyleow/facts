@@ -1,7 +1,7 @@
 package com.ic.ee.domain.course.assignment.submission;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
@@ -18,7 +18,7 @@ public class Submission {
 	private Date creationTime;
 
 	private String comment;
-	private Set<File> submittedFiles;
+	private List<File> submittedFiles;
 
 	private Feedback feedback;
 
@@ -84,11 +84,11 @@ public class Submission {
 	}
 
 	@JsonIgnore
-	public Set<File> getSubmittedFiles() {
+	public List<File> getSubmittedFiles() {
 		return submittedFiles;
 	}
 
-	public void setSubmittedFiles(Set<File> submittedFiles) {
+	public void setSubmittedFiles(List<File> submittedFiles) {
 		this.submittedFiles = submittedFiles;
 	}
 
