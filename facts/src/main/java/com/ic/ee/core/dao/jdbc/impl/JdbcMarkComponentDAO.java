@@ -28,7 +28,7 @@ public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Int
 	@Override
 	public MapSqlParameterSource getSqlParameterSource(MarkComponent object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("assignmentId", "" /* object.getAssignment().getAssignmentId()*/);
+		paramSource.addValue("assignmentId", object.getAssignment().getAssignmentId());
 		paramSource.addValue("maxMark", object.getMaxMark());
 		paramSource.addValue("name", object.getName());
 		paramSource.addValue("description", object.getDescription());

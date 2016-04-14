@@ -1,8 +1,13 @@
 package com.ic.ee.domain.common.feedback.mark;
 
+import com.ic.ee.domain.course.assignment.Assignment;
+
 public class MarkComponent {
 
 	private Integer markComponentId;
+
+	private Assignment assignment;
+
 	private Integer maxMark;
 	private String name;
 	private String description;
@@ -13,6 +18,14 @@ public class MarkComponent {
 
 	public void setMarkComponentId(Integer markComponentId) {
 		this.markComponentId = markComponentId;
+	}
+
+	public Assignment getAssignment() {
+		return assignment;
+	}
+
+	public void setAssignment(Assignment assignment) {
+		this.assignment = assignment;
 	}
 
 	public Integer getMaxMark() {
