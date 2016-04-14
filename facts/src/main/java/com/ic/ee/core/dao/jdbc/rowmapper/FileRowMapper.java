@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.user.User;
 
 public class FileRowMapper implements RowMapper<File> {
 
@@ -19,6 +20,7 @@ public class FileRowMapper implements RowMapper<File> {
 		file.setLocation(rs.getString("location"));
 		file.setSize(rs.getLong("size"));
 		file.setCreationTime(rs.getDate("creationTime"));
+		file.setOwner(new User("username"));
 		return file;
 	}
 

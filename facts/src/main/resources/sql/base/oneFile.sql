@@ -1,1 +1,1 @@
-SELECT fileId, name, extension, hash, location, size, creationTime, contentType FROM file WHERE fileId = :id
+SELECT fileId, name, extension, hash, location, size, creationTime, contentType, username FROM file WHERE fileId = :id
