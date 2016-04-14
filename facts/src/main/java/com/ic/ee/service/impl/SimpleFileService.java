@@ -13,10 +13,8 @@ import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.service.api.FileService;
-import com.ic.ee.util.ElementExtractor;
 import com.ic.ee.util.FileUtils;
 import com.ic.ee.util.HashUtil;
 
@@ -56,11 +54,8 @@ public class SimpleFileService implements FileService {
 
 	@Override
 	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException {
-		List<File> files = fileDAO.getFiles(link);
-		File file;
-		try {
-			file = ElementExtractor.extractOne(files);
-		} catch (NoResultsReturnedException | TooManyResultsReturnedException e) {
+		File file = fileDAO.getFileFromLink(link);
+		if(file == null) {
 			throw new DownloadLinkDoesNotExistException();
 		}
 
@@ -72,7 +67,7 @@ public class SimpleFileService implements FileService {
 	}
 
 	@Override
-	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException {
+	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		// Create file from multipart file
 		File createdFile = fileUtils.createFile(file);
 

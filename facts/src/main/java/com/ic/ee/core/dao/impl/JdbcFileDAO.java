@@ -41,9 +41,9 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 	}
 
 	@Override
-	public List<File> getFiles(String link) {
+	public File getFileFromLink(String link) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override

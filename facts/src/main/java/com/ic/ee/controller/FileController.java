@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
 import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.service.api.FileService;
 
@@ -28,7 +27,7 @@ public class FileController {
 	private FileService fileService;
 
 	@RequestMapping(path = "/files/{fileId}/link", method = RequestMethod.GET)
-	public Map<String, String> getFileLink(@PathVariable("fileId") Integer fileId, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Map<String, String> getFileLink(@PathVariable("fileId") Integer fileId, Principal user) throws NoResultsReturnedException {
 		Map<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("link", fileService.getDownloadLink(fileId, user.getName()));
 		return hashMap;

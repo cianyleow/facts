@@ -17,7 +17,6 @@ import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
@@ -48,7 +47,7 @@ public class SimpleSubmissionService implements SubmissionService {
 	}
 
 	@Override
-	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
+	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		// Generate submission creation time - before file uploads, to avoid slow internet issues
 		submission.setCreationTime(new Date());
 
@@ -86,7 +85,7 @@ public class SimpleSubmissionService implements SubmissionService {
 		return getSubmission(submissionId);
 	}
 
-	private void createSubmissionFiles(Integer submissionId, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException, TooManyResultsReturnedException {
+	private void createSubmissionFiles(Integer submissionId, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		List<Integer> fileIds = new ArrayList<Integer>();
 		for(MultipartFile file : files) {
 			File createdFile = fileService.createFile(file, username);
