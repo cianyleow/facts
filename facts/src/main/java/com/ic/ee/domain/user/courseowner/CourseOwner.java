@@ -7,11 +7,19 @@ import com.ic.ee.domain.user.User;
 
 public class CourseOwner extends User {
 
+	public CourseOwner() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private String title;
 
 	private Set<Course> coursesOwned;
 
 	private Integer telephoneNumber;
+
+	public CourseOwner(String userName) {
+		super(userName);
+	}
 
 	public String getTitle() {
 		return title;

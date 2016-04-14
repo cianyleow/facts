@@ -13,6 +13,14 @@ public class FileRequirement {
 	private Integer maxFileSize;
 	private String allowedExtension;
 
+	public FileRequirement() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public FileRequirement(Integer fileRequirementId) {
+		this.fileRequirementId = fileRequirementId;
+	}
+
 	public Integer getFileRequirementId() {
 		return fileRequirementId;
 	}

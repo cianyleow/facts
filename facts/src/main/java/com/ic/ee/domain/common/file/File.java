@@ -22,6 +22,14 @@ public class File {
 
 	private User owner;
 
+	public File() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public File(Integer fileId) {
+		this.fileId = fileId;
+	}
+
 	public User getOwner() {
 		return owner;
 	}

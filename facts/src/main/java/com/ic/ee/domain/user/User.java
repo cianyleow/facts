@@ -2,10 +2,19 @@ package com.ic.ee.domain.user;
 
 public class User {
 
+	private String userName;
+
 	private String firstName;
 	private String lastName;
-	private String userName;
 	private String email;
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String userName) {
+		this.userName = userName;
+	}
 
 	public String getFirstName() {
 		return firstName;

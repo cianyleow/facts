@@ -17,6 +17,14 @@ public class Mark {
 
 	private Marker marker;
 
+	public Mark() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Mark(Integer markId) {
+		this.markId = markId;
+	}
+
 	public Integer getMarkId() {
 		return markId;
 	}

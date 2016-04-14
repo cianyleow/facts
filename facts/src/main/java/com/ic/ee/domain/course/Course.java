@@ -8,6 +8,10 @@ import com.ic.ee.domain.user.User;
 
 public class Course {
 
+	public Course() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private Integer courseId;
 
 	private String name;
@@ -19,6 +23,10 @@ public class Course {
 	private List<User> markers;
 
 	private User courseOwner;
+
+	public Course(Integer courseId) {
+		this.courseId = courseId;
+	}
 
 	@JsonIgnore
 	public List<User> getMarkers() {

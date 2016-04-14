@@ -11,8 +11,7 @@ public class AssignmentRowMapper implements RowMapper<Assignment> {
 
 	@Override
 	public Assignment mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Assignment assignment = new Assignment();
-		assignment.setAssignmentId(rs.getInt("assignmentId"));
+		Assignment assignment = new Assignment(rs.getInt("assignmentId"));
 		assignment.setName(rs.getString("name"));
 		assignment.setDescription(rs.getString("description"));
 		assignment.setCreationTime(rs.getDate("creationTime"));

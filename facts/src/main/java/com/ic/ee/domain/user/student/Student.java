@@ -7,6 +7,14 @@ import com.ic.ee.domain.user.User;
 
 public class Student extends User {
 
+	public Student() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Student(String userName) {
+		super(userName);
+	}
+
 	private Integer studentId;
 	private Integer yearOfStudy;
 	private Set<Course> enrolledCourses;

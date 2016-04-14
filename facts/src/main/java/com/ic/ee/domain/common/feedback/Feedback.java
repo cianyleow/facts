@@ -24,6 +24,14 @@ public class Feedback {
 
 	private Marker marker;
 
+	public Feedback() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Feedback(Integer feedbackId) {
+		this.feedbackId = feedbackId;
+	}
+
 	public Integer getFeedbackId() {
 		return feedbackId;
 	}

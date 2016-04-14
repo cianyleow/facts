@@ -26,9 +26,7 @@ public class SimpleFeedbackService implements FeedbackService {
 	public Feedback createFeedback(Integer submissionId, String username) {
 		// Create feedback and get ID back
 		Feedback feedback = new Feedback();
-		Submission submission = new Submission();
-		submission.setSubmissionId(submissionId);
-		feedback.setSubmission(submission);
+		feedback.setSubmission(new Submission(submissionId));
 
 		Marker marker = new Marker();
 		marker.setUserName(username);

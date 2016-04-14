@@ -13,8 +13,7 @@ public class FeedbackRowMapper implements RowMapper<Feedback> {
 
 	@Override
 	public Feedback mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Feedback feedback = new Feedback();
-		feedback.setFeedbackId(rs.getInt("feedbackId"));
+		Feedback feedback = new Feedback(rs.getInt("feedbackId"));
 		feedback.setCommentStatus(CommentStatus.valueOf(rs.getString("commentStatus")));
 		feedback.setMarkStatus(MarkStatus.valueOf(rs.getString("markStatus")));
 		return feedback;

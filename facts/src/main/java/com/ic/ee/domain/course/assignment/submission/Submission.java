@@ -26,6 +26,14 @@ public class Submission {
 
 	private Student submitter;
 
+	public Submission() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Submission(Integer submissionId) {
+		this.submissionId = submissionId;
+	}
+
 	@JsonIgnore
 	public Assignment getParentAssignment() {
 		return parentAssignment;

@@ -21,6 +21,14 @@ public class Comment {
 
 	private Marker author;
 
+	public Comment() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Comment(Integer commentId) {
+		this.commentId = commentId;
+	}
+
 	public Integer getCommentId() {
 		return commentId;
 	}

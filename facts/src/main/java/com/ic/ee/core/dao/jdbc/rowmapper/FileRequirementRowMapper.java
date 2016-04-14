@@ -11,8 +11,7 @@ public class FileRequirementRowMapper implements RowMapper<FileRequirement> {
 
 	@Override
 	public FileRequirement mapRow(ResultSet rs, int rowNum) throws SQLException {
-		FileRequirement fr = new FileRequirement();
-		fr.setFileRequirementId(rs.getInt("fileRequirementId"));
+		FileRequirement fr = new FileRequirement(rs.getInt("fileRequirementId"));
 		fr.setFileName(rs.getString("fileName"));
 		fr.setAllowedExtension(rs.getString("allowedExtension"));
 		fr.setMaxFileSize(rs.getInt("maxFileSize"));

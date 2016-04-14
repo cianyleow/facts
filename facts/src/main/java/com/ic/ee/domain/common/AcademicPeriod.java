@@ -12,6 +12,14 @@ public class AcademicPeriod {
 	private Date startTime;
 	private Date endTime;
 
+	public AcademicPeriod() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public AcademicPeriod(Integer academicPeriodId) {
+		this.academicPeriodId = academicPeriodId;
+	}
+
 	public Integer getAcademicPeriodId() {
 		return academicPeriodId;
 	}

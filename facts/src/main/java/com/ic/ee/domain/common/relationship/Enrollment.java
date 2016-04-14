@@ -8,15 +8,23 @@ import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.student.Student;
 
 public class Enrollment {
-	public Integer enrollmentId;
+	private Integer enrollmentId;
 
-	public Student student;
+	private Student student;
 
-	public Course course;
+	private Course course;
 
-	public EnrollmentLevel enrollmentLevel;
+	private EnrollmentLevel enrollmentLevel;
 
-	public Date updateTime;
+	private Date updateTime;
+
+	public Enrollment() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Enrollment(Integer enrollmentId) {
+		this.enrollmentId = enrollmentId;
+	}
 
 	public Integer getEnrollmentId() {
 		return enrollmentId;

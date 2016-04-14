@@ -11,8 +11,7 @@ public class MarkComponentRowMapper implements RowMapper<MarkComponent> {
 
 	@Override
 	public MarkComponent mapRow(ResultSet rs, int rowNum) throws SQLException {
-		MarkComponent mc = new MarkComponent();
-		mc.setMarkComponentId(rs.getInt("markComponentId"));
+		MarkComponent mc = new MarkComponent(rs.getInt("markComponentId"));
 		mc.setMaxMark(rs.getInt("maxMark"));
 		mc.setName(rs.getString("name"));
 		mc.setDescription(rs.getString("description"));

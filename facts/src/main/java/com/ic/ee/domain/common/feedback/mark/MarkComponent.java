@@ -12,6 +12,14 @@ public class MarkComponent {
 	private String name;
 	private String description;
 
+	public MarkComponent() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public MarkComponent(Integer markComponentId) {
+		this.markComponentId = markComponentId;
+	}
+
 	public Integer getMarkComponentId() {
 		return markComponentId;
 	}

@@ -13,14 +13,9 @@ public class EnrollmentRowMapper implements RowMapper<Enrollment> {
 
 	@Override
 	public Enrollment mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Enrollment enrollment = new Enrollment();
-		enrollment.setEnrollmentId(rs.getInt("enrollmentId"));
-		Course course = new Course();
-		course.setCourseId(rs.getInt("courseId"));
-		enrollment.setCourse(course);
-		Student student = new Student();
-		student.setUserName(rs.getString("username"));
-		enrollment.setStudent(student);
+		Enrollment enrollment = new Enrollment(rs.getInt("enrollmentId"));
+		enrollment.setCourse(new Course(rs.getInt("courseId")));
+		enrollment.setStudent(new Student(rs.getString("username")));
 		enrollment.setUpdateTime(rs.getDate("updateTime"));
 		return enrollment;
 	}

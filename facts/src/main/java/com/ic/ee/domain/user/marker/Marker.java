@@ -7,6 +7,14 @@ import com.ic.ee.domain.user.User;
 
 public class Marker extends User {
 
+	public Marker() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Marker(String userName) {
+		super(userName);
+	}
+
 	private Set<Course> coursesMarkedFor;
 	private String title;
 
