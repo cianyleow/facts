@@ -13,18 +13,19 @@ import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.jdbc.rowmapper.AssignmentRowMapper;
 import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 
 public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new AssignmentRowMapper(), Assignment.class, "getAssignmentsByCourse.sql",
+		super(dataSource, new AssignmentRowMapper(), Assignment.class, "severalAssignmentForCourse.sql",
 				"createAssignmentFile.sql");
 	}
 
 	@Override
-	public List<Assignment> getAssignments(Integer courseId) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", courseId);
+	public List<Assignment> getAssignments(Course course) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", course.getCourseId());
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 

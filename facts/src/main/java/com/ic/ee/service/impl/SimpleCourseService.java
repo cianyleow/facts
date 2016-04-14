@@ -6,7 +6,6 @@ import java.util.List;
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.CourseService;
 
 public class SimpleCourseService implements CourseService {
@@ -41,8 +40,7 @@ public class SimpleCourseService implements CourseService {
 
 	private void decorateCourse(Course course) {
 		// Decorate assignments
-		List<Assignment> assignments = assignmentDAO.getAssignments(course.getCourseId());
-		course.setAssignments(assignments);
+		course.setAssignments(assignmentDAO.getAssignments(course));
 		// Decorate markers
 
 		// Decorate course owner
