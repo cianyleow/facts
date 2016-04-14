@@ -66,7 +66,7 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 		paramSource.addValue("hash", object.getHash());
 		paramSource.addValue("location", object.getLocation());
 		paramSource.addValue("size", object.getSize());
-		paramSource.addValue("username", "" /*object.getUser().getUsername()*/);
+		paramSource.addValue("username", object.getOwner().getUserName());
 		paramSource.addValue("contentType", object.getContentType());
 		return paramSource;
 	}

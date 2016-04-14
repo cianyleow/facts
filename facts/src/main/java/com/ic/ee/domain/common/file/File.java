@@ -3,6 +3,7 @@ package com.ic.ee.domain.common.file;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ic.ee.domain.user.User;
 
 public class File {
 
@@ -18,6 +19,16 @@ public class File {
 	private String location;
 
 	private Date creationTime;
+
+	private User owner;
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
 
 	public Integer getFileId() {
 		return fileId;
