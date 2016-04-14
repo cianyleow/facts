@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.User;
@@ -42,7 +40,7 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Course getCourse(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Course getCourse(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId, true);
 	}
 
@@ -52,17 +50,17 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
-	public List<User> getMarkers(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public List<User> getMarkers(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId, true).getMarkers();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
-	public User getCourseOwner(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public User getCourseOwner(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId, true).getCourseOwner();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
-	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId, false).getAssignments();
 	}
 

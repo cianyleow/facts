@@ -1,17 +1,13 @@
 
 package com.ic.ee.service.impl;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.CourseService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleCourseService implements CourseService {
 
@@ -25,9 +21,8 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Course getCourse(Integer courseId, boolean lite) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<Course> courses = courseDAO.getCourses(Collections.singletonList(courseId));
-		Course course = ElementExtractor.extractOne(courses);
+	public Course getCourse(Integer courseId, boolean lite){
+		Course course = courseDAO.getCourse(courseId);
 		if(!lite) {
 			decorateCourse(course);
 		}

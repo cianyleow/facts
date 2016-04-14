@@ -1,1 +1,0 @@
-SELECT course.courseId, course.name, course.shortName, course.description FROM course WHERE course.courseId IN (:courseIds)

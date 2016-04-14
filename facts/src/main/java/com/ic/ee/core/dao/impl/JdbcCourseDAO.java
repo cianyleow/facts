@@ -17,7 +17,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new CourseRowMapper(), Course.class, "getCoursesByIds.sql", "getCourses.sql", "getCoursesByEnrollment.sql");
+		super(dataSource, new CourseRowMapper(), Course.class, "getCourses.sql", "getCoursesByEnrollment.sql");
 	}
 //
 //	@Override
@@ -42,19 +42,18 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 //	}
 
 	@Override
-	public List<Course> getCourses(List<Integer> courseIds) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseIds", courseIds);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+	public Course getCourse(Integer courseId) {
+		return one(courseId);
 	}
 
 	@Override
 	public List<Course> getCourses() {
-		return getJdbcTemplate().query(getSqlStatements().get(1), getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), getRowMapper());
 	}
 
 	@Override
 	public List<Course> getCourses(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
-		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 }
