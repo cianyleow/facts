@@ -17,7 +17,7 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> implements EnrollmentDAO {
 
 	public JdbcEnrollmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql", "getEnrollmentsFromIds.sql", "addEnrollment.sql");
+		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql", "addEnrollment.sql");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 		paramSource.addValue("courseId", enrollment.getCourse().getCourseId());
 		paramSource.addValue("enrollmentLevel", enrollment.getEnrollmentLevel().toString());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(2), paramSource, keyHolder);
+		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
 
