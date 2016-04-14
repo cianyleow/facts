@@ -6,9 +6,9 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 
 public interface EnrollmentDAO {
 
-	public List<Enrollment> getEnrollments(String username);
+	public Enrollment getEnrollment(Integer enrollmentId);
 
-	public List<Enrollment> getEnrollments(List<Integer> enrollmentIds);
+	public List<Enrollment> getEnrollments(String username);
 
 	public Integer addEnrollment(Enrollment enrollment);
 }
