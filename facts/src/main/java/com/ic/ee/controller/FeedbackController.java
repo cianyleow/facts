@@ -1,6 +1,6 @@
 package com.ic.ee.controller;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +24,12 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/comments", method = RequestMethod.GET)
-	public Set<Comment> getComments(@PathVariable("feedbackId") Integer feedbackId) {
+	public List<Comment> getComments(@PathVariable("feedbackId") Integer feedbackId) {
 		return feedbackService.getFeedback(feedbackId).getComments();
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.GET)
-	public Set<Mark> getMarks(@PathVariable("feedbackId") Integer feedbackId) {
+	public List<Mark> getMarks(@PathVariable("feedbackId") Integer feedbackId) {
 		return feedbackService.getFeedback(feedbackId).getMarks();
 	}
 }

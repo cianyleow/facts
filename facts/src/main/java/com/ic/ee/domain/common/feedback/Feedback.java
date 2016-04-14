@@ -1,6 +1,6 @@
 package com.ic.ee.domain.common.feedback;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.comment.Comment;
@@ -16,10 +16,10 @@ public class Feedback {
 
 	private Submission submission;
 
-	private Set<Comment> comments;
+	private List<Comment> comments;
 	private CommentStatus commentStatus;
 
-	private Set<Mark> marks;
+	private List<Mark> marks;
 	private MarkStatus markStatus;
 
 	private Marker marker;
@@ -50,11 +50,11 @@ public class Feedback {
 	}
 
 	@JsonIgnore
-	public Set<Comment> getComments() {
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 
@@ -67,11 +67,11 @@ public class Feedback {
 	}
 
 	@JsonIgnore
-	public Set<Mark> getMarks() {
+	public List<Mark> getMarks() {
 		return marks;
 	}
 
-	public void setMarks(Set<Mark> marks) {
+	public void setMarks(List<Mark> marks) {
 		this.marks = marks;
 	}
 
