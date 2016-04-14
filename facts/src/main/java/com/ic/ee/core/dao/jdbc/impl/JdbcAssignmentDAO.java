@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
@@ -27,19 +26,6 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 	public List<Assignment> getAssignments(Integer courseId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", courseId);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
-	}
-
-	@Override
-	public Integer createAssignment(Integer courseId, Assignment assignment) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("courseId", courseId);
-		paramSource.addValue("name", assignment.getName());
-		paramSource.addValue("description", assignment.getDescription());
-		paramSource.addValue("dueTime", assignment.getDueTime());
-		paramSource.addValue("openTime", assignment.getOpenTime());
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
-		return keyHolder.getKey().intValue();
 	}
 
 	@Override

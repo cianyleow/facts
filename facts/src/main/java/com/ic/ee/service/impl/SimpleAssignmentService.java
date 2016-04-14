@@ -60,16 +60,17 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	@Override
 	public Assignment createAssignment(Integer courseId, Assignment assignment) {
-		// Save assignment, get assignment ID
-		Integer assignmentId = assignmentDAO.createAssignment(courseId, assignment);
-		assignment.setAssignmentId(assignmentId);
+		// Decorate assignment with courseId
+
+		// Create assignment, get persisted object
+		assignment = assignmentDAO.create(assignment);
 
 		// Save markComponents
-		List<MarkComponent> markComponents = markComponentService.createMarkComponents(assignmentId, assignment.getMarkComponents());
+		List<MarkComponent> markComponents = markComponentService.createMarkComponents(assignment.getAssignmentId(), assignment.getMarkComponents());
 		assignment.setMarkComponents(markComponents);
 
 		// Save requiredFiles
-		List<FileRequirement> requiredFiles = fileRequirementService.createFileRequirements(assignmentId, assignment.getRequiredFiles());
+		List<FileRequirement> requiredFiles = fileRequirementService.createFileRequirements(assignment.getAssignmentId(), assignment.getRequiredFiles());
 		assignment.setRequiredFiles(requiredFiles);
 
 		// Return decorated assignment
