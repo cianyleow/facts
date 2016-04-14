@@ -39,7 +39,7 @@ public class SimpleFileService implements FileService {
 
 	@Override
 	public File getFile(Integer fileId) {
-		return getFile(fileId);
+		return fileDAO.one(fileId);
 	}
 
 	@Override
