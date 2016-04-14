@@ -1,14 +1,12 @@
 package com.ic.ee.core.dao.api;
 
-import java.util.List;
-
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public interface SubmissionDAO {
 
-	public Integer createSubmission(Integer assignmentId, String username, Submission submission);
+	public Submission getSubmission(Integer submissionId);
 
-	public List<Submission> getSubmission(List<Integer> submissionIds);
+	public Integer createSubmission(Integer assignmentId, String username, Submission submission);
 
 	public void createSubmissionFile(Integer submissionId, Integer fileId);
 

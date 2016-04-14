@@ -1,12 +1,10 @@
 package com.ic.ee.core.dao.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
@@ -18,7 +16,7 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> implements SubmissionDAO {
 
 	public JdbcSubmissionDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new SubmissionRowMapper(), Submission.class, "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
+		super(dataSource, new SubmissionRowMapper(), Submission.class, "createSubmission.sql", "createSubmissionFile.sql");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,9 +33,8 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 	}
 
 	@Override
-	public List<Submission> getSubmission(List<Integer> submissionIds) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("submissionIds", submissionIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+	public Submission getSubmission(Integer submissionId) {
+		return one(submissionId);
 	}
 
 	@Override
@@ -45,7 +42,7 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("submissionId", submissionId);
 		paramSource.addValue("fileId", fileId);
-		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+		getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
 
 }

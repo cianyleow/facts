@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.submission.Submission;
@@ -31,7 +29,7 @@ public class SubmissionController {
 	private FeedbackService feedbackService;
 
 	@RequestMapping(path = "/submissions/{submissionId}", method = RequestMethod.GET)
-	public Submission getSubmission(@PathVariable("submissionId") Integer submissionId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Submission getSubmission(@PathVariable("submissionId") Integer submissionId) {
 		return submissionService.getSubmission(submissionId);
 	}
 

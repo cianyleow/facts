@@ -16,5 +16,5 @@ public interface SubmissionService {
 
 	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, TooManyResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException;
 
-	public Submission getSubmission(Integer submissionId) throws NoResultsReturnedException, TooManyResultsReturnedException;
+	public Submission getSubmission(Integer submissionId);
 }

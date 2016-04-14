@@ -1,7 +1,6 @@
 package com.ic.ee.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +28,6 @@ import com.ic.ee.domain.course.assignment.submission.SubmissionStatus;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleSubmissionService implements SubmissionService {
 
@@ -124,8 +122,7 @@ public class SimpleSubmissionService implements SubmissionService {
 	}
 
 	@Override
-	public Submission getSubmission(Integer submissionId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<Submission> submissions = submissionDAO.getSubmission(Collections.singletonList(submissionId));
-		return ElementExtractor.extractOne(submissions);
+	public Submission getSubmission(Integer submissionId) {
+		return submissionDAO.getSubmission(submissionId);
 	}
 }
