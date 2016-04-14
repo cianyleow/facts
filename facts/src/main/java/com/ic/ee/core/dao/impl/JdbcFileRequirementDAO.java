@@ -18,7 +18,7 @@ import com.ic.ee.domain.common.file.FileRequirement;
 public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement, Integer> implements FileRequirementDAO {
 
 	public JdbcFileRequirementDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FileRequirementRowMapper(), FileRequirement.class, "createFileRequirement.sql", "getFileRequirementsByIds.sql",
+		super(dataSource, new FileRequirementRowMapper(), FileRequirement.class, "createFileRequirement.sql",
 				"getFileRequirementsByAssignment.sql");
 	}
 
@@ -35,15 +35,13 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement,
 	}
 
 	@Override
-	public List<FileRequirement> getFileRequirements(List<Integer> fileRequirementIds) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("fileRequirementIds", fileRequirementIds);
+	public List<FileRequirement> getFileRequirements(Integer assignmentId) {
+		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
-	 @Override
-	 public List<FileRequirement> getFileRequirements(Integer assignmentId) {
-		 SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		 return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
-	 }
-
+	@Override
+	public FileRequirement getFileRequirement(Integer fileRequirementId) {
+		return one(fileRequirementId);
+	}
 }

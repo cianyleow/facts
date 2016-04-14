@@ -1,22 +1,18 @@
 package com.ic.ee.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.ic.ee.core.dao.api.FileRequirementDAO;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.service.api.FileRequirementService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleFileRequirementService implements FileRequirementService {
 
 	private final FileRequirementDAO fileRequirementDAO;
 
-	public SimpleFileRequirementService(FileRequirementDAO filerequirementDAO) {
-		this.fileRequirementDAO = filerequirementDAO;
+	public SimpleFileRequirementService(FileRequirementDAO fileRequirementDAO) {
+		this.fileRequirementDAO = fileRequirementDAO;
 	}
 
 	@Override
@@ -35,9 +31,8 @@ public class SimpleFileRequirementService implements FileRequirementService {
 	}
 
 	@Override
-	public FileRequirement getFileRequirement(Integer fileRequirementId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<FileRequirement> fileRequirements = fileRequirementDAO.getFileRequirements(Collections.singletonList(fileRequirementId));
-		return ElementExtractor.extractOne(fileRequirements);
+	public FileRequirement getFileRequirement(Integer fileRequirementId) {
+		return fileRequirementDAO.getFileRequirement(fileRequirementId);
 	}
 
 }

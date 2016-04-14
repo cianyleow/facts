@@ -6,9 +6,9 @@ import com.ic.ee.domain.common.file.FileRequirement;
 
 public interface FileRequirementDAO {
 
-	public Integer createFileRequirement(Integer assignmentId, FileRequirement fileRequirement);
+	public FileRequirement getFileRequirement(Integer fileRequirementId);
 
-	public List<FileRequirement> getFileRequirements(List<Integer> fileRequirementIds);
+	public Integer createFileRequirement(Integer assignmentId, FileRequirement fileRequirement);
 
 	public List<FileRequirement> getFileRequirements(Integer assignmentId);
 
