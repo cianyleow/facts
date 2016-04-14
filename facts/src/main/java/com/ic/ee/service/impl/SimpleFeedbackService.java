@@ -2,6 +2,10 @@ package com.ic.ee.service.impl;
 
 import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.domain.common.feedback.Feedback;
+import com.ic.ee.domain.common.feedback.comment.CommentStatus;
+import com.ic.ee.domain.common.feedback.mark.MarkStatus;
+import com.ic.ee.domain.course.assignment.submission.Submission;
+import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
 
 public class SimpleFeedbackService implements FeedbackService {
@@ -21,10 +25,18 @@ public class SimpleFeedbackService implements FeedbackService {
 	@Override
 	public Feedback createFeedback(Integer submissionId, String username) {
 		// Create feedback and get ID back
-		Integer feedbackId = feedbackDAO.createFeedback(submissionId, username);
+		Feedback feedback = new Feedback();
+		Submission submission = new Submission();
+		submission.setSubmissionId(submissionId);
+		feedback.setSubmission(submission);
 
-		// Return object, without decorations
-		return feedbackDAO.one(feedbackId);
+		Marker marker = new Marker();
+		marker.setUserName(username);
+		feedback.setMarker(marker);
+
+		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
+		feedback.setMarkStatus(MarkStatus.MARKS_PENDING);
+
+		return feedbackDAO.create(feedback);
 	}
-
 }

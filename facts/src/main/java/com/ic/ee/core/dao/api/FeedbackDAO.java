@@ -5,5 +5,4 @@ import com.ic.ee.domain.common.feedback.Feedback;
 
 public interface FeedbackDAO extends BaseDAO<Feedback, Integer> {
 
-	public Integer createFeedback(Integer submissionId, String username);
 }
