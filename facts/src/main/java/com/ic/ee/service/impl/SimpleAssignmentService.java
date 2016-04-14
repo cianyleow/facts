@@ -1,6 +1,5 @@
 package com.ic.ee.service.impl;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +21,6 @@ import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.MarkComponentService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleAssignmentService implements AssignmentService {
 
@@ -53,10 +51,11 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
-	public Assignment getAssignment(Integer assignmentId, boolean lite) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<Assignment> assignments = assignmentDAO.getAssignments(Collections.singletonList(assignmentId));
-		Assignment assignment = ElementExtractor.extractOne(assignments);
-		decorateAssignment(assignment);
+	public Assignment getAssignment(Integer assignmentId, boolean lite) {
+		Assignment assignment = assignmentDAO.getAssignment(assignmentId);
+		if(!lite) {
+			decorateAssignment(assignment);
+		}
 		return assignment;
 	}
 

@@ -12,7 +12,7 @@ import com.ic.ee.domain.course.assignment.Assignment;
 
 public interface AssignmentService {
 
-	public Assignment getAssignment(Integer assignmentId, boolean lite) throws NoResultsReturnedException, TooManyResultsReturnedException;
+	public Assignment getAssignment(Integer assignmentId, boolean lite);
 
 	public Assignment createAssignment(Integer courseId, Assignment assignment);
 

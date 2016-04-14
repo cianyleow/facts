@@ -43,22 +43,22 @@ public class AssignmentController {
 	private SubmissionService submissionService;
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
-	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId, true);
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
-	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId, false).getRequiredFiles();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/markComponents", method = RequestMethod.GET)
-	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId, false).getMarkComponents();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)
-	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId, false).getSuppliedFiles();
 	}
 

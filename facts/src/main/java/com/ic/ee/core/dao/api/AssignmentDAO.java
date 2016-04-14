@@ -7,7 +7,7 @@ import com.ic.ee.domain.course.assignment.Assignment;
 
 public interface AssignmentDAO {
 
-	public List<Assignment> getAssignments(List<Integer> assignmentIds);
+	public Assignment getAssignment(Integer assignmentId);
 
 	public List<Assignment> getAssignments(Integer courseId);
 

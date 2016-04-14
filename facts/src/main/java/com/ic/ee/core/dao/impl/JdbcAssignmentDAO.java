@@ -19,20 +19,19 @@ import com.ic.ee.domain.course.assignment.Assignment;
 public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> implements AssignmentDAO {
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new AssignmentRowMapper(), Assignment.class, "getAssignmentsByIds.sql", "getAssignmentsByCourse.sql",
+		super(dataSource, new AssignmentRowMapper(), Assignment.class, "getAssignmentsByCourse.sql",
 				"createAssignment.sql", "createAssignmentFile.sql");
 	}
 
 	@Override
-	public List<Assignment> getAssignments(List<Integer> assignmentIds) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentIds", assignmentIds);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+	public Assignment getAssignment(Integer assignmentId) {
+		return one(assignmentId);
 	}
 
 	@Override
 	public List<Assignment> getAssignments(Integer courseId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", courseId);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 		paramSource.addValue("dueTime", assignment.getDueTime());
 		paramSource.addValue("openTime", assignment.getOpenTime());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(2), paramSource, keyHolder);
+		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
 
@@ -53,6 +52,6 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("assignmentId", assignmentId);
 		paramSource.addValue("fileId", file.getFileId());
-		getJdbcTemplate().update(getSqlStatements().get(3), paramSource);
+		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
 	}
 }
