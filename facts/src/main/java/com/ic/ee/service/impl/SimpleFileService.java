@@ -68,7 +68,7 @@ public class SimpleFileService implements FileService {
 
 		Date validTill = new Date(downloadLink.getValidFrom().getTime() + 30 * 1000);
 
-		if(validTill.after(new Date())) {
+		if(validTill.before(new Date())) {
 			throw new DownloadLinkExpiredException();
 		}
 
