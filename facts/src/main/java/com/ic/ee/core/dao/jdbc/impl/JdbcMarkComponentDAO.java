@@ -16,7 +16,7 @@ import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Integer> implements MarkComponentDAO {
 
 	public JdbcMarkComponentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new MarkComponentRowMapper(), MarkComponent.class, "getMarkComponentsByAssignment.sql");
+		super(dataSource, new MarkComponentRowMapper(), MarkComponent.class, "severalMarkComponentForAssignment.sql");
 	}
 
 	@Override
