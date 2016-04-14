@@ -6,7 +6,7 @@ import com.ic.ee.domain.common.file.File;
 
 public interface FileDAO {
 
-	public List<File> getFiles(List<Integer> fileIds);
+	public File getFile(Integer fileId);
 
 	public List<File> getSubmissionFiles(Integer submissionId);
 

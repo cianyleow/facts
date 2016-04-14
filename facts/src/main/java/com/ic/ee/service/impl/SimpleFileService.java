@@ -1,6 +1,5 @@
 package com.ic.ee.service.impl;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -36,21 +35,12 @@ public class SimpleFileService implements FileService {
 	}
 
 	@Override
-	public List<File> getFiles(List<Integer> fileIds) {
-		if(fileIds == null || fileIds.isEmpty()) {
-			return Collections.emptyList();
-		}
-		return fileDAO.getFiles(fileIds);
+	public File getFile(Integer fileId) {
+		return getFile(fileId);
 	}
 
 	@Override
-	public File getFile(Integer fileId) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<File> files = getFiles(Collections.singletonList(fileId));
-		return ElementExtractor.extractOne(files);
-	}
-
-	@Override
-	public String getDownloadLink(Integer fileId, String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public String getDownloadLink(Integer fileId, String username) throws NoResultsReturnedException {
 		File file = getFile(fileId);
 		Date date = new Date();
 		Random rand = new Random();

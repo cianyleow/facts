@@ -15,13 +15,11 @@ import com.ic.ee.domain.common.file.File;
 
 public interface FileService {
 
-	public List<File> getFiles(List<Integer> fileIds);
-
 	public List<File> getSubmissionFiles(Integer submissionId);
 
-	public File getFile(Integer fileId) throws NoResultsReturnedException, TooManyResultsReturnedException;
+	public File getFile(Integer fileId);
 
-	public String getDownloadLink(Integer fileId, String username) throws NoResultsReturnedException, TooManyResultsReturnedException;
+	public String getDownloadLink(Integer fileId, String username) throws NoResultsReturnedException;
 
 	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException;
 

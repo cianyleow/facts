@@ -1,1 +1,0 @@
-SELECT fileId, name, extension, hash, location, size, creationTime, contentType FROM file WHERE fileId IN (:fileIds)

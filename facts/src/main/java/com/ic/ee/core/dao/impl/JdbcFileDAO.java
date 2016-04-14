@@ -18,16 +18,15 @@ import com.ic.ee.domain.common.file.File;
 public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements FileDAO {
 
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FileRowMapper(), File.class, "getFiles.sql", "addDownloadLink.sql",
+		super(dataSource, new FileRowMapper(), File.class, "addDownloadLink.sql",
 				"getFileFromLink.sql", "voidDownloadLink.sql",
 				"createFile.sql", "getFilesFromSubmissionId.sql",
 				"getFilesFromAssignment.sql");
 	}
 
 	@Override
-	public List<File> getFiles(List<Integer> fileIds) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("fileIds", fileIds);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+	public File getFile(Integer fileId) {
+		return one(fileId);
 	}
 
 	@Override
@@ -37,20 +36,20 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 		paramSource.addValue("link", hash);
 		paramSource.addValue("username", username);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(1), paramSource, keyHolder);
+		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
 	public List<File> getFiles(String link) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override
 	public Integer voidDownloadLink(String link) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().update(getSqlStatements().get(3), paramSource);
+		return getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
 	}
 
 	@Override
@@ -64,19 +63,19 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 		paramSource.addValue("username", username);
 		paramSource.addValue("contentType", file.getContentType());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(4), paramSource, keyHolder);
+		getJdbcTemplate().update(getSqlStatements().get(3), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
 	public List<File> getSubmissionFiles(Integer submissionId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submissionId);
-		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(4), paramSource, getRowMapper());
 	}
 
 	@Override
 	public List<File> getAssignmentFiles(Integer assignmentId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		return getJdbcTemplate().query(getSqlStatements().get(6), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, getRowMapper());
 	}
 }
