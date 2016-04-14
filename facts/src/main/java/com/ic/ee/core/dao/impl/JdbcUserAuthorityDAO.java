@@ -13,16 +13,16 @@ import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.rowmapper.UserAuthorityRowMapper;
 import com.ic.ee.domain.user.auth.UserAuthority;
 
-public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO implements UserAuthorityDAO {
+public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority> implements UserAuthorityDAO {
 
 	public JdbcUserAuthorityDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getUserAuthorities.sql");
+		super(dataSource, new UserAuthorityRowMapper(), "getUserAuthorities.sql");
 	}
 
 	@Override
 	public List<UserAuthority> getUserAuthorities(String username) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("username", username);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new UserAuthorityRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 }

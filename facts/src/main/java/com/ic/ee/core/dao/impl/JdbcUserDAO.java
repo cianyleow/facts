@@ -13,16 +13,16 @@ import com.ic.ee.core.dao.api.UserDAO;
 import com.ic.ee.core.dao.rowmapper.UserRowMapper;
 import com.ic.ee.domain.user.User;
 
-public class JdbcUserDAO extends AbstractJdbcBaseDAO implements UserDAO {
+public class JdbcUserDAO extends AbstractJdbcBaseDAO<User> implements UserDAO {
 
 	public JdbcUserDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getUsers.sql");
+		super(dataSource, new UserRowMapper(), "getUsers.sql");
 	}
 
 	@Override
 	public List<User> getUsers(List<String> usernames) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("usernames", usernames);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new UserRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 }

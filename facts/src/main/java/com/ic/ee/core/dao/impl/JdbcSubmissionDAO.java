@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.dao.rowmapper.SubmissionRowMapper;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
-public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements SubmissionDAO {
+public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission> implements SubmissionDAO {
 
 	public JdbcSubmissionDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
+		super(dataSource, new SubmissionRowMapper(), "createSubmission.sql", "getSubmissionsByIds.sql", "createSubmissionFile.sql");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,7 +37,7 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements Submission
 	@Override
 	public List<Submission> getSubmission(List<Integer> submissionIds) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionIds", submissionIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new SubmissionRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override

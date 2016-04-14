@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.rowmapper.FileRowMapper;
 import com.ic.ee.domain.common.file.File;
 
-public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
+public class JdbcFileDAO extends AbstractJdbcBaseDAO<File> implements FileDAO {
 
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getFiles.sql", "addDownloadLink.sql",
+		super(dataSource, new FileRowMapper(), "getFiles.sql", "addDownloadLink.sql",
 				"getFileFromLink.sql", "voidDownloadLink.sql",
 				"createFile.sql", "getFilesFromSubmissionId.sql",
 				"getFilesFromAssignment.sql");
@@ -27,7 +27,7 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 	@Override
 	public List<File> getFiles(List<Integer> fileIds) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("fileIds", fileIds);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new FileRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 	@Override
 	public List<File> getFiles(String link) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new FileRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
 	}
 
 	@Override
@@ -71,12 +71,12 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO implements FileDAO {
 	@Override
 	public List<File> getSubmissionFiles(Integer submissionId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submissionId);
-		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, new FileRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, getRowMapper());
 	}
 
 	@Override
 	public List<File> getAssignmentFiles(Integer assignmentId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		return getJdbcTemplate().query(getSqlStatements().get(6), paramSource, new FileRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(6), paramSource, getRowMapper());
 	}
 }

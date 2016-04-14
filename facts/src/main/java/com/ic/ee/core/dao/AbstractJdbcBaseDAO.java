@@ -10,20 +10,24 @@ import javax.sql.DataSource;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-public abstract class AbstractJdbcBaseDAO {
+public abstract class AbstractJdbcBaseDAO<T> {
 
 	private final List<String> sqlStatements;
 
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 
+	private final RowMapper<T> rowMapper;
 
-	public AbstractJdbcBaseDAO(DataSource dataSource, String...fileNames) throws IOException {
-		sqlStatements = new ArrayList<String>();
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+
+	public AbstractJdbcBaseDAO(DataSource dataSource, RowMapper<T> rowMapper, String...fileNames) throws IOException {
+		this.rowMapper = rowMapper;
+		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		this.sqlStatements = new ArrayList<String>();
 		for(String fileName : fileNames) {
-			sqlStatements.add(readSQLString(fileName));
+			this.sqlStatements.add(readSQLString(fileName));
 		}
 	}
 
@@ -46,5 +50,9 @@ public abstract class AbstractJdbcBaseDAO {
 
 	public List<String> getSqlStatements() {
 		return sqlStatements;
+	}
+
+	public RowMapper<T> getRowMapper() {
+		return rowMapper;
 	}
 }

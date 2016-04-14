@@ -14,16 +14,16 @@ import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.rowmapper.AuthUserRowMapper;
 import com.ic.ee.domain.user.auth.AuthUser;
 
-public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO implements AuthUserDAO {
+public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO<AuthUser> implements AuthUserDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcAuthUserDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getAuthUsers.sql");
+		super(dataSource, new AuthUserRowMapper(), "getAuthUsers.sql");
 	}
 
 	@Override
 	public List<AuthUser> getAuthUsers(List<String> usernames) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("usernames", usernames);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new AuthUserRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 }

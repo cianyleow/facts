@@ -14,10 +14,10 @@ import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.core.dao.rowmapper.MarkComponentRowMapper;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 
-public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO implements MarkComponentDAO {
+public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent> implements MarkComponentDAO {
 
 	public JdbcMarkComponentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createMarkComponent.sql", "getMarkComponent.sql", "getMarkComponentsByAssignment.sql");
+		super(dataSource, new MarkComponentRowMapper(), "createMarkComponent.sql", "getMarkComponent.sql", "getMarkComponentsByAssignment.sql");
 	}
 
 	@Override
@@ -35,13 +35,13 @@ public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO implements MarkCom
 	@Override
 	public MarkComponent getMarkComponent(Integer markComponentId) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("markComponentId", markComponentId);
-		return getJdbcTemplate().queryForObject(getSqlStatements().get(1), paramSource, new MarkComponentRowMapper());
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override
 	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new MarkComponentRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
 	}
 
 

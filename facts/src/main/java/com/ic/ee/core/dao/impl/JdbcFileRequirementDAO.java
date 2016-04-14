@@ -15,10 +15,10 @@ import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.rowmapper.FileRequirementRowMapper;
 import com.ic.ee.domain.common.file.FileRequirement;
 
-public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO implements FileRequirementDAO {
+public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement> implements FileRequirementDAO {
 
 	public JdbcFileRequirementDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createFileRequirement.sql", "getFileRequirementsByIds.sql",
+		super(dataSource, new FileRequirementRowMapper(), "createFileRequirement.sql", "getFileRequirementsByIds.sql",
 				"getFileRequirementsByAssignment.sql");
 	}
 
@@ -37,13 +37,13 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO implements FileR
 	@Override
 	public List<FileRequirement> getFileRequirements(List<Integer> fileRequirementIds) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("fileRequirementIds", fileRequirementIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new FileRequirementRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	 @Override
 	 public List<FileRequirement> getFileRequirements(Integer assignmentId) {
 		 SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
-		 return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, new FileRequirementRowMapper());
+		 return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
 	 }
 
 }

@@ -14,22 +14,22 @@ import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.rowmapper.EnrollmentRowMapper;
 import com.ic.ee.domain.common.relationship.Enrollment;
 
-public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO implements EnrollmentDAO {
+public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment> implements EnrollmentDAO {
 
 	public JdbcEnrollmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "getEnrollmentsFromUsername.sql", "getEnrollmentsFromIds.sql", "addEnrollment.sql");
+		super(dataSource, new EnrollmentRowMapper(), "getEnrollmentsFromUsername.sql", "getEnrollmentsFromIds.sql", "addEnrollment.sql");
 	}
 
 	@Override
 	public List<Enrollment> getEnrollments(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
-		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, new EnrollmentRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override
 	public List<Enrollment> getEnrollments(List<Integer> enrollmentIds) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("enrollmentIds", enrollmentIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new EnrollmentRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override

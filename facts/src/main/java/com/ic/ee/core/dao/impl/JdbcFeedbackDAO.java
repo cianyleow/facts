@@ -17,10 +17,10 @@ import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 
-public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO implements FeedbackDAO {
+public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback> implements FeedbackDAO {
 
 	public JdbcFeedbackDAO(DataSource dataSource) throws IOException {
-		super(dataSource, "createFeedback.sql", "getFeedbackByIds.sql");
+		super(dataSource, new FeedbackRowMapper(), "createFeedback.sql", "getFeedbackByIds.sql");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO implements FeedbackDAO 
 	@Override
 	public List<Feedback> getFeedback(List<Integer> feedbackIds) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("feedbackIds", feedbackIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, new FeedbackRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 }
