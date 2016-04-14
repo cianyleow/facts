@@ -96,80 +96,38 @@ public class AppConfig {
     }
 
 	@Bean
-	CourseDAO courseDAO() {
-		try {
-			return new JdbcCourseDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("CourseDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	CourseDAO courseDAO() throws IOException {
+		return new JdbcCourseDAO(dataSource);
 	}
 
 	@Bean
-	AssignmentDAO assignmentDAO() {
-		try {
-			return new JdbcAssignmentDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("AssignmentDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	AssignmentDAO assignmentDAO() throws IOException {
+		return new JdbcAssignmentDAO(dataSource);
 	}
 
 	@Bean
-	AuthUserDAO authUserDAO() {
-		try {
-			return new JdbcAuthUserDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("AuthUserDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	AuthUserDAO authUserDAO() throws IOException {
+		return new JdbcAuthUserDAO(dataSource);
 	}
 
 	@Bean
-	UserAuthorityDAO userAuthorityDAO() {
-		try {
-			return new JdbcUserAuthorityDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("UserAuthorityDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	UserAuthorityDAO userAuthorityDAO() throws IOException {
+		return new JdbcUserAuthorityDAO(dataSource);
 	}
 
 	@Bean
-	UserDAO userDAO() {
-		try {
-			return new JdbcUserDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("UserDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	UserDAO userDAO() throws IOException {
+		return new JdbcUserDAO(dataSource);
 	}
 
 	@Bean
-	EnrollmentDAO enrollmentDAO() {
-		try {
-			return new JdbcEnrollmentDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("EnrollmentDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	EnrollmentDAO enrollmentDAO() throws IOException {
+		return new JdbcEnrollmentDAO(dataSource);
 	}
 
 	@Bean
-	FileDAO fileDAO() {
-		try {
-			return new JdbcFileDAO(dataSource);
-		} catch(IOException ioe) {
-			logger.error("FileDAO threw IO Exception: " + ioe.toString());
-			System.exit(-1);
-		}
-		return null;
+	FileDAO fileDAO() throws IOException {
+		return new JdbcFileDAO(dataSource);
 	}
 
 
@@ -199,15 +157,15 @@ public class AppConfig {
 	}
 
 	@Bean
-	CourseService courseService() {
+	CourseService courseService() throws IOException {
 		return new SimpleCourseService(courseDAO(), assignmentDAO());
 	}
 
-	@Bean AssignmentService assignmentService() throws IOException {
+	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {
 		return new SimpleAssignmentService(assignmentDAO(), markComponentDAO(), fileRequirementDAO(), fileDAO(), markComponentService(), fileRequirementService(), fileService());
 	}
 
-	@Bean AuthUserService authUserService() {
+	@Bean AuthUserService authUserService() throws IOException {
 		return new SimpleAuthUserService(authUserDAO(), userAuthorityDAO());
 	}
 
@@ -217,22 +175,22 @@ public class AppConfig {
 	}
 
 	@Bean
-	UserService userService() {
+	UserService userService() throws IOException {
 		return new SimpleUserService(userDAO());
 	}
 
 	@Bean
-	TokenUserDetailsService tokenUserDetailsService() {
+	TokenUserDetailsService tokenUserDetailsService() throws IOException {
 		return new SimpleTokenUserDetailsService(authUserService(), accountStatusUserDetailsChecker());
 	}
 
 	@Bean
-	FileService fileService() {
+	FileService fileService() throws NoSuchAlgorithmException, IOException {
 		return new SimpleFileService(fileDAO(), hashUtil(), fileUtils());
 	}
 
 	@Bean
-	EnrollmentService enrollmentService() {
+	EnrollmentService enrollmentService() throws IOException {
 		return new SimpleEnrollmentService(enrollmentDAO());
 	}
 
@@ -247,7 +205,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	SubmissionService submissionService() throws IOException {
+	SubmissionService submissionService() throws IOException, NoSuchAlgorithmException {
 		return new SimpleSubmissionService(submissionDAO(), assignmentService(), fileService(), submissionFileValidator());
 	}
 
@@ -257,14 +215,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	HashUtil hashUtil() {
-		try {
+	HashUtil hashUtil() throws NoSuchAlgorithmException {
 			return new Sha256HashUtil();
-		} catch (NoSuchAlgorithmException e) {
-			logger.error("Hash Util algorithm does not exist.");
-			System.exit(-1);
-		}
-		return null;
 	}
 
 	@Bean
@@ -273,7 +225,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	FileUtils fileUtils() {
+	FileUtils fileUtils() throws NoSuchAlgorithmException {
 		return new SimpleFileUtils(baseFileLocation, hashUtil());
 	}
 }
