@@ -1,1 +1,6 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE fileRequirementId = :id
+UPDATE file_requirement SET
+assignmentId = :assignmentId,
+fileName = :fileName,
+maxFileSize = :maxFileSize,
+allowedExtension = :allowedExtension
+WHERE fileRequirmentId = :id

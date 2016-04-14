@@ -1,1 +1,6 @@
-SELECT course.courseId, course.name, course.shortName, course.description FROM course WHERE course.courseId = :id
+UPDATE course SET
+name = :name,
+shortName = :shortName,
+description = :description,
+academicPeriodId = :acdemicPeriodId
+WHERE courseId = :id

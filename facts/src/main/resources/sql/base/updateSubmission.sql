@@ -1,1 +1,6 @@
-SELECT submissionId, comment, submissionStatus, creationTime FROM submission WHERE submissionId = :id
+UPDATE submission SET
+assignmentId = :assignmentId,
+username = :username,
+submissionStatus = :submissionStatus,
+comment = :comment
+WHERE submissionId = :submissionId

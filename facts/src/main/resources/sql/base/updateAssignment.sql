@@ -1,13 +1,7 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+UPDATE assignment SET
+courseId = :courseId,
+name = :name,
+description = :description,
+dueTime = :dueTime,
+openTime = :openTime
+WHERE assignmentId = :id

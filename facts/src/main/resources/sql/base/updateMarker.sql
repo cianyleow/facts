@@ -1,13 +1,3 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+UPDATE marker SET
+title = :title
+WHERE username = :id

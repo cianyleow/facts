@@ -1,1 +1,6 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE fileRequirementId = :id
+UPDATE comment SET
+feedbackId = :feedbackId,
+secret = :secret,
+comment = :comment,
+author = :author
+WHERE commentId = :id

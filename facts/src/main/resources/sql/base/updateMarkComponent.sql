@@ -1,1 +1,6 @@
-SELECT markComponentId, maxMark, name, description FROM mark_component WHERE markComponentId = :id
+UPDATE mark_component SET
+assignmentId = :assignmentId,
+maxMark = :maxMark,
+name = :name,
+description = :description
+WHERE markComponentId = :id

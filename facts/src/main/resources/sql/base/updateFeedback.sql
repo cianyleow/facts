@@ -1,1 +1,6 @@
-SELECT feedbackId, submissionId, commentStatus, markStatus, marker FROM feedback WHERE feedbackId = :id
+UPDATE feedback SET
+submissionId = :submissionId,
+commentStatus = :commentStatus,
+markStatus = :markStatus,
+username = :username
+WHERE feedbackId = :id

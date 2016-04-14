@@ -1,1 +1,9 @@
-SELECT fileId, name, extension, hash, location, size, creationTime, contentType FROM file WHERE fileId = :id
+UPDATE file SET
+name = :name,
+extension = :extension,
+hash = :hash,
+location = :location,
+size = :size,
+username = :username,
+contentType = :contentType
+WHERE fileId = :id

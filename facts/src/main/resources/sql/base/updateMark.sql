@@ -1,1 +1,6 @@
-SELECT course.courseId, course.name, course.shortName, course.description FROM course WHERE course.courseId = :id
+UPDATE mark SET
+markComponentId = :markComponentId,
+feedbackId = :feedbackId,
+mark = :mark,
+marker = :marker
+WHERE markId = :id

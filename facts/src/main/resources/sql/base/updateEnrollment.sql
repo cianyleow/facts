@@ -1,1 +1,5 @@
-SELECT enrollmentId, username, courseId, enrollmentLevel, updateTime FROM enrollment WHERE enrollmentId = :id
+UPDATE enrollment SET
+username = :username,
+courseId = :courseId,
+enrollmentLevel = :enrollmentLevel
+WHERE enrollmentId = :id

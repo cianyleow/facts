@@ -1,1 +1,7 @@
-SELECT username, password, accountExpired, accountLocked, credentialsExpired, accountEnabled FROM auth_user WHERE username = :id
+UPDATE auth_user SET
+password = :password,
+accountExpired = :accountExpired,
+accountLocked = :accountLocked,
+credentialsExpired = :credentialsExpired,
+accountEnabled = :accountEnabled
+WHERE username = :id

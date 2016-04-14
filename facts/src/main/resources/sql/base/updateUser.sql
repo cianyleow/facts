@@ -1,1 +1,5 @@
-SELECT username, email, firstName, lastName FROM user WHERE username = :id
+UPDATE user SET
+email = :email,
+firstName = :firstName,
+lastName = :lastName
+WHERE username = :id

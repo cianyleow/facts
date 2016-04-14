@@ -1,13 +1,4 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+UPDATE student SET
+studentId = :studentId,
+yearOfStudy = :yearOfStudy
+WHERE username = :id
