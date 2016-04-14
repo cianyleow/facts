@@ -18,8 +18,7 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	@Override
 	public Feedback getSubmissionFeedback(Integer submissionId) {
-		// TODO Auto-generated method stub
-		return null;
+		return feedbackDAO.getFeedback(new Submission(submissionId));
 	}
 
 	@Override
