@@ -66,28 +66,31 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	@Override
 	public Assignment createAssignment(Integer courseId, Assignment assignment) {
+		// Extract required files/mark components before saving.
+		List<MarkComponent> markComponents = assignment.getMarkComponents();
+		List<FileRequirement> requiredFiles = assignment.getRequiredFiles();
+
 		// Decorate assignment with courseId
 		assignment.setCourse(new Course(courseId));
 
 		// Create assignment, get persisted object
 		assignment = assignmentDAO.create(assignment);
 
-
 		// Save markComponents
-		List<MarkComponent> markComponents = new ArrayList<MarkComponent>();
-		for(MarkComponent markComponent : assignment.getMarkComponents()) {
+		List<MarkComponent> _markComponents = new ArrayList<MarkComponent>();
+		for(MarkComponent markComponent : markComponents) {
 			markComponent.setAssignment(assignment);
-			markComponents.add(markComponentDAO.create(markComponent));
+			_markComponents.add(markComponentDAO.create(markComponent));
 		}
-		assignment.setMarkComponents(markComponents);
+		assignment.setMarkComponents(_markComponents);
 
 		// Save requiredFiles
-		List<FileRequirement> requiredFiles = new ArrayList<FileRequirement>();
-		for(FileRequirement requiredFile : assignment.getRequiredFiles()) {
+		List<FileRequirement> _requiredFiles = new ArrayList<FileRequirement>();
+		for(FileRequirement requiredFile : requiredFiles) {
 			requiredFile.setAssignment(assignment);
-			requiredFiles.add(fileRequirementDAO.create(requiredFile));
+			_requiredFiles.add(fileRequirementDAO.create(requiredFile));
 		}
-		assignment.setRequiredFiles(requiredFiles);
+		assignment.setRequiredFiles(_requiredFiles);
 
 		// Return decorated assignment
 		return assignment;
