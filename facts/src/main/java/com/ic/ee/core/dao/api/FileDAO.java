@@ -17,6 +17,4 @@ public interface FileDAO extends BaseDAO<File, Integer> {
 
 	public Integer voidDownloadLink(String link);
 
-	public Integer createFile(String username, File file);
-
 }

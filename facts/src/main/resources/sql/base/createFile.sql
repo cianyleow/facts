@@ -1,1 +1,17 @@
-SELECT fileId, name, extension, hash, location, size, creationTime, contentType FROM file WHERE fileId = :id
+INSERT INTO file (
+name,
+extension,
+hash,
+location,
+size,
+username,
+contentType
+) VALUES (
+:name,
+:extension,
+:hash,
+:location,
+:size,
+:username,
+:contentType
+);

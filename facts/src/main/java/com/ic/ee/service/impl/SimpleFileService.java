@@ -71,10 +71,10 @@ public class SimpleFileService implements FileService {
 		// Create file from multipart file
 		File createdFile = fileUtils.createFile(file);
 
-		// Get fileId and decorate created file
-		Integer fileId = fileDAO.createFile(username, createdFile);
+		// Decorate file with owner
 
-		return getFile(fileId);
+		// Get fileId and decorate created file
+		return fileDAO.create(createdFile);
 	}
 
 	@Override
