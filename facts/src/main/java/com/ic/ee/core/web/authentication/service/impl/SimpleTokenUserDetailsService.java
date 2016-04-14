@@ -4,8 +4,6 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.ic.ee.core.web.authentication.service.api.TokenUserDetailsService;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.user.auth.AuthUser;
 import com.ic.ee.service.api.AuthUserService;
 
@@ -21,12 +19,7 @@ public class SimpleTokenUserDetailsService implements TokenUserDetailsService {
 
 	@Override
 	public AuthUser loadUserByUsername(String username) throws UsernameNotFoundException {
-		AuthUser user;
-		try {
-			user = authUserService.getAuthUser(username);
-		} catch (NoResultsReturnedException | TooManyResultsReturnedException e) {
-			throw new UsernameNotFoundException("User not found");
-		}
+		AuthUser user = authUserService.getAuthUser(username);
 		if(user == null) {
 			throw new UsernameNotFoundException("User not found");
 		}

@@ -1,7 +1,6 @@
 package com.ic.ee.core.dao.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -20,7 +19,7 @@ public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO<AuthUser, String> imple
 	}
 
 	@Override
-	public List<AuthUser> getAuthUsers(List<String> usernames) {
-		return several(usernames);
+	public AuthUser getAuthUser(String username) {
+		return one(username);
 	}
 }

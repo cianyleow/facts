@@ -1,17 +1,13 @@
 package com.ic.ee.service.impl;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
 import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
-import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.core.web.exception.TooManyResultsReturnedException;
 import com.ic.ee.domain.user.auth.AuthUser;
 import com.ic.ee.domain.user.auth.UserAuthority;
 import com.ic.ee.service.api.AuthUserService;
-import com.ic.ee.util.ElementExtractor;
 
 public class SimpleAuthUserService implements AuthUserService {
 
@@ -24,9 +20,8 @@ public class SimpleAuthUserService implements AuthUserService {
 	}
 
 	@Override
-	public AuthUser getAuthUser(String username) throws NoResultsReturnedException, TooManyResultsReturnedException {
-		List<AuthUser> authUsers = authUserDAO.getAuthUsers(Collections.singletonList(username));
-		AuthUser authUser = ElementExtractor.extractOne(authUsers);
+	public AuthUser getAuthUser(String username) {
+		AuthUser authUser = authUserDAO.getAuthUser(username);
 
 		// Decorate authUser with user authorities.
 		decorateAuthUserWithAuthorities(authUser);
