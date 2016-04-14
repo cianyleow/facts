@@ -2,8 +2,8 @@ package com.ic.ee.domain.common.feedback.comment;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
-import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 
 public class Comment {
@@ -11,8 +11,6 @@ public class Comment {
 	private Integer commentId;
 
 	private Feedback feedback;
-
-	private Submission submission;
 
 	private Boolean secret;
 
@@ -37,20 +35,13 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
+	@JsonIgnore
 	public Feedback getFeedback() {
 		return feedback;
 	}
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
-	}
-
-	public Submission getSubmission() {
-		return submission;
-	}
-
-	public void setSubmission(Submission submission) {
-		this.submission = submission;
 	}
 
 	public Boolean getSecret() {
@@ -77,6 +68,7 @@ public class Comment {
 		this.creationTime = creationTime;
 	}
 
+	@JsonIgnore
 	public Marker getAuthor() {
 		return author;
 	}
