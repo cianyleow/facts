@@ -30,7 +30,7 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement,
 	@Override
 	public MapSqlParameterSource getSqlParameterSource(FileRequirement object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("assignmentId", 0 /*object.getAssignment().getAssigment()*/);
+		paramSource.addValue("assignmentId", object.getAssignment().getAssignmentId());
 		paramSource.addValue("fileName", object.getFileName());
 		paramSource.addValue("maxFileSize", object.getMaxFileSize());
 		paramSource.addValue("allowedExtension", object.getAllowedExtension());
