@@ -152,6 +152,6 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setFeedback(feedbackDAO.getFeedback(submission));
 
 		// Decorate student
-		submission.setSubmitter(userDAO.one(submission.getSubmitter().getUserName()));
+//		submission.setSubmitter(userDAO.one(submission.getSubmitter().getUserName()));
 	}
 }

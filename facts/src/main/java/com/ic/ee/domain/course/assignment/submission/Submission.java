@@ -8,6 +8,7 @@ import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.User;
+import com.ic.ee.domain.user.student.Student;
 
 public class Submission {
 
@@ -24,7 +25,7 @@ public class Submission {
 
 	private Assignment assignment;
 
-	private User submitter;
+	private Student submitter;
 
 	public Submission() {
 		// TODO Auto-generated constructor stub
@@ -43,11 +44,11 @@ public class Submission {
 		this.assignment = assignment;
 	}
 
-	public User getSubmitter() {
+	public Student getSubmitter() {
 		return submitter;
 	}
 
-	public void setSubmitter(User submitter) {
+	public void setSubmitter(Student submitter) {
 		this.submitter = submitter;
 	}
 
