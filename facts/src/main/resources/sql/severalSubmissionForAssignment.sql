@@ -1,0 +1,1 @@
+SELECT submissionId, comment, submissionStatus, creationTime, assignmentId, username FROM submission WHERE assignmentId = :assignmentId

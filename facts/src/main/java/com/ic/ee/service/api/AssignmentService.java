@@ -11,7 +11,9 @@ import com.ic.ee.domain.course.assignment.Assignment;
 
 public interface AssignmentService {
 
-	public Assignment getAssignment(Integer assignmentId, boolean lite);
+	public Assignment getLiteAssignment(Integer assignmentId);
+
+	public Assignment getAssignment(Integer assignmentId);
 
 	public Assignment createAssignment(Integer courseId, Assignment assignment);
 

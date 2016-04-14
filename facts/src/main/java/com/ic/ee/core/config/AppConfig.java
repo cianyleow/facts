@@ -162,7 +162,7 @@ public class AppConfig {
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {
-		return new SimpleAssignmentService(assignmentDAO(), markComponentDAO(), fileRequirementDAO(), fileDAO(), markComponentService(), fileRequirementService(), fileService());
+		return new SimpleAssignmentService(assignmentDAO(), markComponentDAO(), fileRequirementDAO(), submissionDAO(), fileDAO(), courseDAO(), fileService());
 	}
 
 	@Bean AuthUserService authUserService() throws IOException {

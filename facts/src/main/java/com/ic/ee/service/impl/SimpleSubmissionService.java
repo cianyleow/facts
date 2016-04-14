@@ -52,7 +52,7 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setCreationTime(new Date());
 
 		// Get assignment
-		Assignment assignment = assignmentService.getAssignment(assignmentId, false);
+		Assignment assignment = assignmentService.getAssignment(assignmentId);
 
 		// Compare dueTime and creationTime to determine status of submission.
 		if(submission.getCreationTime().before(assignment.getDueTime())) {

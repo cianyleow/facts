@@ -43,22 +43,22 @@ public class AssignmentController {
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId, true);
+		return assignmentService.getLiteAssignment(assignmentId);
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
 	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId, false).getRequiredFiles();
+		return assignmentService.getAssignment(assignmentId).getRequiredFiles();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/markComponents", method = RequestMethod.GET)
 	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId, false).getMarkComponents();
+		return assignmentService.getAssignment(assignmentId).getMarkComponents();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)
 	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId, false).getSuppliedFiles();
+		return assignmentService.getAssignment(assignmentId).getSuppliedFiles();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.POST)
