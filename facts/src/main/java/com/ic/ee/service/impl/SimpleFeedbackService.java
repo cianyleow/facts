@@ -1,6 +1,7 @@
 package com.ic.ee.service.impl;
 
 import com.ic.ee.core.dao.api.FeedbackDAO;
+import com.ic.ee.core.dao.api.MarkDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
@@ -15,9 +16,12 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	private final SubmissionDAO submissionDAO;
 
-	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO) {
+	private final MarkDAO markDAO;
+
+	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO, MarkDAO markDAO) {
 		this.feedbackDAO = feedbackDAO;
 		this.submissionDAO = submissionDAO;
+		this.markDAO = markDAO;
 	}
 
 	@Override
@@ -55,7 +59,7 @@ public class SimpleFeedbackService implements FeedbackService {
 		feedback.setSubmission(submissionDAO.one(feedback.getSubmission().getSubmissionId()));
 
 		// Decorate marks
-
+		feedback.setMarks(markDAO.getMarks(feedback));
 
 		// Decorate comments
 	}

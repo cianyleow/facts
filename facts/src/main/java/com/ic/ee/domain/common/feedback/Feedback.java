@@ -1,5 +1,6 @@
 package com.ic.ee.domain.common.feedback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -72,7 +73,14 @@ public class Feedback {
 	}
 
 	public void setMarks(List<Mark> marks) {
-		this.marks = marks;
+		if(marks == null) {
+			this.marks = new ArrayList<Mark>();
+		} else {
+			this.marks = marks;
+			for(Mark mark : this.marks) {
+				mark.setFeedback(this);
+			}
+		}
 	}
 
 	public MarkStatus getMarkStatus() {

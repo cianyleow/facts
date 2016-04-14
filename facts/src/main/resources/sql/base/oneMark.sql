@@ -1,0 +1,1 @@
+SELECT markId, markComponentId, feedbackId, mark, marker FROM mark WHERE markId = :id
