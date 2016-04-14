@@ -27,7 +27,7 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO implements Submission
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("assignmentId", assignmentId);
 		paramSource.addValue("username", username);
-		paramSource.addValue("submissionStatus", "CREATED" /*submission.getSubmissionStatus().toString()*/);
+		paramSource.addValue("submissionStatus", submission.getSubmissionStatus().toString());
 		paramSource.addValue("comment", submission.getComment());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);

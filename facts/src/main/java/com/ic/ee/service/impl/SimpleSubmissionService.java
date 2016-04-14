@@ -25,6 +25,7 @@ import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.common.file.SubmissionFile;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
+import com.ic.ee.domain.course.assignment.submission.SubmissionStatus;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
@@ -53,8 +54,17 @@ public class SimpleSubmissionService implements SubmissionService {
 		// Generate submission creation time - before file uploads, to avoid slow internet issues
 		submission.setCreationTime(new Date());
 
-		// Get file requirements
+		// Get assignment
 		Assignment assignment = assignmentService.getAssignment(assignmentId, false);
+
+		// Compare dueTime and creationTime to determine status of submission.
+		if(submission.getCreationTime().before(assignment.getDueTime())) {
+			submission.setSubmissionStatus(SubmissionStatus.ONTIME);
+		} else {
+			submission.setSubmissionStatus(SubmissionStatus.LATE);
+		}
+
+		// Get file requirements
 		List<FileRequirement> fileRequirements = assignment.getRequiredFiles();
 
 		// Match all files up with the file requirements and validate - throw error if not complete/incorrect
