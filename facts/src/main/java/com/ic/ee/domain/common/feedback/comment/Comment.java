@@ -2,12 +2,15 @@ package com.ic.ee.domain.common.feedback.comment;
 
 import java.util.Date;
 
+import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 
 public class Comment {
 
-	private Integer feedbackId;
+	private Integer commentId;
+
+	private Feedback feedback;
 
 	private Submission submission;
 
@@ -18,12 +21,20 @@ public class Comment {
 
 	private Marker author;
 
-	public Integer getFeedbackId() {
-		return feedbackId;
+	public Integer getCommentId() {
+		return commentId;
 	}
 
-	public void setFeedbackId(Integer feedbackId) {
-		this.feedbackId = feedbackId;
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 
 	public Submission getSubmission() {

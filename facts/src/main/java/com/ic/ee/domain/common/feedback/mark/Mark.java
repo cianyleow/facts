@@ -1,13 +1,13 @@
 package com.ic.ee.domain.common.feedback.mark;
 
-import com.ic.ee.domain.course.assignment.submission.Submission;
+import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.user.marker.Marker;
 
 public class Mark {
 
 	private Integer markId;
 
-	private Submission submission;
+	private Feedback feedback;
 
 	private MarkComponent markComponent;
 
@@ -25,12 +25,12 @@ public class Mark {
 		this.markId = markId;
 	}
 
-	public Submission getSubmission() {
-		return submission;
+	public Feedback getFeedback() {
+		return feedback;
 	}
 
-	public void setSubmission(Submission submission) {
-		this.submission = submission;
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 
 	public MarkComponent getMarkComponent() {
