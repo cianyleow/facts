@@ -16,7 +16,7 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> implements EnrollmentDAO {
 
 	public JdbcEnrollmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql", "addEnrollment.sql");
+		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql");
 	}
 
 	@Override
