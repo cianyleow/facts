@@ -1,1 +1,1 @@
-SELECT assignmentId, name, description, creationTime, dueTime, openTime FROM assignment WHERE assignmentId IN (:ids)
+SELECT user.username, email, firstName, lastName, studentId, yearOfStudy FROM user JOIN student_information ON user.username = student_information.username WHERE user.username IN (:ids)
