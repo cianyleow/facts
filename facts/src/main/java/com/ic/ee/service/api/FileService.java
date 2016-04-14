@@ -13,7 +13,7 @@ import com.ic.ee.domain.common.file.File;
 
 public interface FileService {
 
-	public DownloadLink getDownloadLink(Integer fileId, String username);
+	public DownloadLink createDownloadLink(Integer fileId, String username);
 
 	public File getFile(Integer fileId);
 

@@ -43,7 +43,7 @@ public class SimpleFileService implements FileService {
 	}
 
 	@Override
-	public DownloadLink getDownloadLink(Integer fileId, String username) {
+	public DownloadLink createDownloadLink(Integer fileId, String username) {
 		File file = getFile(fileId);
 		Date date = new Date();
 		Random rand = new Random();

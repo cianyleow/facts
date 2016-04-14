@@ -26,7 +26,7 @@ public class FileController {
 
 	@RequestMapping(path = "/files/{fileId}/link", method = RequestMethod.GET)
 	public DownloadLink getFileLink(@PathVariable("fileId") Integer fileId, Principal user) {
-		return fileService.getDownloadLink(fileId, user.getName());
+		return fileService.createDownloadLink(fileId, user.getName());
 	}
 
 	@RequestMapping(path = "/files/{link}/download", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
