@@ -9,7 +9,10 @@ import java.util.Map;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ic.ee.core.dao.api.AssignmentDAO;
+import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
+import com.ic.ee.core.dao.api.UserDAO;
 import com.ic.ee.core.validator.SubmissionFileValidator;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
@@ -32,15 +35,25 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final SubmissionDAO submissionDAO;
 
+	private final AssignmentDAO assignmentDAO;
+
+	private final UserDAO userDAO;
+
+	private final FeedbackDAO feedbackDAO;
+
 	private final AssignmentService assignmentService;
 
 	private final FileService fileService;
 
 	private final SubmissionFileValidator submissionFileValidator;
 
-	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentService assignmentService,
-			FileService fileService, SubmissionFileValidator submissionFileValidator) {
+	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, UserDAO userDAO,
+			FeedbackDAO feedbackDAO, AssignmentService assignmentService, FileService fileService,
+			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
+		this.assignmentDAO = assignmentDAO;
+		this.userDAO = userDAO;
+		this.feedbackDAO = feedbackDAO;
 		this.assignmentService = assignmentService;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
@@ -125,6 +138,24 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	@Override
 	public Submission getSubmission(Integer submissionId) {
+		Submission submission = submissionDAO.one(submissionId);
+		decorateSubmission(submission);
+		return submission;
+	}
+
+	@Override
+	public Submission getLiteSubmission(Integer submissionId) {
 		return submissionDAO.one(submissionId);
+	}
+
+	private void decorateSubmission(Submission submission) {
+		// Decorate assignment
+		submission.setAssignment(assignmentDAO.one(submission.getAssignment().getAssignmentId()));
+
+		// Decorate feedback
+		submission.setFeedback(feedbackDAO.getFeedback(submission));
+
+		// Decorate student
+		submission.setSubmitter(userDAO.one(submission.getSubmitter().getUserName()));
 	}
 }

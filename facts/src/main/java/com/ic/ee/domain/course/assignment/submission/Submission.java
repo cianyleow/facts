@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.student.Student;
+import com.ic.ee.domain.user.User;
 
 public class Submission {
 
@@ -24,7 +24,7 @@ public class Submission {
 
 	private Assignment assignment;
 
-	private Student submitter;
+	private User submitter;
 
 	public Submission() {
 		// TODO Auto-generated constructor stub
@@ -43,11 +43,11 @@ public class Submission {
 		this.assignment = assignment;
 	}
 
-	public Student getSubmitter() {
+	public User getSubmitter() {
 		return submitter;
 	}
 
-	public void setSubmitter(Student submitter) {
+	public void setSubmitter(User submitter) {
 		this.submitter = submitter;
 	}
 

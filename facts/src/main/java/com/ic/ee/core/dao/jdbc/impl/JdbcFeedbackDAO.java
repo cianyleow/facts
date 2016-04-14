@@ -11,11 +11,18 @@ import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.jdbc.rowmapper.FeedbackRowMapper;
 import com.ic.ee.domain.common.feedback.Feedback;
+import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> implements FeedbackDAO {
 
 	public JdbcFeedbackDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FeedbackRowMapper(), Feedback.class, "createFeedback.sql");
+		super(dataSource, new FeedbackRowMapper(), Feedback.class, "oneFeedbackForSubmission.sql");
+	}
+
+	@Override
+	public Feedback getFeedback(Submission submission) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submission.getSubmissionId());
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override

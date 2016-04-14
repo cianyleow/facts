@@ -1,1 +1,0 @@
-SELECT feedbackId, submissionId, commentStatus, markStatus, marker FROM feedback WHERE feedbackId IN (:feedbackIds)
