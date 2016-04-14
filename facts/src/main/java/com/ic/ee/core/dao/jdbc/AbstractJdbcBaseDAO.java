@@ -15,7 +15,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public abstract class AbstractJdbcBaseDAO<T, T1> {
+import com.ic.ee.core.dao.BaseDAO;
+
+public abstract class AbstractJdbcBaseDAO<T, T1> implements BaseDAO<T, T1> {
 
 	private final List<String> sqlStatements;
 
@@ -53,14 +55,34 @@ public abstract class AbstractJdbcBaseDAO<T, T1> {
         return stringBuilder.toString();
 	}
 
+	@Override
 	public T one(T1 id) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("id", id);
 		return getJdbcTemplate().queryForObject(oneSqlStatement, paramSource, getRowMapper());
 	}
 
+	@Override
 	public List<T> several(List<T1> ids) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("ids", ids);
 		return getJdbcTemplate().query(severalSqlStatement, paramSource, getRowMapper());
+	}
+
+	@Override
+	public T create(T newObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T update(T updateObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(T1 id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {

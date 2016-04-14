@@ -1,5 +1,8 @@
 package com.ic.ee.core.dao.api;
 
-public interface AcademicPeriodDAO {
+import com.ic.ee.core.dao.BaseDAO;
+import com.ic.ee.domain.common.AcademicPeriod;
+
+public interface AcademicPeriodDAO extends BaseDAO<AcademicPeriod, Integer> {
 
 }

@@ -1,5 +1,8 @@
 package com.ic.ee.core.dao.api;
 
-public interface GroupConstraintDAO {
+import com.ic.ee.core.dao.BaseDAO;
+import com.ic.ee.domain.user.group.constraint.GroupConstraint;
+
+public interface GroupConstraintDAO extends BaseDAO<GroupConstraint, Integer> {
 
 }

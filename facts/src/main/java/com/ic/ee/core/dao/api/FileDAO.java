@@ -2,9 +2,10 @@ package com.ic.ee.core.dao.api;
 
 import java.util.List;
 
+import com.ic.ee.core.dao.BaseDAO;
 import com.ic.ee.domain.common.file.File;
 
-public interface FileDAO {
+public interface FileDAO extends BaseDAO<File, Integer> {
 
 	public File getFile(Integer fileId);
 
