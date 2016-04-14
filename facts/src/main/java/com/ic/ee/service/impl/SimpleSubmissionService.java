@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
+import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.validator.SubmissionFileValidator;
@@ -41,17 +42,20 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final FeedbackDAO feedbackDAO;
 
+	private final FileDAO fileDAO;
+
 	private final FileService fileService;
 
 	private final SubmissionFileValidator submissionFileValidator;
 
 	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, StudentDAO studentDAO,
-			FeedbackDAO feedbackDAO, FileService fileService,
+			FeedbackDAO feedbackDAO, FileDAO fileDAO, FileService fileService,
 			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
 		this.assignmentDAO = assignmentDAO;
 		this.studentDAO = studentDAO;
 		this.feedbackDAO = feedbackDAO;
+		this.fileDAO = fileDAO;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
 	}
@@ -147,6 +151,8 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private void decorateSubmission(Submission submission) {
 		submission.setAssignment(assignmentDAO.one(submission.getAssignment().getAssignmentId()));
+
+		submission.setSubmittedFiles(fileDAO.getFiles(submission));
 
 		try {
 			submission.setFeedback(feedbackDAO.getFeedback(submission));

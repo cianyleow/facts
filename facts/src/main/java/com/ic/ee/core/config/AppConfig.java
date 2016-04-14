@@ -233,7 +233,7 @@ public class AppConfig {
 
 	@Bean
 	SubmissionService submissionService() throws IOException, NoSuchAlgorithmException {
-		return new SimpleSubmissionService(submissionDAO(), assignmentDAO(), studentDAO(), feedbackDAO(), fileService(), submissionFileValidator());
+		return new SimpleSubmissionService(submissionDAO(), assignmentDAO(), studentDAO(), feedbackDAO(), fileDAO(), fileService(), submissionFileValidator());
 	}
 
 	@Bean

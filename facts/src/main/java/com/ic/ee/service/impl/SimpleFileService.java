@@ -1,7 +1,6 @@
 package com.ic.ee.service.impl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -75,10 +74,5 @@ public class SimpleFileService implements FileService {
 
 		// Get fileId and decorate created file
 		return fileDAO.create(createdFile);
-	}
-
-	@Override
-	public List<File> getSubmissionFiles(Integer submissionId) {
-		return fileDAO.getSubmissionFiles(submissionId);
 	}
 }

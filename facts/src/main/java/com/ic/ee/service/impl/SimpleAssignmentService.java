@@ -118,7 +118,7 @@ public class SimpleAssignmentService implements AssignmentService {
 		assignment.setMarkComponents(markComponentDAO.getMarkComponents(assignment.getAssignmentId()));
 
 		// Decorate suppliedFiles
-		assignment.setSuppliedFiles(fileDAO.getAssignmentFiles(assignment.getAssignmentId()));
+		assignment.setSuppliedFiles(fileDAO.getFiles(assignment));
 
 		// Decorate requiredFiles
 		assignment.setRequiredFiles(fileRequirementDAO.getFileRequirements(assignment.getAssignmentId()));
