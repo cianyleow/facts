@@ -12,10 +12,6 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public class Assignment {
 
-	public Assignment() {
-		// TODO Auto-generated constructor stub
-	}
-
 	private Integer assignmentId;
 
 	private String name;
@@ -34,7 +30,11 @@ public class Assignment {
 
 	private List<Submission> submissions;
 
-	private Course parentCourse;
+	private Course course;
+
+	public Assignment() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Assignment(Integer assignmentId) {
 		this.assignmentId = assignmentId;
@@ -50,12 +50,12 @@ public class Assignment {
 	}
 
 	@JsonIgnore
-	public Course getParentCourse() {
-		return parentCourse;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setParentCourse(Course parentCourse) {
-		this.parentCourse = parentCourse;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@JsonIgnore
