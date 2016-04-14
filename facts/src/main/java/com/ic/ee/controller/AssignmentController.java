@@ -69,6 +69,6 @@ public class AssignmentController {
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
 	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);
-		return submissionService.createSubmission(assignmentId, submission, files, "cyl312"/*user.getName()*/);
+		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
 	}
 }
