@@ -21,7 +21,6 @@ import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
 
@@ -78,9 +77,7 @@ public class SimpleAssignmentService implements AssignmentService {
 		List<MarkComponent> markComponents = new ArrayList<MarkComponent>();
 		for(MarkComponent markComponent : assignment.getMarkComponents()) {
 			markComponent.setAssignment(assignment);
-			MarkComponent _markComponent = markComponentDAO.create(markComponent);
-			_markComponent.setAssignment(assignment);
-			markComponents.add(_markComponent);
+			markComponents.add(markComponentDAO.create(markComponent));
 		}
 		assignment.setMarkComponents(markComponents);
 
@@ -88,9 +85,7 @@ public class SimpleAssignmentService implements AssignmentService {
 		List<FileRequirement> requiredFiles = new ArrayList<FileRequirement>();
 		for(FileRequirement requiredFile : assignment.getRequiredFiles()) {
 			requiredFile.setAssignment(assignment);
-			FileRequirement _requiredFile = fileRequirementDAO.create(requiredFile);
-			_requiredFile.setAssignment(assignment);
-			requiredFiles.add(_requiredFile);
+			requiredFiles.add(fileRequirementDAO.create(requiredFile));
 		}
 		assignment.setRequiredFiles(requiredFiles);
 
@@ -117,27 +112,15 @@ public class SimpleAssignmentService implements AssignmentService {
 		assignment.setCourse(course);
 
 		// Decorate markComponents
-		List<MarkComponent> markComponents = markComponentDAO.getMarkComponents(assignment.getAssignmentId());
-		for(MarkComponent markComponent : markComponents) {
-			markComponent.setAssignment(assignment);
-		}
-		assignment.setMarkComponents(markComponents);
+		assignment.setMarkComponents(markComponentDAO.getMarkComponents(assignment.getAssignmentId()));
 
 		// Decorate suppliedFiles
-		List<File> suppliedFiles = fileDAO.getAssignmentFiles(assignment.getAssignmentId());
-		assignment.setSuppliedFiles(suppliedFiles);
+		assignment.setSuppliedFiles(fileDAO.getAssignmentFiles(assignment.getAssignmentId()));
 
 		// Decorate requiredFiles
-		List<FileRequirement> fileRequirements = fileRequirementDAO.getFileRequirements(assignment.getAssignmentId());
-		for(FileRequirement fileRequirement : fileRequirements) {
-			fileRequirement.setAssignment(assignment);
-		}
-		assignment.setRequiredFiles(fileRequirements);
+		assignment.setRequiredFiles(fileRequirementDAO.getFileRequirements(assignment.getAssignmentId()));
 
 		// Decorate submissions
-		List<Submission> submissions = submissionDAO.getSubmissions(assignment);
-		for(Submission submission : submissions) {
-			submission.setAssignment(assignment);
-		}
+		assignment.setSubmissions(submissionDAO.getSubmissions(assignment));
 	}
 }

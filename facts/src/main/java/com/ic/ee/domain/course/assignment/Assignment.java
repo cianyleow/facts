@@ -1,5 +1,6 @@
 package com.ic.ee.domain.course.assignment;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +47,14 @@ public class Assignment {
 	}
 
 	public void setSubmissions(List<Submission> submissions) {
-		this.submissions = submissions;
+		if(submissions == null) {
+			this.submissions = new ArrayList<Submission>();
+		} else {
+			this.submissions = submissions;
+			for(Submission submission : submissions) {
+				submission.setAssignment(this);
+			}
+		}
 	}
 
 	@JsonIgnore
@@ -64,7 +72,14 @@ public class Assignment {
 	}
 
 	public void setRequiredFiles(List<FileRequirement> requiredFiles) {
-		this.requiredFiles = requiredFiles;
+		if(requiredFiles == null) {
+			this.requiredFiles = new ArrayList<FileRequirement>();
+		} else {
+			this.requiredFiles = requiredFiles;
+			for(FileRequirement requiredFile : requiredFiles) {
+				requiredFile.setAssignment(this);
+			}
+		}
 	}
 
 	@JsonIgnore
@@ -73,7 +88,14 @@ public class Assignment {
 	}
 
 	public void setMarkComponents(List<MarkComponent> markComponents) {
-		this.markComponents = markComponents;
+		if(markComponents == null) {
+			this.markComponents = new ArrayList<MarkComponent>();
+		} else {
+			this.markComponents = markComponents;
+			for(MarkComponent markComponent : markComponents) {
+				markComponent.setAssignment(this);
+			}
+		}
 	}
 
 	@JsonIgnore
