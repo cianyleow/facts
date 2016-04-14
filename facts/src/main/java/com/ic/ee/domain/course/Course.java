@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.User;
+import com.ic.ee.domain.user.courseowner.CourseOwner;
 
 public class Course {
 
@@ -23,7 +24,7 @@ public class Course {
 
 	private List<User> markers;
 
-	private User courseOwner;
+	private List<CourseOwner> courseOwners;
 
 	private List<Enrollment> enrollments;
 
@@ -50,12 +51,12 @@ public class Course {
 	}
 
 	@JsonIgnore
-	public User getCourseOwner() {
-		return courseOwner;
+	public List<CourseOwner> getCourseOwners() {
+		return courseOwners;
 	}
 
-	public void setCourseOwner(User courseOwner) {
-		this.courseOwner = courseOwner;
+	public void setCourseOwners(List<CourseOwner> courseOwners) {
+		this.courseOwners = courseOwners;
 	}
 
 	public Integer getCourseId() {

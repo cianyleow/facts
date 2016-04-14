@@ -14,6 +14,7 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.User;
+import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
 
@@ -49,8 +50,8 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
-	public User getCourseOwner(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId).getCourseOwner();
+	public List<CourseOwner> getCourseOwner(@PathVariable("courseId") Integer courseId) {
+		return courseService.getCourse(courseId).getCourseOwners();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
