@@ -7,7 +7,5 @@ import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 
 public interface MarkComponentDAO extends BaseDAO<MarkComponent, Integer> {
 
-	public Integer createMarkComponent(Integer assignmentId, MarkComponent markComponent);
-
 	public List<MarkComponent> getMarkComponents(Integer assignmentId);
 }

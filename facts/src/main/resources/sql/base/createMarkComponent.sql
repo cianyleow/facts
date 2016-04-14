@@ -1,1 +1,11 @@
-SELECT markComponentId, maxMark, name, description FROM mark_component WHERE markComponentId = :id
+INSERT INTO mark_component
+(assignmentId,
+maxMark,
+name,
+description
+) VALUES (
+:assignmentId,
+:maxMark,
+:name, 
+:description
+);

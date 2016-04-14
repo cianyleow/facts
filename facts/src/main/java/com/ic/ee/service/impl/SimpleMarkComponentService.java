@@ -25,9 +25,7 @@ public class SimpleMarkComponentService implements MarkComponentService {
 	}
 
 	public MarkComponent createMarkComponent(Integer assignmentId, MarkComponent markComponent) {
-		Integer markComponentId = markComponentDAO.createMarkComponent(assignmentId, markComponent);
-		markComponent.setMarkComponentId(markComponentId);
-		return markComponent;
+		return markComponentDAO.create(markComponent);
 	}
 
 }
