@@ -25,13 +25,13 @@ public class JdbcUserDAO extends AbstractJdbcBaseDAO<User, String> implements Us
 	}
 
 	@Override
-	public String extractKey(KeyHolder keyHolder) {
+	public String extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getKey(User object) {
+	public String getId(User object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

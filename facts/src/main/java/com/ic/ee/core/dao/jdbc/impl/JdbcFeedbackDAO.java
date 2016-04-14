@@ -36,12 +36,12 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Feedback object) {
+	public Integer getId(Feedback object) {
 		return object.getFeedbackId();
 	}
 }

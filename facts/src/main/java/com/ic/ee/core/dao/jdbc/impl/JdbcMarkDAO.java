@@ -38,12 +38,12 @@ public class JdbcMarkDAO extends AbstractJdbcBaseDAO<Mark, Integer> implements M
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Mark object) {
+	public Integer getId(Mark object) {
 		return object.getMarkId();
 	}
 

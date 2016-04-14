@@ -36,12 +36,12 @@ public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Int
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(MarkComponent object) {
+	public Integer getId(MarkComponent object) {
 		return object.getMarkComponentId();
 	}
 

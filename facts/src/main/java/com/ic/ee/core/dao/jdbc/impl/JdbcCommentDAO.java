@@ -37,12 +37,12 @@ public class JdbcCommentDAO extends AbstractJdbcBaseDAO<Comment, Integer> implem
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Comment object) {
+	public Integer getId(Comment object) {
 		return object.getCommentId();
 	}
 

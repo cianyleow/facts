@@ -46,12 +46,12 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Submission object) {
+	public Integer getId(Submission object) {
 		return object.getSubmissionId();
 	}
 }

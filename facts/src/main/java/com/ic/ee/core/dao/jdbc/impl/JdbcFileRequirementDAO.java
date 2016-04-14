@@ -38,12 +38,12 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement,
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(FileRequirement object) {
+	public Integer getId(FileRequirement object) {
 		return object.getFileRequirementId();
 	}
 }

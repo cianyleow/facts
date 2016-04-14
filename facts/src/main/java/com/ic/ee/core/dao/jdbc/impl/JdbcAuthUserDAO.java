@@ -27,13 +27,13 @@ public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO<AuthUser, String> imple
 	}
 
 	@Override
-	public String extractKey(KeyHolder keyHolder) {
+	public String extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getKey(AuthUser object) {
+	public String getId(AuthUser object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

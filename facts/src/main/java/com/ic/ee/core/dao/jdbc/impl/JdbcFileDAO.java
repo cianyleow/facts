@@ -72,12 +72,12 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(File object) {
+	public Integer getId(File object) {
 		return object.getFileId();
 	}
 }

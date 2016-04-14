@@ -35,12 +35,12 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Enrollment object) {
+	public Integer getId(Enrollment object) {
 		return object.getEnrollmentId();
 	}
 

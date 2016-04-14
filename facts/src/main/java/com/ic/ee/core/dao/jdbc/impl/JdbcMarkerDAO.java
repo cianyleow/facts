@@ -29,13 +29,13 @@ public class JdbcMarkerDAO extends AbstractJdbcBaseDAO<Marker, String> implement
 	}
 
 	@Override
-	public String extractKey(KeyHolder keyHolder) {
+	public String extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getKey(Marker object) {
+	public String getId(Marker object) {
 		return object.getUserName();
 	}
 }

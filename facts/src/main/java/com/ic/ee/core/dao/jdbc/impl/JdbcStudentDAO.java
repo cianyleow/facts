@@ -30,13 +30,13 @@ public class JdbcStudentDAO extends AbstractJdbcBaseDAO<Student, String> impleme
 	}
 
 	@Override
-	public String extractKey(KeyHolder keyHolder) {
+	public String extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getKey(Student object) {
+	public String getId(Student object) {
 		return object.getUserName();
 	}
 

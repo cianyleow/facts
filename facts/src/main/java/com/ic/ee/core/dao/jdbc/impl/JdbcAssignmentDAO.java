@@ -49,12 +49,12 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Integer getKey(Assignment object) {
+	public Integer getId(Assignment object) {
 		return object.getAssignmentId();
 	}
 }

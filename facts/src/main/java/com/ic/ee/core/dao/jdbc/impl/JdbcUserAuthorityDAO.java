@@ -33,13 +33,13 @@ public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, Str
 	}
 
 	@Override
-	public String extractKey(KeyHolder keyHolder) {
+	public String extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getKey(UserAuthority object) {
+	public String getId(UserAuthority object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

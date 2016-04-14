@@ -60,13 +60,13 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	}
 
 	@Override
-	public Integer extractKey(KeyHolder keyHolder) {
+	public Integer extractId(KeyHolder keyHolder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer getKey(Course object) {
+	public Integer getId(Course object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
