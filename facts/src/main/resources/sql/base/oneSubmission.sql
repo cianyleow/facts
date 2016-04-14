@@ -1,1 +1,1 @@
-SELECT submissionId, comment, submissionStatus, creationTime FROM submission WHERE submissionId = :id
+SELECT submissionId, comment, submissionStatus, creationTime, assignmentId, username FROM submission WHERE submissionId = :id

@@ -30,7 +30,7 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 	@Override
 	public MapSqlParameterSource getSqlParameterSource(Submission object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("assignmentId", object.getParentAssignment().getAssignmentId());
+		paramSource.addValue("assignmentId", object.getAssignment().getAssignmentId());
 		paramSource.addValue("username", object.getSubmitter().getUserName());
 		paramSource.addValue("submissionStatus", object.getSubmissionStatus().toString());
 		paramSource.addValue("comment", object.getComment());

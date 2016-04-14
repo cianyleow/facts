@@ -1,1 +1,1 @@
-SELECT submissionId, comment, submissionStatus, creationTime FROM submission WHERE submissionId IN (:ids)
+SELECT submissionId, comment, submissionStatus, creationTime, assignmentId, username FROM submission WHERE submissionId IN (:ids)

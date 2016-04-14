@@ -76,7 +76,7 @@ public class SimpleSubmissionService implements SubmissionService {
 		}
 
 		// Decorate submission with details
-		submission.setParentAssignment(assignment);
+		submission.setAssignment(assignment);
 
 		// Create submission
 		submission = submissionDAO.create(submission);

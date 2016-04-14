@@ -22,7 +22,7 @@ public class Submission {
 
 	private Feedback feedback;
 
-	private Assignment parentAssignment;
+	private Assignment assignment;
 
 	private Student submitter;
 
@@ -35,12 +35,12 @@ public class Submission {
 	}
 
 	@JsonIgnore
-	public Assignment getParentAssignment() {
-		return parentAssignment;
+	public Assignment getAssignment() {
+		return assignment;
 	}
 
-	public void setParentAssignment(Assignment parentAssignment) {
-		this.parentAssignment = parentAssignment;
+	public void setAssignment(Assignment assignment) {
+		this.assignment = assignment;
 	}
 
 	public Student getSubmitter() {
