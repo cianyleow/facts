@@ -28,9 +28,7 @@ public class SimpleFeedbackService implements FeedbackService {
 		Feedback feedback = new Feedback();
 		feedback.setSubmission(new Submission(submissionId));
 
-		Marker marker = new Marker();
-		marker.setUserName(username);
-		feedback.setMarker(marker);
+		feedback.setMarker(new Marker(username));
 
 		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
 		feedback.setMarkStatus(MarkStatus.MARKS_PENDING);
