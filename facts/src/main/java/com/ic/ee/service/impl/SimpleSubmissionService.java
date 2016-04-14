@@ -75,14 +75,17 @@ public class SimpleSubmissionService implements SubmissionService {
 			throw new SubmissionFileValidationException(errors.getAllErrors());
 		}
 
+		// Decorate submission with details
+		submission.setParentAssignment(assignment);
+
 		// Create submission
-		Integer submissionId = submissionDAO.createSubmission(assignmentId, username, submission);
+		submission = submissionDAO.create(submission);
 
 		// Attach files to submission
-		createSubmissionFiles(submissionId, files, username);
+		createSubmissionFiles(submission.getSubmissionId(), files, username);
 
 		// Return decorated submission from DB with submission ID
-		return getSubmission(submissionId);
+		return submission;
 	}
 
 	private void createSubmissionFiles(Integer submissionId, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {

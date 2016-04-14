@@ -1,1 +1,11 @@
-SELECT submissionId, comment, submissionStatus, creationTime FROM submission WHERE submissionId = :id
+INSERT INTO submission (
+assignmentId,
+username,
+comment,
+submissionStatus
+) VALUES (
+:assignmentId, 
+:username,
+:comment,
+:submissionStatus
+);

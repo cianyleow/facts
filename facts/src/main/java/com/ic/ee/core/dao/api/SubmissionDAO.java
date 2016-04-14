@@ -5,8 +5,6 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public interface SubmissionDAO extends BaseDAO<Submission, Integer> {
 
-	public Integer createSubmission(Integer assignmentId, String username, Submission submission);
-
 	public void createSubmissionFile(Integer submissionId, Integer fileId);
 
 }
