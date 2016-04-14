@@ -27,7 +27,6 @@ import com.ic.ee.domain.common.file.SubmissionFile;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.course.assignment.submission.SubmissionStatus;
-import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
 
@@ -41,20 +40,17 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final FeedbackDAO feedbackDAO;
 
-	private final AssignmentService assignmentService;
-
 	private final FileService fileService;
 
 	private final SubmissionFileValidator submissionFileValidator;
 
 	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, UserDAO userDAO,
-			FeedbackDAO feedbackDAO, AssignmentService assignmentService, FileService fileService,
+			FeedbackDAO feedbackDAO, FileService fileService,
 			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
 		this.assignmentDAO = assignmentDAO;
 		this.userDAO = userDAO;
 		this.feedbackDAO = feedbackDAO;
-		this.assignmentService = assignmentService;
 		this.fileService = fileService;
 		this.submissionFileValidator = submissionFileValidator;
 	}
@@ -65,7 +61,7 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setCreationTime(new Date());
 
 		// Get assignment
-		Assignment assignment = assignmentService.getAssignment(assignmentId);
+		Assignment assignment = assignmentDAO.one(assignmentId);
 
 		// Compare dueTime and creationTime to determine status of submission.
 		if(submission.getCreationTime().before(assignment.getDueTime())) {

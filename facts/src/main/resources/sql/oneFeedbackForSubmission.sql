@@ -1,0 +1,1 @@
+SELECT feedbackId, submissionId, commentStatus, markStatus, marker FROM feedback WHERE submissionId = :submissionId
