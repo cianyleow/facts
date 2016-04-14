@@ -13,7 +13,6 @@ import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.FeedbackService;
-import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
 
 @RestController
@@ -21,9 +20,6 @@ public class SubmissionController {
 
 	@Autowired
 	private SubmissionService submissionService;
-
-	@Autowired
-	private FileService fileService;
 
 	@Autowired
 	private FeedbackService feedbackService;
@@ -35,12 +31,12 @@ public class SubmissionController {
 
 	@RequestMapping(path = "/submissions/{submissionId}/submissionFiles", method = RequestMethod.GET)
 	public List<File> getSubmissionFiles(@PathVariable("submissionId") Integer submissionId) {
-		return fileService.getSubmissionFiles(submissionId);
+		return submissionService.getSubmission(submissionId).getSubmittedFiles();
 	}
 
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.GET)
 	public Feedback getFeedback(@PathVariable("submissionId") Integer submissionId) {
-		return feedbackService.getSubmissionFeedback(submissionId);
+		return submissionService.getSubmission(submissionId).getFeedback();
 	}
 
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.POST)
