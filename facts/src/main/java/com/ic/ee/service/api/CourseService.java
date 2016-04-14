@@ -6,7 +6,9 @@ import com.ic.ee.domain.course.Course;
 
 public interface CourseService {
 
-	public Course getCourse(Integer courseId, boolean lite);
+	public Course getLiteCourse(Integer courseId);
+
+	public Course getCourse(Integer courseId);
 
 	// Always returns lite version
 	public List<Course> getCourses();

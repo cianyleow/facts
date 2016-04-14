@@ -41,7 +41,7 @@ public class CourseController {
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Course getCourse(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId, true);
+		return courseService.getLiteCourse(courseId);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
@@ -51,17 +51,17 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
 	public List<User> getMarkers(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId, true).getMarkers();
+		return courseService.getCourse(courseId).getMarkers();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
 	public User getCourseOwner(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId, true).getCourseOwner();
+		return courseService.getCourse(courseId).getCourseOwner();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
 	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId, false).getAssignments();
+		return courseService.getCourse(courseId).getAssignments();
 	}
 
 

@@ -20,11 +20,14 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Course getCourse(Integer courseId, boolean lite){
+	public Course getLiteCourse(Integer courseId) {
+		return courseDAO.one(courseId);
+	}
+
+	@Override
+	public Course getCourse(Integer courseId){
 		Course course = courseDAO.one(courseId);
-		if(!lite) {
-			decorateCourse(course);
-		}
+		decorateCourse(course);
 		return course;
 	}
 
