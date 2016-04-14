@@ -1,12 +1,10 @@
 package com.ic.ee.core.dao.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
@@ -20,7 +18,7 @@ import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> implements FeedbackDAO {
 
 	public JdbcFeedbackDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FeedbackRowMapper(), Feedback.class, "createFeedback.sql", "getFeedbackByIds.sql");
+		super(dataSource, new FeedbackRowMapper(), Feedback.class, "createFeedback.sql");
 	}
 
 	@Override
@@ -36,9 +34,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	}
 
 	@Override
-	public List<Feedback> getFeedback(List<Integer> feedbackIds) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("feedbackIds", feedbackIds);
-		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+	public Feedback getFeedback(Integer feedbackId) {
+		return one(feedbackId);
 	}
-
 }

@@ -46,7 +46,7 @@ public class SubmissionController {
 	}
 
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.POST)
-	public Feedback createFeedback(@PathVariable("submissionId") Integer submissionId, Principal user) throws NoResultsReturnedException, TooManyResultsReturnedException {
+	public Feedback createFeedback(@PathVariable("submissionId") Integer submissionId, Principal user) {
 		return feedbackService.createFeedback(submissionId, user.getName());
 	}
 }
