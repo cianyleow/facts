@@ -1,1 +1,0 @@
-SELECT assignmentId, name, description, creationTime, dueTime, openTime FROM assignment WHERE assignmentId IN (:assignmentIds)

@@ -1,1 +1,0 @@
-UPDATE course SET (name = :name, description = :description, academicPeriodId = :academicPeriodId WHERE courseId = :courseId;)
