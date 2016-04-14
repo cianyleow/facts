@@ -33,11 +33,6 @@ public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Int
 	}
 
 	@Override
-	public MarkComponent getMarkComponent(Integer markComponentId) {
-		return one(markComponentId);
-	}
-
-	@Override
 	public List<MarkComponent> getMarkComponents(Integer assignmentId) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());

@@ -39,9 +39,4 @@ public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement,
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
-
-	@Override
-	public FileRequirement getFileRequirement(Integer fileRequirementId) {
-		return one(fileRequirementId);
-	}
 }

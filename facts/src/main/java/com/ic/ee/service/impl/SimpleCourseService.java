@@ -22,7 +22,7 @@ public class SimpleCourseService implements CourseService {
 
 	@Override
 	public Course getCourse(Integer courseId, boolean lite){
-		Course course = courseDAO.getCourse(courseId);
+		Course course = courseDAO.one(courseId);
 		if(!lite) {
 			decorateCourse(course);
 		}

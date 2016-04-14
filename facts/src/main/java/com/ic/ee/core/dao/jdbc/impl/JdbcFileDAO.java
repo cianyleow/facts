@@ -25,11 +25,6 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 	}
 
 	@Override
-	public File getFile(Integer fileId) {
-		return one(fileId);
-	}
-
-	@Override
 	public Integer addDownloadLink(File file, String hash, String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("fileId", file.getFileId());

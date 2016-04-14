@@ -24,11 +24,6 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 	}
 
 	@Override
-	public Assignment getAssignment(Integer assignmentId) {
-		return one(assignmentId);
-	}
-
-	@Override
 	public List<Assignment> getAssignments(Integer courseId) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("courseId", courseId);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());

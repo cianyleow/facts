@@ -42,11 +42,6 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 //	}
 
 	@Override
-	public Course getCourse(Integer courseId) {
-		return one(courseId);
-	}
-
-	@Override
 	public List<Course> getCourses() {
 		return getJdbcTemplate().query(getSqlStatements().get(0), getRowMapper());
 	}

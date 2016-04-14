@@ -9,7 +9,5 @@ public interface MarkComponentDAO extends BaseDAO<MarkComponent, Integer> {
 
 	public Integer createMarkComponent(Integer assignmentId, MarkComponent markComponent);
 
-	public MarkComponent getMarkComponent(Integer markComponentId);
-
 	public List<MarkComponent> getMarkComponents(Integer assignmentId);
 }

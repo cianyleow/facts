@@ -51,7 +51,7 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	@Override
 	public Assignment getAssignment(Integer assignmentId, boolean lite) {
-		Assignment assignment = assignmentDAO.getAssignment(assignmentId);
+		Assignment assignment = assignmentDAO.one(assignmentId);
 		if(!lite) {
 			decorateAssignment(assignment);
 		}

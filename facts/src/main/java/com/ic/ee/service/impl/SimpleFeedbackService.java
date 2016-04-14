@@ -24,7 +24,7 @@ public class SimpleFeedbackService implements FeedbackService {
 		Integer feedbackId = feedbackDAO.createFeedback(submissionId, username);
 
 		// Return object, without decorations
-		return feedbackDAO.getFeedback(feedbackId);
+		return feedbackDAO.one(feedbackId);
 	}
 
 }

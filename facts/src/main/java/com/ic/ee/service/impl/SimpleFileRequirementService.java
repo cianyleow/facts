@@ -32,7 +32,7 @@ public class SimpleFileRequirementService implements FileRequirementService {
 
 	@Override
 	public FileRequirement getFileRequirement(Integer fileRequirementId) {
-		return fileRequirementDAO.getFileRequirement(fileRequirementId);
+		return fileRequirementDAO.one(fileRequirementId);
 	}
 
 }

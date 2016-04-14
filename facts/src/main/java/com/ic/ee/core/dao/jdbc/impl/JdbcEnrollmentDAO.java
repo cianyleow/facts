@@ -21,11 +21,6 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 	}
 
 	@Override
-	public Enrollment getEnrollment(Integer enrollmentId) {
-		return one(enrollmentId);
-	}
-
-	@Override
 	public List<Enrollment> getEnrollments(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());

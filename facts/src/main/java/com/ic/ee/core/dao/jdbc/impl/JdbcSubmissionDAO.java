@@ -33,11 +33,6 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 	}
 
 	@Override
-	public Submission getSubmission(Integer submissionId) {
-		return one(submissionId);
-	}
-
-	@Override
 	public void createSubmissionFile(Integer submissionId, Integer fileId) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("submissionId", submissionId);

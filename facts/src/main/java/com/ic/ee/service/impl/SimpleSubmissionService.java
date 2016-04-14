@@ -122,6 +122,6 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	@Override
 	public Submission getSubmission(Integer submissionId) {
-		return submissionDAO.getSubmission(submissionId);
+		return submissionDAO.one(submissionId);
 	}
 }

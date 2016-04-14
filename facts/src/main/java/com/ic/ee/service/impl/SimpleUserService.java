@@ -14,6 +14,6 @@ public class SimpleUserService implements UserService {
 
 	@Override
 	public User getUser(String username) {
-		return userDAO.getUser(username);
+		return userDAO.one(username);
 	}
 }

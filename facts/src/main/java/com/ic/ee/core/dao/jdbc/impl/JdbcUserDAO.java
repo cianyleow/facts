@@ -14,9 +14,4 @@ public class JdbcUserDAO extends AbstractJdbcBaseDAO<User, String> implements Us
 	public JdbcUserDAO(DataSource dataSource) throws IOException {
 		super(dataSource, new UserRowMapper(), User.class);
 	}
-
-	@Override
-	public User getUser(String username) {
-		return one(username);
-	}
 }

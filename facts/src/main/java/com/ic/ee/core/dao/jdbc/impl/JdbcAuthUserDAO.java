@@ -17,9 +17,4 @@ public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO<AuthUser, String> imple
 	public JdbcAuthUserDAO(DataSource dataSource) throws IOException {
 		super(dataSource, new AuthUserRowMapper(), AuthUser.class);
 	}
-
-	@Override
-	public AuthUser getAuthUser(String username) {
-		return one(username);
-	}
 }

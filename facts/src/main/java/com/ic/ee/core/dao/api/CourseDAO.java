@@ -7,8 +7,6 @@ import com.ic.ee.domain.course.Course;
 
 public interface CourseDAO extends BaseDAO<Course, Integer> {
 
-	public Course getCourse(Integer courseId);
-
 	public List<Course> getCourses();
 
 	public List<Course> getCourses(String username);

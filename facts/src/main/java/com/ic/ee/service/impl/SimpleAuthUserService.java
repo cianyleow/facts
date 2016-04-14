@@ -21,7 +21,7 @@ public class SimpleAuthUserService implements AuthUserService {
 
 	@Override
 	public AuthUser getAuthUser(String username) {
-		AuthUser authUser = authUserDAO.getAuthUser(username);
+		AuthUser authUser = authUserDAO.one(username);
 
 		// Decorate authUser with user authorities.
 		decorateAuthUserWithAuthorities(authUser);

@@ -32,9 +32,4 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
-
-	@Override
-	public Feedback getFeedback(Integer feedbackId) {
-		return one(feedbackId);
-	}
 }

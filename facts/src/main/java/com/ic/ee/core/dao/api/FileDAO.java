@@ -7,8 +7,6 @@ import com.ic.ee.domain.common.file.File;
 
 public interface FileDAO extends BaseDAO<File, Integer> {
 
-	public File getFile(Integer fileId);
-
 	public List<File> getSubmissionFiles(Integer submissionId);
 
 	public List<File> getAssignmentFiles(Integer assignmentId);

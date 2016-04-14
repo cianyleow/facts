@@ -7,8 +7,6 @@ import com.ic.ee.domain.common.file.FileRequirement;
 
 public interface FileRequirementDAO extends BaseDAO<FileRequirement, Integer> {
 
-	public FileRequirement getFileRequirement(Integer fileRequirementId);
-
 	public Integer createFileRequirement(Integer assignmentId, FileRequirement fileRequirement);
 
 	public List<FileRequirement> getFileRequirements(Integer assignmentId);
