@@ -5,8 +5,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.User;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
+import com.ic.ee.domain.user.marker.Marker;
 
 public class Course {
 
@@ -22,7 +22,7 @@ public class Course {
 
 	private List<Assignment> assignments;
 
-	private List<User> markers;
+	private List<Marker> markers;
 
 	private List<CourseOwner> courseOwners;
 
@@ -33,11 +33,11 @@ public class Course {
 	}
 
 	@JsonIgnore
-	public List<User> getMarkers() {
+	public List<Marker> getMarkers() {
 		return markers;
 	}
 
-	public void setMarkers(List<User> markers) {
+	public void setMarkers(List<Marker> markers) {
 		this.markers = markers;
 	}
 

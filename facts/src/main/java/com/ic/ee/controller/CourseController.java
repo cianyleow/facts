@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.User;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
+import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
 
@@ -45,7 +45,7 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
-	public List<User> getMarkers(@PathVariable("courseId") Integer courseId) {
+	public List<Marker> getMarkers(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getMarkers();
 	}
 
