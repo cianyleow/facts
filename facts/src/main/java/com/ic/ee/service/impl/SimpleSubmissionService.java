@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,13 +146,14 @@ public class SimpleSubmissionService implements SubmissionService {
 	}
 
 	private void decorateSubmission(Submission submission) {
-		// Decorate assignment
 		submission.setAssignment(assignmentDAO.one(submission.getAssignment().getAssignmentId()));
 
-		// Decorate feedback
-		submission.setFeedback(feedbackDAO.getFeedback(submission));
+		try {
+			submission.setFeedback(feedbackDAO.getFeedback(submission));
+		} catch(EmptyResultDataAccessException erdae) {
+			// this happens occasionally, need to figure out how to make this OK
+		}
 
-		// Decorate student
 		submission.setSubmitter(studentDAO.one(submission.getSubmitter().getUserName()));
 	}
 }
