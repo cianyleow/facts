@@ -23,17 +23,17 @@ public class EnrollmentController {
 		return enrollmentService.getEnrollments(username);
 	}
 
-	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.GET)
+	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.GET)
 	public Enrollment getEnrollment(@PathVariable("enrollmentId") Integer enrollmentId) {
 		return enrollmentService.getEnrollment(enrollmentId);
 	}
 
-	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.PUT)
+	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.PUT)
 	public void updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment) {
 		enrollmentService.updateEnrollment(enrollmentId, enrollment);
 	}
 
-	@RequestMapping(path = "/enrollments/{enrollmentId}/details", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.DELETE)
 	public void deleteEnrollment(@PathVariable("enrollmentId") Integer enrollmentId) {
 		enrollmentService.deleteEnrollment(enrollmentId);
 	}
