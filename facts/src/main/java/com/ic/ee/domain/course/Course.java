@@ -3,6 +3,7 @@ package com.ic.ee.domain.course;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.User;
 
@@ -23,6 +24,8 @@ public class Course {
 	private List<User> markers;
 
 	private User courseOwner;
+
+	private List<Enrollment> enrollments;
 
 	public Course(Integer courseId) {
 		this.courseId = courseId;
@@ -85,5 +88,14 @@ public class Course {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@JsonIgnore
+	public List<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+
+	public void setEnrollments(List<Enrollment> enrollments) {
+		this.enrollments = enrollments;
 	}
 }
