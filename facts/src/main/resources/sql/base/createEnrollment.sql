@@ -1,1 +1,1 @@
-SELECT enrollmentId, username, courseId, enrollmentLevel, updateTime FROM enrollment WHERE enrollmentId = :id
+INSERT INTO enrollment (username, courseId, enrollmentLevel) VALUES (:username, :courseId, :enrollmentLevel)
