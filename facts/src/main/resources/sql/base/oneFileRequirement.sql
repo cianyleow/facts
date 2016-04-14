@@ -1,1 +1,1 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE fileRequirementId = :id
+SELECT fileRequirementId, fileName, maxFileSize, allowedExtension, assignmentId FROM file_requirement WHERE fileRequirementId = :id
