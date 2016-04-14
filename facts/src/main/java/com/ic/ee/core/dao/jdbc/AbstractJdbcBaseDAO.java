@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.BaseDAO;
 
@@ -24,6 +26,12 @@ public abstract class AbstractJdbcBaseDAO<T, T1> implements BaseDAO<T, T1> {
 	private final String oneSqlStatement;
 
 	private final String severalSqlStatement;
+
+	private final String createSqlStatement;
+
+	private final String updateSqlStatement;
+
+	private final String deleteSqlStatement;
 
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -39,6 +47,9 @@ public abstract class AbstractJdbcBaseDAO<T, T1> implements BaseDAO<T, T1> {
 		String tableName = genericType.getSimpleName();
 		this.oneSqlStatement = readSQLString("base/one" + tableName + ".sql");
 		this.severalSqlStatement = readSQLString("base/several" + tableName + ".sql");
+		this.createSqlStatement = readSQLString("base/create" + tableName + ".sql");
+		this.updateSqlStatement = readSQLString("base/update" + tableName + ".sql");
+		this.deleteSqlStatement = readSQLString("base/delete" + tableName + ".sql");
 
 	}
 
@@ -69,20 +80,30 @@ public abstract class AbstractJdbcBaseDAO<T, T1> implements BaseDAO<T, T1> {
 
 	@Override
 	public T create(T newObject) {
-		// TODO Auto-generated method stub
-		return null;
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		getJdbcTemplate().update(createSqlStatement, getSqlParameterSource(newObject), keyHolder);
+		T1 key = extractKey(keyHolder);
+		return one(key);
 	}
 
 	@Override
 	public T update(T updateObject) {
-		// TODO Auto-generated method stub
-		return null;
+		MapSqlParameterSource sqlParameterSource = getSqlParameterSource(updateObject);
+		sqlParameterSource.addValue("key", getKey(updateObject));
+		getJdbcTemplate().update(updateSqlStatement, sqlParameterSource);
+		return one(getKey(updateObject));
 	}
+
+	public abstract MapSqlParameterSource getSqlParameterSource(T object);
+
+	public abstract T1 extractKey(KeyHolder keyHolder);
+
+	public abstract T1 getKey(T object);
 
 	@Override
 	public boolean delete(T1 id) {
-		// TODO Auto-generated method stub
-		return false;
+		SqlParameterSource paramSource = new MapSqlParameterSource("id", id);
+		return 1 == getJdbcTemplate().update(deleteSqlStatement, paramSource);
 	}
 
 	public NamedParameterJdbcTemplate getJdbcTemplate() {

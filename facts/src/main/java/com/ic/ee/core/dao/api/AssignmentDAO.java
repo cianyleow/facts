@@ -8,9 +8,9 @@ import com.ic.ee.domain.course.assignment.Assignment;
 
 public interface AssignmentDAO extends BaseDAO<Assignment, Integer> {
 
-	public List<Assignment> getAssignments(Integer courseId);
-
 	public Integer createAssignment(Integer courseId, Assignment assignment);
+
+	public List<Assignment> getAssignments(Integer courseId);
 
 	public void createAssignmentFile(Integer assignmentId, File file);
 }

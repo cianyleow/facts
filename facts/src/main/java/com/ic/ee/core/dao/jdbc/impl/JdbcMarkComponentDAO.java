@@ -38,5 +38,25 @@ public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Int
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(MarkComponent object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("assignmentId", "" /* object.getAssignment().getAssignmentId()*/);
+		paramSource.addValue("maxMark", object.getMaxMark());
+		paramSource.addValue("name", object.getName());
+		paramSource.addValue("description", object.getDescription());
+		return paramSource;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public Integer getKey(MarkComponent object) {
+		return object.getMarkComponentId();
+	}
+
 
 }

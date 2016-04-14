@@ -73,4 +73,27 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignmentId);
 		return getJdbcTemplate().query(getSqlStatements().get(5), paramSource, getRowMapper());
 	}
+
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(File object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", object.getName());
+		paramSource.addValue("extension", object.getExtension());
+		paramSource.addValue("hash", object.getHash());
+		paramSource.addValue("location", object.getLocation());
+		paramSource.addValue("size", object.getSize());
+		paramSource.addValue("username", "" /*object.getUser().getUsername()*/);
+		paramSource.addValue("contentType", object.getContentType());
+		return paramSource;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public Integer getKey(File object) {
+		return object.getFileId();
+	}
 }

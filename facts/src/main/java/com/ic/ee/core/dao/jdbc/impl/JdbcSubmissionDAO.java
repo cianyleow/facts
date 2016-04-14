@@ -40,4 +40,24 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 		getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
 
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(Submission object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("assignmentId", object.getParentAssignment().getAssignmentId());
+		paramSource.addValue("username", "" /*object.getSubmitter().getUsername()*/);
+		paramSource.addValue("submissionStatus", object.getSubmissionStatus().toString());
+		paramSource.addValue("comment", object.getComment());
+		return paramSource;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public Integer getKey(Submission object) {
+		return object.getSubmissionId();
+	}
+
 }

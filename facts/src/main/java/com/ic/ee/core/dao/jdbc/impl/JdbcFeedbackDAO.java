@@ -32,4 +32,24 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
 		return keyHolder.getKey().intValue();
 	}
+
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(Feedback object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("submissionId", object.getSubmission().getSubmissionId());
+		paramSource.addValue("commentStatus", CommentStatus.COMMENT_PENDING.toString());
+		paramSource.addValue("markStatus", MarkStatus.MARKS_PENDING.toString());
+		paramSource.addValue("marker", object.getMarker().getUserName());
+		return paramSource;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public Integer getKey(Feedback object) {
+		return object.getFeedbackId();
+	}
 }

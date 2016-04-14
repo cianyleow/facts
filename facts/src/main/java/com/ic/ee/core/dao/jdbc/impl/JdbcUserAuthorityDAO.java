@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
@@ -23,6 +24,24 @@ public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, Str
 	public List<UserAuthority> getUserAuthorities(String username) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("username", username);
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+	}
+
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(UserAuthority object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String extractKey(KeyHolder keyHolder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKey(UserAuthority object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

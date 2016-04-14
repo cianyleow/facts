@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
@@ -50,5 +51,23 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	public List<Course> getCourses(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+	}
+
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(Course object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getKey(Course object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

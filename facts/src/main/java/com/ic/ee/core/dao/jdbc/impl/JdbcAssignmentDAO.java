@@ -49,4 +49,25 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 		paramSource.addValue("fileId", file.getFileId());
 		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
 	}
+
+	@Override
+	public MapSqlParameterSource getSqlParameterSource(Assignment object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("courseId", object.getParentCourse().getCourseId());
+		paramSource.addValue("name", object.getName());
+		paramSource.addValue("description", object.getDescription());
+		paramSource.addValue("dueTime", object.getDueTime());
+		paramSource.addValue("openTime", object.getOpenTime());
+		return paramSource;
+	}
+
+	@Override
+	public Integer extractKey(KeyHolder keyHolder) {
+		return keyHolder.getKey().intValue();
+	}
+
+	@Override
+	public Integer getKey(Assignment object) {
+		return object.getAssignmentId();
+	}
 }
