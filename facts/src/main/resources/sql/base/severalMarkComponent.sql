@@ -1,1 +1,1 @@
-SELECT markComponentId, maxMark, name, description FROM mark_component WHERE markComponentId IN (:ids)
+SELECT markComponentId, maxMark, name, description, assignmentId FROM mark_component WHERE markComponentId IN (:ids)
