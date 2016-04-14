@@ -7,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.dao.api.DownloadLinkDAO;
 import com.ic.ee.core.dao.api.FileDAO;
-import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
-import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
+import com.ic.ee.core.web.exception.DownloadLinkExpiredException;
+import com.ic.ee.core.web.exception.DownloadLinkUsedException;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
@@ -58,17 +58,28 @@ public class SimpleFileService implements FileService {
 	}
 
 	@Override
-	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException {
-		File file = fileDAO.getFileFromLink(link);
-		if(file == null) {
-			throw new DownloadLinkDoesNotExistException();
+	public DownloadLink getDownloadLink(String link) throws DownloadLinkUsedException, DownloadLinkExpiredException {
+		DownloadLink downloadLink = downloadLinkDAO.getDownloadLink(link);
+		if(downloadLink.isUsed()) {
+			throw new DownloadLinkUsedException();
+		} else {
+			downloadLink.setUsed(true);
 		}
 
-		if(fileDAO.voidDownloadLink(link) != 1) {
-			throw new DownloadLinkVoidFailedException();
+		Date validTill = new Date(downloadLink.getValidFrom().getTime() + 30 * 1000);
+
+		if(validTill.after(new Date())) {
+			throw new DownloadLinkExpiredException();
 		}
 
-		return file;
+		downloadLinkDAO.update(downloadLink);
+		decorateDownloadLink(downloadLink);
+
+		return downloadLink;
+	}
+
+	private void decorateDownloadLink(DownloadLink downloadLink) {
+		downloadLink.setFile(fileDAO.one(downloadLink.getFile().getFileId()));
 	}
 
 	@Override

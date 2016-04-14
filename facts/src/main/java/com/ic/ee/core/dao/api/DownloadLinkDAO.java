@@ -5,4 +5,6 @@ import com.ic.ee.domain.common.file.DownloadLink;
 
 public interface DownloadLinkDAO extends BaseDAO<DownloadLink, Integer> {
 
+	public DownloadLink getDownloadLink(String link);
+
 }

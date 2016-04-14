@@ -15,7 +15,13 @@ import com.ic.ee.domain.common.file.DownloadLink;
 public class JdbcDownloadLinkDAO extends AbstractJdbcBaseDAO<DownloadLink, Integer> implements DownloadLinkDAO {
 
 	public JdbcDownloadLinkDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new DownloadLinkRowMapper(), DownloadLink.class);
+		super(dataSource, new DownloadLinkRowMapper(), DownloadLink.class, "oneDownloadLinkByLink.sql");
+	}
+
+	@Override
+	public DownloadLink getDownloadLink(String link) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("link", link);
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override

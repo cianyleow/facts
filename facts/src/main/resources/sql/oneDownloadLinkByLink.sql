@@ -1,0 +1,1 @@
+SELECT downloadLinkId, fileId, link, validFrom, username, used FROM download_link WHERE link = :link

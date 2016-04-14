@@ -2,8 +2,8 @@ package com.ic.ee.service.api;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ic.ee.core.web.exception.DownloadLinkDoesNotExistException;
-import com.ic.ee.core.web.exception.DownloadLinkVoidFailedException;
+import com.ic.ee.core.web.exception.DownloadLinkExpiredException;
+import com.ic.ee.core.web.exception.DownloadLinkUsedException;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
@@ -17,7 +17,7 @@ public interface FileService {
 
 	public File getFile(Integer fileId);
 
-	public File getFile(String link) throws DownloadLinkDoesNotExistException, DownloadLinkVoidFailedException;
+	public DownloadLink getDownloadLink(String link) throws DownloadLinkUsedException, DownloadLinkExpiredException;
 
 	public File createFile(MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException;
 }
