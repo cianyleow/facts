@@ -28,8 +28,18 @@ public class FeedbackController {
 		return feedbackService.getFeedback(feedbackId).getComments();
 	}
 
+	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.GET)
+	public Comment getComment(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
+		return feedbackService.getLiteComment(commentId);
+	}
+
 	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.GET)
 	public List<Mark> getMarks(@PathVariable("feedbackId") Integer feedbackId) {
 		return feedbackService.getFeedback(feedbackId).getMarks();
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.GET)
+	public Mark getMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId) {
+		return feedbackService.getLiteMark(markId);
 	}
 }
