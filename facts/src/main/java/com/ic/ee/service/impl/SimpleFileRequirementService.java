@@ -25,9 +25,7 @@ public class SimpleFileRequirementService implements FileRequirementService {
 	}
 
 	public FileRequirement createFileRequirement(Integer assignmentId, FileRequirement fileRequirement) {
-		Integer fileRequirementId = fileRequirementDAO.createFileRequirement(assignmentId, fileRequirement);
-		fileRequirement.setFileRequirementId(fileRequirementId);
-		return fileRequirement;
+		return fileRequirementDAO.create(fileRequirement);
 	}
 
 	@Override

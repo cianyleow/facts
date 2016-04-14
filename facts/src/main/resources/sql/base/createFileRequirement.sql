@@ -1,1 +1,11 @@
-SELECT fileRequirementId, fileName, maxFileSize, allowedExtension FROM file_requirement WHERE fileRequirementId = :id
+INSERT INTO file_requirement (
+assignmentId,
+fileName,
+maxFileSize,
+allowedExtension
+) VALUES (
+:assignmentId,
+:fileName,
+:maxFileSize,
+:allowedExtension
+);
