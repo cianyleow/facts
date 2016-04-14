@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
-import com.ic.ee.core.dao.rowmapper.FeedbackRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.FeedbackRowMapper;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.common.feedback.mark.MarkStatus;

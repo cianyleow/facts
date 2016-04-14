@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
-import com.ic.ee.core.dao.rowmapper.SubmissionRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.SubmissionRowMapper;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> implements SubmissionDAO {

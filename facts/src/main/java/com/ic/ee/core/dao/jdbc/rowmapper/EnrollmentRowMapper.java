@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.rowmapper;
+package com.ic.ee.core.dao.jdbc.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

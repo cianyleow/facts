@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
-import com.ic.ee.core.dao.rowmapper.FileRequirementRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.FileRequirementRowMapper;
 import com.ic.ee.domain.common.file.FileRequirement;
 
 public class JdbcFileRequirementDAO extends AbstractJdbcBaseDAO<FileRequirement, Integer> implements FileRequirementDAO {

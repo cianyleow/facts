@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao;
+package com.ic.ee.core.dao.jdbc;
 
 import java.io.BufferedReader;
 import java.io.IOException;

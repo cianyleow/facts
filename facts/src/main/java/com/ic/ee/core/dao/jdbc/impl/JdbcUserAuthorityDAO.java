@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,9 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
-import com.ic.ee.core.dao.rowmapper.UserAuthorityRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.UserAuthorityRowMapper;
 import com.ic.ee.domain.user.auth.UserAuthority;
 
 public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, String> implements UserAuthorityDAO {

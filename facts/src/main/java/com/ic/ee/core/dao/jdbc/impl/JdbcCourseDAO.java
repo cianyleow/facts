@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,9 +8,9 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
-import com.ic.ee.core.dao.rowmapper.CourseRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.CourseRowMapper;
 import com.ic.ee.domain.course.Course;
 
 public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implements CourseDAO {

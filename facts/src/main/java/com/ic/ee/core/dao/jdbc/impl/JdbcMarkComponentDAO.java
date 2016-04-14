@@ -1,4 +1,4 @@
-package com.ic.ee.core.dao.impl;
+package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.ic.ee.core.dao.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.api.MarkComponentDAO;
-import com.ic.ee.core.dao.rowmapper.MarkComponentRowMapper;
+import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
+import com.ic.ee.core.dao.jdbc.rowmapper.MarkComponentRowMapper;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 
 public class JdbcMarkComponentDAO extends AbstractJdbcBaseDAO<MarkComponent, Integer> implements MarkComponentDAO {
