@@ -19,7 +19,7 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 
 	public JdbcAssignmentDAO(DataSource dataSource) throws IOException {
 		super(dataSource, new AssignmentRowMapper(), Assignment.class, "getAssignmentsByCourse.sql",
-				"createAssignment.sql", "createAssignmentFile.sql");
+				"createAssignmentFile.sql");
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("assignmentId", assignmentId);
 		paramSource.addValue("fileId", file.getFileId());
-		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+		getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
 	}
 
 	@Override
