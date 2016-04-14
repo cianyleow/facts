@@ -1,1 +1,1 @@
-SELECT assignmentId, name, description, creationTime, dueTime, openTime FROM assignment WHERE assignmentId = :id
+SELECT assignmentId, courseId, name, description, creationTime, dueTime, openTime FROM assignment WHERE assignmentId = :id
