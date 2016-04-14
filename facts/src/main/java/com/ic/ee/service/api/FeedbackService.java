@@ -18,4 +18,6 @@ public interface FeedbackService {
 
 	public Feedback getFeedback(Integer feedbackId);
 
+	public Comment getComment(Integer commentId);
+
 }

@@ -39,6 +39,11 @@ public class FeedbackController {
 		return feedbackService.getLiteComment(commentId);
 	}
 
+	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}/marker", method = RequestMethod.GET)
+	public Marker getAuthor(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
+		return feedbackService.getComment(commentId).getAuthor();
+	}
+
 	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.GET)
 	public List<Mark> getMarks(@PathVariable("feedbackId") Integer feedbackId) {
 		return feedbackService.getFeedback(feedbackId).getMarks();
