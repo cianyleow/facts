@@ -1,1 +1,4 @@
-SELECT course.courseId, course.name, course.shortName, course.description FROM course WHERE course.courseId = :id
+INSERT INTO course
+('name', 'shortName', 'description', 'academicPeriodId')
+VALUES
+(:name, :shortName, :description, :academicPeriodId);

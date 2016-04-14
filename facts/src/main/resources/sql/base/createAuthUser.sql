@@ -1,1 +1,4 @@
-SELECT username, password, accountExpired, accountLocked, credentialsExpired, accountEnabled FROM auth_user WHERE username = :id
+INSERT INTO auth_user
+('username', 'password', 'accountExpired', 'accountLocked', 'credentialsExpired', 'accountEnabled')
+VALUES
+(:username, :password, :accountExpired, :accountLocked, :credentialsExpired, :accountEnabled);

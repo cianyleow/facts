@@ -1,1 +1,4 @@
-SELECT username, email, firstName, lastName FROM user WHERE username = :id
+INSERT INTO user
+('username', 'email', 'firstName', 'lastName')
+VALUES
+(:username, :email, :firstName, :lastName);

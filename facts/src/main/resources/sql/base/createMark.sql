@@ -1,1 +1,4 @@
-SELECT fileId, name, extension, hash, location, size, creationTime, contentType FROM file WHERE fileId = :id
+INSERT INTO mark
+('markComponentId', 'feedbackId', 'mark', 'username')
+VALUES
+(:markComponentId, :feedbackId, :mark, :username);

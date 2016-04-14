@@ -1,0 +1,1 @@
+INSERT INTO user_authority ('username', 'authority') VALUES (:username, :authority);

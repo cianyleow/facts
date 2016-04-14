@@ -1,13 +1,4 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+INSERT INTO comment
+('feedbackId', 'secret', 'comment', 'username')
+VALUES
+(:feedbackId, :secret, :comment, :username);

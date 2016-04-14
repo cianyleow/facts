@@ -1,13 +1,4 @@
-INSERT INTO assignment (
-courseId,
-name,
-description,
-dueTime,
-openTime
-) VALUES (
-:courseId, 
-:name,
-:description,
-:dueTime,
-:openTime
-);
+INSERT INTO user_title
+('username', 'title')
+VALUES
+(:username, :title);
