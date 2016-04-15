@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.ic.ee.core.dao.api.FileDAO;
@@ -20,44 +19,20 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements FileDAO {
 
 	public JdbcFileDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FileRowMapper(), File.class, "addDownloadLink.sql",
-				"getFileFromLink.sql", "voidDownloadLink.sql",
-				"severalFileForSubmission.sql", "severalFileForAssignment.sql");
-	}
-
-	@Override
-	public Integer addDownloadLink(File file, String hash, String username) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("fileId", file.getFileId());
-		paramSource.addValue("link", hash);
-		paramSource.addValue("username", username);
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
-		return keyHolder.getKey().intValue();
-	}
-
-	@Override
-	public File getFileFromLink(String link) {
-		SqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().queryForObject(getSqlStatements().get(1), paramSource, getRowMapper());
-	}
-
-	@Override
-	public Integer voidDownloadLink(String link) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource("link", link);
-		return getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+		super(dataSource, new FileRowMapper(), File.class, "severalFileForSubmission.sql",
+				"severalFileForAssignment.sql");
 	}
 
 	@Override
 	public List<File> getFiles(Submission submission) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submission.getSubmissionId());
-		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override
 	public List<File> getFiles(Assignment assignment) {
 		SqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignment.getAssignmentId());
-		return getJdbcTemplate().query(getSqlStatements().get(4), paramSource, getRowMapper());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override

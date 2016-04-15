@@ -13,10 +13,4 @@ public interface FileDAO extends BaseDAO<File, Integer> {
 
 	public List<File> getFiles(Assignment assignment);
 
-	public Integer addDownloadLink(File file, String hash, String username);
-
-	public File getFileFromLink(String link);
-
-	public Integer voidDownloadLink(String link);
-
 }
