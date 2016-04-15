@@ -1,1 +1,0 @@
-UPDATE download_link SET used = 1 WHERE link = :link
