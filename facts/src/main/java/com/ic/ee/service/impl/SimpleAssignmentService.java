@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
@@ -65,6 +66,7 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
+	@Transactional
 	public Assignment createAssignment(Integer courseId, Assignment assignment, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		// Extract required files/mark components before saving.
 		List<MarkComponent> markComponents = assignment.getMarkComponents();
