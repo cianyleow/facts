@@ -1,6 +1,3 @@
 UPDATE submission SET
-assignmentId = :assignmentId,
-username = :username,
-submissionStatus = :submissionStatus,
-comment = :comment
+submissionStatus = :submissionStatus
 WHERE submissionId = :submissionId

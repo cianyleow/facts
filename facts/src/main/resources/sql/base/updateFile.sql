@@ -4,6 +4,5 @@ extension = :extension,
 hash = :hash,
 location = :location,
 size = :size,
-username = :username,
 contentType = :contentType
 WHERE fileId = :id

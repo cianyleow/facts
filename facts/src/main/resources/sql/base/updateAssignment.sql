@@ -1,5 +1,4 @@
 UPDATE assignment SET
-courseId = :courseId,
 name = :name,
 description = :description,
 dueTime = :dueTime,
