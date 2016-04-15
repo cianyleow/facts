@@ -108,4 +108,21 @@ public class SimpleFeedbackService implements FeedbackService {
 	public Mark getLiteMark(Integer markId) {
 		return markDAO.one(markId);
 	}
+
+	@Override
+	public Comment createComment(Comment comment) {
+		return commentDAO.create(comment);
+	}
+
+	@Override
+	public Comment updateComment(Comment comment) {
+		return commentDAO.update(comment);
+	}
+
+	@Override
+	public void deleteComment(Integer commentId) {
+		if(commentDAO.delete(commentId)) {
+			// Deleted successfully...
+		}
+	}
 }

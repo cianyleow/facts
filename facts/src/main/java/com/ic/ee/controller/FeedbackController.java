@@ -46,9 +46,25 @@ public class FeedbackController {
 		return feedbackService.getFeedback(feedbackId).getComments();
 	}
 
+	@RequestMapping(path = "/feedback/{feedbackId}/comments", method = RequestMethod.POST)
+	public Comment createComment(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Comment comment) {
+		return feedbackService.createComment(comment);
+	}
+
 	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.GET)
 	public Comment getComment(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
 		return feedbackService.getLiteComment(commentId);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.GET)
+	public Comment updateComment(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId, @RequestBody Comment comment) {
+		comment.setCommentId(commentId);
+		return feedbackService.updateComment(comment);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.DELETE)
+	public void deleteComment(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
+		feedbackService.deleteComment(commentId);
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}/marker", method = RequestMethod.GET)
