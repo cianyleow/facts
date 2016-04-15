@@ -65,7 +65,7 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
-	public Assignment createAssignment(Integer courseId, Assignment assignment) {
+	public Assignment createAssignment(Integer courseId, Assignment assignment, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		// Extract required files/mark components before saving.
 		List<MarkComponent> markComponents = assignment.getMarkComponents();
 		List<FileRequirement> requiredFiles = assignment.getRequiredFiles();
@@ -91,6 +91,13 @@ public class SimpleAssignmentService implements AssignmentService {
 			_requiredFiles.add(fileRequirementDAO.create(requiredFile));
 		}
 		assignment.setRequiredFiles(_requiredFiles);
+
+		// Create/upload/link supplied files
+		List<File> suppliedFiles = new ArrayList<File>();
+		for(MultipartFile file : files) {
+			suppliedFiles.add(createSuppliedFile(assignment.getAssignmentId(), file, username));
+		}
+		assignment.setSuppliedFiles(suppliedFiles);
 
 		// Return decorated assignment
 		return assignment;

@@ -15,7 +15,7 @@ public interface AssignmentService {
 
 	public Assignment getAssignment(Integer assignmentId);
 
-	public Assignment createAssignment(Integer courseId, Assignment assignment);
+	public Assignment createAssignment(Integer courseId, Assignment assignment, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException;
 
 	public File createSuppliedFile(Integer assignmentId, MultipartFile file, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException;
 }
