@@ -56,7 +56,7 @@ public class FeedbackController {
 		return feedbackService.getLiteComment(commentId);
 	}
 
-	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.GET)
+	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.PUT)
 	public Comment updateComment(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId, @RequestBody Comment comment) {
 		comment.setCommentId(commentId);
 		return feedbackService.updateComment(comment);
@@ -77,8 +77,24 @@ public class FeedbackController {
 		return feedbackService.getFeedback(feedbackId).getMarks();
 	}
 
+	@RequestMapping(path = "/feedback/{feedbackId}/comments", method = RequestMethod.POST)
+	public Mark createMark(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Mark mark) {
+		return feedbackService.createMark(mark);
+	}
+
 	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.GET)
 	public Mark getMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId) {
 		return feedbackService.getLiteMark(markId);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.PUT)
+	public Mark updateMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId, @RequestBody Mark mark) {
+		mark.setMarkId(markId);
+		return feedbackService.updateMark(mark);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.DELETE)
+	public void deleteMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId) {
+		feedbackService.deleteMark(markId);
 	}
 }

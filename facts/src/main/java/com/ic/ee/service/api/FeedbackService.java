@@ -28,5 +28,13 @@ public interface FeedbackService {
 
 	public Mark getLiteMark(Integer markId);
 
+	public Mark getMark(Integer markId);
+
+	public Mark createMark(Mark mark);
+
+	public Mark updateMark(Mark mark);
+
+	public void deleteMark(Integer markId);
+
 	public Feedback getSubmissionFeedback(Integer submissionId);
 }

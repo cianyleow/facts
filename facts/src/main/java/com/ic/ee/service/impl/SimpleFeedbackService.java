@@ -125,4 +125,26 @@ public class SimpleFeedbackService implements FeedbackService {
 			// Deleted successfully...
 		}
 	}
+
+	@Override
+	public Mark getMark(Integer markId) {
+		return markDAO.one(markId);
+	}
+
+	@Override
+	public Mark createMark(Mark mark) {
+		return markDAO.create(mark);
+	}
+
+	@Override
+	public Mark updateMark(Mark mark) {
+		return markDAO.update(mark);
+	}
+
+	@Override
+	public void deleteMark(Integer markId) {
+		if(markDAO.delete(markId)) {
+
+		}
+	}
 }
