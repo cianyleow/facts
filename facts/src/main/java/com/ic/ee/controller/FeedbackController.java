@@ -77,7 +77,7 @@ public class FeedbackController {
 		return feedbackService.getFeedback(feedbackId).getMarks();
 	}
 
-	@RequestMapping(path = "/feedback/{feedbackId}/comments", method = RequestMethod.POST)
+	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.POST)
 	public Mark createMark(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Mark mark) {
 		return feedbackService.createMark(mark);
 	}
