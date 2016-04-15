@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
@@ -71,6 +72,7 @@ public class Assignment {
 		return requiredFiles;
 	}
 
+	@JsonProperty
 	public void setRequiredFiles(List<FileRequirement> requiredFiles) {
 		if(requiredFiles == null) {
 			this.requiredFiles = new ArrayList<FileRequirement>();
@@ -87,6 +89,7 @@ public class Assignment {
 		return markComponents;
 	}
 
+	@JsonProperty
 	public void setMarkComponents(List<MarkComponent> markComponents) {
 		if(markComponents == null) {
 			this.markComponents = new ArrayList<MarkComponent>();
