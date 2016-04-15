@@ -8,6 +8,10 @@ public interface FeedbackService {
 
 	public Feedback getLiteFeedback(Integer feedbackId);
 
+	public Feedback updateFeedback(Feedback feedback);
+
+	public void deleteFeedback(Integer feedbackId);
+
 	public Comment getLiteComment(Integer commentId);
 
 	public Mark getLiteMark(Integer markId);

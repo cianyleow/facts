@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,17 @@ public class FeedbackController {
 	@RequestMapping(path = "/feedback/{feedbackId}", method = RequestMethod.GET)
 	public Feedback getFeedback(@PathVariable("feedbackId") Integer feedbackId) {
 		return feedbackService.getLiteFeedback(feedbackId);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}", method = RequestMethod.PUT)
+	public Feedback updateFeedback(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Feedback feedback) {
+		feedback.setFeedbackId(feedbackId);
+		return feedbackService.updateFeedback(feedback);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}", method = RequestMethod.DELETE)
+	public void deleteFeedback(@PathVariable("feedbackId") Integer feedbackId) {
+		feedbackService.deleteFeedback(feedbackId);
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/marker", method = RequestMethod.GET)

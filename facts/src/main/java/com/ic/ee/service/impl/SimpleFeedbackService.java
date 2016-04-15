@@ -58,6 +58,18 @@ public class SimpleFeedbackService implements FeedbackService {
 	}
 
 	@Override
+	public Feedback updateFeedback(Feedback feedback) {
+		return feedbackDAO.update(feedback);
+	}
+
+	@Override
+	public void deleteFeedback(Integer feedbackId) {
+		if(feedbackDAO.delete(feedbackId)) {
+			// Successful...?
+		}
+	}
+
+	@Override
 	public Feedback getFeedback(Integer feedbackId) {
 		Feedback feedback = feedbackDAO.one(feedbackId);
 		decorateFeedback(feedback);
