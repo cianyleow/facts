@@ -88,6 +88,7 @@ public class SimpleFileService implements FileService {
 		File createdFile = fileUtils.createFile(file);
 
 		// Decorate file with owner
+		createdFile.setOwner(new User(username));
 
 		// Get fileId and decorate created file
 		return fileDAO.create(createdFile);
