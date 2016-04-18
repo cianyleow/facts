@@ -13,11 +13,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import com.ic.ee.core.web.authentication.filter.StatelessAuthenticationFilter;
 import com.ic.ee.core.web.authentication.filter.StatelessLoginFilter;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
 import com.ic.ee.core.web.authentication.service.api.TokenUserDetailsService;
+import com.ic.ee.core.web.filter.CsrfHeaderFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -38,7 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.exceptionHandling().and()
-		.anonymous().and()
 		.servletApi().and()
 		.authorizeRequests()
 
@@ -53,7 +56,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(new StatelessLoginFilter("/login", tokenAuthenticationService, userDetailsService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
 
 		// custom Token based authentication based on the header previously given to the client
-		.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+		.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
+
+		// Add CSRF token
+		.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+
+		// Enable CSRF repository
+		.csrf().csrfTokenRepository(csrfTokenRepository());
+	}
+
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("X-XSRF-TOKEN");
+		return repository;
 	}
 
 	@Bean
