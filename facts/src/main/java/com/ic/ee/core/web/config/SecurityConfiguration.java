@@ -42,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.exceptionHandling().and()
+		.anonymous().and()
 		.servletApi().and()
 		.authorizeRequests()
 
