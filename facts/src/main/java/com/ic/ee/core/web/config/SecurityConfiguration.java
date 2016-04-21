@@ -60,10 +60,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
 
 		// Add CSRF token
-		.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+		.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 
 		// Enable CSRF repository
-		.csrf().csrfTokenRepository(csrfTokenRepository());
+//		.csrf().csrfTokenRepository(csrfTokenRepository());
 	}
 
 	private CsrfTokenRepository csrfTokenRepository() {
