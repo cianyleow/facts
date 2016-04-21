@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.mark.Mark;
+import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
 
@@ -34,6 +35,11 @@ public class FeedbackController {
 	@RequestMapping(path = "/feedback/{feedbackId}", method = RequestMethod.DELETE)
 	public void deleteFeedback(@PathVariable("feedbackId") Integer feedbackId) {
 		feedbackService.deleteFeedback(feedbackId);
+	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/submission", method = RequestMethod.GET)
+	public Submission getSubmission(@PathVariable("feedbackId") Integer feedbackId) {
+		return feedbackService.getFeedback(feedbackId).getSubmission();
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/marker", method = RequestMethod.GET)
