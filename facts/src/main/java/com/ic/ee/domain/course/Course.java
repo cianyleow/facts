@@ -7,6 +7,7 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.marker.Marker;
+import com.ic.ee.domain.user.student.Student;
 
 public class Course {
 
@@ -27,6 +28,8 @@ public class Course {
 	private List<CourseOwner> courseOwners;
 
 	private List<Enrollment> enrollments;
+
+	private List<Student> students;
 
 	public Course(Integer courseId) {
 		this.courseId = courseId;
@@ -98,5 +101,14 @@ public class Course {
 
 	public void setEnrollments(List<Enrollment> enrollments) {
 		this.enrollments = enrollments;
+	}
+
+	@JsonIgnore
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 }
