@@ -1,1 +1,1 @@
-SELECT commentId, feedbackId, secret, comment, creationTime, author FROM comment WHERE commentId IN (:ids)
+SELECT commentId, feedbackId, secret, comment, creationTime, username FROM comment WHERE commentId IN (:ids)

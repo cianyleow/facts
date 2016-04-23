@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.SubmissionService;
@@ -42,5 +43,10 @@ public class SubmissionController {
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.POST)
 	public Feedback createFeedback(@PathVariable("submissionId") Integer submissionId, Principal user) {
 		return feedbackService.createFeedback(submissionId, user.getName());
+	}
+
+	@RequestMapping(path = "/submissions/{submissionId}/assignment", method = RequestMethod.GET)
+	public Assignment getAssignment(@PathVariable("submissionId") Integer submissionId) {
+		return submissionService.getSubmission(submissionId).getAssignment();
 	}
 }

@@ -32,7 +32,7 @@ public class JdbcCommentDAO extends AbstractJdbcBaseDAO<Comment, Integer> implem
 		paramSource.addValue("feedbackId", object.getFeedback().getFeedbackId());
 		paramSource.addValue("secret", object.getSecret());
 		paramSource.addValue("comment", object.getComment());
-		paramSource.addValue("author", object.getAuthor().getUserName());
+		paramSource.addValue("username", object.getAuthor().getUserName());
 		return paramSource;
 	}
 

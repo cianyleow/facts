@@ -20,7 +20,7 @@ public interface FeedbackService {
 
 	public Comment getComment(Integer commentId);
 
-	public Comment createComment(Comment comment);
+	public Comment createComment(Integer feedbackId, Comment comment, String username);
 
 	public Comment updateComment(Comment comment);
 

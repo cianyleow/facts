@@ -110,7 +110,9 @@ public class SimpleFeedbackService implements FeedbackService {
 	}
 
 	@Override
-	public Comment createComment(Comment comment) {
+	public Comment createComment(Integer feedbackId, Comment comment, String username) {
+		comment.setAuthor(new Marker(username));
+		comment.setFeedback(new Feedback(feedbackId));
 		return commentDAO.create(comment);
 	}
 

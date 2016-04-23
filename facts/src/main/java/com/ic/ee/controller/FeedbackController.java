@@ -1,5 +1,6 @@
 package com.ic.ee.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/comments", method = RequestMethod.POST)
-	public Comment createComment(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Comment comment) {
-		return feedbackService.createComment(comment);
+	public Comment createComment(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Comment comment, Principal user) {
+		return feedbackService.createComment(feedbackId, comment, user.getName());
 	}
 
 	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}", method = RequestMethod.GET)

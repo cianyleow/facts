@@ -18,7 +18,7 @@ public class CommentRowMapper implements RowMapper<Comment> {
 		comment.setComment(rs.getString("comment"));
 		comment.setCreationTime(rs.getDate("creationTime"));
 		comment.setSecret(rs.getBoolean("secret"));
-		comment.setAuthor(new Marker(rs.getString("author")));
+		comment.setAuthor(new Marker(rs.getString("username")));
 		return comment;
 	}
 }
