@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
+import com.ic.ee.core.dao.api.CourseOwnerDAO;
+import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.service.api.CourseService;
 
@@ -14,9 +16,16 @@ public class SimpleCourseService implements CourseService {
 
 	private final AssignmentDAO assignmentDAO;
 
-	public SimpleCourseService(CourseDAO courseDAO, AssignmentDAO assignmentDAO) {
+	private final MarkerDAO markerDAO;
+
+	private final CourseOwnerDAO courseOwnerDAO;
+
+	public SimpleCourseService(CourseDAO courseDAO, AssignmentDAO assignmentDAO, MarkerDAO markerDAO,
+			CourseOwnerDAO courseOwnerDAO) {
 		this.courseDAO = courseDAO;
 		this.assignmentDAO = assignmentDAO;
+		this.markerDAO = markerDAO;
+		this.courseOwnerDAO = courseOwnerDAO;
 	}
 
 	@Override
@@ -55,8 +64,9 @@ public class SimpleCourseService implements CourseService {
 		// Decorate assignments
 		course.setAssignments(assignmentDAO.getAssignments(course));
 		// Decorate markers
+		course.setMarkers(markerDAO.getMarkers(course));
 
 		// Decorate course owner
-
+		course.setCourseOwners(courseOwnerDAO.getCourseOwners(course));
 	}
 }

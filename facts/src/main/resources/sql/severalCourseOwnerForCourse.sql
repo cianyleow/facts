@@ -1,0 +1,1 @@
+SELECT user.username, email, firstName, lastName, title FROM user JOIN user_title ON user.username = user_title.username JOIN owns ON user.username = owns.username AND owns.courseId = :courseId

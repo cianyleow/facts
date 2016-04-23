@@ -19,6 +19,7 @@ import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.api.CommentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
+import com.ic.ee.core.dao.api.CourseOwnerDAO;
 import com.ic.ee.core.dao.api.DownloadLinkDAO;
 import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
@@ -35,6 +36,7 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCommentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCourseDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcCourseOwnerDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcDownloadLinkDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
@@ -103,6 +105,11 @@ public class AppConfig {
         final FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(multipartFilter);
         filterRegistrationBean.addInitParameter("multipartResolverBeanName", "commonsMultipartResolver");
         return filterRegistrationBean;
+    }
+
+    @Bean
+    CourseOwnerDAO courseOwnerDAO() throws IOException {
+    	return new JdbcCourseOwnerDAO(dataSource);
     }
 
 	@Bean
@@ -192,7 +199,7 @@ public class AppConfig {
 
 	@Bean
 	CourseService courseService() throws IOException {
-		return new SimpleCourseService(courseDAO(), assignmentDAO());
+		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO());
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {

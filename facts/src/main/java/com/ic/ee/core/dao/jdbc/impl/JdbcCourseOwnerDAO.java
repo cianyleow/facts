@@ -8,26 +8,26 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.KeyHolder;
 
-import com.ic.ee.core.dao.api.MarkerDAO;
+import com.ic.ee.core.dao.api.CourseOwnerDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
-import com.ic.ee.core.dao.jdbc.rowmapper.MarkerRowMapper;
+import com.ic.ee.core.dao.jdbc.rowmapper.CourseOwnerRowMapper;
 import com.ic.ee.domain.course.Course;
-import com.ic.ee.domain.user.marker.Marker;
+import com.ic.ee.domain.user.courseowner.CourseOwner;
 
-public class JdbcMarkerDAO extends AbstractJdbcBaseDAO<Marker, String> implements MarkerDAO {
+public class JdbcCourseOwnerDAO extends AbstractJdbcBaseDAO<CourseOwner, String> implements CourseOwnerDAO {
 
-	public JdbcMarkerDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new MarkerRowMapper(), Marker.class, "severalMarkersForCourse.sql");
+	public JdbcCourseOwnerDAO(DataSource dataSource) throws IOException {
+		super(dataSource, new CourseOwnerRowMapper(), CourseOwner.class, "severalCourseOwnerForCourse.sql");
 	}
 
 	@Override
-	public List<Marker> getMarkers(Course course) {
+	public List<CourseOwner> getCourseOwners(Course course) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseId", course.getCourseId());
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Marker object) {
+	public MapSqlParameterSource getSqlParameterSource(CourseOwner object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("email", object.getEmail());
 		paramSource.addValue("firstName", object.getFirstName());
@@ -43,7 +43,7 @@ public class JdbcMarkerDAO extends AbstractJdbcBaseDAO<Marker, String> implement
 	}
 
 	@Override
-	public String getId(Marker object) {
+	public String getId(CourseOwner object) {
 		return object.getUserName();
 	}
 }
