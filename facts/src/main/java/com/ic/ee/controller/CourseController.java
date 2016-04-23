@@ -21,6 +21,7 @@ import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.domain.common.relationship.Enrollment;
+import com.ic.ee.domain.common.relationship.EnrollmentLevel;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
@@ -28,6 +29,7 @@ import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
+import com.ic.ee.service.api.EnrollmentService;
 
 @RestController
 public class CourseController {
@@ -39,6 +41,9 @@ public class CourseController {
 
 	@Autowired
 	private AssignmentService assignmentService;
+
+	@Autowired
+	private EnrollmentService enrollmentService;
 
 	@RequestMapping(path = "/courses", method = RequestMethod.GET)
 	public List<Course> getCourses() {
@@ -53,6 +58,15 @@ public class CourseController {
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getEnrollments();
+	}
+
+	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.POST)
+	public Enrollment enrollCourse(@PathVariable("courseId") Integer courseId, Principal user) {
+		Enrollment enrollment = new Enrollment();
+		enrollment.setCourse(new Course(courseId));
+		enrollment.setStudent(new Student(user.getName()));
+		enrollment.setEnrollmentLevel(EnrollmentLevel.NO_CREDIT);
+		return enrollmentService.createEnrollment(enrollment);
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
