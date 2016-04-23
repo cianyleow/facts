@@ -3,6 +3,7 @@ package com.ic.ee.domain.course;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
@@ -31,8 +32,18 @@ public class Course {
 
 	private List<Student> students;
 
+	private AcademicPeriod academicPeriod;
+
 	public Course(Integer courseId) {
 		this.courseId = courseId;
+	}
+
+	public AcademicPeriod getAcademicPeriod() {
+		return academicPeriod;
+	}
+
+	public void setAcademicPeriod(AcademicPeriod academicPeriod) {
+		this.academicPeriod = academicPeriod;
 	}
 
 	@JsonIgnore
