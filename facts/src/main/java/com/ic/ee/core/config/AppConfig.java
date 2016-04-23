@@ -204,8 +204,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	TokenAuthenticationService tokenAuthenticationService() {
-		return new SimpleTokenAuthenticationService(tokenSecret);
+	TokenAuthenticationService tokenAuthenticationService() throws IOException {
+		return new SimpleTokenAuthenticationService(tokenSecret, userService());
 	}
 
 	@Bean

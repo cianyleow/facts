@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ic.ee.domain.user.User;
 
 public class AuthUser implements UserDetails {
 
@@ -21,6 +22,8 @@ public class AuthUser implements UserDetails {
 	private boolean credentialsExpired;
 
 	private boolean accountEnabled;
+
+	private User userDetails;
 
 	private Set<UserAuthority> authorities;
 
@@ -85,6 +88,14 @@ public class AuthUser implements UserDetails {
 
 	public boolean hasRole(UserRole role) {
 		return authorities.contains(role.asAuthorityFor(this));
+	}
+
+	public User getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(User userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	@Override

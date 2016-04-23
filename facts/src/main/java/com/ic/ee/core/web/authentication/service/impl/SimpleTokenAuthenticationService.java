@@ -11,6 +11,7 @@ import com.ic.ee.core.web.authentication.handler.impl.SimpleTokenHandler;
 import com.ic.ee.core.web.authentication.service.api.TokenAuthenticationService;
 import com.ic.ee.domain.user.auth.AuthUser;
 import com.ic.ee.domain.user.auth.UserAuthentication;
+import com.ic.ee.service.api.UserService;
 
 public class SimpleTokenAuthenticationService implements TokenAuthenticationService {
 
@@ -19,14 +20,18 @@ public class SimpleTokenAuthenticationService implements TokenAuthenticationServ
 
 	private final TokenHandler tokenHandler;
 
-	public SimpleTokenAuthenticationService(String secret) {
+	private final UserService userService;
+
+	public SimpleTokenAuthenticationService(String secret, UserService userService) {
 		tokenHandler = new SimpleTokenHandler(DatatypeConverter.parseBase64Binary(secret));
+		this.userService = userService;
 	}
 
 	@Override
 	public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
 		final AuthUser user = authentication.getDetails();
 		user.setExpires(System.currentTimeMillis() + ONE_DAY);
+		user.setUserDetails(userService.getUser(user.getUsername()));
 		response.addHeader(AUTH_HEADER_NAME, tokenHandler.createTokenForUser(user));
 	}
 

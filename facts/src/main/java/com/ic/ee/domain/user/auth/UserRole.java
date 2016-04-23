@@ -14,7 +14,7 @@ public enum UserRole {
 		switch(authority.getAuthority()) {
 		case "ROLE_STUDENT":
 			return STUDENT;
-		case "ROLE_MAKRER":
+		case "ROLE_MARKER":
 			return MARKER;
 		case "ROLE_COURSE_OWNER":
 			return COURSE_OWNER;
