@@ -1,0 +1,1 @@
+SELECT user.username, email, firstName, lastName, studentId, yearOfStudy FROM user JOIN student_information ON user.username = student_information.username JOIN enrollment ON user.username = enrollment.username WHERE enrollment.courseId = :courseId

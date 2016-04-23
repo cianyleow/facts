@@ -25,6 +25,7 @@ import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.marker.Marker;
+import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.CourseService;
 
@@ -54,6 +55,11 @@ public class CourseController {
 		return courseService.getCourse(courseId).getEnrollments();
 	}
 
+	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
+	public List<Student> getStudents(@PathVariable("courseId") Integer courseId) {
+		return courseService.getCourse(courseId).getStudents();
+	}
+
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
 	public List<Marker> getMarkers(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getMarkers();
@@ -68,7 +74,6 @@ public class CourseController {
 	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getAssignments();
 	}
-
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.POST)
 	public Assignment createAssignment(@PathVariable("courseId") Integer courseId, @RequestParam("files") MultipartFile[] files, @RequestParam("assignment") String assignmentString, Principal user) throws JsonParseException, JsonMappingException, IOException, IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {

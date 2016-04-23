@@ -199,7 +199,7 @@ public class AppConfig {
 
 	@Bean
 	CourseService courseService() throws IOException {
-		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO());
+		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO(), enrollmentDAO(), studentDAO());
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {
