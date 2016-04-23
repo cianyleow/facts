@@ -13,6 +13,12 @@ public interface CourseService {
 	// Always returns lite version
 	public List<Course> getCourses();
 
-	// Always returns lite version
-	public List<Course> getCourses(String username);
+	// Get owned courses
+	public List<Course> getOwnedCourses(String username);
+
+	// Get marked courses
+	public List<Course> getMarkedCourses(String username);
+
+	// Get enrollments
+	public List<Course> getEnrolledCourses(String username);
 }

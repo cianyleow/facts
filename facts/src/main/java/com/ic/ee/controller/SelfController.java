@@ -17,8 +17,18 @@ public class SelfController {
 	@Autowired
 	private CourseService courseService;
 
-	@RequestMapping(path = "/self/courses", method = RequestMethod.GET)
+	@RequestMapping(path = "/self/enrollments", method = RequestMethod.GET)
 	public List<Course> getEnrolledCourses(Principal user) {
-		return courseService.getCourses(user.getName());
+		return courseService.getEnrolledCourses(user.getName());
+	}
+
+	@RequestMapping(path = "/self/marked", method = RequestMethod.GET)
+	public List<Course> getMarkedCourses(Principal user) {
+		return courseService.getMarkedCourses(user.getName());
+	}
+
+	@RequestMapping(path = "/self/owned", method = RequestMethod.GET)
+	public List<Course> getOwnedCourses(Principal user) {
+		return courseService.getOwnedCourses(user.getName());
 	}
 }

@@ -9,5 +9,9 @@ public interface CourseDAO extends BaseDAO<Course, Integer> {
 
 	public List<Course> getCourses();
 
-	public List<Course> getCourses(String username);
+	public List<Course> getEnrolled(String username);
+
+	public List<Course> getMarked(String username);
+
+	public List<Course> getOwned(String username);
 }
