@@ -15,6 +15,11 @@ public class SimpleEnrollmentService implements EnrollmentService {
 	}
 
 	@Override
+	public Enrollment getEnrollment(Integer courseId, String username) {
+		return enrollmentDAO.getEnrollment(courseId, username);
+	}
+
+	@Override
 	public List<Enrollment> getEnrollments(String username) {
 		return enrollmentDAO.getEnrollments(username);
 	}

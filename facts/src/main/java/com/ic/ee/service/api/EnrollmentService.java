@@ -8,6 +8,8 @@ public interface EnrollmentService {
 
 	public List<Enrollment> getEnrollments(String username);
 
+	public Enrollment getEnrollment(Integer courseId, String username);
+
 	public Enrollment getEnrollment(Integer enrollmentId);
 
 	public Enrollment createEnrollment(Enrollment enrollment);

@@ -17,7 +17,7 @@ import com.ic.ee.domain.course.Course;
 public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> implements EnrollmentDAO {
 
 	public JdbcEnrollmentDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql", "severalEnrollmentForCourse.sql");
+		super(dataSource, new EnrollmentRowMapper(), Enrollment.class, "getEnrollmentsFromUsername.sql", "severalEnrollmentForCourse.sql", "oneEnrollmentByCourseAndStudent.sql");
 	}
 
 	@Override
@@ -30,6 +30,14 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 	public List<Enrollment> getEnrollments(Course course) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseId", course.getCourseId());
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+	}
+
+	@Override
+	public Enrollment getEnrollment(Integer courseId, String username) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", username);
+		paramSource.addValue("courseId", courseId);
+		return getJdbcTemplate().queryForObject(getSqlStatements().get(2), paramSource, getRowMapper());
 	}
 
 	@Override

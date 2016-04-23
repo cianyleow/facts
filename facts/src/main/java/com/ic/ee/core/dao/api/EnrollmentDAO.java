@@ -11,4 +11,6 @@ public interface EnrollmentDAO extends BaseDAO<Enrollment, Integer> {
 	public List<Enrollment> getEnrollments(String username);
 
 	public List<Enrollment> getEnrollments(Course course);
+
+	public Enrollment getEnrollment(Integer courseId, String username);
 }
