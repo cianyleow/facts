@@ -14,7 +14,7 @@ public interface EnrollmentService {
 
 	public Enrollment createEnrollment(Enrollment enrollment);
 
-	public void updateEnrollment(Integer enrollmentId, Enrollment enrollment);
+	public Enrollment updateEnrollment(Integer enrollmentId, Enrollment enrollment);
 
 	public void deleteEnrollment(Integer enrollmentId);
 }

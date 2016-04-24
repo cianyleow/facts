@@ -35,15 +35,14 @@ public class SimpleEnrollmentService implements EnrollmentService {
 	}
 
 	@Override
-	public void updateEnrollment(Integer enrollmentId, Enrollment enrollment) {
-		// TODO Auto-generated method stub
-
+	public Enrollment updateEnrollment(Integer enrollmentId, Enrollment enrollment) {
+		enrollment.setEnrollmentId(enrollmentId);
+		return enrollmentDAO.update(enrollment);
 	}
 
 	@Override
 	public void deleteEnrollment(Integer enrollmentId) {
-		// TODO Auto-generated method stub
-
+		enrollmentDAO.delete(enrollmentId);
 	}
 
 }

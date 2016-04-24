@@ -29,8 +29,8 @@ public class EnrollmentController {
 	}
 
 	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.PUT)
-	public void updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment) {
-		enrollmentService.updateEnrollment(enrollmentId, enrollment);
+	public Enrollment updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment) {
+		return enrollmentService.updateEnrollment(enrollmentId, enrollment);
 	}
 
 	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.DELETE)
