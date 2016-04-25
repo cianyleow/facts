@@ -1,1 +1,0 @@
-SELECT enrollmentId, username, courseId, enrollmentLevel, updateTime FROM enrollment WHERE username = :username

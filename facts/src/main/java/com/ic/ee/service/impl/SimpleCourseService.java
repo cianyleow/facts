@@ -9,7 +9,9 @@ import com.ic.ee.core.dao.api.CourseOwnerDAO;
 import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
+import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.CourseService;
 
 public class SimpleCourseService implements CourseService {
@@ -54,8 +56,8 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public List<Course> getEnrolledCourses(String username) {
-		return courseDAO.getEnrolled(username);
+	public List<Enrollment> getEnrollments(String username) {
+		return enrollmentDAO.getEnrollments(new Student(username));
 	}
 
 	@Override

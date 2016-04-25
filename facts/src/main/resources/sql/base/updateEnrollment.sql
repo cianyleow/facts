@@ -1,3 +1,3 @@
-UPDATE enrollment SET
-enrollmentLevel = :enrollmentLevel
+UPDATE enrollment SET 
+enrollmentLevel = :enrollmentLevel 
 WHERE enrollmentId = :id

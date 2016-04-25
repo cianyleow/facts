@@ -1,5 +1,6 @@
 package com.ic.ee.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.domain.common.relationship.Enrollment;
+import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.EnrollmentService;
 
 @RestController
@@ -29,7 +32,9 @@ public class EnrollmentController {
 	}
 
 	@RequestMapping(path = "/enrollments/{enrollmentId}", method = RequestMethod.PUT)
-	public Enrollment updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment) {
+	public Enrollment updateEnrollment(@PathVariable("enrollmentId") Integer enrollmentId, @RequestBody Enrollment enrollment, Principal user) {
+		enrollment.setStudent(new Student());
+		enrollment.setCourse(new Course());
 		return enrollmentService.updateEnrollment(enrollmentId, enrollment);
 	}
 

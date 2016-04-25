@@ -2,6 +2,7 @@ package com.ic.ee.service.api;
 
 import java.util.List;
 
+import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 
 public interface CourseService {
@@ -20,5 +21,5 @@ public interface CourseService {
 	public List<Course> getMarkedCourses(String username);
 
 	// Get enrollments
-	public List<Course> getEnrolledCourses(String username);
+	public List<Enrollment> getEnrollments(String username);
 }

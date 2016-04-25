@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.domain.common.relationship.Enrollment;
+import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.EnrollmentService;
 
 public class SimpleEnrollmentService implements EnrollmentService {
@@ -21,7 +22,7 @@ public class SimpleEnrollmentService implements EnrollmentService {
 
 	@Override
 	public List<Enrollment> getEnrollments(String username) {
-		return enrollmentDAO.getEnrollments(username);
+		return enrollmentDAO.getEnrollments(new Student(username));
 	}
 
 	@Override
