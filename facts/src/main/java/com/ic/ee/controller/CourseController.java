@@ -69,6 +69,11 @@ public class CourseController {
 		return enrollmentService.createEnrollment(enrollment);
 	}
 
+	@RequestMapping(path = "/courses/{courseId}/enrollment", method = RequestMethod.GET)
+	public Enrollment getEnrollment(@PathVariable("courseId") Integer courseId, Principal user) {
+		return enrollmentService.getEnrollment(courseId, user.getName());
+	}
+
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
 	public List<Student> getStudents(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getStudents();
