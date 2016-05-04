@@ -1,7 +1,7 @@
 package com.ic.ee.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +65,7 @@ public class SimpleSubmissionService implements SubmissionService {
 	@Transactional
 	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		// Generate submission creation time - before file uploads, to avoid slow internet issues
-		submission.setCreationTime(new Date());
+		submission.setCreationTime(new Timestamp(System.currentTimeMillis()));
 
 		// Get assignment
 		Assignment assignment = assignmentDAO.one(assignmentId);

@@ -16,9 +16,9 @@ public class AssignmentRowMapper implements RowMapper<Assignment> {
 		assignment.setCourse(new Course(rs.getInt("courseId")));
 		assignment.setName(rs.getString("name"));
 		assignment.setDescription(rs.getString("description"));
-		assignment.setCreationTime(rs.getDate("creationTime"));
-		assignment.setDueTime(rs.getDate("dueTime"));
-		assignment.setOpenTime(rs.getDate("openTime"));
+		assignment.setCreationTime(rs.getTimestamp("creationTime"));
+		assignment.setDueTime(rs.getTimestamp("dueTime"));
+		assignment.setOpenTime(rs.getTimestamp("openTime"));
 		return assignment;
 	}
 

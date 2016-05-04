@@ -1,5 +1,6 @@
 package com.ic.ee.domain.course.assignment;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,9 +21,9 @@ public class Assignment {
 	private String description;
 	private Date creationTime;
 
-	private Date dueTime;
+	private Timestamp dueTime;
 
-	private Date openTime;
+	private Timestamp openTime;
 
 	private List<FileRequirement> requiredFiles;
 
@@ -142,19 +143,19 @@ public class Assignment {
 		this.creationTime = creationTime;
 	}
 
-	public Date getDueTime() {
+	public Timestamp getDueTime() {
 		return dueTime;
 	}
 
-	public void setDueTime(Date dueTime) {
+	public void setDueTime(Timestamp dueTime) {
 		this.dueTime = dueTime;
 	}
 
-	public Date getOpenTime() {
+	public Timestamp getOpenTime() {
 		return openTime;
 	}
 
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(Timestamp openTime) {
 		this.openTime = openTime;
 	}
 }

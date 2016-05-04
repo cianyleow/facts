@@ -17,7 +17,7 @@ public class EnrollmentRowMapper implements RowMapper<Enrollment> {
 	public Enrollment mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Enrollment enrollment = new Enrollment(rs.getInt("enrollment.enrollmentId"));
 		enrollment.setStudent(new Student(rs.getString("enrollment.username")));
-		enrollment.setUpdateTime(rs.getDate("enrollment.updateTime"));
+		enrollment.setUpdateTime(rs.getTimestamp("enrollment.updateTime"));
 		enrollment.setEnrollmentLevel(EnrollmentLevel.valueOf(rs.getString("enrollment.enrollmentLevel")));
 		Course course = new Course(rs.getInt("course.courseId"));
 		course.setAcademicPeriod(new AcademicPeriod(rs.getInt("course.academicPeriodId")));

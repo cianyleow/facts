@@ -1,6 +1,6 @@
 package com.ic.ee.domain.common;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class AcademicPeriod {
 
@@ -9,8 +9,8 @@ public class AcademicPeriod {
 	private String name;
 	private String shortName;
 
-	private Date startTime;
-	private Date endTime;
+	private Timestamp startTime;
+	private Timestamp endTime;
 
 	public AcademicPeriod() {
 		// TODO Auto-generated constructor stub
@@ -44,19 +44,19 @@ public class AcademicPeriod {
 		this.shortName = shortName;
 	}
 
-	public Date getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
 }

@@ -19,7 +19,7 @@ public class FileRowMapper implements RowMapper<File> {
 		file.setHash(rs.getString("hash"));
 		file.setLocation(rs.getString("location"));
 		file.setSize(rs.getLong("size"));
-		file.setCreationTime(rs.getDate("creationTime"));
+		file.setCreationTime(rs.getTimestamp("creationTime"));
 		file.setOwner(new User("username"));
 		return file;
 	}

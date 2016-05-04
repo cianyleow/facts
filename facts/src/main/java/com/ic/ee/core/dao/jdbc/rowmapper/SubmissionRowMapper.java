@@ -17,7 +17,7 @@ public class SubmissionRowMapper implements RowMapper<Submission> {
 		Submission submission = new Submission(rs.getInt("submissionId"));
 		submission.setAssignment(new Assignment(rs.getInt("assignmentId")));
 		submission.setSubmitter(new Student(rs.getString("username")));
-		submission.setCreationTime(rs.getDate("creationTime"));
+		submission.setCreationTime(rs.getTimestamp("creationTime"));
 		submission.setComment(rs.getString("comment"));
 		submission.setSubmissionStatus(SubmissionStatus.valueOf(rs.getString("submissionStatus")));
 		return submission;

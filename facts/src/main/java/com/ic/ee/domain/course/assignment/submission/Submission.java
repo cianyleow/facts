@@ -1,13 +1,12 @@
 package com.ic.ee.domain.course.assignment.submission;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.User;
 import com.ic.ee.domain.user.student.Student;
 
 public class Submission {
@@ -16,7 +15,7 @@ public class Submission {
 
 	private SubmissionStatus submissionStatus;
 
-	private Date creationTime;
+	private Timestamp creationTime;
 
 	private String comment;
 	private List<File> submittedFiles;
@@ -68,11 +67,11 @@ public class Submission {
 		this.submissionStatus = submissionStatus;
 	}
 
-	public Date getCreationTime() {
+	public Timestamp getCreationTime() {
 		return creationTime;
 	}
 
-	public void setCreationTime(Date creationTime) {
+	public void setCreationTime(Timestamp creationTime) {
 		this.creationTime = creationTime;
 	}
 

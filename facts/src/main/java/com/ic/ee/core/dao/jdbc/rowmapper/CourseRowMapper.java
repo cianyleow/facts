@@ -17,10 +17,10 @@ public class CourseRowMapper implements RowMapper<Course> {
 		course.setName(rs.getString("course.name"));
 		course.setShortName(rs.getString("course.shortName"));
 		AcademicPeriod academicPeriod = new AcademicPeriod(rs.getInt("academic_period.academicPeriodId"));
-		academicPeriod.setEndTime(rs.getDate("academic_period.endTime"));
+		academicPeriod.setEndTime(rs.getTimestamp("academic_period.endTime"));
 		academicPeriod.setName(rs.getString("academic_period.name"));
 		academicPeriod.setShortName(rs.getString("academic_period.shortName"));
-		academicPeriod.setStartTime(rs.getDate("academic_period.startTime"));
+		academicPeriod.setStartTime(rs.getTimestamp("academic_period.startTime"));
 		course.setAcademicPeriod(academicPeriod);
 		return course;
 	}

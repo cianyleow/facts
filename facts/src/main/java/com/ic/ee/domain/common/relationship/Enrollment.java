@@ -1,6 +1,6 @@
 package com.ic.ee.domain.common.relationship;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.course.Course;
@@ -15,7 +15,7 @@ public class Enrollment {
 
 	private EnrollmentLevel enrollmentLevel;
 
-	private Date updateTime;
+	private Timestamp updateTime;
 
 	public Enrollment() {
 		// TODO Auto-generated constructor stub
@@ -58,11 +58,11 @@ public class Enrollment {
 		this.enrollmentLevel = enrollmentLevel;
 	}
 
-	public Date getUpdateTime() {
+	public Timestamp getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
 }

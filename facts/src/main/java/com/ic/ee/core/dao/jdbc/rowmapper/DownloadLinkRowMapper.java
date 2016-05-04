@@ -16,7 +16,7 @@ public class DownloadLinkRowMapper implements RowMapper<DownloadLink> {
 		DownloadLink dl = new DownloadLink(rs.getInt("downloadLinkId"));
 		dl.setFile(new File(rs.getInt("fileId")));
 		dl.setLink(rs.getString("link"));
-		dl.setValidFrom(rs.getDate("validFrom"));
+		dl.setValidFrom(rs.getTimestamp("validFrom"));
 		dl.setUser(new User(rs.getString("username")));
 		dl.setUsed(rs.getBoolean("used"));
 		return dl;

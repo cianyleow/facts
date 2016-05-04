@@ -1,6 +1,6 @@
 package com.ic.ee.domain.common.file;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.user.User;
@@ -13,7 +13,7 @@ public class DownloadLink {
 
 	private String link;
 
-	private Date validFrom;
+	private Timestamp validFrom;
 
 	private User user;
 
@@ -52,11 +52,11 @@ public class DownloadLink {
 		this.link = link;
 	}
 
-	public Date getValidFrom() {
+	public Timestamp getValidFrom() {
 		return validFrom;
 	}
 
-	public void setValidFrom(Date validFrom) {
+	public void setValidFrom(Timestamp validFrom) {
 		this.validFrom = validFrom;
 	}
 

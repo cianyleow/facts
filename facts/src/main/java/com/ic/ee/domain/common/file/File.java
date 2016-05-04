@@ -1,6 +1,6 @@
 package com.ic.ee.domain.common.file;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.user.User;
@@ -18,7 +18,7 @@ public class File {
 
 	private String location;
 
-	private Date creationTime;
+	private Timestamp creationTime;
 
 	private User owner;
 
@@ -95,11 +95,11 @@ public class File {
 		this.location = location;
 	}
 
-	public Date getCreationTime() {
+	public Timestamp getCreationTime() {
 		return creationTime;
 	}
 
-	public void setCreationTime(Date creationTime) {
+	public void setCreationTime(Timestamp creationTime) {
 		this.creationTime = creationTime;
 	}
 }
