@@ -76,4 +76,22 @@ public class Comment {
 	public void setAuthor(Marker author) {
 		this.author = author;
 	}
+
+	public static String[] getHeaders() {
+		return new String[]{
+			"Comment ID",
+			"Feedback ID",
+			"Secret",
+			"Comment"
+		};
+	}
+
+	public static String[] getAccessors() {
+		return new String[] {
+				"commentId",
+				"feedback.feedbackId",
+				"secret",
+				"comment"
+		};
+	}
 }

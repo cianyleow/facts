@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
@@ -30,6 +29,8 @@ import com.ic.ee.domain.common.file.SubmissionFile;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.course.assignment.submission.SubmissionStatus;
+import com.ic.ee.domain.user.student.Student;
+import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
 import com.ic.ee.service.api.SubmissionService;
 
@@ -37,7 +38,7 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final SubmissionDAO submissionDAO;
 
-	private final AssignmentDAO assignmentDAO;
+	private final AssignmentService assignmentService;
 
 	private final StudentDAO studentDAO;
 
@@ -49,11 +50,11 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	private final SubmissionFileValidator submissionFileValidator;
 
-	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentDAO assignmentDAO, StudentDAO studentDAO,
+	public SimpleSubmissionService(SubmissionDAO submissionDAO, AssignmentService assignmentService, StudentDAO studentDAO,
 			FeedbackDAO feedbackDAO, FileDAO fileDAO, FileService fileService,
 			SubmissionFileValidator submissionFileValidator) {
 		this.submissionDAO = submissionDAO;
-		this.assignmentDAO = assignmentDAO;
+		this.assignmentService = assignmentService;
 		this.studentDAO = studentDAO;
 		this.feedbackDAO = feedbackDAO;
 		this.fileDAO = fileDAO;
@@ -68,7 +69,7 @@ public class SimpleSubmissionService implements SubmissionService {
 		submission.setCreationTime(new Timestamp(System.currentTimeMillis()));
 
 		// Get assignment
-		Assignment assignment = assignmentDAO.one(assignmentId);
+		Assignment assignment = assignmentService.getAssignment(assignmentId);
 
 		// Compare dueTime and creationTime to determine status of submission.
 		if(submission.getCreationTime().before(assignment.getDueTime())) {
@@ -93,6 +94,9 @@ public class SimpleSubmissionService implements SubmissionService {
 
 		// Decorate submission with details
 		submission.setAssignment(assignment);
+
+		// Decorate submitter on submission
+		submission.setSubmitter(new Student(username));
 
 		// Create submission
 		submission = submissionDAO.create(submission);
@@ -152,7 +156,7 @@ public class SimpleSubmissionService implements SubmissionService {
 	}
 
 	private void decorateSubmission(Submission submission) {
-		submission.setAssignment(assignmentDAO.one(submission.getAssignment().getAssignmentId()));
+		submission.setAssignment(assignmentService.getLiteAssignment(submission.getAssignment().getAssignmentId()));
 
 		submission.setSubmittedFiles(fileDAO.getFiles(submission));
 
