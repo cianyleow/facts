@@ -54,6 +54,13 @@ public class SimpleAssignmentService implements AssignmentService {
 	}
 
 	@Override
+	public void deleteAssignment(Integer assignmentId) {
+		if(!assignmentDAO.delete(assignmentId)) {
+			// throw an error to indicate it failed
+		}
+	}
+
+	@Override
 	public Assignment getLiteAssignment(Integer assignmentId) {
 		return assignmentDAO.one(assignmentId);
 	}

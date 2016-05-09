@@ -46,6 +46,11 @@ public class AssignmentController {
 		return assignmentService.getLiteAssignment(assignmentId);
 	}
 
+	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.DELETE)
+	public void deleteAssignment(@PathVariable("assignmentId") Integer assignmentId) {
+		assignmentService.deleteAssignment(assignmentId);
+	}
+
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
 	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getRequiredFiles();
