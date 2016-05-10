@@ -66,6 +66,11 @@ public class AssignmentController {
 		return assignmentService.getAssignment(assignmentId).getSuppliedFiles();
 	}
 
+	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
+	public List<Submission> getSubmissions(@PathVariable("assignmentId") Integer assignmentId) {
+		return assignmentService.getAssignment(assignmentId).getSubmissions();
+	}
+
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.POST)
 	public File addRequiredFiles(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("file") MultipartFile file, Principal user) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		return assignmentService.createSuppliedFile(assignmentId, file, user.getName());
