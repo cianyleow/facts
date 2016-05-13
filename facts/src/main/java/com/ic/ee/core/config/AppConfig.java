@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.MultipartFilter;
 
+import com.ic.ee.core.dao.api.AnnouncementDAO;
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.AuthUserDAO;
 import com.ic.ee.core.dao.api.CommentDAO;
@@ -32,6 +33,7 @@ import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
 import com.ic.ee.core.dao.api.UserDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcAnnouncementDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAssignmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcAuthUserDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcCommentDAO;
@@ -143,6 +145,11 @@ public class AppConfig {
 	}
 
 	@Bean
+	AnnouncementDAO announcementDAO() throws IOException {
+		return new JdbcAnnouncementDAO(dataSource);
+	}
+
+	@Bean
 	UserDAO userDAO() throws IOException {
 		return new JdbcUserDAO(dataSource);
 	}
@@ -199,7 +206,7 @@ public class AppConfig {
 
 	@Bean
 	CourseService courseService() throws IOException {
-		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO(), enrollmentDAO(), studentDAO());
+		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO(), enrollmentDAO(), studentDAO(), announcementDAO());
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {

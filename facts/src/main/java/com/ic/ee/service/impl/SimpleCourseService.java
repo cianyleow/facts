@@ -3,6 +3,7 @@ package com.ic.ee.service.impl;
 
 import java.util.List;
 
+import com.ic.ee.core.dao.api.AnnouncementDAO;
 import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.api.CourseOwnerDAO;
@@ -28,14 +29,17 @@ public class SimpleCourseService implements CourseService {
 
 	private final StudentDAO studentDAO;
 
+	private final AnnouncementDAO announcementDAO;
+
 	public SimpleCourseService(CourseDAO courseDAO, AssignmentDAO assignmentDAO, MarkerDAO markerDAO,
-			CourseOwnerDAO courseOwnerDAO, EnrollmentDAO enrollmentDAO, StudentDAO studentDAO) {
+			CourseOwnerDAO courseOwnerDAO, EnrollmentDAO enrollmentDAO, StudentDAO studentDAO, AnnouncementDAO announcementDAO) {
 		this.courseDAO = courseDAO;
 		this.assignmentDAO = assignmentDAO;
 		this.markerDAO = markerDAO;
 		this.courseOwnerDAO = courseOwnerDAO;
 		this.enrollmentDAO = enrollmentDAO;
 		this.studentDAO = studentDAO;
+		this.announcementDAO = announcementDAO;
 	}
 
 	@Override
@@ -85,6 +89,9 @@ public class SimpleCourseService implements CourseService {
 
 		// Decorate students
 		course.setStudents(studentDAO.getStudents(course));
+
+		// Decorate announcements
+		course.setAnnouncements(announcementDAO.getAnnouncements(course));
 
 	}
 }

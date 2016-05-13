@@ -23,6 +23,7 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.common.relationship.EnrollmentLevel;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.marker.Marker;
@@ -72,6 +73,12 @@ public class CourseController {
 	@RequestMapping(path = "/courses/{courseId}/enrollment", method = RequestMethod.GET)
 	public Enrollment getEnrollment(@PathVariable("courseId") Integer courseId, Principal user) {
 		return enrollmentService.getEnrollment(courseId, user.getName());
+	}
+
+
+	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.GET)
+	public List<Announcement> getAnnouncements(@PathVariable("courseId") Integer courseId) {
+		return courseService.getCourse(courseId).getAnnouncements();
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
