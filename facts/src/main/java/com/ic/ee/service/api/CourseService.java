@@ -24,5 +24,5 @@ public interface CourseService {
 	// Get enrollments
 	public List<Enrollment> getEnrollments(String username);
 
-	public Announcement createAnnouncement(Integer courseId, Announcement announcement);
+	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username);
 }

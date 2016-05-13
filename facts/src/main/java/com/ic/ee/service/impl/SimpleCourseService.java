@@ -13,6 +13,7 @@ import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
+import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.CourseService;
 
@@ -76,8 +77,9 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public Announcement createAnnouncement(Integer courseId, Announcement announcement) {
+	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username) {
 		announcement.setCourse(new Course(courseId));
+		announcement.setCourseOwner(new CourseOwner(username));
 		return announcementDAO.create(announcement);
 	}
 

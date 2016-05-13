@@ -82,8 +82,8 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.POST)
-	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId, @RequestBody Announcement announcement) {
-		return courseService.createAnnouncement(courseId, announcement);
+	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId, @RequestBody Announcement announcement, Principal user) {
+		return courseService.createAnnouncement(courseId, announcement, user.getName());
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
