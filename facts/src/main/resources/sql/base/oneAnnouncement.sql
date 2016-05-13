@@ -1,1 +1,1 @@
-SELECT announcementId, courseId, content, link, creationTime, username FROM announcement WHERE announcement = :id
+SELECT announcementId, courseId, content, title, creationTime, username FROM announcement WHERE announcement = :id

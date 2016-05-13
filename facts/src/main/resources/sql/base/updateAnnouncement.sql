@@ -1,6 +1,6 @@
 UPDATE announcement SET
 courseId = :courseId,
 content = :content,
-link = :link,
+title = :title,
 username = :username
 WHERE announcementId = :id

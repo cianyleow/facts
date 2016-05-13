@@ -32,7 +32,7 @@ public class JdbcAnnouncementDAO extends AbstractJdbcBaseDAO<Announcement, Integ
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("courseId", object.getCourse().getCourseId());
 		paramSource.addValue("content", object.getContent());
-		paramSource.addValue("link", object.getLink());
+		paramSource.addValue("title", object.getTitle());
 		paramSource.addValue("username", object.getCourseOwner().getUserName());
 		return paramSource;
 	}

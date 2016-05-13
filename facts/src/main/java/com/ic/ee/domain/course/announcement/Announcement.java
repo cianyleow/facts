@@ -15,7 +15,7 @@ public class Announcement {
 
 	private String content;
 
-	private String link;
+	private String title;
 
 	private Timestamp creationTime;
 
@@ -53,12 +53,12 @@ public class Announcement {
 		this.content = content;
 	}
 
-	public String getLink() {
-		return link;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Timestamp getCreationTime() {

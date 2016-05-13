@@ -1,11 +1,11 @@
 INSERT INTO announcement (
 courseId,
 content,
-link,
+title,
 username
 ) VALUES (
 :courseId, 
 :content,
-:link,
+:title,
 :username
 );
