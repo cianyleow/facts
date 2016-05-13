@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
+import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.marker.Marker;
@@ -31,6 +32,8 @@ public class Course {
 	private List<Enrollment> enrollments;
 
 	private List<Student> students;
+
+	private List<Announcement> announcements;
 
 	private AcademicPeriod academicPeriod;
 
@@ -121,5 +124,14 @@ public class Course {
 
 	public void setStudents(List<Student> students) {
 		this.students = students;
+	}
+
+	@JsonIgnore
+	public List<Announcement> getAnnouncements() {
+		return announcements;
+	}
+
+	public void setAnnouncements(List<Announcement> announcements) {
+		this.announcements = announcements;
 	}
 }
