@@ -12,6 +12,7 @@ import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.CourseService;
 
@@ -72,6 +73,12 @@ public class SimpleCourseService implements CourseService {
 	@Override
 	public List<Course> getMarkedCourses(String username) {
 		return courseDAO.getMarked(username);
+	}
+
+	@Override
+	public Announcement createAnnouncement(Integer courseId, Announcement announcement) {
+		announcement.setCourse(new Course(courseId));
+		return announcementDAO.create(announcement);
 	}
 
 	private void decorateCourse(Course course) {
