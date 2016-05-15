@@ -25,4 +25,6 @@ public interface CourseService {
 	public List<Enrollment> getEnrollments(String username);
 
 	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username);
+
+	public void deleteAnnouncement(Integer announcementId);
 }

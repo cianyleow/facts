@@ -86,6 +86,11 @@ public class CourseController {
 		return courseService.createAnnouncement(courseId, announcement, user.getName());
 	}
 
+	@RequestMapping(path = "/courses/{courseId}/announcements/{announcementId}", method = RequestMethod.DELETE)
+	public void deleteAnnouncement(@PathVariable("announcementId") Integer announcementId) {
+		courseService.deleteAnnouncement(announcementId);
+	}
+
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
 	public List<Student> getStudents(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getStudents();

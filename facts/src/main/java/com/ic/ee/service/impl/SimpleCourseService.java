@@ -83,6 +83,13 @@ public class SimpleCourseService implements CourseService {
 		return announcementDAO.create(announcement);
 	}
 
+	@Override
+	public void deleteAnnouncement(Integer announcementId) {
+		if(!announcementDAO.delete(announcementId)) {
+			// throw deletion error
+		}
+	}
+
 	private void decorateCourse(Course course) {
 		// Decorate assignments
 		course.setAssignments(assignmentDAO.getAssignments(course));
