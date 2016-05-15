@@ -20,27 +20,6 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
 		super(dataSource, new CourseRowMapper(), Course.class, "getCourses.sql", "severalCourseByEnrolled.sql", "severalCourseByMarked.sql", "severalCourseByOwned.sql");
 	}
-//
-//	@Override
-//	public Integer saveCourse(Course course) {
-//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("name", course.getName());
-//		paramSource.addValue("shortName", course.getShortName());
-//		paramSource.addValue("description", course.getDescription());
-//		KeyHolder keyHolder = new GeneratedKeyHolder();
-//		getJdbcTemplate().update(getSqlStatements().get(0), paramSource, keyHolder);
-//		return keyHolder.getKey().intValue();
-//	}
-//
-//	@Override
-//	public Integer updateCourse(Course course) {
-//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("courseId", course.getCourseId());
-//		paramSource.addValue("name", course.getName());
-//		paramSource.addValue("shortName", course.getShortName());
-//		paramSource.addValue("description", course.getDescription());
-//		return getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
-//	}
 
 	@Override
 	public List<Course> getCourses() {
@@ -67,19 +46,21 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 
 	@Override
 	public MapSqlParameterSource getSqlParameterSource(Course object) {
-		// TODO Auto-generated method stub
-		return null;
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", object.getName());
+		paramSource.addValue("shortName", object.getShortName());
+		paramSource.addValue("description", object.getDescription());
+		paramSource.addValue("academicPeriodId", object.getAcademicPeriod().getAcademicPeriodId());
+		return paramSource;
 	}
 
 	@Override
 	public Integer extractId(KeyHolder keyHolder) {
-		// TODO Auto-generated method stub
-		return null;
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override
 	public Integer getId(Course object) {
-		// TODO Auto-generated method stub
-		return null;
+		return object.getCourseId();
 	}
 }

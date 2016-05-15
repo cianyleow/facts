@@ -1,6 +1,3 @@
-UPDATE course SET
-name = :name,
-shortName = :shortName,
-description = :description,
-academicPeriodId = :acdemicPeriodId
+UPDATE course SET 
+description = :description 
 WHERE courseId = :id
