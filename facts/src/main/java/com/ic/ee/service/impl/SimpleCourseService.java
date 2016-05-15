@@ -90,6 +90,11 @@ public class SimpleCourseService implements CourseService {
 		}
 	}
 
+	@Override
+	public Course updateCourse(Course course) {
+		return courseDAO.update(course);
+	}
+
 	private void decorateCourse(Course course) {
 		// Decorate assignments
 		course.setAssignments(assignmentDAO.getAssignments(course));

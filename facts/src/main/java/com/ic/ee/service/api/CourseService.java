@@ -12,6 +12,8 @@ public interface CourseService {
 
 	public Course getCourse(Integer courseId);
 
+	public Course updateCourse(Course course);
+
 	// Always returns lite version
 	public List<Course> getCourses();
 

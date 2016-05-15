@@ -21,6 +21,7 @@ import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.common.relationship.EnrollmentLevel;
 import com.ic.ee.domain.course.Course;
@@ -57,6 +58,13 @@ public class CourseController {
 		return courseService.getLiteCourse(courseId);
 	}
 
+	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.PUT)
+	public Course updateCourse(@PathVariable("courseId") Integer courseId, @RequestBody Course course) {
+		course.setCourseId(courseId);
+		course.setAcademicPeriod(new AcademicPeriod(-1)); // Dummy academic period to avoid NPE
+		return courseService.updateCourse(course);
+	}
+
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getEnrollments();
@@ -82,7 +90,8 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.POST)
-	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId, @RequestBody Announcement announcement, Principal user) {
+	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId,
+			@RequestBody Announcement announcement, Principal user) {
 		return courseService.createAnnouncement(courseId, announcement, user.getName());
 	}
 
@@ -112,7 +121,11 @@ public class CourseController {
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.POST)
-	public Assignment createAssignment(@PathVariable("courseId") Integer courseId, @RequestParam("files") MultipartFile[] files, @RequestParam("assignment") String assignmentString, Principal user) throws JsonParseException, JsonMappingException, IOException, IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
+	public Assignment createAssignment(@PathVariable("courseId") Integer courseId,
+			@RequestParam("files") MultipartFile[] files, @RequestParam("assignment") String assignmentString,
+			Principal user)
+					throws JsonParseException, JsonMappingException, IOException, IncorrectFileNameFormatException,
+					FileUploadException, HashingException, NoResultsReturnedException {
 		Assignment assignment = new ObjectMapper().readValue(assignmentString, Assignment.class);
 		return assignmentService.createAssignment(courseId, assignment, files, user.getName());
 	}
