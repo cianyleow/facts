@@ -17,14 +17,14 @@ public interface CourseService {
 	// Always returns lite version
 	public List<Course> getCourses();
 
+	// Get enrolled courses
+	public List<Course> getEnrolledCourses(List<Enrollment> enrollments);
+
 	// Get owned courses
 	public List<Course> getOwnedCourses(String username);
 
 	// Get marked courses
 	public List<Course> getMarkedCourses(String username);
-
-	// Get enrollments
-	public List<Enrollment> getEnrollments(String username);
 
 	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username);
 

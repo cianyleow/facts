@@ -1,6 +1,7 @@
 
 package com.ic.ee.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ic.ee.core.dao.api.AnnouncementDAO;
@@ -14,7 +15,6 @@ import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
-import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.CourseService;
 
 public class SimpleCourseService implements CourseService {
@@ -62,11 +62,6 @@ public class SimpleCourseService implements CourseService {
 	}
 
 	@Override
-	public List<Enrollment> getEnrollments(String username) {
-		return enrollmentDAO.getEnrollments(new Student(username));
-	}
-
-	@Override
 	public List<Course> getOwnedCourses(String username) {
 		return courseDAO.getOwned(username);
 	}
@@ -93,6 +88,15 @@ public class SimpleCourseService implements CourseService {
 	@Override
 	public Course updateCourse(Course course) {
 		return courseDAO.update(course);
+	}
+
+	@Override
+	public List<Course> getEnrolledCourses(List<Enrollment> enrollments) {
+		List<Integer> courseIds = new ArrayList<Integer>();
+		for(Enrollment enrollment : enrollments) {
+			courseIds.add(enrollment.getCourse().getCourseId());
+		}
+		return courseDAO.several(courseIds);
 	}
 
 	private void decorateCourse(Course course) {

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.common.relationship.EnrollmentLevel;
 import com.ic.ee.domain.course.Course;
@@ -19,11 +18,7 @@ public class EnrollmentRowMapper implements RowMapper<Enrollment> {
 		enrollment.setStudent(new Student(rs.getString("enrollment.username")));
 		enrollment.setUpdateTime(rs.getTimestamp("enrollment.updateTime"));
 		enrollment.setEnrollmentLevel(EnrollmentLevel.valueOf(rs.getString("enrollment.enrollmentLevel")));
-		Course course = new Course(rs.getInt("course.courseId"));
-		course.setAcademicPeriod(new AcademicPeriod(rs.getInt("course.academicPeriodId")));
-		course.setDescription(rs.getString("course.description"));
-		course.setName(rs.getString("course.name"));
-		course.setShortName(rs.getString("course.shortName"));
+		Course course = new Course(rs.getInt("enrollment.courseId"));
 		enrollment.setCourse(course);
 		return enrollment;
 	}
