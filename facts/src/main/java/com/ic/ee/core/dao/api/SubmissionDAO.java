@@ -12,4 +12,6 @@ public interface SubmissionDAO extends BaseDAO<Submission, Integer> {
 
 	public List<Submission> getSubmissions(Assignment assignment);
 
+	public List<Submission> getSubmissions(Assignment assignment, String username);
+
 }

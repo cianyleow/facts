@@ -17,7 +17,7 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> implements SubmissionDAO {
 
 	public JdbcSubmissionDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new SubmissionRowMapper(), Submission.class, "createSubmissionFile.sql", "severalSubmissionForAssignment.sql");
+		super(dataSource, new SubmissionRowMapper(), Submission.class, "createSubmissionFile.sql", "severalSubmissionForAssignment.sql", "severalSubmissionForAssignmentAndUsername.sql");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,6 +33,14 @@ public class JdbcSubmissionDAO extends AbstractJdbcBaseDAO<Submission, Integer> 
 	public List<Submission> getSubmissions(Assignment assignment) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignment.getAssignmentId());
 		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
+	}
+
+	@Override
+	public List<Submission> getSubmissions(Assignment assignment, String username) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("assignmentId", assignment.getAssignmentId());
+		paramSource.addValue("username", username);
+		return getJdbcTemplate().query(getSqlStatements().get(2), paramSource, getRowMapper());
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.ic.ee.service.api;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ic.ee.core.web.exception.FileUploadException;
@@ -17,5 +19,7 @@ public interface SubmissionService {
 	public Submission getLiteSubmission(Integer submissionId);
 
 	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException;
+
+	public List<Submission> getSubmissions(Integer assignmentId, String username);
 
 }
