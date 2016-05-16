@@ -26,6 +26,8 @@ public class Submission {
 
 	private Student submitter;
 
+	private Integer version;
+
 	public Submission() {
 		// TODO Auto-generated constructor stub
 	}
@@ -99,5 +101,13 @@ public class Submission {
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

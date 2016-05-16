@@ -20,6 +20,7 @@ public class SubmissionRowMapper implements RowMapper<Submission> {
 		submission.setCreationTime(rs.getTimestamp("creationTime"));
 		submission.setComment(rs.getString("comment"));
 		submission.setSubmissionStatus(SubmissionStatus.valueOf(rs.getString("submissionStatus")));
+		submission.setVersion(rs.getInt("version"));
 		return submission;
 	}
 
