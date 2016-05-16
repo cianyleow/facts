@@ -23,7 +23,6 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
-import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
@@ -54,11 +53,6 @@ public class AssignmentController {
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
 	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getRequiredFiles();
-	}
-
-	@RequestMapping(path = "/assignments/{assignmentId}/markComponents", method = RequestMethod.GET)
-	public List<MarkComponent> getMarkComponents(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId).getMarkComponents();
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)

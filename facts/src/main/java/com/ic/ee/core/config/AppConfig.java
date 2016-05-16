@@ -26,8 +26,6 @@ import com.ic.ee.core.dao.api.EnrollmentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
-import com.ic.ee.core.dao.api.MarkComponentDAO;
-import com.ic.ee.core.dao.api.MarkDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
@@ -44,8 +42,6 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcEnrollmentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileRequirementDAO;
-import com.ic.ee.core.dao.jdbc.impl.JdbcMarkComponentDAO;
-import com.ic.ee.core.dao.jdbc.impl.JdbcMarkDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcMarkerDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcStudentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcSubmissionDAO;
@@ -63,7 +59,6 @@ import com.ic.ee.service.api.EnrollmentService;
 import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
-import com.ic.ee.service.api.MarkComponentService;
 import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
@@ -73,7 +68,6 @@ import com.ic.ee.service.impl.SimpleEnrollmentService;
 import com.ic.ee.service.impl.SimpleFeedbackService;
 import com.ic.ee.service.impl.SimpleFileRequirementService;
 import com.ic.ee.service.impl.SimpleFileService;
-import com.ic.ee.service.impl.SimpleMarkComponentService;
 import com.ic.ee.service.impl.SimpleSubmissionService;
 import com.ic.ee.service.impl.SimpleUserService;
 import com.ic.ee.util.FileUtils;
@@ -170,11 +164,6 @@ public class AppConfig {
 	}
 
 	@Bean
-	MarkDAO markDAO() throws IOException {
-		return new JdbcMarkDAO(dataSource);
-	}
-
-	@Bean
 	CommentDAO commentDAO() throws IOException {
 		return new JdbcCommentDAO(dataSource);
 	}
@@ -182,11 +171,6 @@ public class AppConfig {
 	@Bean
 	FeedbackDAO feedbackDAO() throws IOException {
 		return new JdbcFeedbackDAO(dataSource);
-	}
-
-	@Bean
-	MarkComponentDAO markComponentDAO() throws IOException {
-		return new JdbcMarkComponentDAO(dataSource);
 	}
 
 	@Bean
@@ -210,7 +194,7 @@ public class AppConfig {
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {
-		return new SimpleAssignmentService(assignmentDAO(), markComponentDAO(), fileRequirementDAO(), submissionDAO(), fileDAO(), courseDAO(), fileService());
+		return new SimpleAssignmentService(assignmentDAO(), fileRequirementDAO(), submissionDAO(), fileDAO(), courseDAO(), fileService());
 	}
 
 	@Bean AuthUserService authUserService() throws IOException {
@@ -248,18 +232,13 @@ public class AppConfig {
 	}
 
 	@Bean
-	MarkComponentService markComponentService() throws IOException {
-		return new SimpleMarkComponentService(markComponentDAO());
-	}
-
-	@Bean
 	SubmissionService submissionService() throws IOException, NoSuchAlgorithmException {
 		return new SimpleSubmissionService(submissionDAO(), assignmentService(), studentDAO(), feedbackDAO(), fileDAO(), fileService(), submissionFileValidator());
 	}
 
 	@Bean
 	FeedbackService feedbackService() throws IOException {
-		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), markDAO(), commentDAO(), markerDAO());
+		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), commentDAO(), markerDAO());
 	}
 
 	@Bean

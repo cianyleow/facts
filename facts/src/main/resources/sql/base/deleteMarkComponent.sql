@@ -1,1 +1,0 @@
-DELETE FROM mark_component WHERE markComponentId = :id

@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.Course;
@@ -26,8 +25,6 @@ public class Assignment {
 	private Timestamp openTime;
 
 	private List<FileRequirement> requiredFiles;
-
-	private List<MarkComponent> markComponents;
 
 	private List<File> suppliedFiles;
 
@@ -81,23 +78,6 @@ public class Assignment {
 			this.requiredFiles = requiredFiles;
 			for(FileRequirement requiredFile : requiredFiles) {
 				requiredFile.setAssignment(this);
-			}
-		}
-	}
-
-	@JsonIgnore
-	public List<MarkComponent> getMarkComponents() {
-		return markComponents;
-	}
-
-	@JsonProperty
-	public void setMarkComponents(List<MarkComponent> markComponents) {
-		if(markComponents == null) {
-			this.markComponents = new ArrayList<MarkComponent>();
-		} else {
-			this.markComponents = markComponents;
-			for(MarkComponent markComponent : markComponents) {
-				markComponent.setAssignment(this);
 			}
 		}
 	}

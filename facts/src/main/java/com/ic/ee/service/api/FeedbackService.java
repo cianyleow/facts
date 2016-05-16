@@ -2,7 +2,6 @@ package com.ic.ee.service.api;
 
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
-import com.ic.ee.domain.common.feedback.mark.Mark;
 
 public interface FeedbackService {
 
@@ -25,16 +24,6 @@ public interface FeedbackService {
 	public Comment updateComment(Comment comment);
 
 	public void deleteComment(Integer commentId);
-
-	public Mark getLiteMark(Integer markId);
-
-	public Mark getMark(Integer markId);
-
-	public Mark createMark(Mark mark);
-
-	public Mark updateMark(Mark mark);
-
-	public void deleteMark(Integer markId);
 
 	public Feedback getSubmissionFeedback(Integer submissionId);
 }

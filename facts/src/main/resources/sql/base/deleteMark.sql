@@ -1,1 +1,0 @@
-DELETE FROM mark WHERE markId = :id

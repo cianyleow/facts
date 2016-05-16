@@ -30,7 +30,6 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("submissionId", object.getSubmission().getSubmissionId());
 		paramSource.addValue("commentStatus", object.getCommentStatus().toString());
-		paramSource.addValue("markStatus", object.getMarkStatus().toString());
 		paramSource.addValue("marker", object.getMarker().getUserName());
 		return paramSource;
 	}

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
-import com.ic.ee.domain.common.feedback.mark.Mark;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
@@ -77,31 +76,5 @@ public class FeedbackController {
 	@RequestMapping(path = "/feedback/{feedbackId}/comments/{commentId}/marker", method = RequestMethod.GET)
 	public Marker getAuthor(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
 		return feedbackService.getComment(commentId).getAuthor();
-	}
-
-	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.GET)
-	public List<Mark> getMarks(@PathVariable("feedbackId") Integer feedbackId) {
-		return feedbackService.getFeedback(feedbackId).getMarks();
-	}
-
-	@RequestMapping(path = "/feedback/{feedbackId}/marks", method = RequestMethod.POST)
-	public Mark createMark(@PathVariable("feedbackId") Integer feedbackId, @RequestBody Mark mark) {
-		return feedbackService.createMark(mark);
-	}
-
-	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.GET)
-	public Mark getMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId) {
-		return feedbackService.getLiteMark(markId);
-	}
-
-	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.PUT)
-	public Mark updateMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId, @RequestBody Mark mark) {
-		mark.setMarkId(markId);
-		return feedbackService.updateMark(mark);
-	}
-
-	@RequestMapping(path = "/feedback/{feedbackId}/marks/{markId}", method = RequestMethod.DELETE)
-	public void deleteMark(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("markId") Integer markId) {
-		feedbackService.deleteMark(markId);
 	}
 }

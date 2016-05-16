@@ -11,13 +11,11 @@ import com.ic.ee.core.dao.api.AssignmentDAO;
 import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
-import com.ic.ee.core.dao.api.MarkComponentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
-import com.ic.ee.domain.common.feedback.mark.MarkComponent;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.Course;
@@ -29,8 +27,6 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	private final AssignmentDAO assignmentDAO;
 
-	private final MarkComponentDAO markComponentDAO;
-
 	private final FileRequirementDAO fileRequirementDAO;
 
 	private final SubmissionDAO submissionDAO;
@@ -41,11 +37,9 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	private final FileService fileService;
 
-	public SimpleAssignmentService(AssignmentDAO assignmentDAO, MarkComponentDAO markComponentDAO,
-			FileRequirementDAO fileRequirementDAO, SubmissionDAO submissionDAO, FileDAO fileDAO, CourseDAO courseDAO,
-			FileService fileService) {
+	public SimpleAssignmentService(AssignmentDAO assignmentDAO, FileRequirementDAO fileRequirementDAO, SubmissionDAO submissionDAO,
+			FileDAO fileDAO, CourseDAO courseDAO, FileService fileService) {
 		this.assignmentDAO = assignmentDAO;
-		this.markComponentDAO = markComponentDAO;
 		this.fileRequirementDAO = fileRequirementDAO;
 		this.submissionDAO = submissionDAO;
 		this.fileDAO = fileDAO;
@@ -75,8 +69,7 @@ public class SimpleAssignmentService implements AssignmentService {
 	@Override
 	@Transactional
 	public Assignment createAssignment(Integer courseId, Assignment assignment, MultipartFile[] files, String username) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
-		// Extract required files/mark components before saving.
-		List<MarkComponent> markComponents = assignment.getMarkComponents();
+		// Extract required files before saving.
 		List<FileRequirement> requiredFiles = assignment.getRequiredFiles();
 
 		// Decorate assignment with courseId
@@ -84,14 +77,6 @@ public class SimpleAssignmentService implements AssignmentService {
 
 		// Create assignment, get persisted object
 		assignment = assignmentDAO.create(assignment);
-
-		// Save markComponents
-		List<MarkComponent> _markComponents = new ArrayList<MarkComponent>();
-		for(MarkComponent markComponent : markComponents) {
-			markComponent.setAssignment(assignment);
-			_markComponents.add(markComponentDAO.create(markComponent));
-		}
-		assignment.setMarkComponents(_markComponents);
 
 		// Save requiredFiles
 		List<FileRequirement> _requiredFiles = new ArrayList<FileRequirement>();
@@ -129,9 +114,6 @@ public class SimpleAssignmentService implements AssignmentService {
 		Course course = courseDAO.one(assignment.getCourse().getCourseId());
 		course.setAssignments(Collections.singletonList(assignment));
 		assignment.setCourse(course);
-
-		// Decorate markComponents
-		assignment.setMarkComponents(markComponentDAO.getMarkComponents(assignment.getAssignmentId()));
 
 		// Decorate suppliedFiles
 		assignment.setSuppliedFiles(fileDAO.getFiles(assignment));

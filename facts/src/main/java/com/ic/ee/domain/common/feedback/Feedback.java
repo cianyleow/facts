@@ -6,8 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
-import com.ic.ee.domain.common.feedback.mark.Mark;
-import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 
@@ -19,9 +17,6 @@ public class Feedback {
 
 	private List<Comment> comments;
 	private CommentStatus commentStatus;
-
-	private List<Mark> marks;
-	private MarkStatus markStatus;
 
 	private Marker marker;
 
@@ -72,30 +67,6 @@ public class Feedback {
 
 	public void setCommentStatus(CommentStatus commentStatus) {
 		this.commentStatus = commentStatus;
-	}
-
-	@JsonIgnore
-	public List<Mark> getMarks() {
-		return marks;
-	}
-
-	public void setMarks(List<Mark> marks) {
-		if(marks == null) {
-			this.marks = new ArrayList<Mark>();
-		} else {
-			this.marks = marks;
-			for(Mark mark : this.marks) {
-				mark.setFeedback(this);
-			}
-		}
-	}
-
-	public MarkStatus getMarkStatus() {
-		return markStatus;
-	}
-
-	public void setMarkStatus(MarkStatus markStatus) {
-		this.markStatus = markStatus;
 	}
 
 	@JsonIgnore

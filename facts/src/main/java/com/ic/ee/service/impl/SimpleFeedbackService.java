@@ -2,14 +2,11 @@ package com.ic.ee.service.impl;
 
 import com.ic.ee.core.dao.api.CommentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
-import com.ic.ee.core.dao.api.MarkDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
-import com.ic.ee.domain.common.feedback.mark.Mark;
-import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
@@ -20,16 +17,13 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	private final SubmissionDAO submissionDAO;
 
-	private final MarkDAO markDAO;
-
 	private final CommentDAO commentDAO;
 
 	private final MarkerDAO markerDAO;
 
-	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO, MarkDAO markDAO, CommentDAO commentDAO, MarkerDAO markerDAO) {
+	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO, CommentDAO commentDAO, MarkerDAO markerDAO) {
 		this.feedbackDAO = feedbackDAO;
 		this.submissionDAO = submissionDAO;
-		this.markDAO = markDAO;
 		this.commentDAO = commentDAO;
 		this.markerDAO = markerDAO;
 	}
@@ -47,7 +41,6 @@ public class SimpleFeedbackService implements FeedbackService {
 		feedback.setMarker(new Marker(username));
 
 		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
-		feedback.setMarkStatus(MarkStatus.MARKS_PENDING);
 
 		return feedbackDAO.create(feedback);
 	}
@@ -80,9 +73,6 @@ public class SimpleFeedbackService implements FeedbackService {
 		// Decorate submission
 		feedback.setSubmission(submissionDAO.one(feedback.getSubmission().getSubmissionId()));
 
-		// Decorate marks
-		feedback.setMarks(markDAO.getMarks(feedback));
-
 		// Decorate comments
 		feedback.setComments(commentDAO.getComments(feedback));
 	}
@@ -105,11 +95,6 @@ public class SimpleFeedbackService implements FeedbackService {
 	}
 
 	@Override
-	public Mark getLiteMark(Integer markId) {
-		return markDAO.one(markId);
-	}
-
-	@Override
 	public Comment createComment(Integer feedbackId, Comment comment, String username) {
 		comment.setAuthor(new Marker(username));
 		comment.setFeedback(new Feedback(feedbackId));
@@ -125,28 +110,6 @@ public class SimpleFeedbackService implements FeedbackService {
 	public void deleteComment(Integer commentId) {
 		if(commentDAO.delete(commentId)) {
 			// Deleted successfully...
-		}
-	}
-
-	@Override
-	public Mark getMark(Integer markId) {
-		return markDAO.one(markId);
-	}
-
-	@Override
-	public Mark createMark(Mark mark) {
-		return markDAO.create(mark);
-	}
-
-	@Override
-	public Mark updateMark(Mark mark) {
-		return markDAO.update(mark);
-	}
-
-	@Override
-	public void deleteMark(Integer markId) {
-		if(markDAO.delete(markId)) {
-
 		}
 	}
 }
