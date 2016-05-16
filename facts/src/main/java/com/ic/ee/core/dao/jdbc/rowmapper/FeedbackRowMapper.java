@@ -18,6 +18,7 @@ public class FeedbackRowMapper implements RowMapper<Feedback> {
 		feedback.setSubmission(new Submission(rs.getInt("submissionId")));
 		feedback.setMarker(new Marker(rs.getString("username")));
 		feedback.setCommentStatus(CommentStatus.valueOf(rs.getString("commentStatus")));
+		feedback.setMark(rs.getDouble("mark"));
 		return feedback;
 	}
 

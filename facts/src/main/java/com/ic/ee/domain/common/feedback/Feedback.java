@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.course.assignment.submission.Submission;
@@ -18,11 +19,11 @@ public class Feedback {
 	private List<Comment> comments;
 	private CommentStatus commentStatus;
 
+	private Double mark;
+
 	private Marker marker;
 
-	public Feedback() {
-		// TODO Auto-generated constructor stub
-	}
+	public Feedback() {}
 
 	public Feedback(Integer feedbackId) {
 		this.feedbackId = feedbackId;
@@ -76,5 +77,15 @@ public class Feedback {
 
 	public void setMarker(Marker marker) {
 		this.marker = marker;
+	}
+
+	@JsonIgnore
+	public Double getMark() {
+		return mark;
+	}
+
+	@JsonProperty
+	public void setMark(Double mark) {
+		this.mark = mark;
 	}
 }

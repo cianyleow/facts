@@ -2,10 +2,12 @@ INSERT INTO feedback (
 submissionId,
 marker,
 commentStatus,
-markStatus
+markStatus,
+mark
 ) VALUES (
 :submissionId, 
 :marker,
 :commentStatus,
-:markStatus
+:markStatus,
+:mark
 );

@@ -31,6 +31,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		paramSource.addValue("submissionId", object.getSubmission().getSubmissionId());
 		paramSource.addValue("commentStatus", object.getCommentStatus().toString());
 		paramSource.addValue("marker", object.getMarker().getUserName());
+		paramSource.addValue("mark", object.getMark());
 		return paramSource;
 	}
 

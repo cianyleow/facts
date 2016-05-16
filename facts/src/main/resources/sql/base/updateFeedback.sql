@@ -1,5 +1,6 @@
 UPDATE feedback SET
 commentStatus = :commentStatus,
 markStatus = :markStatus,
-username = :username
+username = :username,
+mark = :mark 
 WHERE feedbackId = :id
