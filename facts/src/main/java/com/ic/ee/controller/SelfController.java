@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.EnrollmentService;
@@ -24,6 +25,11 @@ public class SelfController {
 	@RequestMapping(path = "/self/enrolledCourses", method = RequestMethod.GET)
 	public List<Course> getEnrolledCourses(Principal user) {
 		return courseService.getEnrolledCourses(enrollmentService.getEnrollments(user.getName()));
+	}
+
+	@RequestMapping(path = "/self/enrollments", method = RequestMethod.GET)
+	public List<Enrollment> getEnrollments(Principal user) {
+		return enrollmentService.decorateCourses(enrollmentService.getEnrollments(user.getName()));
 	}
 
 	@RequestMapping(path = "/self/markedCourses", method = RequestMethod.GET)

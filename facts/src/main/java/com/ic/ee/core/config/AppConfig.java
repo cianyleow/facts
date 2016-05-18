@@ -223,7 +223,7 @@ public class AppConfig {
 
 	@Bean
 	EnrollmentService enrollmentService() throws IOException {
-		return new SimpleEnrollmentService(enrollmentDAO());
+		return new SimpleEnrollmentService(enrollmentDAO(), courseDAO(), studentDAO());
 	}
 
 	@Bean

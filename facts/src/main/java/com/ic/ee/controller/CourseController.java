@@ -67,7 +67,7 @@ public class CourseController {
 
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId).getEnrollments();
+		return enrollmentService.decorateStudents(courseService.getCourse(courseId).getEnrollments());
 	}
 
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.POST)

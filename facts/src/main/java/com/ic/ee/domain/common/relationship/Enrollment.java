@@ -2,7 +2,6 @@ package com.ic.ee.domain.common.relationship;
 
 import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.student.Student;
 
@@ -33,7 +32,6 @@ public class Enrollment {
 		this.enrollmentId = enrollmentId;
 	}
 
-	@JsonIgnore
 	public Student getStudent() {
 		return student;
 	}

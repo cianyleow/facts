@@ -17,4 +17,8 @@ public interface EnrollmentService {
 	public Enrollment updateEnrollment(Integer enrollmentId, Enrollment enrollment);
 
 	public void deleteEnrollment(Integer enrollmentId);
+
+	public List<Enrollment> decorateCourses(List<Enrollment> enrollments);
+
+	public List<Enrollment> decorateStudents(List<Enrollment> enrollments);
 }
