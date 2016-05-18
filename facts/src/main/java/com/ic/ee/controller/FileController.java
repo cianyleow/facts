@@ -17,12 +17,16 @@ import com.ic.ee.core.web.exception.DownloadLinkUsedException;
 import com.ic.ee.domain.common.file.DownloadLink;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.service.api.FileService;
+import com.ic.ee.util.FileUtils;
 
 @RestController
 public class FileController {
 
 	@Autowired
 	private FileService fileService;
+
+	@Autowired
+	private FileUtils fileUtils;
 
 	@RequestMapping(path = "/files/{fileId}/link", method = RequestMethod.GET)
 	public DownloadLink getFileLink(@PathVariable("fileId") Integer fileId, Principal user) {
@@ -33,8 +37,7 @@ public class FileController {
 	public FileSystemResource downloadAnonymousFile(@PathVariable("link") String link, HttpServletResponse response) throws DownloadLinkUsedException, DownloadLinkExpiredException {
 		DownloadLink downloadLink = fileService.getDownloadLink(link);
 		File file = downloadLink.getFile();
-//		response.setContentType(file.getContentType());
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName() + "." + file.getExtension());
-		return new FileSystemResource(file.getLocation());
+		return new FileSystemResource(fileUtils.getFileLocation(file.getLocation()));
 	}
 }

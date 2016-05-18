@@ -61,7 +61,8 @@ public class SimpleFileUtils implements FileUtils {
 			throw new FileUploadException(new EmptyFileException());
 		}
 
-		String fileLocation = createFileLocation(hash);
+		String systemFileName = createFileSystemName(hash);
+		String fileLocation = getFileLocation(systemFileName);
 
 		try {
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new java.io.File(fileLocation)));
@@ -70,12 +71,16 @@ public class SimpleFileUtils implements FileUtils {
 			throw new FileUploadException(e);
 		}
 
-		return fileLocation;
+		return systemFileName;
 	}
 
-	private String createFileLocation(String hash) {
+	private String createFileSystemName(String hash) {
 		Date date = new Date();
-		String fileLocation = baseFileLocation + "/" + hash + "." + date.getTime();
-		return fileLocation;
+		return hash + "." + date.getTime();
+	}
+
+	@Override
+	public String getFileLocation(String systemFileName) {
+		return baseFileLocation + "/" + systemFileName;
 	}
 }

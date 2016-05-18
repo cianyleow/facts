@@ -11,4 +11,6 @@ public interface FileUtils {
 
 	public File createFile(MultipartFile file) throws IncorrectFileNameFormatException, FileUploadException, HashingException;
 
+	public String getFileLocation(String systemFileName);
+
 }
