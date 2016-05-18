@@ -61,6 +61,9 @@ public class SimpleEnrollmentService implements EnrollmentService {
 
 	@Override
 	public List<Enrollment> decorateCourses(List<Enrollment> enrollments) {
+		if(enrollments == null || enrollments.isEmpty()) {
+			return enrollments;
+		}
 		List<Integer> courseIds = CollectionUtil.extractAttribute(enrollments, new Extractor<Enrollment, Integer>() {
 
 			@Override
@@ -99,6 +102,9 @@ public class SimpleEnrollmentService implements EnrollmentService {
 
 	@Override
 	public List<Enrollment> decorateStudents(List<Enrollment> enrollments) {
+		if(enrollments == null || enrollments.isEmpty()) {
+			return enrollments;
+		}
 		List<String> usernames = CollectionUtil.extractAttribute(enrollments, new Extractor<Enrollment, String>() {
 
 			@Override
