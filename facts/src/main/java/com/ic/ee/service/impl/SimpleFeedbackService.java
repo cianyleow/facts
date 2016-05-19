@@ -1,15 +1,21 @@
 package com.ic.ee.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ic.ee.core.dao.api.CommentDAO;
 import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
+import com.ic.ee.core.web.exception.NoMarkersException;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
+import com.ic.ee.util.marker.Allocator;
 
 public class SimpleFeedbackService implements FeedbackService {
 
@@ -35,14 +41,30 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	@Override
 	public Feedback createFeedback(Integer submissionId, String username) {
+		return createFeedback(new Submission(submissionId), new Marker(username));
+	}
+
+	private Feedback createFeedback(Submission submission, Marker marker) {
 		Feedback feedback = new Feedback();
-		feedback.setSubmission(new Submission(submissionId));
-
-		feedback.setMarker(new Marker(username));
-
+		feedback.setSubmission(submission);
+		feedback.setMarker(marker);
 		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
-
+		feedback.setMark(0.0);
 		return feedbackDAO.create(feedback);
+	}
+
+	@Override
+	public List<Feedback> createFeedback(Integer assignmentId, Allocator allocator) throws NoMarkersException {
+		List<Marker> markers = markerDAO.getMarkers(new Assignment(assignmentId));
+		if(markers == null || markers.size() == 0) {
+			throw new NoMarkersException();
+		}
+		List<Submission> submissions = submissionDAO.getSubmissions(new Assignment(assignmentId));
+		List<Feedback> feedback = new ArrayList<Feedback>();
+		for(Submission submission : submissions) {
+			feedback.add(createFeedback(submission, allocator.getMarker(submission, markers)));
+		}
+		return feedback;
 	}
 
 	@Override

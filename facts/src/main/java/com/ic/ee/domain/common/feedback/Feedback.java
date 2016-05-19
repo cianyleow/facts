@@ -37,7 +37,6 @@ public class Feedback {
 		this.feedbackId = feedbackId;
 	}
 
-	@JsonIgnore
 	public Submission getSubmission() {
 		return submission;
 	}

@@ -1,7 +1,11 @@
 package com.ic.ee.service.api;
 
+import java.util.List;
+
+import com.ic.ee.core.web.exception.NoMarkersException;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.feedback.comment.Comment;
+import com.ic.ee.util.marker.Allocator;
 
 public interface FeedbackService {
 
@@ -10,6 +14,8 @@ public interface FeedbackService {
 	public Feedback getFeedback(Integer feedbackId);
 
 	public Feedback createFeedback(Integer submissionId, String username);
+
+	public List<Feedback> createFeedback(Integer assignmentId, Allocator allocator) throws NoMarkersException;
 
 	public Feedback updateFeedback(Feedback feedback);
 

@@ -19,16 +19,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
+import com.ic.ee.core.web.exception.NoMarkersException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
+import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
+import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.SubmissionService;
+import com.ic.ee.util.marker.impl.RoundRobinAllocator;
 
 @RestController
 public class AssignmentController {
@@ -39,6 +43,9 @@ public class AssignmentController {
 
 	@Autowired
 	private SubmissionService submissionService;
+
+	@Autowired
+	private FeedbackService feedbackService;
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) {
@@ -79,5 +86,10 @@ public class AssignmentController {
 	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);
 		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
+	}
+
+	@RequestMapping(path = "/assignments/{assignmentId}/feedback", method = RequestMethod.POST)
+	public List<Feedback> createFeedback(@PathVariable("assignmentId") Integer assignmentId) throws NoMarkersException {
+		return feedbackService.createFeedback(assignmentId, new RoundRobinAllocator());
 	}
 }

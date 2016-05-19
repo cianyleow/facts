@@ -12,18 +12,25 @@ import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.jdbc.rowmapper.MarkerRowMapper;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.user.marker.Marker;
 
 public class JdbcMarkerDAO extends AbstractJdbcBaseDAO<Marker, String> implements MarkerDAO {
 
 	public JdbcMarkerDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new MarkerRowMapper(), Marker.class, "severalMarkersForCourse.sql");
+		super(dataSource, new MarkerRowMapper(), Marker.class, "severalMarkerForCourse.sql", "severalMarkerForAssignment.sql");
 	}
 
 	@Override
 	public List<Marker> getMarkers(Course course) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("courseId", course.getCourseId());
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
+	}
+
+	@Override
+	public List<Marker> getMarkers(Assignment assignment) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("assignmentId", assignment.getAssignmentId());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override
