@@ -27,12 +27,17 @@ public class JdbcCourseOwnerDAO extends AbstractJdbcBaseDAO<CourseOwner, String>
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(CourseOwner object) {
+	public MapSqlParameterSource getNewSqlParameterSource(CourseOwner object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("email", object.getEmail());
-		paramSource.addValue("firstName", object.getFirstName());
-		paramSource.addValue("lastName", object.getLastName());
+		paramSource.addValue("username", object.getUserName());
 		paramSource.addValue("title", object.getTitle());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(CourseOwner updateObject, CourseOwner existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("title", updateObject.getTitle() == null ? existingObject.getTitle() : updateObject.getTitle());
 		return paramSource;
 	}
 

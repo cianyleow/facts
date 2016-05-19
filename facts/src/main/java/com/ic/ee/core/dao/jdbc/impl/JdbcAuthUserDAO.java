@@ -21,7 +21,13 @@ public class JdbcAuthUserDAO extends AbstractJdbcBaseDAO<AuthUser, String> imple
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(AuthUser object) {
+	public MapSqlParameterSource getNewSqlParameterSource(AuthUser object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(AuthUser updateObject, AuthUser existingObject) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -36,7 +36,7 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(File object) {
+	public MapSqlParameterSource getNewSqlParameterSource(File object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", object.getName());
 		paramSource.addValue("extension", object.getExtension());
@@ -45,6 +45,19 @@ public class JdbcFileDAO extends AbstractJdbcBaseDAO<File, Integer> implements F
 		paramSource.addValue("size", object.getSize());
 		paramSource.addValue("username", object.getOwner().getUserName());
 		paramSource.addValue("contentType", object.getContentType());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(File updateObject, File existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", updateObject.getName() == null ? existingObject.getName() : updateObject.getName());
+		paramSource.addValue("extension", updateObject.getExtension() == null ? existingObject.getExtension() : updateObject.getExtension());
+		paramSource.addValue("hash", updateObject.getHash() == null ? existingObject.getHash() : updateObject.getHash());
+		paramSource.addValue("location", updateObject.getLocation() == null ? existingObject.getLocation() : updateObject.getLocation());
+		paramSource.addValue("size", updateObject.getSize() == null ? existingObject.getSize() : updateObject.getSize());
+		paramSource.addValue("username", updateObject.getOwner() == null ? existingObject.getOwner().getUserName() : updateObject.getOwner().getUserName());
+		paramSource.addValue("contentType", updateObject.getContentType() == null ? existingObject.getContentType() : updateObject.getContentType());
 		return paramSource;
 	}
 

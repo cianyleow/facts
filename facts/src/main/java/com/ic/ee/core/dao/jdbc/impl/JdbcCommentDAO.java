@@ -27,12 +27,20 @@ public class JdbcCommentDAO extends AbstractJdbcBaseDAO<Comment, Integer> implem
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Comment object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Comment object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("feedbackId", object.getFeedback().getFeedbackId());
 		paramSource.addValue("secret", object.getSecret());
 		paramSource.addValue("comment", object.getComment());
 		paramSource.addValue("username", object.getAuthor().getUserName());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Comment updateObject, Comment existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("secret", updateObject.getSecret() == null ? existingObject.getSecret() : updateObject.getSecret());
+		paramSource.addValue("comment", updateObject.getComment() == null ? existingObject.getComment() : updateObject.getComment());
 		return paramSource;
 	}
 

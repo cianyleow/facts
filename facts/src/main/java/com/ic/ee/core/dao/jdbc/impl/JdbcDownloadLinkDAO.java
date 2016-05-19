@@ -25,12 +25,19 @@ public class JdbcDownloadLinkDAO extends AbstractJdbcBaseDAO<DownloadLink, Integ
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(DownloadLink object) {
+	public MapSqlParameterSource getNewSqlParameterSource(DownloadLink object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("fileId", object.getFile().getFileId());
 		paramSource.addValue("link", object.getLink());
 		paramSource.addValue("username", object.getUser().getUserName());
 		paramSource.addValue("used", object.isUsed());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(DownloadLink updateObject, DownloadLink existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("used", updateObject.isUsed() == null ? existingObject.isUsed() : updateObject.isUsed());
 		return paramSource;
 	}
 

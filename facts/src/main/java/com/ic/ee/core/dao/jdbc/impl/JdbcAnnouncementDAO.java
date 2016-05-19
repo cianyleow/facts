@@ -28,12 +28,20 @@ public class JdbcAnnouncementDAO extends AbstractJdbcBaseDAO<Announcement, Integ
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Announcement object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Announcement object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("courseId", object.getCourse().getCourseId());
 		paramSource.addValue("content", object.getContent());
 		paramSource.addValue("title", object.getTitle());
 		paramSource.addValue("username", object.getCourseOwner().getUserName());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Announcement updateObject, Announcement existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("content", updateObject.getContent() == null ? existingObject.getContent() : updateObject.getContent());
+		paramSource.addValue("title", updateObject.getTitle() == null ? existingObject.getTitle() : updateObject.getTitle());
 		return paramSource;
 	}
 

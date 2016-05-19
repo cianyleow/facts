@@ -77,4 +77,9 @@ public class FeedbackController {
 	public Marker getAuthor(@PathVariable("feedbackId") Integer feedbackId, @PathVariable("commentId") Integer commentId) {
 		return feedbackService.getComment(commentId).getAuthor();
 	}
+
+	@RequestMapping(path = "/feedback/{feedbackId}/mark", method = RequestMethod.GET)
+	public Double getMark(@PathVariable("feedbackId") Integer feedbackId) {
+		return feedbackService.getLiteFeedback(feedbackId).getMark();
+	}
 }

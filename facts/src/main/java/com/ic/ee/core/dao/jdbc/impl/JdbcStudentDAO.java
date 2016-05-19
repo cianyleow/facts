@@ -27,13 +27,19 @@ public class JdbcStudentDAO extends AbstractJdbcBaseDAO<Student, String> impleme
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Student object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Student object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("email", object.getEmail());
-		paramSource.addValue("firstName", object.getFirstName());
-		paramSource.addValue("lastName", object.getLastName());
+		paramSource.addValue("username", object.getUserName());
 		paramSource.addValue("studentId", object.getStudentId());
 		paramSource.addValue("yearOfStudy", object.getYearOfStudy());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Student updateObject, Student existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("studentId", updateObject.getStudentId() == null ? existingObject.getStudentId() : updateObject.getStudentId());
+		paramSource.addValue("yearOfStudy", updateObject.getYearOfStudy() == null ? existingObject.getYearOfStudy() : updateObject.getYearOfStudy());
 		return paramSource;
 	}
 

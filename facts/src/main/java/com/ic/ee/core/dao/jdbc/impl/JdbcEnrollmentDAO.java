@@ -42,11 +42,18 @@ public class JdbcEnrollmentDAO extends AbstractJdbcBaseDAO<Enrollment, Integer> 
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Enrollment object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Enrollment object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", object.getStudent().getUserName());
 		paramSource.addValue("courseId", object.getCourse().getCourseId());
 		paramSource.addValue("enrollmentLevel", object.getEnrollmentLevel().toString());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Enrollment updateObject, Enrollment existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("enrollmentLevel", updateObject.getEnrollmentLevel() == null ? existingObject.getEnrollmentLevel().toString() : updateObject.getEnrollmentLevel().toString());
 		return paramSource;
 	}
 

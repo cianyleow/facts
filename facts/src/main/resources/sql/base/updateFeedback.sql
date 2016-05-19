@@ -1,4 +1,4 @@
-UPDATE feedback SET
+UPDATE feedback SET 
 commentStatus = :commentStatus,
 markStatus = :markStatus,
 username = :username,

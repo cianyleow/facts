@@ -38,13 +38,23 @@ public class JdbcAssignmentDAO extends AbstractJdbcBaseDAO<Assignment, Integer> 
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Assignment object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Assignment object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("courseId", object.getCourse().getCourseId());
 		paramSource.addValue("name", object.getName());
 		paramSource.addValue("description", object.getDescription());
 		paramSource.addValue("dueTime", object.getDueTime());
 		paramSource.addValue("openTime", object.getOpenTime());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Assignment updateObject, Assignment existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", updateObject.getName() == null ? existingObject.getName() : updateObject.getName());
+		paramSource.addValue("description", updateObject.getDescription() == null ? existingObject.getDescription() : updateObject.getDescription());
+		paramSource.addValue("dueTime", updateObject.getDueTime() == null ? existingObject.getDueTime() : updateObject.getDueTime());
+		paramSource.addValue("openTime", updateObject.getOpenTime() == null ? existingObject.getOpenTime() : updateObject.getOpenTime());
 		return paramSource;
 	}
 

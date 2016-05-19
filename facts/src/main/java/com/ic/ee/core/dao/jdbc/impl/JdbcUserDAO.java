@@ -19,9 +19,22 @@ public class JdbcUserDAO extends AbstractJdbcBaseDAO<User, String> implements Us
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(User object) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapSqlParameterSource getNewSqlParameterSource(User object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("firstName", object.getFirstName());
+		paramSource.addValue("lastName", object.getLastName());
+		paramSource.addValue("userName", object.getUserName());
+		paramSource.addValue("email", object.getEmail());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(User updateObject, User existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("firstName", updateObject.getFirstName() == null ? existingObject.getFirstName() : updateObject.getFirstName());
+		paramSource.addValue("lastName", updateObject.getLastName() == null ? existingObject.getLastName() : updateObject.getLastName());
+		paramSource.addValue("email", updateObject.getEmail() == null ? existingObject.getEmail() : updateObject.getEmail());
+		return paramSource;
 	}
 
 	@Override
@@ -32,7 +45,6 @@ public class JdbcUserDAO extends AbstractJdbcBaseDAO<User, String> implements Us
 
 	@Override
 	public String getId(User object) {
-		// TODO Auto-generated method stub
-		return null;
+		return object.getUserName();
 	}
 }

@@ -17,7 +17,7 @@ public class DownloadLink {
 
 	private User user;
 
-	private boolean used;
+	private Boolean used;
 
 	public DownloadLink() {
 
@@ -69,11 +69,11 @@ public class DownloadLink {
 		this.user = user;
 	}
 
-	public boolean isUsed() {
+	public Boolean isUsed() {
 		return used;
 	}
 
-	public void setUsed(boolean used) {
+	public void setUsed(Boolean used) {
 		this.used = used;
 	}
 }

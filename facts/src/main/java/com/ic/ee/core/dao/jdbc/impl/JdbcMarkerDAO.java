@@ -27,12 +27,17 @@ public class JdbcMarkerDAO extends AbstractJdbcBaseDAO<Marker, String> implement
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Marker object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Marker object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("email", object.getEmail());
-		paramSource.addValue("firstName", object.getFirstName());
-		paramSource.addValue("lastName", object.getLastName());
+		paramSource.addValue("username", object.getUserName());
 		paramSource.addValue("title", object.getTitle());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Marker updateObject, Marker existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("title", updateObject.getTitle() == null ? existingObject.getTitle() : updateObject.getTitle());
 		return paramSource;
 	}
 

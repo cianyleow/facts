@@ -45,12 +45,22 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(Course object) {
+	public MapSqlParameterSource getNewSqlParameterSource(Course object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", object.getName());
 		paramSource.addValue("shortName", object.getShortName());
 		paramSource.addValue("description", object.getDescription());
 		paramSource.addValue("academicPeriodId", object.getAcademicPeriod().getAcademicPeriodId());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(Course updateObject, Course existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", updateObject.getName() == null ? existingObject.getName() : updateObject.getName());
+		paramSource.addValue("shortName", updateObject.getShortName() == null ? existingObject.getShortName() : updateObject.getShortName());
+		paramSource.addValue("description", updateObject.getDescription() == null ? existingObject.getDescription() : updateObject.getDescription());
+		paramSource.addValue("academicPeriodId", updateObject.getAcademicPeriod() == null ? existingObject.getAcademicPeriod().getAcademicPeriodId() : updateObject.getAcademicPeriod().getAcademicPeriodId());
 		return paramSource;
 	}
 

@@ -81,20 +81,22 @@ public abstract class AbstractJdbcBaseDAO<T, T1> implements BaseDAO<T, T1> {
 	@Override
 	public T create(T newObject) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(createSqlStatement, getSqlParameterSource(newObject), keyHolder);
+		getJdbcTemplate().update(createSqlStatement, getNewSqlParameterSource(newObject), keyHolder);
 		T1 key = extractId(keyHolder);
 		return one(key);
 	}
 
 	@Override
 	public T update(T updateObject) {
-		MapSqlParameterSource sqlParameterSource = getSqlParameterSource(updateObject);
+		MapSqlParameterSource sqlParameterSource = getUpdateSqlParameterSource(updateObject, one(getId(updateObject)));
 		sqlParameterSource.addValue("id", getId(updateObject));
 		getJdbcTemplate().update(updateSqlStatement, sqlParameterSource);
 		return one(getId(updateObject));
 	}
 
-	public abstract MapSqlParameterSource getSqlParameterSource(T object);
+	public abstract MapSqlParameterSource getNewSqlParameterSource(T object);
+
+	public abstract MapSqlParameterSource getUpdateSqlParameterSource(T updateObject, T existingObject);
 
 	public abstract T1 extractId(KeyHolder keyHolder);
 

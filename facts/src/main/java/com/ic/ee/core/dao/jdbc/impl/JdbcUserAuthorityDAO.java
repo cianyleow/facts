@@ -27,9 +27,18 @@ public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, Str
 	}
 
 	@Override
-	public MapSqlParameterSource getSqlParameterSource(UserAuthority object) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapSqlParameterSource getNewSqlParameterSource(UserAuthority object) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", object.getUser().getUsername());
+		paramSource.addValue("authority", object.getAuthority());
+		return paramSource;
+	}
+
+	@Override
+	public MapSqlParameterSource getUpdateSqlParameterSource(UserAuthority updateObject, UserAuthority existingObject) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("authority", updateObject.getAuthority() == null ? existingObject.getAuthority() : updateObject.getAuthority());
+		return paramSource;
 	}
 
 	@Override
@@ -40,8 +49,7 @@ public class JdbcUserAuthorityDAO extends AbstractJdbcBaseDAO<UserAuthority, Str
 
 	@Override
 	public String getId(UserAuthority object) {
-		// TODO Auto-generated method stub
-		return null;
+		return object.getUser().getUsername();
 	}
 
 }

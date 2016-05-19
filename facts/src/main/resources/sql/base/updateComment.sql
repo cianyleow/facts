@@ -1,5 +1,4 @@
 UPDATE comment SET
 secret = :secret,
-comment = :comment,
-username = :username
+comment = :comment
 WHERE commentId = :id
