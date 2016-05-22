@@ -2,6 +2,7 @@ package com.ic.ee.domain.user.marker;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.User;
 
@@ -18,6 +19,7 @@ public class Marker extends User {
 	private Set<Course> coursesMarkedFor;
 	private String title;
 
+	@JsonIgnore
 	public Set<Course> getCoursesMarkedFor() {
 		return coursesMarkedFor;
 	}
