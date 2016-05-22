@@ -4,12 +4,16 @@ username,
 commentStatus,
 markStatus,
 mark,
-dueTime
+dueTime,
+commentReleased,
+markReleased
 ) VALUES (
 :submissionId, 
 :username,
 :commentStatus,
 :markStatus,
 :mark,
-:dueTime
+:dueTime,
+:commentReleased,
+:markReleased
 );

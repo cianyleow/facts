@@ -30,10 +30,12 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("submissionId", object.getSubmission().getSubmissionId());
 		paramSource.addValue("commentStatus", object.getCommentStatus().toString());
-		paramSource.addValue("markStatus", "");
+		paramSource.addValue("markStatus", object.getMarkStatus().toString());
 		paramSource.addValue("username", object.getMarker().getUserName());
 		paramSource.addValue("mark", object.getMark());
 		paramSource.addValue("dueTime", object.getDueTime());
+		paramSource.addValue("commentReleased", object.getCommentReleased());
+		paramSource.addValue("markReleased", object.getMarkReleased());
 		return paramSource;
 	}
 
@@ -41,10 +43,12 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	public MapSqlParameterSource getUpdateSqlParameterSource(Feedback updateObject, Feedback existingObject) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("commentStatus", updateObject.getCommentStatus() == null ? existingObject.getCommentStatus().toString() : updateObject.getCommentStatus().toString());
-		paramSource.addValue("markStatus", ""/*updateObject.getMarkStatus() == null ? existingObject.getMarkStatus().toString() : updateObject.getMarkStatus().toString()*/);
+		paramSource.addValue("markStatus", updateObject.getMarkStatus() == null ? existingObject.getMarkStatus().toString() : updateObject.getMarkStatus().toString());
 		paramSource.addValue("username", updateObject.getMarker() == null ? existingObject.getMarker().getUserName() : updateObject.getMarker().getUserName());
 		paramSource.addValue("mark", updateObject.getMark() == null ? existingObject.getMark() : updateObject.getMark());
 		paramSource.addValue("dueTime", updateObject.getDueTime() == null ? existingObject.getDueTime() : updateObject.getDueTime());
+		paramSource.addValue("commentReleased", updateObject.getCommentReleased() == null ? existingObject.getCommentReleased() : updateObject.getCommentReleased());
+		paramSource.addValue("markReleased", updateObject.getMarkReleased() == null ? existingObject.getMarkReleased() : updateObject.getMarkReleased());
 		return paramSource;
 	}
 

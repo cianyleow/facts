@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
+import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.util.collection.CollectionUtil;
@@ -22,8 +23,11 @@ public class Feedback {
 
 	private List<Comment> comments;
 	private CommentStatus commentStatus;
+	private Boolean commentReleased;
 
 	private Double mark;
+	private MarkStatus markStatus;
+	private Boolean markReleased;
 
 	private Marker marker;
 
@@ -67,12 +71,21 @@ public class Feedback {
 		}
 	}
 
+	@JsonIgnore
 	public CommentStatus getCommentStatus() {
 		return commentStatus;
 	}
 
 	public void setCommentStatus(CommentStatus commentStatus) {
 		this.commentStatus = commentStatus;
+	}
+
+	public Boolean getCommentReleased() {
+		return commentReleased;
+	}
+
+	public void setCommentReleased(Boolean commentReleased) {
+		this.commentReleased = commentReleased;
 	}
 
 	@JsonIgnore
@@ -92,6 +105,23 @@ public class Feedback {
 	@JsonProperty
 	public void setMark(Double mark) {
 		this.mark = mark;
+	}
+
+	@JsonIgnore
+	public MarkStatus getMarkStatus() {
+		return markStatus;
+	}
+
+	public void setMarkStatus(MarkStatus markStatus) {
+		this.markStatus = markStatus;
+	}
+
+	public Boolean getMarkReleased() {
+		return markReleased;
+	}
+
+	public void setMarkReleased(Boolean markReleased) {
+		this.markReleased = markReleased;
 	}
 
 	@JsonIgnore
