@@ -19,6 +19,7 @@ public class FeedbackRowMapper implements RowMapper<Feedback> {
 		feedback.setMarker(new Marker(rs.getString("username")));
 		feedback.setCommentStatus(CommentStatus.valueOf(rs.getString("commentStatus")));
 		feedback.setMark(rs.getDouble("mark"));
+		feedback.setDueTime(rs.getTimestamp("dueTime"));
 		return feedback;
 	}
 

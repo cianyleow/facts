@@ -1,5 +1,6 @@
 package com.ic.ee.domain.common.feedback;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +26,8 @@ public class Feedback {
 	private Double mark;
 
 	private Marker marker;
+
+	private Timestamp dueTime;
 
 	public Feedback() {}
 
@@ -102,5 +105,13 @@ public class Feedback {
 				return !element.getSecret();
 			}
 		});
+	}
+
+	public Timestamp getDueTime() {
+		return dueTime;
+	}
+
+	public void setDueTime(Timestamp dueTime) {
+		this.dueTime = dueTime;
 	}
 }

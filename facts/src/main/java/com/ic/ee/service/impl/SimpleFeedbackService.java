@@ -1,6 +1,8 @@
 package com.ic.ee.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ic.ee.core.dao.api.CommentDAO;
@@ -50,6 +52,7 @@ public class SimpleFeedbackService implements FeedbackService {
 		feedback.setMarker(marker);
 		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
 		feedback.setMark(0.0);
+		feedback.setDueTime(new Timestamp(new Date().getTime() + 10 * 24 * 60 * 60 * 1000));
 		return feedbackDAO.create(feedback);
 	}
 

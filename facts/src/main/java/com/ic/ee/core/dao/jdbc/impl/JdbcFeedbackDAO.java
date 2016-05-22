@@ -33,6 +33,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		paramSource.addValue("markStatus", "");
 		paramSource.addValue("username", object.getMarker().getUserName());
 		paramSource.addValue("mark", object.getMark());
+		paramSource.addValue("dueTime", object.getDueTime());
 		return paramSource;
 	}
 
@@ -43,6 +44,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 		paramSource.addValue("markStatus", ""/*updateObject.getMarkStatus() == null ? existingObject.getMarkStatus().toString() : updateObject.getMarkStatus().toString()*/);
 		paramSource.addValue("username", updateObject.getMarker() == null ? existingObject.getMarker().getUserName() : updateObject.getMarker().getUserName());
 		paramSource.addValue("mark", updateObject.getMark() == null ? existingObject.getMark() : updateObject.getMark());
+		paramSource.addValue("dueTime", updateObject.getDueTime() == null ? existingObject.getDueTime() : updateObject.getDueTime());
 		return paramSource;
 	}
 

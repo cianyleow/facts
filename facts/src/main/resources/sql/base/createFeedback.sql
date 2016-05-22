@@ -3,11 +3,13 @@ submissionId,
 username,
 commentStatus,
 markStatus,
-mark
+mark,
+dueTime
 ) VALUES (
 :submissionId, 
 :username,
 :commentStatus,
 :markStatus,
-:mark
+:mark,
+:dueTime
 );
