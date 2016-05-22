@@ -25,5 +25,15 @@ public class CollectionUtil {
 		return elements;
 	}
 
+	public static <T1, T2> List<T1> filterElements(List <T1> elements, Includer<T1, T2> includer) {
+		ArrayList<T1> filtered = new ArrayList<T1>();
+		for(T1 element : elements) {
+			if(includer.include(element)) {
+				filtered.add(element);
+			}
+		}
+		return filtered;
+	}
+
 
 }

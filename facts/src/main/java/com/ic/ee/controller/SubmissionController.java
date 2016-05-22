@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ic.ee.domain.common.feedback.Feedback;
+import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
@@ -38,6 +39,11 @@ public class SubmissionController {
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.GET)
 	public Feedback getFeedback(@PathVariable("submissionId") Integer submissionId) {
 		return submissionService.getSubmission(submissionId).getFeedback();
+	}
+
+	@RequestMapping(path = "/submissions/{submissionId}/feedback/{feedbackId}/comments", method = RequestMethod.GET)
+	public List<Comment> getComments(@PathVariable("feedbackId") Integer feedbackId) {
+		return feedbackService.getFeedback(feedbackId).getPublicComments();
 	}
 
 	@RequestMapping(path = "/submissions/{submissionId}/feedback", method = RequestMethod.POST)
