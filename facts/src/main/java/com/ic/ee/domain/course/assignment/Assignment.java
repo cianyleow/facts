@@ -1,7 +1,6 @@
 package com.ic.ee.domain.course.assignment;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,14 +58,7 @@ public class Assignment {
 	}
 
 	public void setSubmissions(List<Submission> submissions) {
-		if(submissions == null) {
-			this.submissions = new ArrayList<Submission>();
-		} else {
-			this.submissions = submissions;
-			for(Submission submission : submissions) {
-				submission.setAssignment(this);
-			}
-		}
+		this.submissions = submissions;
 	}
 
 	public Course getCourse() {
@@ -82,14 +74,7 @@ public class Assignment {
 	}
 
 	public void setRequiredFiles(List<FileRequirement> requiredFiles) {
-		if(requiredFiles == null) {
-			this.requiredFiles = new ArrayList<FileRequirement>();
-		} else {
-			this.requiredFiles = requiredFiles;
-			for(FileRequirement requiredFile : requiredFiles) {
-				requiredFile.setAssignment(this);
-			}
-		}
+		this.requiredFiles = requiredFiles;
 	}
 
 	public List<File> getSuppliedFiles() {
