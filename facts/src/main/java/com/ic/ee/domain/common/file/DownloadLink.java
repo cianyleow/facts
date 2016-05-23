@@ -3,20 +3,28 @@ package com.ic.ee.domain.common.file;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.user.User;
 
 public class DownloadLink {
 
+	@JsonView(Views.Public.class)
 	private Integer downloadLinkId;
 
+	@JsonIgnore
 	private File file;
 
+	@JsonView(Views.Public.class)
 	private String link;
 
+	@JsonIgnore
 	private Timestamp validFrom;
 
+	@JsonIgnore
 	private User user;
 
+	@JsonView(Views.Public.class)
 	private Boolean used;
 
 	public DownloadLink() {

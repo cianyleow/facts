@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +22,7 @@ import com.ic.ee.core.web.exception.FileUploadException;
 import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.common.relationship.EnrollmentLevel;
@@ -48,16 +50,19 @@ public class CourseController {
 	@Autowired
 	private EnrollmentService enrollmentService;
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses", method = RequestMethod.GET)
 	public List<Course> getCourses() {
 		return courseService.getCourses();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	public Course getCourse(@PathVariable("courseId") Integer courseId) {
 		return courseService.getLiteCourse(courseId);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.PUT)
 	public Course updateCourse(@PathVariable("courseId") Integer courseId, @RequestBody Course course) {
 		course.setCourseId(courseId);
@@ -65,11 +70,13 @@ public class CourseController {
 		return courseService.updateCourse(course);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(@PathVariable("courseId") Integer courseId) {
 		return enrollmentService.decorateStudents(courseService.getCourse(courseId).getEnrollments());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.POST)
 	public Enrollment enrollCourse(@PathVariable("courseId") Integer courseId, Principal user) {
 		Enrollment enrollment = new Enrollment();
@@ -79,47 +86,56 @@ public class CourseController {
 		return enrollmentService.createEnrollment(enrollment);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/enrollment", method = RequestMethod.GET)
 	public Enrollment getEnrollment(@PathVariable("courseId") Integer courseId, Principal user) {
 		return enrollmentService.getEnrollment(courseId, user.getName());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.GET)
 	public List<Announcement> getAnnouncements(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getAnnouncements();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.POST)
 	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId,
 			@RequestBody Announcement announcement, Principal user) {
 		return courseService.createAnnouncement(courseId, announcement, user.getName());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/announcements/{announcementId}", method = RequestMethod.DELETE)
 	public void deleteAnnouncement(@PathVariable("announcementId") Integer announcementId) {
 		courseService.deleteAnnouncement(announcementId);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/students", method = RequestMethod.GET)
 	public List<Student> getStudents(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getStudents();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/markers", method = RequestMethod.GET)
 	public List<Marker> getMarkers(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getMarkers();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
 	public List<CourseOwner> getCourseOwner(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getCourseOwners();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
 	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
 		return courseService.getCourse(courseId).getAssignments();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.POST)
 	public Assignment createAssignment(@PathVariable("courseId") Integer courseId,
 			@RequestParam("files") MultipartFile[] files, @RequestParam("assignment") String assignmentString,

@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.Course;
@@ -14,22 +15,34 @@ import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public class Assignment {
 
+	@JsonView(Views.Public.class)
 	private Integer assignmentId;
 
+	@JsonView(Views.Public.class)
 	private String name;
+
+	@JsonView(Views.Public.class)
 	private String description;
+
+	@JsonView(Views.Public.class)
 	private Date creationTime;
 
+	@JsonView(Views.Public.class)
 	private Timestamp dueTime;
 
+	@JsonView(Views.Public.class)
 	private Timestamp openTime;
 
+	@JsonView(Views.Public.class)
 	private List<FileRequirement> requiredFiles;
 
+	@JsonView(Views.Public.class)
 	private List<File> suppliedFiles;
 
+	@JsonView(Views.CourseOwner.class)
 	private List<Submission> submissions;
 
+	@JsonView(Views.Public.class)
 	private Course course;
 
 	public Assignment() {
@@ -56,7 +69,6 @@ public class Assignment {
 		}
 	}
 
-	@JsonIgnore
 	public Course getCourse() {
 		return course;
 	}
@@ -65,12 +77,10 @@ public class Assignment {
 		this.course = course;
 	}
 
-	@JsonIgnore
 	public List<FileRequirement> getRequiredFiles() {
 		return requiredFiles;
 	}
 
-	@JsonProperty
 	public void setRequiredFiles(List<FileRequirement> requiredFiles) {
 		if(requiredFiles == null) {
 			this.requiredFiles = new ArrayList<FileRequirement>();
@@ -82,7 +92,6 @@ public class Assignment {
 		}
 	}
 
-	@JsonIgnore
 	public List<File> getSuppliedFiles() {
 		return suppliedFiles;
 	}

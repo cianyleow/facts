@@ -2,6 +2,9 @@ package com.ic.ee.domain.user.student;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.User;
 
@@ -15,8 +18,13 @@ public class Student extends User {
 		super(userName);
 	}
 
+	@JsonView(Views.Student.class)
 	private Integer studentId;
+
+	@JsonView(Views.Student.class)
 	private Integer yearOfStudy;
+
+	@JsonIgnore
 	private Set<Course> enrolledCourses;
 
 	public Integer getStudentId() {

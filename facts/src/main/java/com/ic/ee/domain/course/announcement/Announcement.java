@@ -2,23 +2,29 @@ package com.ic.ee.domain.course.announcement;
 
 import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 
 public class Announcement {
 
+	@JsonView(Views.Public.class)
 	private Integer announcementId;
 
+	@JsonView(Views.Student.class)
 	private Course course;
 
+	@JsonView(Views.Student.class)
 	private String content;
 
+	@JsonView(Views.Student.class)
 	private String title;
 
+	@JsonView(Views.Student.class)
 	private Timestamp creationTime;
 
+	@JsonView(Views.Student.class)
 	private CourseOwner courseOwner;
 
 	public Announcement() { }
@@ -35,12 +41,10 @@ public class Announcement {
 		this.announcementId = announcementId;
 	}
 
-	@JsonIgnore
 	public Course getCourse() {
 		return course;
 	}
 
-	@JsonProperty
 	public void setCourse(Course course) {
 		this.course = course;
 	}
@@ -69,12 +73,10 @@ public class Announcement {
 		this.creationTime = creationTime;
 	}
 
-	@JsonIgnore
 	public CourseOwner getCourseOwner() {
 		return courseOwner;
 	}
 
-	@JsonProperty
 	public void setCourseOwner(CourseOwner courseOwner) {
 		this.courseOwner = courseOwner;
 	}

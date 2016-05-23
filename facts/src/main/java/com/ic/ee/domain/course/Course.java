@@ -3,6 +3,8 @@ package com.ic.ee.domain.course;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.announcement.Announcement;
@@ -17,24 +19,37 @@ public class Course {
 		// TODO Auto-generated constructor stub
 	}
 
+	@JsonView(Views.Public.class)
 	private Integer courseId;
 
+	@JsonView(Views.Public.class)
 	private String name;
+
+	@JsonView(Views.Public.class)
 	private String shortName;
+
+	@JsonView(Views.Public.class)
 	private String description;
 
+	@JsonView(Views.Student.class)
 	private List<Assignment> assignments;
 
+	@JsonView(Views.CourseOwner.class)
 	private List<Marker> markers;
 
+	@JsonView(Views.Student.class)
 	private List<CourseOwner> courseOwners;
 
+	@JsonView(Views.CourseOwner.class)
 	private List<Enrollment> enrollments;
 
+	@JsonView(Views.CourseOwner.class)
 	private List<Student> students;
 
+	@JsonView(Views.Student.class)
 	private List<Announcement> announcements;
 
+	@JsonView(Views.Public.class)
 	private AcademicPeriod academicPeriod;
 
 	public Course(Integer courseId) {

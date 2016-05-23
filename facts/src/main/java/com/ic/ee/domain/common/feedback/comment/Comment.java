@@ -3,20 +3,29 @@ package com.ic.ee.domain.common.feedback.comment;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.user.marker.Marker;
 
 public class Comment {
 
+	@JsonView(Views.Public.class)
 	private Integer commentId;
 
+	@JsonIgnore
 	private Feedback feedback;
 
+	@JsonView(Views.Marker.class)
 	private Boolean secret;
 
+	@JsonView(Views.Student.class)
 	private String comment;
+
+	@JsonView(Views.Student.class)
 	private Timestamp creationTime;
 
+	@JsonView(Views.Student.class)
 	private Marker author;
 
 	public Comment() {

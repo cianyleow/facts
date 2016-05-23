@@ -1,16 +1,25 @@
 package com.ic.ee.domain.common.file;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.course.assignment.Assignment;
 
 public class FileRequirement {
 
+	@JsonView(Views.Public.class)
 	private Integer fileRequirementId;
 
+	@JsonView(Views.Student.class)
 	private Assignment assignment;
 
+	@JsonView(Views.Student.class)
 	private String fileName;
+
+	@JsonView(Views.Student.class)
 	private Integer maxFileSize;
+
+	@JsonView(Views.Student.class)
 	private String allowedExtension;
 
 	public FileRequirement() {

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.comment.Comment;
 import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.common.feedback.mark.MarkStatus;
@@ -17,20 +17,34 @@ import com.ic.ee.util.collection.Includer;
 
 public class Feedback {
 
+	@JsonView(Views.Public.class)
 	private Integer feedbackId;
 
+	@JsonView(Views.Marker.class)
 	private Submission submission;
 
+	@JsonView(Views.Marker.class)
 	private List<Comment> comments;
+
+	@JsonView(Views.Marker.class)
 	private CommentStatus commentStatus;
+
+	@JsonView(Views.Student.class)
 	private Boolean commentReleased;
 
+	@JsonView(Views.Marker.class)
 	private Double mark;
+
+	@JsonView(Views.Marker.class)
 	private MarkStatus markStatus;
+
+	@JsonView(Views.Student.class)
 	private Boolean markReleased;
 
+	@JsonView(Views.Student.class)
 	private Marker marker;
 
+	@JsonView(Views.Student.class)
 	private Timestamp dueTime;
 
 	public Feedback() {}
@@ -55,7 +69,6 @@ public class Feedback {
 		this.submission = submission;
 	}
 
-	@JsonIgnore
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -71,7 +84,6 @@ public class Feedback {
 		}
 	}
 
-	@JsonIgnore
 	public CommentStatus getCommentStatus() {
 		return commentStatus;
 	}
@@ -88,7 +100,6 @@ public class Feedback {
 		this.commentReleased = commentReleased;
 	}
 
-	@JsonIgnore
 	public Marker getMarker() {
 		return marker;
 	}
@@ -97,17 +108,14 @@ public class Feedback {
 		this.marker = marker;
 	}
 
-	@JsonIgnore
 	public Double getMark() {
 		return mark;
 	}
 
-	@JsonProperty
 	public void setMark(Double mark) {
 		this.mark = mark;
 	}
 
-	@JsonIgnore
 	public MarkStatus getMarkStatus() {
 		return markStatus;
 	}
@@ -124,7 +132,6 @@ public class Feedback {
 		this.markReleased = markReleased;
 	}
 
-	@JsonIgnore
 	public List<Comment> getPublicComments() {
 		if(comments == null || comments.isEmpty()) {
 			return Collections.emptyList();

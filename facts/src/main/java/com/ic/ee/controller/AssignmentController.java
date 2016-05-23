@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,7 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.common.file.FileRequirement;
@@ -47,6 +49,7 @@ public class AssignmentController {
 	@Autowired
 	private FeedbackService feedbackService;
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getLiteAssignment(assignmentId);
@@ -57,37 +60,44 @@ public class AssignmentController {
 		assignmentService.deleteAssignment(assignmentId);
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
 	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getRequiredFiles();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)
 	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getSuppliedFiles();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
 	public List<Submission> getSubmissions(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getSubmissions();
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions/self", method = RequestMethod.GET)
 	public List<Submission> getSubmission(@PathVariable("assignmentId") Integer assignmentId, Principal user) {
 		return submissionService.getSubmissions(assignmentId, user.getName());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.POST)
 	public File addRequiredFiles(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("file") MultipartFile file, Principal user) throws IncorrectFileNameFormatException, FileUploadException, HashingException, NoResultsReturnedException {
 		return assignmentService.createSuppliedFile(assignmentId, file, user.getName());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
 	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);
 		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
 	}
 
+	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/feedback", method = RequestMethod.POST)
 	public List<Feedback> createFeedback(@PathVariable("assignmentId") Integer assignmentId) throws NoMarkersException {
 		return feedbackService.createFeedback(assignmentId, new RoundRobinAllocator());

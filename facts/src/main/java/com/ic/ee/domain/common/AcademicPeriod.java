@@ -2,14 +2,24 @@ package com.ic.ee.domain.common;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
+
 public class AcademicPeriod {
 
+	@JsonView(Views.Public.class)
 	private Integer academicPeriodId;
 
+	@JsonView(Views.Public.class)
 	private String name;
+
+	@JsonView(Views.Public.class)
 	private String shortName;
 
+	@JsonView(Views.Public.class)
 	private Timestamp startTime;
+
+	@JsonView(Views.Public.class)
 	private Timestamp endTime;
 
 	public AcademicPeriod() {

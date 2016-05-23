@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
@@ -11,21 +13,31 @@ import com.ic.ee.domain.user.student.Student;
 
 public class Submission {
 
+	@JsonView(Views.Student.class)
 	private Integer submissionId;
 
+	@JsonView(Views.Student.class)
 	private SubmissionStatus submissionStatus;
 
+	@JsonView(Views.Student.class)
 	private Timestamp creationTime;
 
+	@JsonView(Views.Student.class)
 	private String comment;
+
+	@JsonIgnore
 	private List<File> submittedFiles;
 
+	@JsonView(Views.Student.class)
 	private Feedback feedback;
 
+	@JsonView(Views.Marker.class)
 	private Assignment assignment;
 
+	@JsonView(Views.Student.class)
 	private Student submitter;
 
+	@JsonView(Views.Student.class)
 	private Integer version;
 
 	public Submission() {
@@ -85,7 +97,6 @@ public class Submission {
 		this.comment = comment;
 	}
 
-	@JsonIgnore
 	public List<File> getSubmittedFiles() {
 		return submittedFiles;
 	}
@@ -94,7 +105,6 @@ public class Submission {
 		this.submittedFiles = submittedFiles;
 	}
 
-	@JsonIgnore
 	public Feedback getFeedback() {
 		return feedback;
 	}

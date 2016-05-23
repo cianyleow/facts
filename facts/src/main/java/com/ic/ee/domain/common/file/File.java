@@ -3,23 +3,37 @@ package com.ic.ee.domain.common.file;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.user.User;
 
 public class File {
 
+	@JsonView(Views.Public.class)
 	private Integer fileId;
 
+	@JsonView(Views.Public.class)
 	private String name;
+
+	@JsonView(Views.Public.class)
 	private String extension;
 
+	@JsonView(Views.Public.class)
 	private String contentType;
+
+	@JsonView(Views.Public.class)
 	private Long size;
+
+	@JsonView(Views.Public.class)
 	private String hash;
 
+	@JsonIgnore
 	private String location;
 
+	@JsonView(Views.Public.class)
 	private Timestamp creationTime;
 
+	@JsonIgnore
 	private User owner;
 
 	public File() {

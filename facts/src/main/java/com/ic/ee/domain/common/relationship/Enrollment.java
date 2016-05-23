@@ -2,18 +2,26 @@ package com.ic.ee.domain.common.relationship;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ic.ee.domain.Views;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.user.student.Student;
 
 public class Enrollment {
+
+	@JsonView(Views.Public.class)
 	private Integer enrollmentId;
 
+	@JsonView(Views.Student.class)
 	private Student student;
 
+	@JsonView(Views.Student.class)
 	private Course course;
 
+	@JsonView(Views.Student.class)
 	private EnrollmentLevel enrollmentLevel;
 
+	@JsonView(Views.Student.class)
 	private Timestamp updateTime;
 
 	public Enrollment() {
