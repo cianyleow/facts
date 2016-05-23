@@ -1,8 +1,7 @@
 INSERT INTO feedback (
 submissionId,
 username,
-commentStatus,
-markStatus,
+feedbackStatus,
 mark,
 dueTime,
 commentReleased,
@@ -10,8 +9,7 @@ markReleased
 ) VALUES (
 :submissionId, 
 :username,
-:commentStatus,
-:markStatus,
+:feedbackStatus,
 :mark,
 :dueTime,
 :commentReleased,

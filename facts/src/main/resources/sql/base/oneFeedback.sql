@@ -1,1 +1,1 @@
-SELECT feedbackId, submissionId, commentStatus, markStatus, username, mark, dueTime, commentReleased, markReleased FROM feedback WHERE feedbackId = :id
+SELECT feedbackId, submissionId, feedbackStatus, username, mark, dueTime, commentReleased, markReleased FROM feedback WHERE feedbackId = :id

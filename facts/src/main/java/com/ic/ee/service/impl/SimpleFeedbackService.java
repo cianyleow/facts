@@ -11,8 +11,8 @@ import com.ic.ee.core.dao.api.MarkerDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.web.exception.NoMarkersException;
 import com.ic.ee.domain.common.feedback.Feedback;
+import com.ic.ee.domain.common.feedback.FeedbackStatus;
 import com.ic.ee.domain.common.feedback.comment.Comment;
-import com.ic.ee.domain.common.feedback.comment.CommentStatus;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
@@ -50,9 +50,11 @@ public class SimpleFeedbackService implements FeedbackService {
 		Feedback feedback = new Feedback();
 		feedback.setSubmission(submission);
 		feedback.setMarker(marker);
-		feedback.setCommentStatus(CommentStatus.COMMENT_PENDING);
+		feedback.setFeedbackStatus(FeedbackStatus.QUEUED);
 		feedback.setMark(0.0);
 		feedback.setDueTime(new Timestamp(new Date().getTime() + 10 * 24 * 60 * 60 * 1000));
+		feedback.setCommentReleased(false);
+		feedback.setMarkReleased(false);
 		return feedbackDAO.create(feedback);
 	}
 

@@ -1,6 +1,5 @@
 UPDATE feedback SET 
-commentStatus = :commentStatus,
-markStatus = :markStatus,
+feedbackStatus = :feedbackStatus,
 username = :username,
 mark = :mark,
 dueTime = :dueTime,

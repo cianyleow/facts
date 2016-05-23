@@ -37,8 +37,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	public MapSqlParameterSource getNewSqlParameterSource(Feedback object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("submissionId", object.getSubmission().getSubmissionId());
-		paramSource.addValue("commentStatus", object.getCommentStatus().toString());
-		paramSource.addValue("markStatus", object.getMarkStatus().toString());
+		paramSource.addValue("feedbackStatus", object.getFeedbackStatus().toString());
 		paramSource.addValue("username", object.getMarker().getUserName());
 		paramSource.addValue("mark", object.getMark());
 		paramSource.addValue("dueTime", object.getDueTime());
@@ -50,8 +49,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	@Override
 	public MapSqlParameterSource getUpdateSqlParameterSource(Feedback updateObject, Feedback existingObject) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("commentStatus", updateObject.getCommentStatus() == null ? existingObject.getCommentStatus().toString() : updateObject.getCommentStatus().toString());
-		paramSource.addValue("markStatus", updateObject.getMarkStatus() == null ? existingObject.getMarkStatus().toString() : updateObject.getMarkStatus().toString());
+		paramSource.addValue("commentStatus", updateObject.getFeedbackStatus() == null ? existingObject.getFeedbackStatus().toString() : updateObject.getFeedbackStatus().toString());
 		paramSource.addValue("username", updateObject.getMarker() == null ? existingObject.getMarker().getUserName() : updateObject.getMarker().getUserName());
 		paramSource.addValue("mark", updateObject.getMark() == null ? existingObject.getMark() : updateObject.getMark());
 		paramSource.addValue("dueTime", updateObject.getDueTime() == null ? existingObject.getDueTime() : updateObject.getDueTime());

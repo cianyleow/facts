@@ -8,8 +8,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.comment.Comment;
-import com.ic.ee.domain.common.feedback.comment.CommentStatus;
-import com.ic.ee.domain.common.feedback.mark.MarkStatus;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.util.collection.CollectionUtil;
@@ -26,22 +24,19 @@ public class Feedback {
 	@JsonView(Views.Marker.class)
 	private List<Comment> comments;
 
-	@JsonView(Views.Marker.class)
-	private CommentStatus commentStatus;
-
 	@JsonView(Views.Student.class)
 	private Boolean commentReleased;
 
 	@JsonView(Views.Marker.class)
 	private Double mark;
 
-	@JsonView(Views.Marker.class)
-	private MarkStatus markStatus;
-
 	@JsonView(Views.Student.class)
 	private Boolean markReleased;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Marker.class)
+	private FeedbackStatus feedbackStatus;
+
+	@JsonView(Views.CourseOwner.class)
 	private Marker marker;
 
 	@JsonView(Views.Student.class)
@@ -84,14 +79,6 @@ public class Feedback {
 		}
 	}
 
-	public CommentStatus getCommentStatus() {
-		return commentStatus;
-	}
-
-	public void setCommentStatus(CommentStatus commentStatus) {
-		this.commentStatus = commentStatus;
-	}
-
 	public Boolean getCommentReleased() {
 		return commentReleased;
 	}
@@ -116,12 +103,12 @@ public class Feedback {
 		this.mark = mark;
 	}
 
-	public MarkStatus getMarkStatus() {
-		return markStatus;
+	public FeedbackStatus getFeedbackStatus() {
+		return feedbackStatus;
 	}
 
-	public void setMarkStatus(MarkStatus markStatus) {
-		this.markStatus = markStatus;
+	public void setFeedbackStatus(FeedbackStatus feedbackStatus) {
+		this.feedbackStatus = feedbackStatus;
 	}
 
 	public Boolean getMarkReleased() {
