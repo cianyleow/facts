@@ -13,13 +13,13 @@ import com.ic.ee.domain.user.student.Student;
 
 public class Submission {
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private Integer submissionId;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private SubmissionStatus submissionStatus;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private Timestamp creationTime;
 
 	@JsonView(Views.Student.class)
@@ -28,15 +28,16 @@ public class Submission {
 	@JsonView(Views.Student.class)
 	private List<File> submittedFiles;
 
-	@JsonView(Views.Student.class)
+	@JsonIgnore
 	private Feedback feedback;
 
 	@JsonView(Views.Marker.class)
 	private Assignment assignment;
 
+	@JsonIgnore
 	private Student submitter;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private Integer version;
 
 	public Submission() {

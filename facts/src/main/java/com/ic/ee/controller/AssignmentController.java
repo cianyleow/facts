@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,6 @@ import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
-import com.ic.ee.domain.common.file.FileRequirement;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.service.api.AssignmentService;
@@ -52,7 +52,7 @@ public class AssignmentController {
 	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.GET)
 	public Assignment getAssignment(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getLiteAssignment(assignmentId);
+		return assignmentService.getAssignment(assignmentId);
 	}
 
 	@RequestMapping(path = "/assignments/{assignmentId}", method = RequestMethod.DELETE)
@@ -61,18 +61,7 @@ public class AssignmentController {
 	}
 
 	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/assignments/{assignmentId}/requiredFiles", method = RequestMethod.GET)
-	public List<FileRequirement> getAssignmentRequiredFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId).getRequiredFiles();
-	}
-
-	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/assignments/{assignmentId}/suppliedFiles", method = RequestMethod.GET)
-	public List<File> getSuppliedFiles(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId).getSuppliedFiles();
-	}
-
-	@JsonView(Views.Public.class)
+	@PreAuthorize("hasRole('ROLE_MARKER')")
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
 	public List<Submission> getSubmissions(@PathVariable("assignmentId") Integer assignmentId) {
 		return assignmentService.getAssignment(assignmentId).getSubmissions();
@@ -91,6 +80,7 @@ public class AssignmentController {
 	}
 
 	@JsonView(Views.Public.class)
+	@PreAuthorize("hasRole('ROLE_MARKER')")
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
 	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);

@@ -41,7 +41,7 @@ public class Assignment {
 	@JsonView(Views.CourseOwner.class)
 	private List<Submission> submissions;
 
-	@JsonView(Views.Public.class)
+	@JsonIgnore
 	private Course course;
 
 	public Assignment() {
