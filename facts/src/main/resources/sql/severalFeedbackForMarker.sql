@@ -1,0 +1,1 @@
+SELECT feedbackId, submissionId, commentStatus, markStatus, username, mark, dueTime, commentReleased, markReleased FROM feedback WHERE username = :username

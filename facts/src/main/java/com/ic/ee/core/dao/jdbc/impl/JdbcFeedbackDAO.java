@@ -1,6 +1,7 @@
 package com.ic.ee.core.dao.jdbc.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -12,17 +13,24 @@ import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.jdbc.rowmapper.FeedbackRowMapper;
 import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.course.assignment.submission.Submission;
+import com.ic.ee.domain.user.marker.Marker;
 
 public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> implements FeedbackDAO {
 
 	public JdbcFeedbackDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new FeedbackRowMapper(), Feedback.class, "oneFeedbackForSubmission.sql");
+		super(dataSource, new FeedbackRowMapper(), Feedback.class, "oneFeedbackForSubmission.sql", "severalFeedbackForMarker.sql");
 	}
 
 	@Override
 	public Feedback getFeedback(Submission submission) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("submissionId", submission.getSubmissionId());
 		return getJdbcTemplate().queryForObject(getSqlStatements().get(0), paramSource, getRowMapper());
+	}
+
+	@Override
+	public List<Feedback> getFeedback(Marker marker) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", marker.getUserName());
+		return getJdbcTemplate().query(getSqlStatements().get(1), paramSource, getRowMapper());
 	}
 
 	@Override

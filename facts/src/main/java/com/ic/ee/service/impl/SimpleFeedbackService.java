@@ -137,4 +137,9 @@ public class SimpleFeedbackService implements FeedbackService {
 			// Deleted successfully...
 		}
 	}
+
+	@Override
+	public List<Feedback> getFeedback(String username) {
+		return feedbackDAO.getFeedback(new Marker(username));
+	}
 }

@@ -13,6 +13,8 @@ public interface FeedbackService {
 
 	public Feedback getFeedback(Integer feedbackId);
 
+	public List<Feedback> getFeedback(String username);
+
 	public Feedback createFeedback(Integer submissionId, String username);
 
 	public List<Feedback> createFeedback(Integer assignmentId, Allocator allocator) throws NoMarkersException;
