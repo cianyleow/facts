@@ -25,7 +25,7 @@ public class Submission {
 	@JsonView(Views.Student.class)
 	private String comment;
 
-	@JsonIgnore
+	@JsonView(Views.Student.class)
 	private List<File> submittedFiles;
 
 	@JsonView(Views.Student.class)
@@ -34,7 +34,6 @@ public class Submission {
 	@JsonView(Views.Marker.class)
 	private Assignment assignment;
 
-	@JsonView(Views.Student.class)
 	private Student submitter;
 
 	@JsonView(Views.Student.class)

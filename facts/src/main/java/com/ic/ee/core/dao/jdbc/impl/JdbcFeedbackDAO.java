@@ -49,7 +49,7 @@ public class JdbcFeedbackDAO extends AbstractJdbcBaseDAO<Feedback, Integer> impl
 	@Override
 	public MapSqlParameterSource getUpdateSqlParameterSource(Feedback updateObject, Feedback existingObject) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("commentStatus", updateObject.getFeedbackStatus() == null ? existingObject.getFeedbackStatus().toString() : updateObject.getFeedbackStatus().toString());
+		paramSource.addValue("feedbackStatus", updateObject.getFeedbackStatus() == null ? existingObject.getFeedbackStatus().toString() : updateObject.getFeedbackStatus().toString());
 		paramSource.addValue("username", updateObject.getMarker() == null ? existingObject.getMarker().getUserName() : updateObject.getMarker().getUserName());
 		paramSource.addValue("mark", updateObject.getMark() == null ? existingObject.getMark() : updateObject.getMark());
 		paramSource.addValue("dueTime", updateObject.getDueTime() == null ? existingObject.getDueTime() : updateObject.getDueTime());

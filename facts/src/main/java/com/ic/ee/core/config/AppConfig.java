@@ -237,8 +237,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	FeedbackService feedbackService() throws IOException {
-		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), commentDAO(), markerDAO());
+	FeedbackService feedbackService() throws IOException, NoSuchAlgorithmException {
+		return new SimpleFeedbackService(feedbackDAO(), submissionDAO(), commentDAO(), markerDAO(), submissionService());
 	}
 
 	@Bean

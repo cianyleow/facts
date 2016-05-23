@@ -17,6 +17,7 @@ import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
+import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.util.marker.Allocator;
 
 public class SimpleFeedbackService implements FeedbackService {
@@ -29,11 +30,14 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	private final MarkerDAO markerDAO;
 
-	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO, CommentDAO commentDAO, MarkerDAO markerDAO) {
+	private final SubmissionService submissionService;
+
+	public SimpleFeedbackService(FeedbackDAO feedbackDAO, SubmissionDAO submissionDAO, CommentDAO commentDAO, MarkerDAO markerDAO, SubmissionService submissionService) {
 		this.feedbackDAO = feedbackDAO;
 		this.submissionDAO = submissionDAO;
 		this.commentDAO = commentDAO;
 		this.markerDAO = markerDAO;
+		this.submissionService = submissionService;
 	}
 
 	@Override
@@ -73,11 +77,6 @@ public class SimpleFeedbackService implements FeedbackService {
 	}
 
 	@Override
-	public Feedback getLiteFeedback(Integer feedbackId) {
-		return feedbackDAO.one(feedbackId);
-	}
-
-	@Override
 	public Feedback updateFeedback(Feedback feedback) {
 		return feedbackDAO.update(feedback);
 	}
@@ -98,10 +97,13 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	private void decorateFeedback(Feedback feedback) {
 		// Decorate submission
-		feedback.setSubmission(submissionDAO.one(feedback.getSubmission().getSubmissionId()));
+		feedback.setSubmission(submissionService.getSubmission(feedback.getSubmission().getSubmissionId()));
 
 		// Decorate comments
 		feedback.setComments(commentDAO.getComments(feedback));
+
+		// Decorate marker
+		feedback.setMarker(markerDAO.one(feedback.getMarker().getUserName()));
 	}
 
 	@Override
@@ -114,11 +116,6 @@ public class SimpleFeedbackService implements FeedbackService {
 	private void decorateComment(Comment comment) {
 		// Decorate author
 		comment.setAuthor(markerDAO.one(comment.getAuthor().getUserName()));
-	}
-
-	@Override
-	public Comment getLiteComment(Integer commentId) {
-		return commentDAO.one(commentId);
 	}
 
 	@Override
