@@ -28,7 +28,7 @@ public class Submission {
 	@JsonView(Views.Student.class)
 	private List<File> submittedFiles;
 
-	@JsonIgnore
+	@JsonView(Views.Student.class)
 	private Feedback feedback;
 
 	@JsonView(Views.Marker.class)

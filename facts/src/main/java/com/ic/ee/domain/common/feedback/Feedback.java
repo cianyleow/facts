@@ -119,8 +119,9 @@ public class Feedback {
 		this.markReleased = markReleased;
 	}
 
+	@JsonView(Views.Student.class)
 	public List<Comment> getPublicComments() {
-		if(comments == null || comments.isEmpty()) {
+		if(!commentReleased || comments == null || comments.isEmpty()) {
 			return Collections.emptyList();
 		}
 		return CollectionUtil.filterElements(comments, new Includer<Comment, Boolean>() {
@@ -129,6 +130,24 @@ public class Feedback {
 				return !element.getSecret();
 			}
 		});
+	}
+
+	@JsonView(Views.Student.class)
+	public String getGrade() {
+		if(!markReleased || mark == null) {
+			return null;
+		} else if(mark > 70) {
+			return "A*";
+		} else if(mark < 70 || mark > 60) {
+			return "B";
+		} else if(mark < 60 || mark > 50) {
+			return "C";
+		} else if(mark < 50 || mark > 40) {
+			return "D";
+		} else if(mark < 40) {
+			return "F";
+		}
+		return null;
 	}
 
 	public Timestamp getDueTime() {
