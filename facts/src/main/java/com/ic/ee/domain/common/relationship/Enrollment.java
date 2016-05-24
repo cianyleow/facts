@@ -15,7 +15,7 @@ public class Enrollment {
 	@JsonView(Views.Student.class)
 	private Student student;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private Course course;
 
 	@JsonView(Views.Student.class)

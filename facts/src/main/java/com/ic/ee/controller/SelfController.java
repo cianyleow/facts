@@ -35,7 +35,7 @@ public class SelfController {
 		return courseService.getEnrolledCourses(enrollmentService.getEnrollments(user.getName()));
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/self/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(Principal user) {
 		return enrollmentService.decorateCourses(enrollmentService.getEnrollments(user.getName()));
