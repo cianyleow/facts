@@ -82,7 +82,7 @@ public class CourseController {
 		return enrollmentService.decorateStudents(courseService.getCourse(courseId).getEnrollments());
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.POST)
 	public Enrollment enrollCourse(@PathVariable("courseId") Integer courseId, Principal user) {
 		Enrollment enrollment = new Enrollment();
