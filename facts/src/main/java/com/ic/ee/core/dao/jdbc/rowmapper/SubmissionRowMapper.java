@@ -21,6 +21,7 @@ public class SubmissionRowMapper implements RowMapper<Submission> {
 		submission.setComment(rs.getString("comment"));
 		submission.setSubmissionStatus(SubmissionStatus.valueOf(rs.getString("submissionStatus")));
 		submission.setVersion(rs.getInt("version"));
+		submission.setCredit(rs.getBoolean("credit"));
 		return submission;
 	}
 

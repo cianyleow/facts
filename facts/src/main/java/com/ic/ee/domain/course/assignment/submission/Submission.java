@@ -40,6 +40,9 @@ public class Submission {
 	@JsonView(Views.Public.class)
 	private Integer version;
 
+	@JsonView(Views.Public.class)
+	private Boolean credit;
+
 	public Submission() {
 		// TODO Auto-generated constructor stub
 	}
@@ -119,5 +122,13 @@ public class Submission {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public Boolean getCredit() {
+		return credit;
+	}
+
+	public void setCredit(Boolean credit) {
+		this.credit = credit;
 	}
 }

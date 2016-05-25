@@ -1,1 +1,1 @@
-SELECT submissionId, comment, submissionStatus, creationTime, assignmentId, username, 0 AS version FROM submission WHERE submissionId IN (:ids)
+SELECT submissionId, comment, submissionStatus, creationTime, assignmentId, username, 0 AS version, 0 AS credit FROM submission WHERE submissionId IN (:ids)
