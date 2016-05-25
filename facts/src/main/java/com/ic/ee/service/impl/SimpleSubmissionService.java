@@ -160,6 +160,15 @@ public class SimpleSubmissionService implements SubmissionService {
 		return submissionDAO.getSubmissions(new Assignment(assignmentId), username);
 	}
 
+	@Override
+	public List<Submission> getSubmissions(Assignment assignment) {
+		List<Submission> submissions = submissionDAO.getSubmissions(assignment);
+		for(Submission submission : submissions) {
+			decorateSubmission(submission);
+		}
+		return submissions;
+	}
+
 	private void decorateSubmission(Submission submission) {
 		submission.setAssignment(assignmentService.getLiteAssignment(submission.getAssignment().getAssignmentId()));
 

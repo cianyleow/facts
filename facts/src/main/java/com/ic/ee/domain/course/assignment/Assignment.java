@@ -38,7 +38,7 @@ public class Assignment {
 	@JsonView(Views.Public.class)
 	private List<File> suppliedFiles;
 
-	@JsonView(Views.CourseOwner.class)
+	@JsonIgnore
 	private List<Submission> submissions;
 
 	@JsonIgnore

@@ -60,11 +60,11 @@ public class AssignmentController {
 		assignmentService.deleteAssignment(assignmentId);
 	}
 
-	@JsonView(Views.Public.class)
-	@PreAuthorize("hasRole('ROLE_MARKER')")
+	@JsonView(Views.CourseOwner.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.GET)
-	public List<Submission> getSubmissions(@PathVariable("assignmentId") Integer assignmentId) {
-		return assignmentService.getAssignment(assignmentId).getSubmissions();
+	public List<Submission> getSubmission(@PathVariable("assignmentId") Integer assignmentId) {
+		return submissionService.getSubmissions(new Assignment(assignmentId));
 	}
 
 	@JsonView(Views.Public.class)
@@ -80,7 +80,6 @@ public class AssignmentController {
 	}
 
 	@JsonView(Views.Public.class)
-	@PreAuthorize("hasRole('ROLE_MARKER')")
 	@RequestMapping(path = "/assignments/{assignmentId}/submissions", method = RequestMethod.POST)
 	public Submission createSubmission(@PathVariable("assignmentId") Integer assignmentId, @RequestParam("files") MultipartFile[] files, @RequestParam("submission") String submissionString, Principal user) throws NoResultsReturnedException, JsonParseException, JsonMappingException, IOException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException {
 		Submission submission = new ObjectMapper().readValue(submissionString, Submission.class);

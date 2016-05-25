@@ -34,7 +34,7 @@ public class Submission {
 	@JsonView(Views.Marker.class)
 	private Assignment assignment;
 
-	@JsonIgnore
+	@JsonView(Views.CourseOwner.class)
 	private Student submitter;
 
 	@JsonView(Views.Public.class)

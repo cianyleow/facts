@@ -11,6 +11,7 @@ import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
+import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
 
 public interface SubmissionService {
@@ -21,5 +22,7 @@ public interface SubmissionService {
 	public Submission createSubmission(Integer assignmentId, Submission submission, MultipartFile[] files, String username) throws NoResultsReturnedException, SubmissionFileMatchException, UnmatchableSetsException, SubmissionFileValidationException, IncorrectFileNameFormatException, FileUploadException, HashingException;
 
 	public List<Submission> getSubmissions(Integer assignmentId, String username);
+
+	public List<Submission> getSubmissions(Assignment assignment);
 
 }

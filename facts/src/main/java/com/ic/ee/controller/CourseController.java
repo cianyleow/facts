@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +24,11 @@ import com.ic.ee.core.web.exception.HashingException;
 import com.ic.ee.core.web.exception.IncorrectFileNameFormatException;
 import com.ic.ee.core.web.exception.NoResultsReturnedException;
 import com.ic.ee.domain.Views;
-import com.ic.ee.domain.common.AcademicPeriod;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.common.relationship.EnrollmentLevel;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.course.assignment.Assignment;
-import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.domain.user.student.Student;
 import com.ic.ee.service.api.AssignmentService;
@@ -56,21 +55,28 @@ public class CourseController {
 		return courseService.getCourses();
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.GET)
 	public Course getCourse(@PathVariable("courseId") Integer courseId) {
-		return courseService.getLiteCourse(courseId);
+		return courseService.getCourse(courseId);
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.CourseOwner.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
+	@RequestMapping(path = "/courses/{courseId}/admin", method = RequestMethod.GET)
+	public Course getAdminCourse(@PathVariable("courseId") Integer courseId) {
+		return courseService.getCourse(courseId);
+	}
+
+	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.PUT)
 	public Course updateCourse(@PathVariable("courseId") Integer courseId, @RequestBody Course course) {
 		course.setCourseId(courseId);
-		course.setAcademicPeriod(new AcademicPeriod(-1)); // Dummy academic period to avoid NPE
 		return courseService.updateCourse(course);
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.CourseOwner.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
 	@RequestMapping(path = "/courses/{courseId}/enrollments", method = RequestMethod.GET)
 	public List<Enrollment> getEnrollments(@PathVariable("courseId") Integer courseId) {
 		return enrollmentService.decorateStudents(courseService.getCourse(courseId).getEnrollments());
@@ -86,19 +92,14 @@ public class CourseController {
 		return enrollmentService.createEnrollment(enrollment);
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/courses/{courseId}/enrollment", method = RequestMethod.GET)
 	public Enrollment getEnrollment(@PathVariable("courseId") Integer courseId, Principal user) {
 		return enrollmentService.getEnrollment(courseId, user.getName());
 	}
 
-	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.GET)
-	public List<Announcement> getAnnouncements(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId).getAnnouncements();
-	}
-
-	@JsonView(Views.Public.class)
+	@JsonView(Views.Student.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.POST)
 	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId,
 			@RequestBody Announcement announcement, Principal user) {
@@ -106,7 +107,8 @@ public class CourseController {
 	}
 
 	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/courses/{courseId}/announcements/{announcementId}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
+	@RequestMapping(path = "/announcements/{announcementId}", method = RequestMethod.DELETE)
 	public void deleteAnnouncement(@PathVariable("announcementId") Integer announcementId) {
 		courseService.deleteAnnouncement(announcementId);
 	}
@@ -124,18 +126,7 @@ public class CourseController {
 	}
 
 	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/courses/{courseId}/courseOwners", method = RequestMethod.GET)
-	public List<CourseOwner> getCourseOwner(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId).getCourseOwners();
-	}
-
-	@JsonView(Views.Public.class)
-	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.GET)
-	public List<Assignment> getAssignments(@PathVariable("courseId") Integer courseId) {
-		return courseService.getCourse(courseId).getAssignments();
-	}
-
-	@JsonView(Views.Public.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
 	@RequestMapping(path = "/courses/{courseId}/assignments", method = RequestMethod.POST)
 	public Assignment createAssignment(@PathVariable("courseId") Integer courseId,
 			@RequestParam("files") MultipartFile[] files, @RequestParam("assignment") String assignmentString,
