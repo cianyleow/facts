@@ -39,7 +39,7 @@ public class Feedback {
 	@JsonView(Views.CourseOwner.class)
 	private Marker marker;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Marker.class)
 	private Timestamp dueTime;
 
 	public Feedback() {}
