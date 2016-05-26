@@ -10,16 +10,16 @@ public class FileRequirement {
 	@JsonView(Views.Public.class)
 	private Integer fileRequirementId;
 
-	@JsonView(Views.Student.class)
+	@JsonIgnore
 	private Assignment assignment;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private String fileName;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private Integer maxFileSize;
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.Public.class)
 	private String allowedExtension;
 
 	public FileRequirement() {
