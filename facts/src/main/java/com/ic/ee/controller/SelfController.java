@@ -32,7 +32,7 @@ public class SelfController {
 	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/self/enrolledCourses", method = RequestMethod.GET)
 	public List<Course> getEnrolledCourses(Principal user) {
-		return courseService.getEnrolledCourses(enrollmentService.getEnrollments(user.getName()));
+		return courseService.getEnrolledCourses(user.getName());
 	}
 
 	@JsonView(Views.Student.class)

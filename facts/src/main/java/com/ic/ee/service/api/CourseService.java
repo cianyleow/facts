@@ -2,7 +2,6 @@ package com.ic.ee.service.api;
 
 import java.util.List;
 
-import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
 
@@ -18,7 +17,7 @@ public interface CourseService {
 	public List<Course> getCourses();
 
 	// Get enrolled courses
-	public List<Course> getEnrolledCourses(List<Enrollment> enrollments);
+	public List<Course> getEnrolledCourses(String username);
 
 	// Get owned courses
 	public List<Course> getOwnedCourses(String username);
