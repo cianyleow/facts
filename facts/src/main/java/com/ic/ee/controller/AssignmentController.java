@@ -27,7 +27,6 @@ import com.ic.ee.core.web.exception.SubmissionFileMatchException;
 import com.ic.ee.core.web.exception.SubmissionFileValidationException;
 import com.ic.ee.core.web.exception.UnmatchableSetsException;
 import com.ic.ee.domain.Views;
-import com.ic.ee.domain.common.feedback.Feedback;
 import com.ic.ee.domain.common.file.File;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.domain.course.assignment.submission.Submission;
@@ -86,9 +85,10 @@ public class AssignmentController {
 		return submissionService.createSubmission(assignmentId, submission, files, user.getName());
 	}
 
-	@JsonView(Views.Public.class)
+	@JsonView(Views.CourseOwner.class)
 	@RequestMapping(path = "/assignments/{assignmentId}/feedback", method = RequestMethod.POST)
-	public List<Feedback> createFeedback(@PathVariable("assignmentId") Integer assignmentId) throws NoMarkersException {
-		return feedbackService.createFeedback(assignmentId, new RoundRobinAllocator());
+	public List<Submission> assignMarkers(@PathVariable("assignmentId") Integer assignmentId) throws NoMarkersException {
+		feedbackService.createFeedback(assignmentId, new RoundRobinAllocator());
+		return submissionService.getSubmissions(new Assignment(assignmentId));
 	}
 }

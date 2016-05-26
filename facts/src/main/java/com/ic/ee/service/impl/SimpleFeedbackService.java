@@ -19,6 +19,7 @@ import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.util.marker.Allocator;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class SimpleFeedbackService implements FeedbackService {
 
@@ -47,10 +48,16 @@ public class SimpleFeedbackService implements FeedbackService {
 
 	@Override
 	public Feedback createFeedback(Integer submissionId, String username) {
-		return createFeedback(new Submission(submissionId), new Marker(username));
+		Feedback createFeedback = null;
+		try {
+			createFeedback(new Submission(submissionId), new Marker(username));
+		} catch(MySQLIntegrityConstraintViolationException e) {
+			createFeedback = feedbackDAO.getFeedback(new Submission(submissionId));
+		}
+		return createFeedback;
 	}
 
-	private Feedback createFeedback(Submission submission, Marker marker) {
+	private Feedback createFeedback(Submission submission, Marker marker) throws MySQLIntegrityConstraintViolationException {
 		Feedback feedback = new Feedback();
 		feedback.setSubmission(submission);
 		feedback.setMarker(marker);
@@ -71,7 +78,13 @@ public class SimpleFeedbackService implements FeedbackService {
 		List<Submission> submissions = submissionDAO.getSubmissions(new Assignment(assignmentId));
 		List<Feedback> feedback = new ArrayList<Feedback>();
 		for(Submission submission : submissions) {
-			feedback.add(createFeedback(submission, allocator.getMarker(submission, markers)));
+			Feedback createFeedback = null;
+			try {
+				createFeedback = createFeedback(submission, allocator.getMarker(submission, markers));
+			} catch(MySQLIntegrityConstraintViolationException e) {
+				createFeedback = feedbackDAO.getFeedback(submission);
+			}
+			feedback.add(createFeedback);
 		}
 		return feedback;
 	}
