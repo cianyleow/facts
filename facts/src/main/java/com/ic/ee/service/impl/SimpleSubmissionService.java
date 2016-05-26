@@ -157,7 +157,9 @@ public class SimpleSubmissionService implements SubmissionService {
 
 	@Override
 	public List<Submission> getSubmissions(Integer assignmentId, String username) {
-		return submissionDAO.getSubmissions(new Assignment(assignmentId), username);
+		List<Submission> submissions = submissionDAO.getSubmissions(new Assignment(assignmentId), username);
+		decorateCredibility(submissions);
+		return submissions;
 	}
 
 	@Override
@@ -167,6 +169,23 @@ public class SimpleSubmissionService implements SubmissionService {
 			decorateSubmission(submission);
 		}
 		return submissions;
+	}
+
+	// Method only works when run over full list of submissions from an assignment for a specific user!
+	private void decorateCredibility(List<Submission> submissions) {
+		if(submissions == null || submissions.size() == 0) {
+			return;
+		}
+		Submission creditSubmission = submissions.get(0);
+		if(creditSubmission.getSubmissionStatus().equals(SubmissionStatus.LATE)) {
+			return; // If first submission is late, no others are valid.
+		}
+		for(Submission submission : submissions) {
+			if(submission.getSubmissionId() > creditSubmission.getSubmissionId() && !submission.getSubmissionStatus().equals(SubmissionStatus.LATE)) {
+				creditSubmission = submission;
+			}
+		}
+		creditSubmission.setCredit(true);
 	}
 
 	private void decorateSubmission(Submission submission) {
