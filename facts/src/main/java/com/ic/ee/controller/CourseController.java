@@ -98,7 +98,7 @@ public class CourseController {
 		return enrollmentService.getEnrollment(courseId, user.getName());
 	}
 
-	@JsonView(Views.Student.class)
+	@JsonView(Views.CourseOwner.class)
 	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
 	@RequestMapping(path = "/courses/{courseId}/announcements", method = RequestMethod.POST)
 	public Announcement createAnnouncement(@PathVariable("courseId") Integer courseId,

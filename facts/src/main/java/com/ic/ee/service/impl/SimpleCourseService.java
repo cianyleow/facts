@@ -14,6 +14,7 @@ import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
 import com.ic.ee.service.api.CourseService;
+import com.ic.ee.service.api.NotificationService;
 
 public class SimpleCourseService implements CourseService {
 
@@ -31,8 +32,11 @@ public class SimpleCourseService implements CourseService {
 
 	private final AnnouncementDAO announcementDAO;
 
+	private final NotificationService notificationService;
+
 	public SimpleCourseService(CourseDAO courseDAO, AssignmentDAO assignmentDAO, MarkerDAO markerDAO,
-			CourseOwnerDAO courseOwnerDAO, EnrollmentDAO enrollmentDAO, StudentDAO studentDAO, AnnouncementDAO announcementDAO) {
+			CourseOwnerDAO courseOwnerDAO, EnrollmentDAO enrollmentDAO, StudentDAO studentDAO, AnnouncementDAO announcementDAO,
+			NotificationService notificationService) {
 		this.courseDAO = courseDAO;
 		this.assignmentDAO = assignmentDAO;
 		this.markerDAO = markerDAO;
@@ -40,6 +44,7 @@ public class SimpleCourseService implements CourseService {
 		this.enrollmentDAO = enrollmentDAO;
 		this.studentDAO = studentDAO;
 		this.announcementDAO = announcementDAO;
+		this.notificationService = notificationService;
 	}
 
 	@Override
@@ -73,7 +78,12 @@ public class SimpleCourseService implements CourseService {
 	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username) {
 		announcement.setCourse(new Course(courseId));
 		announcement.setCourseOwner(new CourseOwner(username));
-		return announcementDAO.create(announcement);
+		Announcement _announcement = announcementDAO.create(announcement);
+
+		// Create notification once announcement is created.
+		notificationService.createNotification(_announcement);
+
+		return _announcement;
 	}
 
 	@Override

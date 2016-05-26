@@ -22,6 +22,7 @@ import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.assignment.Assignment;
 import com.ic.ee.service.api.AssignmentService;
 import com.ic.ee.service.api.FileService;
+import com.ic.ee.service.api.NotificationService;
 
 public class SimpleAssignmentService implements AssignmentService {
 
@@ -37,14 +38,17 @@ public class SimpleAssignmentService implements AssignmentService {
 
 	private final FileService fileService;
 
+	private final NotificationService notificationService;
+
 	public SimpleAssignmentService(AssignmentDAO assignmentDAO, FileRequirementDAO fileRequirementDAO, SubmissionDAO submissionDAO,
-			FileDAO fileDAO, CourseDAO courseDAO, FileService fileService) {
+			FileDAO fileDAO, CourseDAO courseDAO, FileService fileService, NotificationService notificationService) {
 		this.assignmentDAO = assignmentDAO;
 		this.fileRequirementDAO = fileRequirementDAO;
 		this.submissionDAO = submissionDAO;
 		this.fileDAO = fileDAO;
 		this.courseDAO = courseDAO;
 		this.fileService = fileService;
+		this.notificationService = notificationService;
 	}
 
 	@Override
@@ -92,6 +96,9 @@ public class SimpleAssignmentService implements AssignmentService {
 			suppliedFiles.add(createSuppliedFile(assignment.getAssignmentId(), file, username));
 		}
 		assignment.setSuppliedFiles(suppliedFiles);
+
+		// Create notification of assignment creation.
+		notificationService.createNotification(assignment);
 
 		// Return decorated assignment
 		return assignment;

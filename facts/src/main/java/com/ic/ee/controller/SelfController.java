@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.Feedback;
+import com.ic.ee.domain.common.notification.Notification;
 import com.ic.ee.domain.common.relationship.Enrollment;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.user.User;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.EnrollmentService;
 import com.ic.ee.service.api.FeedbackService;
+import com.ic.ee.service.api.NotificationService;
 
 @RestController
 public class SelfController {
@@ -28,6 +31,9 @@ public class SelfController {
 
 	@Autowired
 	private FeedbackService feedbackService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@JsonView(Views.Public.class)
 	@RequestMapping(path = "/self/enrolledCourses", method = RequestMethod.GET)
@@ -57,5 +63,11 @@ public class SelfController {
 	@RequestMapping(path = "/self/marking", method = RequestMethod.GET)
 	public List<Feedback> getMarking(Principal user) {
 		return feedbackService.getFeedback(user.getName());
+	}
+
+	@JsonView(Views.Public.class)
+	@RequestMapping(path = "/self/notifications", method = RequestMethod.GET)
+	public List<Notification> getNotifications(Principal user) {
+		return notificationService.getNotifications(new User(user.getName()));
 	}
 }

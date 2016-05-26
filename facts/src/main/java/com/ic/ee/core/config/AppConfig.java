@@ -27,6 +27,7 @@ import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
+import com.ic.ee.core.dao.api.NotificationDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
 import com.ic.ee.core.dao.api.UserAuthorityDAO;
@@ -43,6 +44,7 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileRequirementDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcMarkerDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcNotificationDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcStudentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcSubmissionDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcUserAuthorityDAO;
@@ -59,6 +61,7 @@ import com.ic.ee.service.api.EnrollmentService;
 import com.ic.ee.service.api.FeedbackService;
 import com.ic.ee.service.api.FileRequirementService;
 import com.ic.ee.service.api.FileService;
+import com.ic.ee.service.api.NotificationService;
 import com.ic.ee.service.api.SubmissionService;
 import com.ic.ee.service.api.UserService;
 import com.ic.ee.service.impl.SimpleAssignmentService;
@@ -68,6 +71,7 @@ import com.ic.ee.service.impl.SimpleEnrollmentService;
 import com.ic.ee.service.impl.SimpleFeedbackService;
 import com.ic.ee.service.impl.SimpleFileRequirementService;
 import com.ic.ee.service.impl.SimpleFileService;
+import com.ic.ee.service.impl.SimpleNotificationService;
 import com.ic.ee.service.impl.SimpleSubmissionService;
 import com.ic.ee.service.impl.SimpleUserService;
 import com.ic.ee.util.FileUtils;
@@ -111,6 +115,11 @@ public class AppConfig {
 	@Bean
 	CourseDAO courseDAO() throws IOException {
 		return new JdbcCourseDAO(dataSource);
+	}
+
+	@Bean
+	NotificationDAO notificationDAO() throws IOException {
+		return new JdbcNotificationDAO(dataSource);
 	}
 
 	@Bean
@@ -189,12 +198,17 @@ public class AppConfig {
 	}
 
 	@Bean
+	NotificationService notificationService() throws IOException {
+		return new SimpleNotificationService(notificationDAO());
+	}
+
+	@Bean
 	CourseService courseService() throws IOException {
-		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO(), enrollmentDAO(), studentDAO(), announcementDAO());
+		return new SimpleCourseService(courseDAO(), assignmentDAO(), markerDAO(), courseOwnerDAO(), enrollmentDAO(), studentDAO(), announcementDAO(), notificationService());
 	}
 
 	@Bean AssignmentService assignmentService() throws IOException, NoSuchAlgorithmException {
-		return new SimpleAssignmentService(assignmentDAO(), fileRequirementDAO(), submissionDAO(), fileDAO(), courseDAO(), fileService());
+		return new SimpleAssignmentService(assignmentDAO(), fileRequirementDAO(), submissionDAO(), fileDAO(), courseDAO(), fileService(), notificationService());
 	}
 
 	@Bean AuthUserService authUserService() throws IOException {
