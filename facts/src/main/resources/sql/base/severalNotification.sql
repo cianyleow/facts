@@ -1,4 +1,3 @@
-SELECT notification.notificationId, title, content, link, notification_for.seen, creationTime 
-FROM notification 
-LEFT JOIN notification_for ON notification.notificationId = notification_for.notificationId 
+SELECT notification.notificationId, title, content, link, true AS `notification_for.seen`, creationTime 
+FROM notification  
 WHERE notificationId IN (:ids)

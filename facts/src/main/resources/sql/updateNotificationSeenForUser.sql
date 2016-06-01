@@ -1,0 +1,1 @@
+UPDATE notification_for SET seen = true WHERE notificationId = :notificationId AND username = :username 

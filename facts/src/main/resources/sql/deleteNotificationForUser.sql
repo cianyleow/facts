@@ -1,0 +1,1 @@
+DELETE FROM notification_for WHERE notificationId = :notificationId AND username = :username

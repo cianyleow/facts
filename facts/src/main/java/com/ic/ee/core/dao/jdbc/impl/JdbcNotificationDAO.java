@@ -18,12 +18,12 @@ import com.ic.ee.domain.user.User;
 public class JdbcNotificationDAO extends AbstractJdbcBaseDAO<Notification, Integer> implements NotificationDAO {
 
 	public JdbcNotificationDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new NotificationRowMapper(), Notification.class, "severalNotificationForRecipient.sql", "createNotificationForCourse.sql");
+		super(dataSource, new NotificationRowMapper(), Notification.class, "severalNotificationForRecipient.sql", "createNotificationForCourse.sql", "updateNotificationSeenForUser.sql", "deleteNotificationForUser.sql");
 	}
 
 	@Override
 	public List<Notification> getNotifications(User user) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", user.getUserName());
 		return getJdbcTemplate().query(getSqlStatements().get(0), paramSource, getRowMapper());
 	}
 
@@ -33,6 +33,23 @@ public class JdbcNotificationDAO extends AbstractJdbcBaseDAO<Notification, Integ
 		paramSource.addValue("notificationId", notification.getNotificationId());
 		paramSource.addValue("courseId", course.getCourseId());
 		getJdbcTemplate().update(getSqlStatements().get(1), paramSource);
+	}
+
+	@Override
+	public Notification markSeen(Integer notificationId, String username) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("notificationId", notificationId);
+		paramSource.addValue("username", username);
+		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+		return one(notificationId);
+	}
+
+	@Override
+	public void deleteNotificationForUser(Integer notificationId, String username) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("notificationId", notificationId);
+		paramSource.addValue("username", username);
+		getJdbcTemplate().update(getSqlStatements().get(3), paramSource);
 	}
 
 	@Override

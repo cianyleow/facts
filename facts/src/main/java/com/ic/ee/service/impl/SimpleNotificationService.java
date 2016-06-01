@@ -46,4 +46,14 @@ public class SimpleNotificationService implements NotificationService {
 		notificationDAO.link(created, assignment.getCourse());
 	}
 
+	@Override
+	public Notification markSeen(Integer notificationId, String username) {
+		return notificationDAO.markSeen(notificationId, username);
+	}
+
+	@Override
+	public void deleteNotificationForUser(Integer notificationId, String username) {
+		notificationDAO.deleteNotificationForUser(notificationId, username);
+	}
+
 }

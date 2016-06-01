@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,5 +70,17 @@ public class SelfController {
 	@RequestMapping(path = "/self/notifications", method = RequestMethod.GET)
 	public List<Notification> getNotifications(Principal user) {
 		return notificationService.getNotifications(new User(user.getName()));
+	}
+
+	@JsonView(Views.Public.class)
+	@RequestMapping(path = "/self/notifications/{notificationId}", method = RequestMethod.PUT)
+	public Notification markNotificationSeen(@PathVariable("notificationId") Integer notificationId, Principal user) {
+		return notificationService.markSeen(notificationId, user.getName());
+	}
+
+	@JsonView(Views.Public.class)
+	@RequestMapping(path = "/self/notifications/{notificationId}", method = RequestMethod.DELETE)
+	public void deleteNotification(@PathVariable("notificationId") Integer notificationId, Principal user) {
+		notificationService.deleteNotificationForUser(notificationId, user.getName());
 	}
 }

@@ -14,4 +14,8 @@ public interface NotificationService {
 	public void createNotification(Announcement announcement);
 
 	public void createNotification(Assignment assignment);
+
+	public Notification markSeen(Integer notificationId, String username);
+
+	public void deleteNotificationForUser(Integer notificationId, String username);
 }

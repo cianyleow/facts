@@ -12,4 +12,8 @@ public interface NotificationDAO extends BaseDAO<Notification, Integer> {
 	public List<Notification> getNotifications(User user);
 
 	public void link(Notification notification, Course course);
+
+	public Notification markSeen(Integer notificationId, String username);
+
+	public void deleteNotificationForUser(Integer notificationId, String username);
 }
