@@ -50,7 +50,7 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", marker.getUserName());
 		paramSource.addValue("courseId", course.getCourseId());
-		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+		getJdbcTemplate().update(getSqlStatements().get(4), paramSource);
 
 	}
 
