@@ -13,6 +13,7 @@ import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
 import com.ic.ee.domain.user.courseowner.CourseOwner;
+import com.ic.ee.domain.user.marker.Marker;
 import com.ic.ee.service.api.CourseService;
 import com.ic.ee.service.api.NotificationService;
 
@@ -121,6 +122,16 @@ public class SimpleCourseService implements CourseService {
 
 		// Decorate announcements
 		course.setAnnouncements(announcementDAO.getAnnouncements(course));
+	}
 
+	@Override
+	public Marker addMarker(Course course, Marker marker) {
+		courseDAO.addMarker(course, marker);
+		return marker;
+	}
+
+	@Override
+	public List<Marker> getAvailableMarkers(Course course) {
+		return markerDAO.getAvailableMarkers(course);
 	}
 }

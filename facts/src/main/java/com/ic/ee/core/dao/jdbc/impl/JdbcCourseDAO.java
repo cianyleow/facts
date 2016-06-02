@@ -13,12 +13,13 @@ import com.ic.ee.core.dao.api.CourseDAO;
 import com.ic.ee.core.dao.jdbc.AbstractJdbcBaseDAO;
 import com.ic.ee.core.dao.jdbc.rowmapper.CourseRowMapper;
 import com.ic.ee.domain.course.Course;
+import com.ic.ee.domain.user.marker.Marker;
 
 public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implements CourseDAO {
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public JdbcCourseDAO(DataSource dataSource) throws IOException {
-		super(dataSource, new CourseRowMapper(), Course.class, "getCourses.sql", "severalCourseByEnrolled.sql", "severalCourseByMarked.sql", "severalCourseByOwned.sql");
+		super(dataSource, new CourseRowMapper(), Course.class, "getCourses.sql", "severalCourseByEnrolled.sql", "severalCourseByMarked.sql", "severalCourseByOwned.sql", "addMarkerToCourse.sql");
 	}
 
 	@Override
@@ -42,6 +43,15 @@ public class JdbcCourseDAO extends AbstractJdbcBaseDAO<Course, Integer> implemen
 	public List<Course> getOwned(String username) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource("username", username);
 		return getJdbcTemplate().query(getSqlStatements().get(3), paramSource, getRowMapper());
+	}
+
+	@Override
+	public void addMarker(Course course, Marker marker) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", marker.getUserName());
+		paramSource.addValue("courseId", course.getCourseId());
+		getJdbcTemplate().update(getSqlStatements().get(2), paramSource);
+
 	}
 
 	@Override

@@ -68,6 +68,20 @@ public class CourseController {
 		return courseService.getCourse(courseId);
 	}
 
+	@JsonView(Views.CourseOwner.class)
+	@PreAuthorize("hasRole ('ROLE_COURSE_OWNER')")
+	@RequestMapping(path = "/courses/{courseId}/admin/markers", method = RequestMethod.POST)
+	public Marker addCourseMarker(@PathVariable("courseId") Integer courseId, @RequestBody Marker marker) {
+		return courseService.addMarker(new Course(courseId), marker);
+	}
+
+	@JsonView(Views.CourseOwner.class)
+	@PreAuthorize("hasRole('ROLE_COURSE_OWNER')")
+	@RequestMapping(path = "/courses/{courseId}/admin/markers/available", method = RequestMethod.GET)
+	public List<Marker> getAvailableMarkers(@PathVariable("courseId") Integer courseId) {
+		return courseService.getAvailableMarkers(new Course(courseId));
+	}
+
 	@JsonView(Views.Student.class)
 	@RequestMapping(path = "/courses/{courseId}", method = RequestMethod.PUT)
 	public Course updateCourse(@PathVariable("courseId") Integer courseId, @RequestBody Course course) {

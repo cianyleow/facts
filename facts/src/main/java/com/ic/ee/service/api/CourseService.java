@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ic.ee.domain.course.Course;
 import com.ic.ee.domain.course.announcement.Announcement;
+import com.ic.ee.domain.user.marker.Marker;
 
 public interface CourseService {
 
@@ -28,4 +29,8 @@ public interface CourseService {
 	public Announcement createAnnouncement(Integer courseId, Announcement announcement, String username);
 
 	public void deleteAnnouncement(Integer announcementId);
+
+	public Marker addMarker(Course course, Marker marker);
+
+	public List<Marker> getAvailableMarkers(Course course);
 }

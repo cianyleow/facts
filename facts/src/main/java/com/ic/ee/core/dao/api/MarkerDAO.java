@@ -13,4 +13,5 @@ public interface MarkerDAO extends BaseDAO<Marker, String> {
 
 	public List<Marker> getMarkers(Assignment assignment);
 
+	public List<Marker> getAvailableMarkers(Course course);
 }
