@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ic.ee.domain.Views;
 import com.ic.ee.domain.common.feedback.comment.Comment;
@@ -119,7 +120,7 @@ public class Feedback {
 		this.markReleased = markReleased;
 	}
 
-	@JsonView(Views.Student.class)
+	@JsonIgnore
 	public List<Comment> getPublicComments() {
 		if(!commentReleased || comments == null || comments.isEmpty()) {
 			return Collections.emptyList();
