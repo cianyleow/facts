@@ -27,6 +27,7 @@ import com.ic.ee.core.dao.api.FeedbackDAO;
 import com.ic.ee.core.dao.api.FileDAO;
 import com.ic.ee.core.dao.api.FileRequirementDAO;
 import com.ic.ee.core.dao.api.MarkerDAO;
+import com.ic.ee.core.dao.api.MarkerSwapRequestDAO;
 import com.ic.ee.core.dao.api.NotificationDAO;
 import com.ic.ee.core.dao.api.StudentDAO;
 import com.ic.ee.core.dao.api.SubmissionDAO;
@@ -44,6 +45,7 @@ import com.ic.ee.core.dao.jdbc.impl.JdbcFeedbackDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcFileRequirementDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcMarkerDAO;
+import com.ic.ee.core.dao.jdbc.impl.JdbcMarkerSwapRequestDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcNotificationDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcStudentDAO;
 import com.ic.ee.core.dao.jdbc.impl.JdbcSubmissionDAO;
@@ -160,6 +162,11 @@ public class AppConfig {
 	@Bean
 	EnrollmentDAO enrollmentDAO() throws IOException {
 		return new JdbcEnrollmentDAO(dataSource);
+	}
+
+	@Bean
+	MarkerSwapRequestDAO markerSwapRequestDAO() throws IOException {
+		return new JdbcMarkerSwapRequestDAO(dataSource);
 	}
 
 	@Bean
