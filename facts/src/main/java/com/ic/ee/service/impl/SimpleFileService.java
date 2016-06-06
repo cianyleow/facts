@@ -54,6 +54,7 @@ public class SimpleFileService implements FileService {
 		downloadLink.setFile(file);
 		downloadLink.setLink(link);
 		downloadLink.setUser(new User(username));
+		downloadLink.setUsed(false);
 		return downloadLinkDAO.create(downloadLink);
 	}
 
