@@ -1,7 +1,7 @@
 # FACTS
 FACTS API
 
-Installation
+Production Installation
 ------------
 This installation guide is written for a Debian/Ubuntu based system. Specifically, an AWS Ubuntu 14.04 instance was used in June 2016, so please note that certain programs and commands may change over time.
 
