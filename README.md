@@ -36,5 +36,6 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   3. `CREATE USER 'facts'@'localhost' IDENTIFIED BY '#PASSWORD#';`
     1. Replace #PASSWORD# with a suitably complex password.
   4. `CREATE database facts`;
+  5. `GRANT INSERT, DELETE, SELECT, UPDATE ON facts.* FOR 'facts'@'localhost'`
   5. `USE facts;`
   6. `source facts/Install-DB.sql`
