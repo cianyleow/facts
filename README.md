@@ -23,10 +23,11 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
 5. Clone the latest FACTS repository and build it locally with a Gradle Wrapper command.
   1. `git clone https://github.com/cianyleow/facts`
   2. `cd facts/facts`
-  3. `./gradlew build`
-  4. `cd ../..`
-  5. `mv facts/facts/build/libs/facts-0.0.1-SNAPSHOT.jar ./`
-  6. `chmod 500 facts-0.0.1-SNAPSHOT.jar`
+  3. `chmod u+x gradlew`
+  4. `./gradlew build`
+  5. `cd ../..`
+  6. `mv facts/facts/build/libs/facts-0.0.1-SNAPSHOT.jar ./`
+  7. `chmod 500 facts-0.0.1-SNAPSHOT.jar`
     1. This sets the security level for the application. 
 
 6. Set up the database by running the `Install-DB.sql` file. You will need to create a user and database first.
