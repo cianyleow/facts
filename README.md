@@ -72,7 +72,11 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
     3. Then use `exit` to go back to being your standard user.
 
 10. Configure NGINX to operate as a reverse proxy and deliver the application over SSL.
-  1. `cp /home/ubuntu/facts/facts /etc/nginx/sites-available/`
+  1. `cp /home/ubuntu/facts/facts.nginx.conf /etc/nginx/sites-available/facts`
+  2. `cp /home/ubuntu/facts/certs.conf /etc/nginx/snippets/`
+    1. Install certificate/key in: `/etc/ssl/certs/facts.crt` `/etc/ssl/private/facts.key`
+  3. `cp /home/ubuntu/facts/ssl-params.conf /etc/nginx/snippets`
+    1. Install Diffie-Hellman file in: `/etc/ssl/certs/dhparam.pem`
   2. `ln -s /etc/nginx/sites-available/facts /etc/nginx/sites-enabled/`
-  3. Create the SSL certification and install correctly for the configuration.
-    1.
+  3. Either follow the instructions below to sign your own certificate, or place the certificate files in the locations detailed below.
+    1. 
