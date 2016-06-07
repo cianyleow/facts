@@ -34,11 +34,7 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   1. `mysql -u root -p`
   2. Enter your password and you will enter the MySQL shell. Execute commands from here in this shell.
   3. `CREATE USER 'facts'@'localhost' IDENTIFIED BY '#PASSWORD#';`
-    1. Please choose a suitablly complex password.
+    1. Replace #PASSWORD# with a suitably complex password.
   4. `CREATE database facts`;
   5. `USE facts;`
-  6. `source Install-DB.sql`
-
-
-
-7. 
+  6. `source facts/Install-DB.sql`
