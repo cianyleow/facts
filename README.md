@@ -71,14 +71,17 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
     2. `/etc/init.d/facts`
     3. Then use `exit` to go back to being your standard user.
 
-10. Configure NGINX to operate as a reverse proxy and deliver the application over SSL.
+10. Install SSL certificates for server security.
+  1. Create self signed certificates:
+    1. `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/facts.key -out /etc/ssl/certs/facts.crt`
+    2. `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048`
+  2. Install existing certificates:
+    1. `/etc/ssl/certs/facts.crt`
+    2. `/etc/ssl/private/facts.key`
+    3. `/etc/ssl/certs/dhparam.pem`
+
+11. Configure NGINX to operate as a reverse proxy and deliver the application over SSL.
   1. `cp /home/ubuntu/facts/facts.nginx.conf /etc/nginx/sites-available/facts`
   2. `cp /home/ubuntu/facts/certs.conf /etc/nginx/snippets/`
-    1. Install certificate/key in: `/etc/ssl/certs/facts.crt` `/etc/ssl/private/facts.key`
   3. `cp /home/ubuntu/facts/ssl-params.conf /etc/nginx/snippets`
-    1. Install Diffie-Hellman file in: `/etc/ssl/certs/dhparam.pem`
   4. `ln -s /etc/nginx/sites-available/facts /etc/nginx/sites-enabled/`
-
-11. Self sign your own SSL certificate using these two commands.
-  1. `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/facts.key -out /etc/ssl/certs/facts.crt`
-  2. `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048`
