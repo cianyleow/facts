@@ -6,7 +6,7 @@ Installation
 This installation guide is written for a Debian/Ubuntu based system. Specifically, an AWS Ubuntu 14.04 instance was used in June 2016, so please note that certain programs and commands may change over time.
 
 1. Add the Oracle Java 8 dependency to the APT repository
-  a. `sudo add-apt-repository ppa:webupd8team/java`
+--a. `sudo add-apt-repository ppa:webupd8team/java`
 2. Update the APT environment
   a. `sudo apt-get update`
 3. Install the necessary software for the API to run
