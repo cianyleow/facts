@@ -54,7 +54,7 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   1. `sudo mv /home/ubuntu/facts/application.properties /var/facts/application.properties`
   2. `nano /var/facts/application.properties`
     1. Edit the details and set the MySQL facts user password, upload location (if different to above) and the JWT secret. 
-    2. The secret can be generated with the following command:
+    2. The JWT secret can be generated with the following command:
       1. `openssl genrsa -des3 256`
         1. Please choose a suitably strong passphrase.
       2. Copy the key itself, which looks like the below:
