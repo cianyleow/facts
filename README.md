@@ -61,3 +61,18 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
         1. `FFhdIezDCRo79SwavHcwqcPdCoAxM88h1LdPQYbWgENzwPotRygOcf69wQX2h+gLMRBGbstX1Ce0F57Vf0+zINIEshex5ZtegirXDsxeT39r3dadUSk4sHuT06qcPT2sdB+RNDJeVnbyFkJocJ3331yqW7buiue4UZDwItzVeJnDH4xePDgByiQHDfnQR5D7LBA5s5c3TdNJdnim7NqNYL0zcC/J997oOUhB6GJFgCM=`
   3. `chown 400 /var/facts/application.properties`
   4. `chmod 400 /var/facts/application.properties`
+
+9. Install the application as a system service in init.d
+  1. `sudo ln -s /var/facts/facts-0.0.1-SNAPSHOT.jar /etc/init.d/facts`
+  2. `sudo mkdir /run/facts`
+  3. `sudo chown facts:root /run/facts`
+  4. `sudo su facts`
+    1. Become the user facts and then start the facts application.
+    2. `/etc/init.d/facts`
+    3. Then use `exit` to go back to being your standard user.
+
+10. Configure NGINX to operate as a reverse proxy and deliver the application over SSL.
+  1. `cp /home/ubuntu/facts/facts /etc/nginx/sites-available/`
+  2. `ln -s /etc/nginx/sites-available/facts /etc/nginx/sites-enabled/`
+  3. Create the SSL certification and install correctly for the configuration.
+    1.
