@@ -1,0 +1,20 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name server_domain_or_IP;
+	return 301 https://$server_name$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	include snippets/certs.conf;
+	include snippets/ssl-params.conf;
+
+	 location /api {
+                expires -1;
+                add_header Pragma "no-cache";
+                add_header Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
+                proxy_pass http://localhost:9090/;
+        }
+}
