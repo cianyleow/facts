@@ -16,7 +16,7 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   2. You will need to set a password for the MySQL server here and accept the Oracle Java 8 license agreements.
     1. Please choose a suitably complex password.
 
-4. Run some commands to secure the MySQL server installation. Follow the on-screen instructions.
+4. Run the commands to secure the MySQL server installation. Follow the on-screen instructions.
   1. `mysql_secure_installation`
   2. `mysql_install_db`
   
@@ -26,9 +26,14 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   3. `chmod u+x gradlew`
   4. `./gradlew build`
   5. `cd ../..`
-  6. `mv facts/facts/build/libs/facts-0.0.1-SNAPSHOT.jar ./`
-  7. `chmod 500 facts-0.0.1-SNAPSHOT.jar`
-    1. This sets the security level for the application. 
+
+6. Create the user to run the application as and file system location to reside in.
+  1. `sudo add user facts`
+    1. Configure this user with a secure password.
+  2. `sudo mkdir /var/facts`
+  3. `sudo mv facts/facts/build/libs/facts-0.0.1-SNAPSHOT.jar /var/facts/`
+  4. `sudo chown facts:facts /var/facts/facts-0.0.1-SNAPSHOT.jar`
+  5. `sudo chmod 500 /var/facts/facts-0.0.1-SNAPSHOT.jar`
 
 6. Set up the database by running the `Install-DB.sql` file. You will need to create a user and database first.
   1. `mysql -u root -p`
@@ -39,3 +44,16 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
   5. `GRANT INSERT, DELETE, SELECT, UPDATE ON facts.* FOR 'facts'@'localhost'`
   5. `USE facts;`
   6. `source facts/Install-DB.sql`
+
+7. Create the uploads folder and secure it.
+  1. `sudo mkdir /var/facts/upload`
+  2. `sudo chown facts:facts /var/facts/upload`
+  3. `sudo chmod 600 /var/facts/upload`
+
+8. Configure the specific application properties
+  1. `sudo mv /home/ubuntu/facts/application.properties /var/facts/application.properties`
+  2. `nano /var/facts/application.properties`
+    1. Edit the details and set the MySQL facts user password, upload location (if different to above) and the JWT secret. 
+  3. `chown 400 /var/facts/application.properties`
+  4. `chmod 400 /var/facts/application.properties`
+  4. 
