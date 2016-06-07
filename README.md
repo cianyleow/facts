@@ -81,7 +81,8 @@ This installation guide is written for a Debian/Ubuntu based system. Specificall
     3. `/etc/ssl/certs/dhparam.pem`
 
 11. Configure NGINX to operate as a reverse proxy and deliver the application over SSL.
-  1. `cp /home/ubuntu/facts/facts.nginx.conf /etc/nginx/sites-available/facts`
-  2. `cp /home/ubuntu/facts/certs.conf /etc/nginx/snippets/`
-  3. `cp /home/ubuntu/facts/ssl-params.conf /etc/nginx/snippets`
-  4. `ln -s /etc/nginx/sites-available/facts /etc/nginx/sites-enabled/`
+  1. `sudo cp /home/ubuntu/facts/nginx/facts /etc/nginx/sites-available/`
+  2. `sudo cp -r /home/ubuntu/facts/nginx/snippets /etc/nginx`
+  3. `sudo ln -s /etc/nginx/sites-available/facts /etc/nginx/sites-enabled/`
+  4. `sudo nginx -t`
+  5. `sudo service nginx restart`
